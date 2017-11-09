@@ -1,0 +1,9 @@
+[ignore]
+.*/node_modules/.*
+.*/example/.*
+[include]
+[libs]
+flow-typed
+[options]
+all=true
+module.ignore_non_literal_requires=true

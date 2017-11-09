@@ -1,0 +1,41 @@
+{
+  "name": "usthing-thing",
+  "version": "0.1.0",
+  "description": "",
+  "main": "lib/index.js",
+  "scripts": {
+    "flow": "flow",
+    "flow-typed": "flow-typed",
+    "flow-copy-source": "flow-copy-source",
+    "flow:check": "flow check ./src/",
+    "flow:copy-source": "flow-copy-source src lib",
+    "flow:build": "flow-remove-types ./src/ -d ./lib/ --all --pretty",
+    "flow:deps": "flow-typed install",
+    "build": "npm run flow:build && npm run flow:copy-source",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "pre-commit": [
+    "flow:check",
+    "build"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IniZio/usthing-thing.git"
+  },
+  "author": "IniZio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/IniZio/usthing-thing/issues"
+  },
+  "homepage": "https://github.com/IniZio/usthing-thing#readme",
+  "dependencies": {
+    "dockerode": "^2.5.3"
+  },
+  "devDependencies": {
+    "flow-bin": "^0.59.0",
+    "flow-copy-source": "^1.2.1",
+    "flow-remove-types": "^1.2.3",
+    "flow-typed": "^2.2.3",
+    "pre-commit": "^1.2.2"
+  }
+}
