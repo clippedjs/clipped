@@ -1,3 +1,4 @@
 module.exports = {
-  name: 'example'
+  name: 'example',
+  type: 'nodejs'
 }
