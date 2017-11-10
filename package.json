@@ -1,5 +1,5 @@
 {
-  "name": "usthing-thing",
+  "name": "thing",
   "version": "0.1.0",
   "description": "",
   "main": "lib/index.js",
@@ -11,9 +11,11 @@
     "flow-copy-source": "flow-copy-source",
     "flow:check": "flow check ./src/",
     "flow:copy-source": "flow-copy-source src lib",
-    "flow:build": "flow-remove-types ./src/ -d ./lib/ --all --pretty",
+    "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./lib/ --all --pretty",
     "flow:deps": "flow-typed install",
     "standard:lint": "standard --verbose --fix | snazzy",
+    "postinstall": "npm run flow:deps",
+    "dev": "nodemon --watch src --exec npm run flow:build",
     "build": "npm run flow:build && npm run flow:copy-source",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -27,11 +29,15 @@
       "**/lib/"
     ],
     "parser": "babel-eslint",
+    "extends": [
+      "plugin:flowtype/recommended"
+    ],
     "plugins": [
       "flowtype"
     ],
     "rules": {
-      "use-flow-type": 1
+      "use-flow-type": 1,
+      "flowtype/define-flow-type": 2
     }
   },
   "repository": {
@@ -45,6 +51,7 @@
   },
   "homepage": "https://github.com/IniZio/usthing-thing#readme",
   "dependencies": {
+    "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
     "tar-fs": "^1.16.0"
   },

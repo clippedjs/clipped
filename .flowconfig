@@ -1,6 +1,6 @@
 [ignore]
 .*/node_modules/.*
-.*/example/.*
+.*/examples/.*
 .*/lib/.*
 [include]
 [libs]
