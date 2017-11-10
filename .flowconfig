@@ -2,6 +2,7 @@
 .*/node_modules/.*
 .*/examples/.*
 .*/lib/.*
+<PROJECT_ROOT>/index.js
 [include]
 [libs]
 flow-typed
