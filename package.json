@@ -29,7 +29,8 @@
   },
   "homepage": "https://github.com/IniZio/usthing-thing#readme",
   "dependencies": {
-    "dockerode": "^2.5.3"
+    "dockerode": "^2.5.3",
+    "tar-fs": "^1.16.0"
   },
   "devDependencies": {
     "flow-bin": "^0.59.0",
