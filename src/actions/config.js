@@ -1,10 +1,10 @@
 // @flow
-const {cwd, resolve} = require('../utils')
+const {cwd, resolvePath} = require('../utils')
 
 function getConfig (): thingConfig {
   let config: thingConfig = {}
   try {
-    config = require(resolve('thing.config.js', cwd))
+    config = require(resolvePath('thing.config.js', cwd))
   } catch (err) {}
   return config
 }

@@ -1,5 +1,4 @@
 declare type dockerConfig = {
-  path: string
 }
 
 declare type buildConfig = {
@@ -8,6 +7,6 @@ declare type buildConfig = {
 
 declare type thingConfig = {
   name?: string,
-  type?: 'nodejs',
+  type?: 'nodejs' | 'reactjs',
   build?: buildConfig
 }

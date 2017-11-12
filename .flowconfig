@@ -1,6 +1,7 @@
 [ignore]
 .*/node_modules/.*
 .*/examples/.*
+.*/templates/.*
 .*/lib/.*
 <PROJECT_ROOT>/index.js
 [include]
