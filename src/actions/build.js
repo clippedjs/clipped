@@ -8,7 +8,7 @@ const {getConfig} = require(resolvePath('actions/config'))
 const docker = (config: thingConfig = getConfig()) =>
   new Promise((resolve, reject) => {
     // Use template dockerfile if no existing one
-    const srcDockerfile: string = resolvePath(`../docker-images/${config.type || 'nodejs'}/Dockerfile`)
+    const srcDockerfile: string = resolvePath(`../templates/docker-images/${config.type || 'nodejs'}/Dockerfile`)
     const destDockerfile: string = resolvePath('./Dockerfile', cwd)
     let usingTemplateDockerfile: boolean = false
 
