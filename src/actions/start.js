@@ -1,6 +1,6 @@
 // @flow
 const {resolvePath} = require('../utils')
-const {getConfig} = require(resolvePath('actions/config'))
+const {getConfig} = require('./config')
 const build = require('./build')
 
 function startThing (config: thingConfig = getConfig()) {

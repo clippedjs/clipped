@@ -7,6 +7,6 @@ declare type buildConfig = {
 
 declare type thingConfig = {
   name?: string,
-  type?: 'nodejs' | 'reactjs',
+  type?: 'nodejs' | 'frontend',
   build?: buildConfig
 }
