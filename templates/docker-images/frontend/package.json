@@ -2,14 +2,15 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "thing.js",
   "scripts": {
-    "dev": "node ../../ dev",
-    "build": "node ../../ build --platform=docker",
+    "start": "node ./thing.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {}
+  "dependencies": {
+    "server": "^1.0.4"
+  }
 }

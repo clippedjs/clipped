@@ -1,6 +1,7 @@
 const fs = require('fs')
-var path = require('path')
-var webpack = require('webpack')
+const path = require('path')
+const webpack = require('webpack')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 // Directory that called the wrapper
 function resolve (dir) {
@@ -13,7 +14,7 @@ module.exports = {
   output: {
     pathinfo: true,
     path: resolve('dist'),
-    publicPath: '/dist/',
+    // publicPath: '/dist/',
     filename: 'build.js'
   },
   module: {
@@ -23,8 +24,8 @@ module.exports = {
         use: [
           require.resolve('vue-style-loader'),
           require.resolve('css-loader')
-        ],
-      },      {
+        ]
+      }, {
         test: /\.vue$/,
         loader: require.resolve('vue-loader'),
         options: {
@@ -47,6 +48,11 @@ module.exports = {
       }
     ]
   },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, 'index.html')
+    })
+  ],
   resolveLoader: {
     modules: [
       resolve('src'),
@@ -66,7 +72,7 @@ module.exports = {
     modules: [
       resolve('src'),
       resolve('node_modules'),
-      path.resolve(__dirname, 'node_modules'),
+      path.resolve(__dirname, 'node_modules')
     ]
   },
   devServer: {
@@ -81,6 +87,7 @@ module.exports = {
 }
 
 if (process.env.NODE_ENV === 'production') {
+  module.exports.output.publicPath = '/'
   module.exports.devtool = '#source-map'
   // http://vue-loader.vuejs.org/en/workflow/production.html
   module.exports.plugins = (module.exports.plugins || []).concat([

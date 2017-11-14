@@ -53,6 +53,8 @@
   "dependencies": {
     "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
+    "graceful-ncp": "^3.0.0",
+    "minimist": "^1.2.0",
     "nodemon": "^1.12.1",
     "tar-fs": "^1.16.0"
   },
