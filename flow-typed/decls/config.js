@@ -5,7 +5,7 @@ declare type buildConfig = {
   docker?: dockerConfig
 }
 
-declare type thingConfig = {
+declare type clippedConfig = {
   name?: string,
   type?: 'nodejs' | 'frontend',
   build?: buildConfig

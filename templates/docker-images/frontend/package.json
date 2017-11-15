@@ -2,9 +2,9 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "thing.js",
+  "main": "clipped.js",
   "scripts": {
-    "start": "node ./thing.js",
+    "start": "node ./clipped.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

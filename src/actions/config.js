@@ -1,10 +1,10 @@
 // @flow
 const {cwd, resolvePath} = require('../utils')
 
-function getConfig (): thingConfig {
-  let config: thingConfig = {}
+function getConfig (): clippedConfig {
+  let config: clippedConfig = {}
   try {
-    config = require(resolvePath('thing.config.js', cwd))
+    config = require(resolvePath('clipped.config.js', cwd))
   } catch (err) {}
   return config
 }

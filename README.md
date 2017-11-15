@@ -1,17 +1,17 @@
-# usthing-thingy
+# Clipped
 
 There should be the best way to optimization.
 Project configuration should be about options only.
 
-**Thing handles the `...`**
+**Clipped handles the `...`**
 
 ## How to use
-1. Install this module: `npm i -g <insert name here>`
+1. Install this module: `npm i -g clipped`
 2. Copy from skeleton from examples folder
-3. Develop project with `<insert name here> dev`
+3. Develop project with `clipped dev`
 4. Build Project:
-  - Native: `<insert name here> build`
-  - Docker: `<insert name here> build --platform=docker`
+  - Native: `clipped build #--platform=native`
+  - Docker: `clipped build --platform=docker`
 
 ## Things handled
 - [ ] Scaffolding: (eliminates need for devDependencies)(currently in examples/ folder)
@@ -27,8 +27,8 @@ Project configuration should be about options only.
 
 ## How to contribute
 ```bash
-# Clone the repo
-git clone git@github.com:IniZio/usthing-thing.git
+# Clone the repo<
+git clone git@github.com:IniZio/usthing-clipped.git
 
 # Install dependencies
 npm i

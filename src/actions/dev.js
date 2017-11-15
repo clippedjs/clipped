@@ -3,10 +3,10 @@ const spawn = require('cross-spawn')
 const {cwd, resolvePath} = require('../utils')
 const {getConfig} = require('./config')
 
-const nodejs = (config: thingConfig = getConfig()) =>
+const nodejs = (config: clippedConfig = getConfig()) =>
   new Promise((resolve, reject) => {
     nodemon({
-      script: resolvePath(`../templates/wrappers/${'nodejs'}/thing.js`),
+      script: resolvePath(`../templates/wrappers/${'nodejs'}/clipped.js`),
       watch: [resolvePath('./src', cwd)]
     })
 
@@ -23,7 +23,7 @@ const nodejs = (config: thingConfig = getConfig()) =>
     })
   })
 
-const frontend = (config: thingConfig = getConfig()) =>
+const frontend = (config: clippedConfig = getConfig()) =>
   new Promise((resolve, reject) => {
     const proc = spawn(`node`, [
       resolvePath('../templates/wrappers/frontend/node_modules/.bin/webpack-dev-server'),
