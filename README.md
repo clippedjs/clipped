@@ -1,15 +1,43 @@
-# usthing-thing
+# usthing-thingy
 
-Things in scaffolding, dev, build, deploy
+There should be the best way to optimization.
+Project configuration should be about options only.
 
-Flow:
-1. Scaffolding: (eliminates need for devDependencies)
-  - frontend: VueJs, ReactJs
-  - backend: ServerJs
-2. Dev:
+**Thing handles the `...`**
+
+## How to use
+1. Install this module: `npm i -g <insert name here>`
+2. Copy from skeleton from examples folder
+3. Develop project with `<insert name here> dev`
+4. Build Project:
+  - Native: `<insert name here> build`
+  - Docker: `<insert name here> build --platform=docker`
+
+## Things handled
+- [ ] Scaffolding: (eliminates need for devDependencies)(currently in examples/ folder)
+  - frontend: ReactJs (WIP), VueJs
+  - backend: Express
+- [x] Dev:
   - frontend: webpack-dev-server
-  - backend: nodemon / gaze
-3. Build (Docker Image):
-  - frontend: webpack Build
-  - backend: backpack
-4. Deploy
+  - backend: nodemon
+- [x] Build (Docker Image):
+  - frontend: webpack
+  - backend: (currently raw copy)
+- [ ] Deploy: Docker push(Planning)
+
+## How to contribute
+```bash
+# Clone the repo
+git clone git@github.com:IniZio/usthing-thing.git
+
+# Install dependencies
+npm i
+
+# Use nodemon to continuously build
+npm run dev
+
+# Try the actions in examples folder
+cd examples/frontend
+npm run dev
+npm run build
+```
