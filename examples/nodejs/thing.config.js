@@ -1,5 +1,5 @@
 module.exports = {
-  name: 'example',
+  name: 'nodejs-example',
   type: 'nodejs',
   build: {
     docker: {}

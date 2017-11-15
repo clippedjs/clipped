@@ -53,9 +53,12 @@
   "dependencies": {
     "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
+    "express": "^4.16.2",
     "graceful-ncp": "^3.0.0",
     "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
     "nodemon": "^1.12.1",
+    "rimraf": "^2.6.2",
     "tar-fs": "^1.16.0"
   },
   "devDependencies": {
