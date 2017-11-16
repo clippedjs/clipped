@@ -63,14 +63,14 @@ const docker = (config: clippedConfig = getConfig()) =>
  */
 const native = (config: clippedConfig = getConfig()) =>
   new Promise((resolve, reject) => {
-    let proc
+    let proc, installProc
     // rimraf(resolvePath('./dist', cwd), err => {
     //   if (err) reject(err)
     //   mkdirp(resolvePath('./dist', cwd), err => {
     //     if (err) reject(err)
     switch (config.type) {
         case 'frontend':
-          const installProc = spawn('npm', ['install', '--prefix', resolvePath('../templates/wrappers/frontend')], {stdio: 'inherit'})
+          installProc = spawn('npm', ['install', '--prefix', resolvePath('../templates/wrappers/frontend')], {stdio: 'inherit'})
           installProc.on('close', (code) => {
             const proc = spawn('npm', [
               'run',
@@ -92,32 +92,25 @@ const native = (config: clippedConfig = getConfig()) =>
             })
           break
         case 'nodejs':
-          mkdirp(resolvePath('./dist', cwd), err => {
-            if (err) reject(err)
-              // Copy wrapper to dist
-            ncp(resolvePath('../templates/wrappers/nodejs'), resolvePath('./dist', cwd), err => {
-              if (err) {console.error(err); reject(err)}
-              // Copy src to dist as well
-              ncp(resolvePath('./src', cwd), resolvePath('./dist', cwd), err => {
-                if (err) {
-                  console.error(err)
-                  reject(err)
-                }
-                ncp(resolvePath('./package.json', cwd), resolvePath('./dist/package.json', cwd), err => {
-                  if (err) {
-                    console.error(err)
-                    reject(err)
-                  }
-                  ncp(resolvePath('./package-lock.json', cwd), resolvePath('./dist/package-lock.json', cwd), err => {
-                    if (err) {
-                      console.error(err)
-                      reject(err)
-                    }
-                    resolve()
-                  })
-                })
+          installProc = spawn('npm', ['install', '--prefix', resolvePath('../templates/wrappers/nodejs')], {stdio: 'inherit'})
+          installProc.on('close', (code) => {
+            const proc = spawn('npm', [
+              'run',
+              `build`,
+              '--prefix', resolvePath('../templates/wrappers/nodejs'),
+              '--',
+              '--env.clippedTarget',
+              cwd
+            ], {stdio: 'inherit', 'NODE_ENV': 'production'})
+            proc.on('close', (code) => resolve())
+            proc.on('error', (err) => {
+                console.error(err)
+                reject(err)
               })
-            })
+          })
+          installProc.on('error', (err) => {
+            console.error(err)
+            reject(err)
           })
         default:
         }

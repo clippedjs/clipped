@@ -2,17 +2,18 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "clipped.js",
   "scripts": {
-    "dev": "node ../../ dev",
-    "build": "node ../../ build",
-    "build:docker": "node ../../ build --platform=docker",
+    "dev": "backpack dev",
+    "build": "backpack build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "express": "^4.16.2"
+  "dependencies": {},
+  "devDependencies": {
+    "backpack-core": "^0.4.3",
+    "minimist": "^1.2.0"
   }
 }

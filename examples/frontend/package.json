@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "node ../../ dev",
-    "build": "node ../../ build --platform=docker",
+    "build:docker": "node ../../ build --platform=docker",
+    "build": "node ../../ build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

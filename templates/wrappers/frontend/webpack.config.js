@@ -23,12 +23,12 @@ module.exports = env => {
         {
           test: /\.css$/,
           use: [
-            require.resolve('vue-style-loader'),
-            require.resolve('css-loader')
+            'vue-style-loader',
+            'css-loader'
           ]
         }, {
           test: /\.vue$/,
-          loader: require.resolve('vue-loader'),
+          loader: 'vue-loader',
           options: {
             loaders: {
             }
@@ -37,12 +37,12 @@ module.exports = env => {
         },
         {
           test: /\.js$/,
-          loader: require.resolve('babel-loader'),
+          loader: 'babel-loader',
           exclude: /node_modules/
         },
         {
           test: /\.(png|jpg|gif|svg)$/,
-          loader: require.resolve('file-loader'),
+          loader: 'file-loader',
           options: {
             name: '[name].[ext]?[hash]'
           }
