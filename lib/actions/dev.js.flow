@@ -27,15 +27,13 @@ const frontend = (config: clippedConfig = getConfig()) =>
   new Promise((resolve, reject) => {
     const installProc = spawn('npm', ['install', '--prefix', resolvePath('../templates/wrappers/frontend')], {stdio: 'inherit'})
     installProc.on('close', (code) => {
-      const proc = spawn(`node`, [
-        resolvePath('../templates/wrappers/frontend/node_modules/.bin/webpack-dev-server'),
-        // resolvePath('../templates/wrappers/frontend/node_modules/.bin/webpack'),
-        // '--no-inline',
-        '--inline',
-        '--progress',
-        `--config`,
-        // resolvePath('../templates/wrappers/frontend/build/webpack.dev.conf.js')
-        resolvePath('../templates/wrappers/frontend/webpack.config.js')
+      const proc = spawn('npm', [
+        'run',
+        `dev`,
+        '--prefix', resolvePath('../templates/wrappers/frontend'),
+        '--',
+        '--env.clippedTarget',
+        cwd
       ], {stdio: 'inherit'})
       proc.on('close', (code) => process.exit(code))
       proc.on('error', (err) => {

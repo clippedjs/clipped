@@ -70,15 +70,16 @@ const native = (config: clippedConfig = getConfig()) =>
     //     if (err) reject(err)
     switch (config.type) {
         case 'frontend':
-          console.log('going to run installproc')
           const installProc = spawn('npm', ['install', '--prefix', resolvePath('../templates/wrappers/frontend')], {stdio: 'inherit'})
           installProc.on('close', (code) => {
-            proc = spawn(`node`, [
-                resolvePath('../templates/wrappers/frontend/node_modules/.bin/webpack'),
-                '--progress',
-                `--config`,
-                resolvePath('../templates/wrappers/frontend/webpack.config.js')
-              ], {stdio: 'inherit', 'NODE_ENV': 'production'})
+            const proc = spawn('npm', [
+              'run',
+              `build`,
+              '--prefix', resolvePath('../templates/wrappers/frontend'),
+              '--',
+              '--env.clippedTarget',
+              cwd
+            ], {stdio: 'inherit', 'NODE_ENV': 'production'})
             proc.on('close', (code) => resolve())
             proc.on('error', (err) => {
                 console.error(err)
