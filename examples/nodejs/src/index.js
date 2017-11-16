@@ -1,3 +1,4 @@
+import 'source-map-support/register'
 const app = require('express')()
 
 app.get('/', (req, res) => {
@@ -16,4 +17,5 @@ app.listen(PORT, err => {
 
   console.log(`> Listening on port ${PORT}`)
 })
-module.exports = app
+
+export default app
