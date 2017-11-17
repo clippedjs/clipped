@@ -1,4 +1,4 @@
-# Clipped
+# Clipped [![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped) [![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped)
 
 There should be the best way to optimization.
 Project configuration should be about options only.
@@ -6,12 +6,12 @@ Project configuration should be about options only.
 **Clipped handles the `...`**
 
 ## How to Install
-```bash
+```sh
 npm i -g clipped
 ```
 
 ## Available commands
-```bash
+```sh
 npm i -g clipped # Install this module
 
 clipped scaffold --type=nodejs # Scaffold a project
@@ -22,12 +22,6 @@ clipped build # Build project natively
 
 clipped build --platform=docker # Build docker image
 ```
-1. Install this module: `npm i -g clipped`
-2. Scaffold project: ``
-3. Develop project with `clipped dev`
-4. Build Project:
-  - Native: `clipped build`
-  - Docker: `clipped build --platform=docker`
 
 ## Things handled
 - [ ] Scaffolding: (eliminates need for devDependencies)

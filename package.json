@@ -1,8 +1,11 @@
 {
   "name": "clipped",
-  "version": "0.1.0",
-  "description": "",
+  "version": "0.2.5",
+  "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "lib/index.js",
+  "bin": {
+    "clipped": "lib/index.js"
+  },
   "scripts": {
     "flow": "flow",
     "flow-typed": "flow-typed",
@@ -14,7 +17,6 @@
     "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./lib/ --all --pretty",
     "flow:deps": "flow-typed install",
     "standard:lint": "standard --verbose --fix | snazzy",
-    "postinstall": "npm run flow:deps",
     "dev": "nodemon --watch src --exec npm run flow:build",
     "build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
     "test": "echo \"Error: no test specified\" && exit 1"

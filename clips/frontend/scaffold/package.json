@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "node ../../ dev",
-    "build:docker": "node ../../ build --platform=docker",
-    "build": "node ../../ build",
+    "dev": "clipped dev",
+    "build:docker": "clipped build --platform=docker",
+    "build": "clipped build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
