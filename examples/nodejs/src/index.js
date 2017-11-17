@@ -1,4 +1,3 @@
-import 'source-map-support/register'
 const app = require('express')()
 
 app.get('/', (req, res) => {
