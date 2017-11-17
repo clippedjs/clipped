@@ -6,7 +6,8 @@ const {resolvePath} = require('./utils')
 
 const actions = new Set([
   'dev',
-  'build'
+  'build',
+  'scaffold'
   // 'deploy'
 ])
 

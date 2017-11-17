@@ -15,7 +15,7 @@ module.exports = env => {
       pathinfo: true,
       path: resolve('dist'),
       // publicPath: '/dist/',
-      filename: 'build.js'
+      filename: 'index.js'
     },
     module: {
       rules: [
