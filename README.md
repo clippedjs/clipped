@@ -53,3 +53,20 @@ npm i
 # Use nodemon to continuously build
 npm run dev
 ```
+
+## Structure
+```
+.
+├── clips
+│   ├── frontend
+│   │   ├── docker-image
+│   │   ├── scaffold
+│   │   └── wrapper
+│   └── nodejs
+│       ├── docker-image
+│       ├── scaffold
+│       └── wrapper
+└── src
+    ├── actions
+    └── utils
+```
