@@ -1,107 +1,70 @@
 // @flow
 const fs = require('fs')
-const {ncp} = require('graceful-ncp')
-const mkdirp = require('mkdirp')
-const rimraf = require('rimraf')
+
 const tar = require('tar-fs')
 const minimist = require('minimist')
 const spawn = require('cross-spawn')
 const Docker = require('dockerode')
 const {cwd, resolvePath} = require('../utils')
+const {ncp, rimraf, mkdirp} = require('../utils/file-manipulation')
+const {spawnFactory} = require('../utils/process-spawn')
+const {dockerImageFactory} = require('../utils/docker')
 const {getConfig, getClipPath} = require('./config')
 
 /**
  * docker - Builds docker image from dist folder
  *
+ * @async
  * @param {clippedConfig} [config={}]
- *
  * @returns {Promise<void>}
  */
-const docker = (config: clippedConfig = getConfig()) =>
-  new Promise((resolve, reject) => {
-    const srcDockerfile: string = getClipPath(config.type, 'docker-image')
-    const destDockerfile: string = resolvePath('dist', cwd)
+async function docker (config: clippedConfig = getConfig()) {
+  const srcDockerImage: string = await getClipPath(config.type, 'docker-image')
+  const dockerImageDest: string = resolvePath('dist', cwd)
 
-    // Copy template dockerfile to dist folder
-    // rimraf(destDockerfile, err => {
-      // if (err) reject(err)
-      ncp(srcDockerfile, destDockerfile, err => {
-        if (err) reject(err)
+  console.log('> Preparing Dockerfile')
+  await ncp(srcDockerImage, dockerImageDest)
 
-        console.log('> Start building image')
-        const docker = new Docker()
-
-        // const tarStream = tar.pack(resolvePath('dist', cwd))
-        const files = fs.readdirSync(resolvePath('dist', cwd))
-
-        docker.buildImage(
-          // tarStream,
-          {
-            context: resolvePath('dist', cwd),
-            src: files
-          },
-          {
-            // NOTE: dockerode does not seem to support custom dockerfile in options?
-            // f: srcDockerfile,
-            t: config.name
-          },
-          (err, output:stream$Readable) => {
-            if (err) {
-              console.error(err)
-              reject(err)
-            }
-            if (output) {
-              output.pipe(process.stdout, {end: true})
-              output.on('end', () => {
-                resolve()
-              })
-            }
-          }
-        )
-      })
-    // })
-  })
+  console.log('> Start building image')
+  const files = fs.readdirSync(dockerImageDest)
+  // const tarStream = tar.pack(resolvePath('dist', cwd))
+  await dockerImageFactory(
+    // tarStream,
+    {
+      context: resolvePath('dist', cwd),
+      src: files
+    },
+    {
+      // NOTE: dockerode does not seem to support custom dockerfile in options?
+      // f: srcDockerfile,
+      t: config.name
+    }
+  )
+}
 
 /**
  * native - Builds dist folder from src folder
  *
+ * @async
  * @param {clippedConfig} [config={}]
- *
  * @returns {Promise<void>}
  */
-const native = (config: clippedConfig = getConfig()) =>
-  new Promise((resolve, reject) => {
-    rimraf(resolvePath('./dist', cwd), err => {
-      if (err) reject(err)
-      mkdirp(resolvePath('./dist', cwd), err => {
-        if (err) reject(err)
-        const wrapperPath = getClipPath(config.type, 'wrapper')
-        const installProc = spawn('npm', ['install', '--prefix', wrapperPath], {stdio: 'inherit'})
-        installProc.on('close', (code) => {
-          const proc = spawn('npm', [
-            'run',
-            `build`,
-            '--prefix', wrapperPath,
-            '--',
-            '--env.clippedTarget',
-            cwd
-          ], {stdio: 'inherit', 'NODE_ENV': 'production'})
-          proc.on('close', (code) => resolve())
-          proc.on('error', (err) => {
-              console.error(err)
-              reject(err)
-            })
-        })
-        installProc.on('error', (err) => {
-            console.error(err)
-            reject(err)
-          })
-      })
-    })
-  })
+async function native (config: clippedConfig = getConfig()) {
+  await rimraf(resolvePath('./dist', cwd))
+  await mkdirp(resolvePath('./dist', cwd))
+
+  const wrapperPath = await getClipPath(config.type, 'wrapper')
+  await spawnFactory('npm', ['install', '--prefix', wrapperPath])
+  await spawnFactory(
+    'npm',
+    ['run', 'build', '--prefix', wrapperPath, '--', `--env.clippedTarget=${cwd}`],
+    {stdio: 'inherit', 'NODE_ENV': 'production'}
+  )
+}
 
 async function build (config: clippedConfig = getConfig()) {
   const argv: Object = minimist(process.argv, {default: {platform: 'native'}})
+  // Make sure each platform only build once
   const platforms: Array<string> = [...new Set([].concat(argv['platform']))]
   await Promise.all(
     platforms.map(async (platform: string) => {
@@ -118,6 +81,7 @@ async function build (config: clippedConfig = getConfig()) {
     })
   )
 }
+
 if (!module.parent)
   try {
     build()
