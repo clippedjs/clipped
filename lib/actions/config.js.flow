@@ -20,11 +20,11 @@ function getConfig (): clippedConfig {
 /**
  * getClipPath - setup clip and return its path
  *
+ * @async
  * @param {string} type
- * @returns {string} path to clip
+ * @returns {Promise<sting>} Promise to return  path to clip
  */
-// NOTE: use sync til promisify file manipulations
-function getClipPath (type: string = 'nodejs', target: string = ''): string {
+async function getClipPath (type: string = 'nodejs', target: string = ''): Promise<string> {
   return resolvePath(path.join(`../clips/${type}`, target))
 }
 
