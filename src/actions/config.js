@@ -2,7 +2,6 @@
 const path = require('path')
 const {cwd, resolvePath} = require('../utils')
 
-
 /**
  * getConfig - Get clipped.config.js of prject
  *
@@ -15,7 +14,6 @@ function getConfig (): clippedConfig {
   } catch (err) {}
   return config
 }
-
 
 /**
  * getClipPath - setup clip and return its path

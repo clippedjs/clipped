@@ -23,7 +23,6 @@ declare module 'graceful-ncp' {
  * needed.
  */
 
-
 // Filename aliases
 declare module 'graceful-ncp/index' {
   declare module.exports: $Exports<'graceful-ncp'>;

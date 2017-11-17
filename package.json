@@ -16,7 +16,7 @@
     "standard:lint": "standard --verbose --fix | snazzy",
     "postinstall": "npm run flow:deps",
     "dev": "nodemon --watch src --exec npm run flow:build",
-    "build": "npm run flow:build && npm run flow:copy-source",
+    "build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "pre-commit": [
@@ -24,6 +24,11 @@
     "build"
   ],
   "standard": {
+    "globals": [
+      "clippedConfig",
+      "stream$Readable",
+      "stream$Readable"
+    ],
     "ignore": [
       "**/flow-typed/",
       "**/lib/"
@@ -36,6 +41,7 @@
       "flowtype"
     ],
     "rules": {
+      "define-flow-type": 1,
       "use-flow-type": 1,
       "flowtype/define-flow-type": 2
     }

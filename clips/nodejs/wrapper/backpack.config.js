@@ -22,7 +22,7 @@ module.exports = {
 
     // changes the name of the entry point from index -> main.js
     config.entry = {
-      clipped: resolve('./dist/clipping.js'),
+      clipped: resolve('./dist/clipping.js')
       // index: resolve('./src/index.js')
     }
 

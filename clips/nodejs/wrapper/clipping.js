@@ -8,9 +8,8 @@ server.use('/', app)
 server.listen(PORT, err => {
   if (err) console.error(err)
 
-  if (__DEV__) { // webpack flags!
+  if (__DEV__) { // eslint-disable-line
     console.log('> In development')
   }
   console.log('> Backend listening at port', PORT)
-
 })

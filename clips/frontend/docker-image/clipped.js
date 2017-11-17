@@ -1,4 +1,5 @@
 const server = require('server')
+const {render} = server.reply
 
 const PORT = process.env.PORT || 8080
 
