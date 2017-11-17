@@ -1,4 +1,5 @@
 // @flow
+const path = require('path')
 const {cwd, resolvePath} = require('../utils')
 
 
@@ -23,8 +24,8 @@ function getConfig (): clippedConfig {
  * @returns {string} path to clip
  */
 // NOTE: use sync til promisify file manipulations
-function getClipPath (type: string = 'nodejs'): string {
-  return resolvePath(`../templates/wrappers/${type}`)
+function getClipPath (type: string = 'nodejs', target: string = ''): string {
+  return resolvePath(path.join(`../clips/${type}`, target))
 }
 
 module.exports = {

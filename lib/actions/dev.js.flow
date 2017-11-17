@@ -12,14 +12,14 @@ const {getConfig, getClipPath} = require('./config')
  */
 function dev (config: clippedConfig = getConfig()): Promise<void> {
   return new Promise((resolve, reject) => {
-    const clipPath = getClipPath(config.type)
+    const wrapperPath = getClipPath(config.type, 'wrapper')
 
-    const installProc = spawn('npm', ['install', '--prefix', clipPath], {stdio: 'inherit'})
+    const installProc = spawn('npm', ['install', '--prefix', wrapperPath], {stdio: 'inherit'})
     installProc.on('close', (code) => {
       const proc = spawn('npm', [
         'run',
         `dev`,
-        '--prefix', clipPath,
+        '--prefix', wrapperPath,
         '--',
         `--env.clippedTarget=${cwd}`
       ], {stdio: 'inherit'})

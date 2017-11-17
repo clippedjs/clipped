@@ -19,7 +19,7 @@ const {getConfig, getClipPath} = require('./config')
  */
 const docker = (config: clippedConfig = getConfig()) =>
   new Promise((resolve, reject) => {
-    const srcDockerfile: string = resolvePath(`../templates/docker-images/${config.type || 'nodejs'}/`)
+    const srcDockerfile: string = getClipPath(config.type, 'docker-image')
     const destDockerfile: string = resolvePath('dist', cwd)
 
     // Copy template dockerfile to dist folder
@@ -75,13 +75,13 @@ const native = (config: clippedConfig = getConfig()) =>
       if (err) reject(err)
       mkdirp(resolvePath('./dist', cwd), err => {
         if (err) reject(err)
-        const clipPath = getClipPath(config.type)
-        const installProc = spawn('npm', ['install', '--prefix', clipPath], {stdio: 'inherit'})
+        const wrapperPath = getClipPath(config.type, 'wrapper')
+        const installProc = spawn('npm', ['install', '--prefix', wrapperPath], {stdio: 'inherit'})
         installProc.on('close', (code) => {
           const proc = spawn('npm', [
             'run',
             `build`,
-            '--prefix', clipPath,
+            '--prefix', wrapperPath,
             '--',
             '--env.clippedTarget',
             cwd
