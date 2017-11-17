@@ -15,7 +15,7 @@ module.exports = {
   webpack: (config, options, webpack) => {
     // Runtime dependencies
     fs.writeFileSync(resolve('./dist/package.json'), fs.readFileSync(resolve('./package.json')))
-    
+
     // Perform customizations to config
     // Important: return the modified config
 
