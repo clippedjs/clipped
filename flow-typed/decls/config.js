@@ -7,6 +7,6 @@ declare type buildConfig = {
 
 declare type clippedConfig = {
   name?: string,
-  type?: 'nodejs' | 'frontend',
+  type?: string,
   build?: buildConfig
 }

@@ -5,29 +5,46 @@ Project configuration should be about options only.
 
 **Clipped handles the `...`**
 
-## How to use
+## How to Install
+```bash
+npm i -g clipped
+```
+
+## Available commands
+```bash
+npm i -g clipped # Install this module
+
+clipped scaffold --type=nodejs # Scaffold a project
+
+clipped dev # Hot reload the project (both nodejs and frontend)
+
+clipped build # Build project natively
+
+clipped build --platform=docker # Build docker image
+```
 1. Install this module: `npm i -g clipped`
-2. Copy from skeleton from examples folder
+2. Scaffold project: ``
 3. Develop project with `clipped dev`
 4. Build Project:
-  - Native: `clipped build #--platform=native`
+  - Native: `clipped build`
   - Docker: `clipped build --platform=docker`
 
 ## Things handled
-- [ ] Scaffolding: (eliminates need for devDependencies)(currently in examples/ folder)
-  - frontend: ReactJs (WIP), VueJs
-  - backend: Express
+- [ ] Scaffolding: (eliminates need for devDependencies)
+  - [ ] frontend: ReactJs (WIP)
+  - [x] frntend: VueJs
+  - [x] backend: Express
 - [x] Dev:
-  - frontend: webpack-dev-server
-  - backend: nodemon
+  - [x] frontend: webpack-dev-server
+  - [x] backend: backpack
 - [x] Build (Docker Image):
-  - frontend: webpack
-  - backend: (currently raw copy)
-- [ ] Deploy: Docker push(Planning)
+  - [x] frontend: webpack
+  - [x] backend: backpck
+- [ ] Deploy: Docker push (Planning)
 
 ## How to contribute
 ```bash
-# Clone the repo<
+# Clone the repo
 git clone git@github.com:IniZio/usthing-clipped.git
 
 # Install dependencies
@@ -35,9 +52,4 @@ npm i
 
 # Use nodemon to continuously build
 npm run dev
-
-# Try the actions in examples folder
-cd examples/frontend
-npm run dev
-npm run build
 ```
