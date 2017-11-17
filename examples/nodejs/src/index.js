@@ -5,16 +5,5 @@ app.get('/', (req, res) => {
 })
 
 const PORT = process.env.PORT || 8080
-app.listen(PORT, err => {
-  if (err) {
-    console.error(err)
-  }
-
-  if (__DEV__) { // webpack flags!
-    console.log('> In development')
-  }
-
-  console.log(`> Listening on port ${PORT}`)
-})
 
 export default app

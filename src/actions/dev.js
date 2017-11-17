@@ -1,5 +1,7 @@
 const nodemon = require('nodemon')
 const spawn = require('cross-spawn')
+const mkdirp = require('mkdirp')
+const rimraf = require('rimraf')
 const {cwd, resolvePath} = require('../utils')
 const {getConfig, getClipPath} = require('./config')
 
@@ -12,21 +14,27 @@ const {getConfig, getClipPath} = require('./config')
  */
 function dev (config: clippedConfig = getConfig()): Promise<void> {
   return new Promise((resolve, reject) => {
-    const wrapperPath = getClipPath(config.type, 'wrapper')
+    rimraf(resolvePath('./dist', cwd), err => {
+      if (err) reject(err)
+      mkdirp(resolvePath('./dist', cwd), err => {
+        if (err) reject(err)
+        const wrapperPath = getClipPath(config.type, 'wrapper')
 
-    const installProc = spawn('npm', ['install', '--prefix', wrapperPath], {stdio: 'inherit'})
-    installProc.on('close', (code) => {
-      const proc = spawn('npm', [
-        'run',
-        `dev`,
-        '--prefix', wrapperPath,
-        '--',
-        `--env.clippedTarget=${cwd}`
-      ], {stdio: 'inherit'})
-      proc.on('close', (code) => process.exit(code))
-      proc.on('error', (err) => {
-        console.error(err)
-        process.exit(1)
+        const installProc = spawn('npm', ['install', '--prefix', wrapperPath], {stdio: 'inherit'})
+        installProc.on('close', (code) => {
+          const proc = spawn('npm', [
+            'run',
+            `dev`,
+            '--prefix', wrapperPath,
+            '--',
+            `--env.clippedTarget=${cwd}`
+          ], {stdio: 'inherit'})
+          proc.on('close', (code) => process.exit(code))
+          proc.on('error', (err) => {
+            console.error(err)
+            process.exit(1)
+          })
+        })
       })
     })
   })
