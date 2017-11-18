@@ -1,0 +1,9 @@
+{
+  "presets": [
+    "backpack-core/babel",
+    "flow"
+  ],
+  "plugins": [
+    "transform-flow-strip-types"
+  ]
+}

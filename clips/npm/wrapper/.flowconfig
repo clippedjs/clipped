@@ -2,11 +2,13 @@
 .*/node_modules/.*
 .*/examples/.*
 .*/clips/.*
-.*/dist/.*
+.*/lib/.*
 <PROJECT_ROOT>/index.js
 [include]
 [libs]
+.*/flow-typed/.*s
 flow-typed
+<PROJECT_ROOT>/flow-typed
 [options]
 all=true
 module.ignore_non_literal_requires=true

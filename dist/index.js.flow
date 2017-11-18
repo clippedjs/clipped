@@ -1,4 +1,3 @@
-#!/usr/bin/env node
 // @flow
 'user strict'
 
@@ -39,6 +38,4 @@ function parseArgs () {
 
 if (!module.parent) parseArgs()
 
-module.exports = {
-  parseArgs
-}
+module.exports = parseArgs

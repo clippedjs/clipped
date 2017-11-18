@@ -1,10 +1,10 @@
 {
   "name": "clipped",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "Tool to handle scaffold, dev, build and deploy",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "clipped": "lib/index.js"
+    "clipped": "dist/clipping.js"
   },
   "scripts": {
     "flow": "flow",
@@ -13,8 +13,8 @@
     "snazzy": "snazzy",
     "flow-copy-source": "flow-copy-source",
     "flow:check": "flow check ./src/",
-    "flow:copy-source": "flow-copy-source src lib",
-    "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./lib/ --all --pretty",
+    "flow:copy-source": "flow-copy-source src dist",
+    "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./dist/ --all --pretty",
     "flow:deps": "flow-typed install",
     "standard:lint": "standard --verbose --fix | snazzy",
     "dev": "nodemon --watch src --exec npm run flow:build",
@@ -33,7 +33,7 @@
     ],
     "ignore": [
       "**/flow-typed/",
-      "**/lib/"
+      "**/dist/"
     ],
     "parser": "babel-eslint",
     "extends": [

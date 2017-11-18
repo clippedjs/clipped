@@ -1,19 +1,20 @@
 {
-  "name": "backend",
+  "name": "nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "lib/index.js",
+  "bin": {
+    "clipped": "lib/index.js"
+  },
   "scripts": {
     "dev": "clipped dev",
     "build": "clipped build",
-    "build:docker": "clipped build --platform=docker",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.16.2",
     "source-map-support": "^0.5.0"
   }
 }
