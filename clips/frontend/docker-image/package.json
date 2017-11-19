@@ -2,9 +2,9 @@
   "name": "frontend",
   "version": "1.0.0",
   "description": "",
-  "main": "clipped.js",
+  "main": "clipping.js",
   "scripts": {
-    "start": "node ./clipped.js",
+    "start": "node ./clipping.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],

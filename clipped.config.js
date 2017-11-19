@@ -1,6 +1,6 @@
 module.exports = {
   name: 'clipped',
-  type: 'nodejs',
+  type: 'npm',
   build: {
     docker: {}
   }

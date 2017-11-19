@@ -2,7 +2,7 @@
   "name": "nodejs",
   "version": "1.0.0",
   "description": "",
-  "main": "clipped.js",
+  "main": "clipping.js",
   "scripts": {
     "dev": "backpack dev",
     "build": "backpack build",
@@ -14,5 +14,8 @@
   "devDependencies": {
     "backpack-core": "^0.4.3",
     "minimist": "^1.2.0"
+  },
+  "dependencies": {
+    "source-map-support": "^0.5.0"
   }
 }

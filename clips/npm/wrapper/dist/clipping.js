@@ -1,5 +1,4 @@
 import express from 'express'
-// import 'source-map-support/register'
 import app from '../src/index.js'
 
 const server = express()

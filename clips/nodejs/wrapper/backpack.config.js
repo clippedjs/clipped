@@ -22,7 +22,7 @@ module.exports = {
 
     // changes the name of the entry point from index -> main.js
     config.entry = {
-      clipped: resolve('./dist/clipping.js'),
+      clipping: resolve('./dist/clipping.js'),
       index: resolve('./src/index.js')
     }
 
@@ -31,7 +31,11 @@ module.exports = {
 
     config.output.path = resolve('./dist')
 
+    config.devtool = 'source-map'
+
     config.module.rules.find(rule => rule.loader.includes('babel')).exclude.push(resolve('node_modules'))
+
+    config.plugins.splice(1, 1)
 
     return config
   }
