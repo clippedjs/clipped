@@ -52,11 +52,15 @@ npm run dev
 ```
 .
 ├── clips
-│   ├── frontend
+│   ├── frontend # Vuejs
 │   │   ├── docker-image
 │   │   ├── scaffold
 │   │   └── wrapper
-│   └── nodejs
+│   │── nodejs # Server in Nodejs
+│   │   ├── docker-image
+│   │   ├── scaffold
+│   │   └── wrapper
+│   └── npm # NPM module
 │       ├── docker-image
 │       ├── scaffold
 │       └── wrapper
@@ -64,3 +68,11 @@ npm run dev
     ├── actions
     └── utils
 ```
+
+## FAQ
+### Adding Flowtype (only npm clip)
+1. In your project folder, install flowtype dependencies:
+```sh
+npm i --only=dev babel-plugin-transform-flow-strip-types babel-preset-es2015
+```
+2. Be sure you have the flowconfig. You may copy it from the 'npm' clip

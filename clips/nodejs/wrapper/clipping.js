@@ -1,5 +1,12 @@
 import express from 'express'
-import app from '../src/index.js'
+// // import 'source-map-support/register'
+// import app from '../src/index.js'
+let app = {}
+try {
+  app = require('../index.js').default || require('../index.js')
+} catch (e) {
+  try { app = require('../src/index.js').default || require('../src/index.js') } catch (e) {}
+}
 
 const server = express()
 

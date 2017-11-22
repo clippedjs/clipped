@@ -11,23 +11,15 @@ function resolve (dir) {
   return path.join(CLIPPED_TARGET, dir)
 }
 
-const indexAtRoot = fs.existsSync(resolve('./index.js'))
-const index = indexAtRoot ? resolve('./index.js') : resolve('./src/index.js')
-
 module.exports = {
   webpack: (config, options, webpack) => {
-    // Runtime dependencies
-    fs.writeFileSync(resolve('./dist/package.json'), fs.readFileSync(resolve('./package.json')))
-    fs.writeFileSync(resolve('./dist/clipping.js'), fs.readFileSync('./clipping.js'))
-
     // Perform customizations to config
     // Important: return the modified config
+    fs.writeFileSync(resolve('./dist/clipping.js'), fs.readFileSync('./clipping.js'))
 
     // changes the name of the entry point from index -> main.js
     config.entry = {
-      clipped: resolve('./dist/clipping.js'),
-      // index: resolve('./src/index.js')
-      index
+      index: resolve('./src/index.js')
     }
 
     config.resolve.modules.push(resolve('node_modules'))
@@ -35,12 +27,7 @@ module.exports = {
 
     config.output.path = resolve('./dist')
 
-    config.devtool = false
-
-    // Object.assign(config.module.rules.find(rule => rule.loader.includes('babel')).options, {compact: false})
     config.module.rules.find(rule => rule.loader.includes('babel')).exclude.push(resolve('node_modules'))
-
-    config.plugins.splice(1, 1)
 
     return config
   }

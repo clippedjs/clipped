@@ -1,9 +1,8 @@
-#!/usr/bin/env node
 // @flow
 'user strict'
 
 const spawn = require('cross-spawn')
-const {resolvePath} = require('./utils')
+const {resolvePath} = require('./utils/')
 
 const actions = new Set([
   'dev',
@@ -12,14 +11,19 @@ const actions = new Set([
   // 'deploy'
 ])
 
+const bins = {}
+actions.forEach((action: string) => {
+  bins[action] = require(`./actions/${action}`)
+})
+
 function parseArgs () {
   const action = process.argv[2]
 
   if (actions.has(action)) {
-    const bin: string = resolvePath(`actions/${action}`)
+    const bin: string = `./actions/${action}`
     const args = process.argv.slice(2)
 
-    const proc = spawn(`node`, [bin, ...args], {stdio: 'inherit'})
+    const proc = spawn(`node`, [resolvePath(bin), ...args], {stdio: 'inherit'})
     proc.on('close', (code) => process.exit(code))
     proc.on('error', (err) => {
       console.error(err)
@@ -39,6 +43,4 @@ function parseArgs () {
 
 if (!module.parent) parseArgs()
 
-module.exports = {
-  parseArgs
-}
+module.exports = parseArgs

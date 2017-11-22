@@ -1,10 +1,10 @@
 {
   "name": "clipped",
-  "version": "0.2.6",
+  "version": "0.3.2",
   "description": "Tool to handle scaffold, dev, build and deploy",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "bin": {
-    "clipped": "lib/index.js"
+    "clipped": "dist/clipping.js"
   },
   "scripts": {
     "flow": "flow",
@@ -12,13 +12,15 @@
     "standard": "standard",
     "snazzy": "snazzy",
     "flow-copy-source": "flow-copy-source",
-    "flow:check": "flow check ./src/",
-    "flow:copy-source": "flow-copy-source src lib",
-    "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./lib/ --all --pretty",
+    "flow:check": "flow check ./",
+    "flow:copy-source": "flow-copy-source src dist",
+    "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./dist/ --all --pretty",
     "flow:deps": "flow-typed install",
     "standard:lint": "standard --verbose --fix | snazzy",
     "dev": "nodemon --watch src --exec npm run flow:build",
     "build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
+    "//dev": "clipped dev",
+    "//build": "clipped build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "pre-commit": [
@@ -33,7 +35,7 @@
     ],
     "ignore": [
       "**/flow-typed/",
-      "**/lib/"
+      "**/dist/"
     ],
     "parser": "babel-eslint",
     "extends": [
@@ -64,10 +66,16 @@
     "graceful-ncp": "^3.0.0",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
-    "rimraf": "^2.6.2"
+    "rimraf": "^2.6.2",
+    "source-map-support": "^0.5.0",
+    "tar-fs": "^1.16.0"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
+    "babel-plugin-transform-flow-strip-types": "^6.22.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "backpack-core": "^0.4.3",
     "eslint-plugin-flowtype": "^2.39.1",
     "flow-bin": "^0.59.0",
     "flow-copy-source": "^1.2.1",
