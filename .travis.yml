@@ -1,3 +1,6 @@
+language: node_js
+node_js:
+  - 8.7.0
 deploy:
   provider: npm
   email: newman.kcchow@gmail.com
