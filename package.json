@@ -21,7 +21,7 @@
     "build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
     "//dev": "clipped dev",
     "//build": "clipped build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 0"
   },
   "pre-commit": [
     "flow:check",
