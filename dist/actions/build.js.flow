@@ -2,6 +2,7 @@
 // const tar = require('tar-fs')
 const fs = require('fs')
 const minimist = require('minimist')
+const yarnInstall = require('yarn-install')
 const {cwd, resolvePath} = require('../utils')
 const {ncp, rimraf, mkdirp} = require('../utils/file-manipulation')
 const {spawnFactory} = require('../utils/process-spawn')
@@ -51,7 +52,7 @@ async function native (config: clippedConfig = getConfig()) {
   await mkdirp(resolvePath('./dist', cwd))
 
   const wrapperPath = await getClipPath(config.type, 'wrapper')
-  await spawnFactory('npm', ['install', '--prefix', wrapperPath])
+  await yarnInstall({cwd: wrapperPath})
   await spawnFactory(
     'npm',
     ['run', 'build', '--prefix', wrapperPath, '--', `--env.clippedTarget=${cwd}`],

@@ -1,6 +1,6 @@
 {
   "name": "clipped",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
@@ -68,7 +68,8 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.0",
-    "tar-fs": "^1.16.0"
+    "tar-fs": "^1.16.0",
+    "yarn-install": "^0.5.1"
   },
   "devDependencies": {
     "babel-eslint": "^8.0.2",
