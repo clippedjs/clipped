@@ -27,7 +27,13 @@ module.exports = {
 
     config.output.path = resolve('./dist')
 
-    config.module.rules.find(rule => rule.loader.includes('babel')).exclude.push(resolve('node_modules'))
+    // To use custom babelrc
+    delete (config.module.rules.find(rule => rule.loader.includes('babel')).options)
+    config.module.rules.push({
+      test: /node_modules\/JSONStream\/index\.js$/,
+      loader: 'shebang-loader'
+    })
+    config.module.rules.find(rule => rule.loader.includes('babel')).loader = `babel-loader?babelrc=false&extends=${path.join(__dirname, '/.babelrc')}`
 
     return config
   }

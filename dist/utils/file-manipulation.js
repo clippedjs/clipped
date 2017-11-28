@@ -1,4 +1,5 @@
-const {ncp} = require('graceful-ncp')
+// const {ncp} = require('graceful-ncp')
+const ncp = require('ncp')
 const rimraf = require('rimraf')
 const mkdirp = require('mkdirp')
 
