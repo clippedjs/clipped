@@ -1,5 +1,6 @@
 // @flow
 const path = require('path')
+const merge = require('webpack-merge')
 const {cwd, resolvePath} = require('../utils')
 
 /**
@@ -9,10 +10,12 @@ const {cwd, resolvePath} = require('../utils')
  */
 function getConfig (): clippedConfig {
   let config: clippedConfig = {}
+  let packageJSON: Object = {}
   try {
+    packageJSON = require(resolvePath('package.json', cwd))
     config = require(resolvePath('clipped.config.js', cwd))
   } catch (err) {}
-  return config
+  return merge(packageJSON, config)
 }
 
 /**

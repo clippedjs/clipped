@@ -1,6 +1,6 @@
 {
   "name": "clipped",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
@@ -69,6 +69,7 @@
     "rimraf": "^2.6.2",
     "source-map-support": "^0.5.0",
     "tar-fs": "^1.16.0",
+    "webpack-merge": "^4.1.1",
     "yarn-install": "^0.5.1"
   },
   "devDependencies": {
