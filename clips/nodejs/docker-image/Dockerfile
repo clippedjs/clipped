@@ -6,4 +6,4 @@ COPY . .
 RUN npm i --production
 
 EXPOSE 8080
-CMD ["node", "clipping.js"]
+CMD ["node", "clipped.js"]
