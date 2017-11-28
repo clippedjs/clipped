@@ -23,24 +23,28 @@ module.exports = {
     // Perform customizations to config
     // Important: return the modified config
 
-    // changes the name of the entry point from index -> main.js
     config.entry = {
       clipped: resolve('./dist/clipping.js'),
       // index: resolve('./src/index.js')
       index
     }
-
-    config.resolve.modules.push(resolve('node_modules'))
-    config.resolveLoader.modules.push(resolve('node_modules'))
-
     config.output.path = resolve('./dist')
 
-    config.devtool = false
-
-    // Object.assign(config.module.rules.find(rule => rule.loader.includes('babel')).options, {compact: false})
+    // Make webpack look into node_modules both in wrapper and cwd
+    config.resolve.modules.push(resolve('node_modules'))
+    config.resolveLoader.modules.push(resolve('node_modules'))
     config.module.rules.find(rule => rule.loader.includes('babel')).exclude.push(resolve('node_modules'))
 
+    // No sourcemap to remove runtime dependency
+    // NOTE: might add back later
+    config.devtool = false
     config.plugins.splice(1, 1)
+
+    // react-native and nodejs socket excluded to make skygear work
+    Object.assign(config.externals, {
+      'react-native': 'undefined',
+      'websocket': 'undefined'
+    })
 
     return config
   }

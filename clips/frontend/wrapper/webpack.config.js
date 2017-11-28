@@ -1,5 +1,6 @@
 const path = require('path')
 const webpack = require('webpack')
+const webpackMerge = require('webpack-merge')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = env => {
@@ -16,6 +17,11 @@ module.exports = env => {
       path: resolve('dist'),
       // publicPath: '/dist/',
       filename: 'index.js'
+    },
+    externals: {
+      // react-native and nodejs socket excluded to make skygear work
+      'react-native': 'undefined',
+      'websocket': 'undefined'
     },
     module: {
       rules: [
@@ -108,5 +114,7 @@ module.exports = env => {
     ])
   }
 
-  return baseConfig
+  let overrideConfig = {}
+  try { overrideConfig = require(resolve('webpack.config.js')) } catch (e) {}
+  return webpackMerge(baseConfig, overrideConfig)
 }

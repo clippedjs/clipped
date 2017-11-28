@@ -1,6 +1,6 @@
 # Clipped [![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped) [![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped)
 
-There should be the best way to optimization.
+There should be "the best way" to optimization.
 Project configuration should be about options only.
 
 **Clipped handles the `...`**
@@ -26,14 +26,14 @@ clipped build --platform=docker # Build docker image
 ## Things handled
 - [ ] Scaffolding: (eliminates need for devDependencies)
   - [ ] frontend: ReactJs (WIP)
-  - [x] frntend: VueJs
+  - [x] frontend: VueJs
   - [x] backend: Express
 - [x] Dev:
   - [x] frontend: webpack-dev-server
   - [x] backend: backpack
 - [x] Build (Docker Image):
   - [x] frontend: webpack
-  - [x] backend: backpck
+  - [x] backend: backpack
 - [ ] Deploy: Docker push (Planning)
 
 ## How to contribute
@@ -70,9 +70,6 @@ npm run dev
 ```
 
 ## FAQ
-### Adding Flowtype (only npm clip)
-1. In your project folder, install flowtype dependencies:
-```sh
-npm i --only=dev babel-plugin-transform-flow-strip-types babel-preset-es2015
-```
-2. Be sure you have the flowconfig. You may copy it from the 'npm' clip
+### Does Clipped suport Flowtype / Typescript ?
+Flowtype: :construction: WIP to make it supported on all clips
+Typescript: waiting for babel to support Typescript :sleeping:

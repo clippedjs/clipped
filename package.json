@@ -1,6 +1,6 @@
 {
   "name": "clipped",
-  "version": "0.3.5",
+  "version": "0.3.6",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
