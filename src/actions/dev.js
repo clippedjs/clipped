@@ -12,7 +12,7 @@ const {getConfig, getClipPath} = require('./config')
  *
  * @returns {Promise<void>}
  */
-async function dev (config: clippedConfig = getConfig()): Promise<void> {
+async function dev (config: clippedConfig = {}): Promise<void> {
   // Make sure dist folder is clear
   await rimraf(resolvePath('./dist', cwd))
   await mkdirp(resolvePath('./dist', cwd))

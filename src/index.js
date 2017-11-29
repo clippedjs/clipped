@@ -18,8 +18,10 @@ async function main (args: Object = parseArgs()) {
   const {action, opt} = args
 
   if (Object.keys(actions).includes(action)) {
+    let config = {}
     try {
-      await actions[action]({...getConfig(), ...opt})
+      config = await getConfig()
+      await actions[action]({...config, ...opt})
     } catch (e) {
       console.error(e)
     }

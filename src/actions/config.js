@@ -1,17 +1,22 @@
-import path from 'path'
+const path = require('path')
 const merge = require('webpack-merge')
 const {cwd, resolvePath} = require('../utils')
 
 /**
  * getConfig - Get clipped.config.js of project
  *
+ * @async
  * @returns {thingConfig}
  */
-function getConfig (): clippedConfig {
+async function getConfig (): clippedConfig {
   let config: clippedConfig = {}
   let packageJSON: Object = {}
-  try { packageJSON = require(resolvePath('package.json', cwd)) } catch (err) {}
-  try { config = require(resolvePath('clipped.config.js', cwd)) } catch (err) {}
+
+  // Since it is fully dynamic, need to use nodejs's rather than webpack's require
+  // eslint-disable-next-line no-undef
+  try { packageJSON = __non_webpack_require__(resolvePath('package.json', cwd)) } catch (err) { console.error(err) }
+  // eslint-disable-next-line no-undef
+  try { config = __non_webpack_require__(resolvePath('clipped.config.js', cwd)) } catch (err) { console.error(err) }
   return merge(packageJSON, config)
 }
 

@@ -10,7 +10,7 @@ const {getConfig, getClipPath} = require('./config')
  * @param {clippedConfig} [config={}]
  *
  */
-async function scaffold (config: clippedConfig = getConfig()) {
+async function scaffold (config: clippedConfig = {}) {
   const {type} = config
 
   // Copy scaffold into folder and install dependencies

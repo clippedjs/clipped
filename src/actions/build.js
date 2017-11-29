@@ -13,7 +13,7 @@ const {getConfig, getClipPath} = require('./config')
  * @param {clippedConfig} [config={}]
  * @returns {Promise<void>}
  */
-async function docker (config: clippedConfig = getConfig()) {
+async function docker (config: clippedConfig = {}) {
   const srcDockerImage: string = await getClipPath(config.type, 'docker-image')
   const dockerImageDest: string = resolvePath('dist', cwd)
 
@@ -44,7 +44,7 @@ async function docker (config: clippedConfig = getConfig()) {
  * @param {clippedConfig} [config={}]
  * @returns {Promise<void>}
  */
-async function native (config: clippedConfig = getConfig()) {
+async function native (config: clippedConfig = {}) {
   await rimraf(resolvePath('./dist', cwd))
   await mkdirp(resolvePath('./dist', cwd))
 
@@ -64,7 +64,7 @@ async function native (config: clippedConfig = getConfig()) {
  * @param {clippedConfig} [config={}]
  *
  */
-async function build (config: clippedConfig = getConfig()) {
+async function build (config: clippedConfig = {}) {
   // Make sure each platform only build once
   const platforms: Array<string> = [...new Set([].concat(config.platform || 'native'))]
   await Promise.all(
