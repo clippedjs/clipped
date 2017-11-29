@@ -1,6 +1,6 @@
 {
   "name": "clipped",
-  "version": "0.3.6",
+  "version": "0.4.2",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
@@ -23,7 +23,7 @@
     "build": "clipped build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
-  "pre-commit": [
+  "//pre-commit": [
     "flow:check",
     "build"
   ],
@@ -63,6 +63,7 @@
   "dependencies": {
     "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
+    "flow-typed": "^2.2.3",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
@@ -82,7 +83,6 @@
     "flow-bin": "^0.59.0",
     "flow-copy-source": "^1.2.1",
     "flow-remove-types": "^1.2.3",
-    "flow-typed": "^2.2.3",
     "pre-commit": "^1.2.2",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
