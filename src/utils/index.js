@@ -1,4 +1,4 @@
-const path = require('path')
+import path from 'path'
 
 const cwd: string = process.cwd()
 
@@ -14,7 +14,7 @@ function resolvePath (dir: string = '', parent: string = path.join(__dirname, '.
   return path.join(parent, dir)
 }
 
-module.exports = {
+export {
   cwd,
   resolvePath
 }

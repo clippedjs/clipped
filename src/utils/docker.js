@@ -1,4 +1,4 @@
-const Docker = require('dockerode')
+import Docker from 'dockerode'
 
 /**
  * dockerImageFactory - Docker image generator
@@ -8,8 +8,8 @@ const Docker = require('dockerode')
  * @param {Object} [opts={}]
  *
  */
-module.exports.dockerImageFactory = (pack: any, opts: Object = {}): Promise<void> =>
-  new Promise((resolve, reject) => {
+function dockerImageFactory (pack: any, opts: Object = {}): Promise<void> {
+  return new Promise((resolve, reject) => {
     const docker = new Docker()
     docker.buildImage(
       pack,
@@ -23,3 +23,8 @@ module.exports.dockerImageFactory = (pack: any, opts: Object = {}): Promise<void
       }
     )
   })
+}
+
+export {
+  dockerImageFactory
+}

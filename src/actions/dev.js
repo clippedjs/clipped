@@ -1,4 +1,4 @@
-const yarnInstall = require('yarn-install')
+import yarnInstall from 'yarn-install'
 const {cwd, resolvePath} = require('../utils')
 const {rimraf, mkdirp} = require('../utils/file-manipulation')
 const {spawnFactory} = require('../utils/process-spawn')
@@ -23,4 +23,4 @@ async function dev (config: clippedConfig = getConfig()): Promise<void> {
   await spawnFactory('npm', ['run', `dev`, '--prefix', wrapperPath, '--', `--env.clippedTarget=${cwd}`])
 }
 
-module.exports = dev
+export default dev

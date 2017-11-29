@@ -1,19 +1,11 @@
-const minimist = require('minimist')
+import minimist from 'minimist'
+import dev from './actions/dev'
+import build from './actions/build'
+import scaffold from './actions/scaffold'
+
 const {getConfig} = require('./actions/config')
 
-const actions = new Set([
-  // 'help',
-  // 'version',
-  'dev',
-  'build',
-  'scaffold'
-  // 'deploy'
-])
-
-const bins = {}
-actions.forEach((action: string) => {
-  bins[action] = require(`./actions/${action}`)
-})
+const actions = {dev, build, scaffold}
 
 /**
  * main - Entry function
@@ -25,17 +17,23 @@ actions.forEach((action: string) => {
 async function main (args: Object = parseArgs()) {
   const {action, opt} = args
 
-  if (actions.has(action)) {
-    await bins[action]({...getConfig(), ...opt})
+  if (Object.keys(actions).includes(action)) {
+    try {
+      await actions[action]({...getConfig(), ...opt})
+    } catch (e) {
+      console.error(e)
+    }
   } else {
     console.log(`
       Usage:
       $ clipped <action>
 
       Available actions:
-      ${Array.from(actions).join(', ')}
+      ${Object.keys(actions).join(', ')}
     `)
   }
+
+  process.exit(0)
 }
 
 /**
@@ -50,4 +48,4 @@ function parseArgs () {
   return {action, opt}
 }
 
-module.exports = main
+export default main

@@ -1,5 +1,4 @@
-// @flow
-const path = require('path')
+import path from 'path'
 const merge = require('webpack-merge')
 const {cwd, resolvePath} = require('../utils')
 
@@ -11,10 +10,8 @@ const {cwd, resolvePath} = require('../utils')
 function getConfig (): clippedConfig {
   let config: clippedConfig = {}
   let packageJSON: Object = {}
-  try {
-    packageJSON = require(resolvePath('package.json', cwd))
-    config = require(resolvePath('clipped.config.js', cwd))
-  } catch (err) {}
+  try { packageJSON = require(resolvePath('package.json', cwd)) } catch (err) {}
+  try { config = require(resolvePath('clipped.config.js', cwd)) } catch (err) {}
   return merge(packageJSON, config)
 }
 
@@ -26,10 +23,10 @@ function getConfig (): clippedConfig {
  * @returns {Promise<sting>} Promise to return  path to clip
  */
 async function getClipPath (type: string = 'nodejs', target: string = ''): Promise<string> {
-  return resolvePath(path.join(`../clips/${type}`, target))
+  return resolvePath(path.join(`./clips/${type}`, target))
 }
 
-module.exports = {
+export {
   getConfig,
   getClipPath
 }

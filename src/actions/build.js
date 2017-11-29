@@ -1,4 +1,4 @@
-const fs = require('fs')
+import fs from 'fs'
 const yarnInstall = require('yarn-install')
 const {cwd, resolvePath} = require('../utils')
 const {ncp, rimraf, mkdirp} = require('../utils/file-manipulation')
@@ -83,4 +83,4 @@ async function build (config: clippedConfig = getConfig()) {
   )
 }
 
-module.exports = build
+export default build

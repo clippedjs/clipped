@@ -1,4 +1,4 @@
-const yarnInstall = require('yarn-install')
+import yarnInstall from 'yarn-install'
 const {cwd} = require('../utils')
 const {ncp} = require('../utils/file-manipulation')
 const {getConfig, getClipPath} = require('./config')
@@ -24,4 +24,4 @@ async function scaffold (config: clippedConfig = getConfig()) {
   `)
 }
 
-module.exports = scaffold
+export default scaffold

@@ -1,6 +1,6 @@
-const ncp = require('ncp')
-const rimraf = require('rimraf')
-const mkdirp = require('mkdirp')
+const nncp = require('ncp')
+const rrimraf = require('rimraf')
+const mmkdirp = require('mkdirp')
 
 /**
 * ncp - Copy file recursively
@@ -11,13 +11,14 @@ const mkdirp = require('mkdirp')
 * @param {object} [opts={}]
 *
 */
-module.exports.ncp = (src: string, dest: string, opts: Object = {}): Promise<void> =>
-  new Promise((resolve, reject) => {
-    ncp(src, dest, opts, err => {
+function ncp (src: string, dest: string, opts: Object = {}): Promise<void> {
+  return new Promise((resolve, reject) => {
+    nncp(src, dest, opts, err => {
       if (err) reject(err)
       resolve()
     })
   })
+}
 
 /**
  * rimraf - Remove file recursively
@@ -27,13 +28,14 @@ module.exports.ncp = (src: string, dest: string, opts: Object = {}): Promise<voi
  * @param {object} [opts={}]
  *
  */
-module.exports.rimraf = (f: string, opts: Object = {}): Promise<void> =>
-  new Promise((resolve, reject) => {
-    rimraf(f, opts, err => {
+function rimraf (f: string, opts: Object = {}): Promise<void> {
+  return new Promise((resolve, reject) => {
+    rrimraf(f, opts, err => {
       if (err) reject(err)
       resolve()
     })
   })
+}
 
 /**
  * mkdirp - Create directory
@@ -43,10 +45,17 @@ module.exports.rimraf = (f: string, opts: Object = {}): Promise<void> =>
  * @param {object} [opts={}]
  *
  */
-module.exports.mkdirp = (path: string, opts: Object = {}): Promise<void> =>
-  new Promise((resolve, reject) => {
-    mkdirp(path, opts, err => {
+function mkdirp (path: string, opts: Object = {}): Promise<void> {
+  return new Promise((resolve, reject) => {
+    mmkdirp(path, opts, err => {
       if (err) reject(err)
       resolve()
     })
   })
+}
+
+export {
+  ncp,
+  rimraf,
+  mkdirp
+}

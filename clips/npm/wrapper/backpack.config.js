@@ -21,6 +21,11 @@ module.exports = {
     config.entry = {
       index: resolve('./src/index.js')
     }
+    config.target = 'node',
+    config.node = {
+      __dirname: false,
+      __filename: false
+    }
 
     config.resolve.modules.push(resolve('node_modules'))
     config.resolveLoader.modules.push(resolve('node_modules'))

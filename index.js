@@ -1,1 +1,1 @@
-require('./lib')
+require('./dist')

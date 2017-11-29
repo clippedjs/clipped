@@ -17,10 +17,10 @@
     "flow:build": "npm run flow:check && flow-remove-types ./src/ -d ./dist/ --all --pretty",
     "flow:deps": "flow-typed install",
     "standard:lint": "standard --verbose --fix | snazzy",
-    "dev": "nodemon --watch src --exec npm run flow:build",
-    "build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
-    "//dev": "clipped dev",
-    "//build": "clipped build",
+    "//dev": "nodemon --watch src --exec npm run flow:build",
+    "//build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
+    "dev": "clipped dev",
+    "build": "clipped build",
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "pre-commit": [
