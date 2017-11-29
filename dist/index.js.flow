@@ -1,10 +1,9 @@
-// @flow
-'user strict'
-
-const spawn = require('cross-spawn')
-const {resolvePath} = require('./utils/')
+const minimist = require('minimist')
+const {getConfig} = require('./actions/config')
 
 const actions = new Set([
+  // 'help',
+  // 'version',
   'dev',
   'build',
   'scaffold'
@@ -16,19 +15,18 @@ actions.forEach((action: string) => {
   bins[action] = require(`./actions/${action}`)
 })
 
-function parseArgs () {
-  const action = process.argv[2]
+/**
+ * main - Entry function
+ *
+ * @async
+ * @param {Object} [args={}] Arguments to command
+ *
+ */
+async function main (args: Object = parseArgs()) {
+  const {action, opt} = args
 
   if (actions.has(action)) {
-    const bin: string = `./actions/${action}`
-    const args = process.argv.slice(2)
-
-    const proc = spawn(`node`, [resolvePath(bin), ...args], {stdio: 'inherit'})
-    proc.on('close', (code) => process.exit(code))
-    proc.on('error', (err) => {
-      console.error(err)
-      process.exit(1)
-    })
+    await bins[action]({...getConfig(), ...opt})
   } else {
     console.log(`
       Usage:
@@ -37,10 +35,19 @@ function parseArgs () {
       Available actions:
       ${Array.from(actions).join(', ')}
     `)
-    process.exit(0)
   }
 }
 
-if (!module.parent) parseArgs()
+/**
+ * parseArgs - Parse cli arguments
+ *
+ * @returns {Object} action and options
+ */
+function parseArgs () {
+  const action: string = process.argv[2]
+  const opt: Object = minimist(process.argv, {default: {platform: 'native'}})
 
-module.exports = parseArgs
+  return {action, opt}
+}
+
+module.exports = main

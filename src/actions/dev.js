@@ -7,12 +7,13 @@ const {getConfig, getClipPath} = require('./config')
 /**
  * dev - Handle dev action
  *
+ * @async
  * @param {clippedConfig} [config={}]
  *
  * @returns {Promise<void>}
  */
 async function dev (config: clippedConfig = getConfig()): Promise<void> {
-  // Makee sure dist folder is clear
+  // Make sure dist folder is clear
   await rimraf(resolvePath('./dist', cwd))
   await mkdirp(resolvePath('./dist', cwd))
 
@@ -21,7 +22,5 @@ async function dev (config: clippedConfig = getConfig()): Promise<void> {
 
   await spawnFactory('npm', ['run', `dev`, '--prefix', wrapperPath, '--', `--env.clippedTarget=${cwd}`])
 }
-
-if (!module.parent) dev()
 
 module.exports = dev

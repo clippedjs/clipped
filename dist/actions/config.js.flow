@@ -4,7 +4,7 @@ const merge = require('webpack-merge')
 const {cwd, resolvePath} = require('../utils')
 
 /**
- * getConfig - Get clipped.config.js of prject
+ * getConfig - Get clipped.config.js of project
  *
  * @returns {thingConfig}
  */

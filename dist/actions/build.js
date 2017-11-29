@@ -1,7 +1,4 @@
-// 
-// const tar = require('tar-fs')
 const fs = require('fs')
-const minimist = require('minimist')
 const yarnInstall = require('yarn-install')
 const {cwd, resolvePath} = require('../utils')
 const {ncp, rimraf, mkdirp} = require('../utils/file-manipulation')
@@ -60,10 +57,16 @@ async function native (config = getConfig()) {
   )
 }
 
+/**
+ * build - Build action
+ *
+ * @async
+ * @param {clippedConfig} [config={}]
+ *
+ */
 async function build (config = getConfig()) {
-  const argv = minimist(process.argv, {default: {platform: 'native'}})
   // Make sure each platform only build once
-  const platforms = [...new Set([].concat(argv['platform']))]
+  const platforms = [...new Set([].concat(config.platform || 'native'))]
   await Promise.all(
     platforms.map(async (platform) => {
       switch (platform) {
@@ -78,15 +81,6 @@ async function build (config = getConfig()) {
       }
     })
   )
-}
-
-if (!module.parent) {
-  try {
-    build()
-  } catch (e) {
-    console.error(e)
-    process.exit(e)
-  }
 }
 
 module.exports = build
