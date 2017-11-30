@@ -1,6 +1,5 @@
 {
   "name": "clipped",
-  "version": "0.0.0-semantic-release",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
