@@ -1,11 +1,16 @@
 language: node_js
+cache:
+  directories:
+    - ~/.npm
+notifications:
+  email: false
 node_js:
-  - 8.7.0
-deploy:
-  provider: npm
-  email: newman.kcchow@gmail.com
-  api_key:
-    secure: Il8LdIuClWQ13Ov6PG0W8rYim+Na857+bUh3/utmDMoag0s85oCELlB/X2NTyuAiWvgb0KtuaxVsroY8f89ThwqVUnsedajpF96U5/ql7KdDQof7bb3k3F/dJHryhGPZqQYS7wTIG4RaU7pomYhoL0DI/lvZKmtpDXdHQX5qtTdHnQRKClMFhsf95CQxByhCF2pfzguAwWblIFgy57lfDWrTW9ZQvlBJCHTH6U0Lv38mycYvFgrSPK/xvFs4nJbfFCePx6alDrgdrkfmP5OTw4+vi1TRBuTxrM040o07c7BPPIN2fl+qSPzKMw8iJ8dd/ChF/82dh/X/Wta14EA9GTCUvUfXt8FIKjJWWiRrJdLmxsSp4L1t3IU+zHXQBCFcJe7CAnnZYtC0vTUs0Ljz7zG7Jw+66iTDBtfghGUkV78E3LGZJCJMJQ8u04SnDFBPLuWPGAktQRBro7hsXljCqTdhsH8gmG78lMBnKJCUAaro1kXIr+N0OITOW+paE1q2VzqjxBVGWS2mXR7qL3w+NTS/CCwLKUqAazdDckZ4zKsJxsOjhoKV4zGIaYUc1WojFNxORtwzw40XvUFSmPIz8zZKKCrk2S0iNpEN3TckbdORAf50k1+apzx/9rhViU7etKVCjpH4RP/TuRqsqkLWYWsWnlPwJhZ+/jsX7xKu82w=
-  on:
-    tags: true
-    repo: IniZio/usthing-clipped
+  - '9'
+  - '8'
+  - '6'
+  - '4'
+after_success:
+  - npm run semantic-release
+branches:
+  except:
+    - /^v\d+\.\d+\.\d+$/

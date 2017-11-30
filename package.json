@@ -1,6 +1,6 @@
 {
   "name": "clipped",
-  "version": "0.4.3",
+  "version": "0.0.0-semantic-release",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
@@ -21,7 +21,8 @@
     "//build": "npm run standard:lint && npm run flow:build && npm run flow:copy-source",
     "dev": "clipped dev",
     "build": "clipped build",
-    "test": "echo \"Error: no test specified\" && exit 0"
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
   },
   "//pre-commit": [
     "flow:check",
@@ -52,7 +53,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/IniZio/usthing-clipped.git"
+    "url": "https://github.com/IniZio/usthing-clipped.git"
   },
   "author": "IniZio",
   "license": "ISC",
@@ -85,6 +86,10 @@
     "flow-remove-types": "^1.2.3",
     "pre-commit": "^1.2.2",
     "snazzy": "^7.0.0",
-    "standard": "^10.0.3"
+    "standard": "^10.0.3",
+    "semantic-release": "^8.2.0"
+  },
+  "publishConfig": {
+    "access": "restricted"
   }
 }
