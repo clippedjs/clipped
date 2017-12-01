@@ -1,8 +1,0 @@
-[ignore]
-<PROJECT_ROOT>/\([^s]\|s\([^r]\|r\([^c]\|$\)\|$\)\|$\).*$
-[include]
-[libs]
-flow-typed
-[options]
-all=true
-module.ignore_non_literal_requires=true
