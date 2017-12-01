@@ -1,6 +1,10 @@
 const path = require('path')
 const merge = require('webpack-merge')
 const {cwd, resolvePath} = require('../utils')
+const {getRepoOwner, cloneRepo} = require('../utils/git')
+
+const CLIP_POSTFIX = '-clip'
+const CLIP_CACHE_PATH = `./.clips`
 
 /**
  * getConfig - Get clipped.config.js of project
@@ -24,11 +28,55 @@ async function getConfig (): clippedConfig {
  * getClipPath - setup clip and return its path
  *
  * @async
- * @param {string} type
+ * @param {string} type clip
+ * @param {string} target subfolder of clip
  * @returns {Promise<sting>} Promise to return  path to clip
  */
 async function getClipPath (type: string = 'nodejs', target: string = ''): Promise<string> {
-  return resolvePath(path.join(`./clips/${type}`, target))
+  let clipRepos: Object[] = []
+
+  if (!type.includes(CLIP_POSTFIX)) type += CLIP_POSTFIX
+
+  // Override sequence: clipped.config.js -> repo owner -> base
+  // Use clipped config
+  if (type.includes('/') && type.split('/')[0]) {
+    clipRepos.push({name: type, url: `https://github.com/${type}`})
+  }
+  // Use repo owner
+  if (!type.includes('/')) {
+    try {
+      const repoOwner = await getRepoOwner()
+      clipRepos.push({name: `${repoOwner}/${type}`, url: `https://github.com/${repoOwner}/${type}`})
+    } catch (e) {}
+  }
+  // Base clip
+  const clipName = 'clippedjs/' + type.substr(type.includes('/') ? type.lastIndexOf('/') + 1 : 0)
+  clipRepos.push({name: clipName, url: `https://github.com/${clipName}`})
+
+  let result: ?string = null
+  await Promise.all(
+    clipRepos.map(async repo => {
+      // Stop attempting if got a clip
+      if (result) return
+      let clipPath = ''
+      try {
+        clipPath = resolvePath(path.join(CLIP_CACHE_PATH, repo.name))
+        await cloneRepo(repo.url, clipPath)
+        result = clipPath
+      } catch (e) {
+        console.log(e.message)
+        if (e.message.includes('exists and is not an empty directory')) {
+          console.log('Clip exists in cache')
+          result = clipPath
+        } else {
+          console.log(`Clip at '${repo.name}' not found, falling through`)
+        }
+      }
+    })
+  )
+
+  if (!result) throw new Error('Cannot find clip requested')
+  return path.join(result, target)
 }
 
 export {
