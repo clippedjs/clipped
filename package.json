@@ -1,5 +1,5 @@
 {
-  "name": "@clipped/clipped",
+  "name": "clipped",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
@@ -84,6 +84,5 @@
     "semantic-release": "^8.2.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
-  },
-  "version": "0.0.0-development"
+  }
 }
