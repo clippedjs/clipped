@@ -1,5 +1,5 @@
 {
-  "name": "clipped",
+  "name": "@clipped/clipped",
   "description": "Tool to handle scaffold, dev, build and deploy",
   "main": "dist/index.js",
   "bin": {
@@ -46,14 +46,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/IniZio/usthing-clipped.git"
+    "url": "https://github.com/clippedjs/clipped.git"
   },
   "author": "IniZio",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/IniZio/usthing-clipped/issues"
+    "url": "https://github.com/clippedjs/clipped/issues"
   },
-  "homepage": "https://github.com/IniZio/usthing-clipped#readme",
+  "homepage": "https://github.com/clippedjs/clipped#readme",
   "dependencies": {
     "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
@@ -84,5 +84,6 @@
     "semantic-release": "^8.2.0",
     "snazzy": "^7.0.0",
     "standard": "^10.0.3"
-  }
+  },
+  "version": "0.0.0-development"
 }
