@@ -2,6 +2,7 @@ import yarnInstall from 'yarn-install'
 const {cwd, resolvePath} = require('../utils')
 const {rimraf, mkdirp} = require('../utils/file-manipulation')
 const {spawnFactory} = require('../utils/process-spawn')
+const {cloneSubmodules} = require('../utils/git')
 const {getConfig, getClipPath} = require('./config')
 
 /**

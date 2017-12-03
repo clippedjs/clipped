@@ -1,7 +1,7 @@
 const path = require('path')
 const merge = require('webpack-merge')
-const {cwd, resolvePath} = require('../utils')
-const {getRepoOwner, cloneRepo} = require('../utils/git')
+const {cwd, resolvePath, promiseSerial} = require('../utils')
+const {getRepoOwner, cloneRepo, fetchRepo} = require('../utils/git')
 
 const CLIP_POSTFIX = '-clip'
 const CLIP_CACHE_PATH = `./.clips`
@@ -38,42 +38,51 @@ async function getClipPath (type: string = 'nodejs', target: string = ''): Promi
   if (!type.includes(CLIP_POSTFIX)) type += CLIP_POSTFIX
 
   // Override sequence: clipped.config.js -> repo owner -> base
+  // Is full url
+  if (type.split('/').length >= 3) {
+    clipRepos.push({name: type, url: type})
+  }
   // Use clipped config
   if (type.includes('/') && type.split('/')[0]) {
     clipRepos.push({name: type, url: `https://github.com/${type}`})
+    clipRepos.push({name: type, url: `git@github.com:${type}`})
   }
   // Use repo owner
   if (!type.includes('/')) {
     try {
       const repoOwner = await getRepoOwner()
-      clipRepos.push({name: `${repoOwner}/${type}`, url: `https://github.com/${repoOwner}/${type}`})
-    } catch (e) {}
+      const clipPath = `${repoOwner}/${type}`
+      clipRepos.push({name: clipPath, url: `https://github.com/${clipPath}`})
+      clipRepos.push({name: clipPath, url: `git@github.com:${clipPath}`})
+  } catch (e) {}
   }
   // Base clip
   const clipName = 'clippedjs/' + type.substr(type.includes('/') ? type.lastIndexOf('/') + 1 : 0)
   clipRepos.push({name: clipName, url: `https://github.com/${clipName}`})
 
-  let result: ?string = null
-  await Promise.all(
-    clipRepos.map(async repo => {
-      // Stop attempting if got a clip
-      if (result) return
-      let clipPath = ''
-      try {
-        clipPath = resolvePath(path.join(CLIP_CACHE_PATH, repo.name))
-        await cloneRepo(repo.url, clipPath)
+  // Start making clone attempts, stop on first success
+  let result: ?string = null  
+  const cloneAttempts = clipRepos.map(repo => async () => {
+    if (result) return
+    let clipPath = ''
+    try {
+      clipPath = resolvePath(path.join(CLIP_CACHE_PATH, repo.name))
+      await cloneRepo(repo.url, clipPath)
+      result = clipPath
+    } catch (e) {
+      // If already cached
+      if (e.message.includes('exists and is not an empty directory')) {
+        console.log('Clip exists in cache')        
+        await fetchRepo(clipPath)
         result = clipPath
-      } catch (e) {
-        console.log(e.message)
-        if (e.message.includes('exists and is not an empty directory')) {
-          console.log('Clip exists in cache')
-          result = clipPath
-        } else {
-          console.log(`Clip at '${repo.name}' not found, falling through`)
-        }
+      } else if (e.message.includes('credentials callback returned an invalid cred type errno')) {
+        // Wrong credentials (hope is due to private https)
+      } else {
+        console.error(e)
       }
-    })
-  )
+    }
+  })
+  await promiseSerial(cloneAttempts)
 
   if (!result) throw new Error('Cannot find clip requested')
   return path.join(result, target)

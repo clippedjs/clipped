@@ -1,6 +1,7 @@
 {
   "name": "clipped",
   "description": "Tool to handle scaffold, dev, build and deploy",
+  "version": "0.0.0",
   "main": "dist/index.js",
   "bin": {
     "clipped": "dist/clipping.js"

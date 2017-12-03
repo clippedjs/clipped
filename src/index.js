@@ -20,7 +20,7 @@ async function main (args: Object = parseArgs()) {
   if (Object.keys(actions).includes(action)) {
     let config = {}
     try {
-      config = await getConfig()
+      if (action != 'scaffold') config = await getConfig()
       await actions[action]({...config, ...opt})
     } catch (e) {
       console.error(e)

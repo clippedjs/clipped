@@ -1,6 +1,6 @@
 import path from 'path'
 
-const cwd: string = process.cwd()
+export const cwd: string = process.cwd()
 
 /**
  * resolvePath - Resolve paths
@@ -10,11 +10,18 @@ const cwd: string = process.cwd()
  *
  * @returns {string} Resolved path
  */
-function resolvePath (dir: string = '', parent: string = path.join(__dirname, '../')): string {
+export function resolvePath (dir: string = '', parent: string = path.join(__dirname, '../')): string {
   return path.join(parent, dir)
 }
 
-export {
-  cwd,
-  resolvePath
+/**
+ * promiseSerial - Resolve promises sequentially
+ * 
+ * @param {Function} funcs 
+ * @returns 
+ */
+export function promiseSerial (funcs: Function) {
+  return funcs.reduce((promise, func) =>
+    promise.then(result => func().then(Array.prototype.concat.bind(result))),
+    Promise.resolve([]))
 }
