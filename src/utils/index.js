@@ -1,4 +1,5 @@
 import path from 'path'
+const {promisify} = require('util')
 
 export const cwd: string = process.cwd()
 
@@ -25,3 +26,7 @@ export function promiseSerial (funcs: Function) {
     promise.then(result => func().then(Array.prototype.concat.bind(result))),
     Promise.resolve([]))
 }
+
+export const exec = promisify(function(command, opts, callback) {
+  return require("child_process").exec(command, opts, callback);
+})

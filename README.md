@@ -5,6 +5,10 @@ Project configuration should be about options only.
 
 **Clipped handles the `...`**
 
+## Requirements
+- Git installed and available as command `git`
+- NodeJs >= 8.0.0
+
 ## How to Install
 ```sh
 npm i -g clipped
@@ -74,21 +78,3 @@ npm run dev
 Flowtype: :construction: WIP to make it supported on all clips
 
 Typescript: waiting for babel to support Typescript :sleeping:
-
-### Receives error 'the latest libstdc++ is missing on your system!'
-On ubuntu:
-```sh
-sudo add-apt-repository ppa:ubuntu-toolchain-r/test
-sudo apt-get update
-sudo apt-get install libstdc++-4.9-dev
-```
-
-On Travis:
-```
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - libstdc++-4.9-dev
-```
