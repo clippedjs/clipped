@@ -6,6 +6,9 @@
   "bin": {
     "clipped": "dist/clipping.js"
   },
+  "engines": {
+    "node": ">=8"
+  },
   "scripts": {
     "commit": "git-cz",
     "flow": "flow",
@@ -59,11 +62,12 @@
     "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
     "flow-typed": "^2.2.3",
+    "git-url-parse": "^7.0.1",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
-    "nodegit": "^0.20.3",
     "rimraf": "^2.6.2",
+    "simple-git": "^1.84.0",
     "source-map-support": "^0.5.0",
     "tar-fs": "^1.16.0",
     "webpack-merge": "^4.1.1",
