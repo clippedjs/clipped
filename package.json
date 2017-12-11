@@ -1,0 +1,87 @@
+{
+  "name": "clipped",
+  "description": "Tool to handle scaffold, dev, build and deploy",
+  "version": "0.0.0",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clippedjs/clipped.git"
+  },
+  "author": "IniZio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clippedjs/clipped/issues"
+  },
+  "main": "dist/index.js",
+  "bin": {
+    "clipped": "dist/clipping.js"
+  },
+  "scripts": {
+    "commit": "git-cz",
+    "flow:deps": "flow-typed install",
+    "postinstall": "npm run flow:deps",
+    "dev": "clipped dev",
+    "build": "clipped build",
+    "test": "echo \"Error: no test specified\" && exit 0",
+    "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
+  },
+  "standard": {
+    "globals": [
+      "clippedConfig",
+      "stream$Readable",
+      "stream$Readable"
+    ],
+    "ignore": [
+      "**/flow-typed/",
+      "**/dist/"
+    ],
+    "parser": "babel-eslint",
+    "extends": [
+      "plugin:flowtype/recommended"
+    ],
+    "plugins": [
+      "flowtype"
+    ],
+    "rules": {
+      "define-flow-type": 1,
+      "use-flow-type": 1,
+      "flowtype/define-flow-type": 2
+    }
+  },
+  "homepage": "https://github.com/clippedjs/clipped#readme",
+  "dependencies": {
+    "cross-spawn": "^5.1.0",
+    "dockerode": "^2.5.3",
+    "extends-classes": "^1.0.5",
+    "git-url-parse": "^7.0.1",
+    "lodash": "^4.17.4",
+    "minimist": "^1.2.0",
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "rimraf": "^2.6.2",
+    "simple-git": "^1.84.0",
+    "source-map-support": "^0.5.0",
+    "tar-fs": "^1.16.0",
+    "webpack-merge": "^4.1.1",
+    "yarn-install": "^0.5.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "backpack-core": "^0.4.3",
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "flow-bin": "^0.61.0",
+    "flow-typed": "^2.2.3",
+    "pre-commit": "^1.2.2",
+    "semantic-release": "^8.2.0",
+    "standard": "^10.0.3"
+  }
+}
