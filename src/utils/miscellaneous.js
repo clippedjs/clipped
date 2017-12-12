@@ -26,7 +26,7 @@ export function resolvePath (dir: string = '', parent: string = path.join(__dirn
  */
 export function promiseSerial (
   funcs: Function[],
-  callback: Function,
+  callback: Function = (result, curr) => curr(result),
   initial: any = () => null
 ) {
   return funcs.reduce(

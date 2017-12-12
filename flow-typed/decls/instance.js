@@ -1,6 +1,6 @@
-declare type Clipped = {
+declare type clippedInstance = {
   // Hooks
-  _hooks?: any[],
+  _hooks: any[],
   hooks: Object,
   execHook: Function,
 
@@ -12,4 +12,7 @@ declare type Clipped = {
 
   // Helper
   resolve: Function,
+
+  // Config
+  init: Function
 }

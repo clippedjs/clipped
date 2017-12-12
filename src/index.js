@@ -11,7 +11,8 @@ import Clipped from './instance'
 export async function cli (args: Object = parseArgs()) {
   const {action, opt} = args
 
-  const clipped: Clipped = new Clipped()
+  // eslint-disable-next-line no-undef
+  const clipped: clippedInstance = await new Clipped().init()
 
   if (Object.keys(clipped.hooks).includes(action)) {
     try { await clipped.execHook(action, opt) } catch (e) { console.error(e) }

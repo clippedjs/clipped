@@ -12,12 +12,12 @@ const CLIP_POSTFIX = '-clip'
 const CLIP_CACHE_PATH = resolvePath('./.clips', __dirname)
 
 /**
- * cloneClip - clone clip, yarn, and return its path
+ * cloneClip - clone clip, yarn, and then return its path
  *
  * @export
  * @async
  * @param {string} clip
- * @returns {Promise<sting>} Promise to return  path to clip
+ * @returns {Promise<sting>} Promise to return path to clip
  */
 export async function cloneClip (clip: string = 'nodejs', target: string = ''): Promise<string> {
   let clipRepos: Object[] = []
@@ -51,8 +51,6 @@ export async function cloneClip (clip: string = 'nodejs', target: string = ''): 
     {name: baseClip, url: `https://github.com/${baseClip}`}
   ]
 
-  console.log('Clip repos: ', clipRepos)
-
   // Start making clone attempts, stop on first success
   let result: ?string = null
   const cloneAttempts = clipRepos.map(repo => async () => {
@@ -75,7 +73,7 @@ export async function cloneClip (clip: string = 'nodejs', target: string = ''): 
       }
     }
   })
-  await promiseSerial(cloneAttempts, (result, curr) => curr(result))
+  await promiseSerial(cloneAttempts)
 
   if (!result) throw new Error('Cannot find clip requested')
   console.log('Using ', result)
@@ -84,4 +82,6 @@ export async function cloneClip (clip: string = 'nodejs', target: string = ''): 
 
 export function initClip (Clipped: Object) {
   Clipped.prototype.clone = cloneClip
+
+  return Clipped
 }
