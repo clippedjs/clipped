@@ -1,0 +1,15 @@
+{
+  "name": "clipped-preset-webpack-frontend",
+  "version": "0.1.2",
+  "description": "",
+  "main": "index.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "clipped-preset-webpack": "^0.1.2",
+    "css-loader": "^0.28.7",
+    "html-webpack-plugin": "^2.30.1",
+    "html-webpack-template": "^6.1.0"
+  }
+}
