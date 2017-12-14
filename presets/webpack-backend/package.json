@@ -1,0 +1,19 @@
+{
+  "name": "clipped-preset-webpack-backend",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-backpack": "^0.4.3",
+    "clipped-preset-webpack": "file:../webpack",
+    "source-map-support": "^0.5.0",
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
+  }
+}

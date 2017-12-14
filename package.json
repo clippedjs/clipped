@@ -1,7 +1,7 @@
 {
   "name": "clipped",
   "description": "Tool to handle scaffold, dev, build and deploy",
-  "version": "0.0.0",
+  "version": "0.0.2",
   "engines": {
     "node": ">=8"
   },
@@ -21,7 +21,7 @@
   "scripts": {
     "commit": "git-cz",
     "flow:deps": "flow-typed install",
-    "postinstall": "npm run flow:deps",
+    "//postinstall": "npm run flow:deps",
     "dev": "clipped dev",
     "build": "clipped build",
     "test": "echo \"Error: no test specified\" && exit 0",
@@ -65,6 +65,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
+    "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.2",
     "simple-git": "^1.84.0",
     "source-map-support": "^0.5.0",
@@ -78,6 +79,7 @@
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-import": "^2.8.0",
     "flow-bin": "^0.61.0",
     "flow-typed": "^2.2.3",
     "pre-commit": "^1.2.2",
