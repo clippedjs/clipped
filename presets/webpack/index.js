@@ -20,7 +20,7 @@ module.exports = (clipped, opt = {}) => {
     resolveLoader: {
       modules: [
         clipped.resolve('node_modules'),
-        path.resolve(__dirname, 'node_modules'),
+        path.join(__dirname, 'node_modules'),
       ],
     },
     resolve: {
@@ -31,19 +31,19 @@ module.exports = (clipped, opt = {}) => {
       extensions: ['*', '.js', '.vue', '.jsx', '.json', '.marko', '.ts', '.tsx'],
       modules: [
         clipped.resolve('node_modules'),
-        path.resolve(__dirname, 'node_modules')
+        path.join(__dirname, 'node_modules')
       ]
     },
     module: {
       rules: [
         {
           test: /\.js$/,
-          loader: require.resolve('babel-loader'),
+          loader: 'babel-loader',
           include: [clipped.resolve('src')],
           exclude: [/node_modules/],
           options: {
             presets: [
-              [require.resolve('babel-preset-env'), { modules: false }]
+              ['babel-preset-env', { modules: false }]
             ]
           }
         }
