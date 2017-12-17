@@ -1,4 +1,3 @@
-
 /**
  * execConfig - Execute project configuration
  *
@@ -20,7 +19,11 @@ async function execConfig (opt: Object = {}) { // eslint-disable-line
 export function initConfig (Clipped: Object) {
   Clipped.prototype.__initialized__ = false
 
-  Clipped.prototype.config = {}
+  Clipped.prototype.config = {
+    context: process.cwd(),
+    src: Clipped.prototype.resolve('src'),
+    dist: Clipped.prototype.resolve('dist')
+  }
 
   Clipped.prototype.init = execConfig
 

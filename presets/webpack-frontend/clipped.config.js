@@ -22,7 +22,7 @@ module.exports = async (clipped, opt = {}) => {
   clipped.config.webpack
     .plugin('html')
     .use(HtmlWebpackPlugin, [{
-      template: require.resolve('html-webpack-template'),
+      template: require.resolve('html-webpack-template/index.ejs'),
       inject: false,
       appMountId: 'root'
     }])

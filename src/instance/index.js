@@ -16,11 +16,11 @@ function Clipped (opt: Object = {}) {
   return this
 }
 
+initHelper(Clipped)
 initConfig(Clipped)
 initHook(Clipped)
 initLog(Clipped)
 initClip(Clipped)
 initMiddleware(Clipped)
-initHelper(Clipped)
 
 export default Clipped

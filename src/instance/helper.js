@@ -7,7 +7,7 @@ import path from 'path'
  * @param {string} parent
  * @memberof Clipped
  */
-export function resolvePath (dir: string = './', parent: string = process.cwd()) {
+export function resolvePath (dir: string = './', parent: string = (this.config && this.config.context) || process.cwd()) {
   return path.join(parent, dir)
 }
 

@@ -8,10 +8,10 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
   try {
     clipped.config['webpack'] = new Chain()
     clipped.config.webpack.merge({
-      context: clipped.resolve('./'),
+      context: clipped.config.context,
       output: {
         pathinfo: true,
-        path: clipped.resolve('dist')
+        path: clipped.config.dist
       },
       externals: {
         // react-native and nodejs socket excluded to make skygear work
@@ -26,8 +26,8 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       },
       resolve: {
         alias: {
-          '@': clipped.resolve('src'),
-          '~': clipped.resolve('src')
+          '@': clipped.config.src,
+          '~': clipped.config.src
         },
         extensions: ['*', '.js', '.vue', '.jsx', '.json', '.marko', '.ts', '.tsx'],
         modules: [
@@ -48,7 +48,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       },
       devtool: false,
       plugins: [
-        new CleanWebpackPlugin([clipped.resolve('dist')]),
+        new CleanWebpackPlugin([clipped.config.dist]),
         new webpack.DefinePlugin({
           'process.env': {
             NODE_ENV: process.env.NODE_ENV ? '"production"' : '"development"'
@@ -60,14 +60,14 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
 
     clipped.config.webpack
       .entry('index')
-        .add(clipped.resolve('src/index.js'))
+        .add(path.join(clipped.config.src, 'index.js'))
         .end()
 
     clipped.config.webpack.module
       .rule('babel')
         .test(/\.jsx?$/)
         .include
-          .add(clipped.resolve('src'))
+          .add(clipped.config.src)
           .end()
         .use('babel')
           .loader('babel-loader')
