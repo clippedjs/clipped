@@ -2,7 +2,7 @@
   "name": "clipped-preset-webpack-frontend",
   "version": "0.1.4",
   "description": "",
-  "main": "index.js",
+  "main": "clipped.config.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
