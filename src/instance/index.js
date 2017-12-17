@@ -3,6 +3,7 @@ import {initHook} from './hook'
 import {initLog} from './log'
 import {initClip} from './clip'
 import {initMiddleware} from './middleware'
+import {initDocker} from './docker'
 import {initHelper} from './helper'
 
 function Clipped (opt: Object = {}) {
@@ -21,6 +22,7 @@ initConfig(Clipped)
 initHook(Clipped)
 initLog(Clipped)
 initClip(Clipped)
+initDocker(Clipped)
 initMiddleware(Clipped)
 
 export default Clipped

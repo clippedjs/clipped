@@ -1,18 +1,33 @@
 import path from 'path'
+import {castArray} from 'lodash'
+import {ncp} from '../utils'
 
 /**
  * resolvePath - Resolve path from cwd
  *
- * @param {string} dir
- * @param {string} parent
+ * @param {string | string[]} dirs
  * @memberof Clipped
  */
-export function resolvePath (dir: string = './', parent: string = (this.config && this.config.context) || process.cwd()) {
-  return path.join(parent, dir)
+export function resolvePath (...dirs: string[]) {
+  return path.join((this.config && this.config.context) || process.cwd(), ...dirs)
+}
+
+/**
+ * copyFiles - Multiple file operations
+ *
+ * @param {(Object | Object[])} operations
+ *
+ */
+export async function copyFiles (operations: Object | Object[]) {
+  await Promise.all(castArray(operations).map(
+    operation => ncp(operation.src, operation.dest, operation.opt)
+  ))
 }
 
 export function initHelper (Clipped: Object) {
   Clipped.prototype.resolve = resolvePath
+
+  Clipped.prototype.copy = copyFiles
 
   return Clipped
 }

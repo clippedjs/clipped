@@ -22,7 +22,8 @@ export function initConfig (Clipped: Object) {
   Clipped.prototype.config = {
     context: process.cwd(),
     src: Clipped.prototype.resolve('src'),
-    dist: Clipped.prototype.resolve('dist')
+    dist: Clipped.prototype.resolve('dist'),
+    dockerTemplate: Clipped.prototype.resolve('docker-template')
   }
 
   Clipped.prototype.init = execConfig

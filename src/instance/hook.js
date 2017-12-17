@@ -30,10 +30,12 @@ class Hook {
 
   modify (name: string, operation: Function) {
     this.tasks[this.tasks.findIndex(task => task.name === name)] = operation(this.tasks[this.tasks.findIndex(task => task.name === name)])
+    return this
   }
 
   delete (name: string) {
     this.tasks = filterFromTree({callback: this.tasks}, 'callback', child => child.name === name).callback
+    return this
   }
 }
 
@@ -59,11 +61,11 @@ export async function execHook (name: string, ...args: any) {
 
   await promiseSerial(
     [
-      ...(this.hook('pre') || {}).tasks,
-      ...(this.hook(`pre-${name}`) || {}).tasks,
-      ...(this.hook(name) || {}).tasks,
-      ...(this.hook(`post-${name}`) || {}).tasks,
-      ...(this.hook('post') || {}).tasks
+      ...this.hook('pre') .tasks,
+      ...this.hook(`pre-${name}`).tasks,
+      ...this.hook(name).tasks,
+      ...this.hook(`post-${name}`).tasks,
+      ...this.hook('post').tasks
     ].map(task => {
       // Distinguish concurrernt tasks
       switch (task.constructor) {
