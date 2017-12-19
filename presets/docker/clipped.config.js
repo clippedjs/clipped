@@ -2,7 +2,7 @@ const fs = require('fs')
 
 module.exports = async clipped => {
   clipped.hook('pre-build:docker')
-    .add('build', clipped.execHook('version'))
+    .add('build', async clipped => clipped.execHook('build'))
   clipped.hook('build:docker')
     .add('default', async clipped => {
       await clipped.copy([
@@ -19,5 +19,5 @@ module.exports = async clipped => {
         }
       )
     })
-    console.log(Object.keys(clipped.hooks).map(hook => clipped.hooks[hook].tasks.map(task => task.callback.toString())))
+    // console.log(Object.keys(clipped.hooks).map(hook => clipped.hooks[hook].tasks.map(task => task.callback.toString())))
 }

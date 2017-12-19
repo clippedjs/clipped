@@ -29,9 +29,11 @@ export function promiseSerial (
   callback: Function = (result, curr) => curr(result),
   initial: any = () => null
 ) {
+  // console.log(funcs.toString(), callback.toString())
   return funcs.reduce(
-    async (acc: any, current, index) => {
-      const result = await acc()
+    async (acc: any = () => {}, current = () => {}, index) => {
+      let result = null
+      if (isFunction(acc)) result = await acc()
       return callback(result, current, index)
     },
     isFunction(initial) ? initial : () => initial

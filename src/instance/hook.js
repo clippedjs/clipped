@@ -1,8 +1,8 @@
 import {castArray} from 'lodash'
-import {promiseSerial, exec, filterFromTree} from '../utils'
+import {exec} from '../utils'
 
 class Task {
-  constructor (name: string, callback: Function) {
+  constructor (name: string, callback: Function = () => {}) {
     this.name = name
     this.callback = callback
   }
@@ -19,7 +19,7 @@ class Hook {
   }
 
   add (name: string, callback: Function | Function[], index = Math.max(this.tasks.length, 0)) {
-    this.tasks.splice(index, 0, castArray(new Task(name, callback)))
+    this.tasks.splice(index, 0, new Task(name, callback))
     return this
   }
 
@@ -34,7 +34,7 @@ class Hook {
   }
 
   delete (name: string) {
-    this.tasks = filterFromTree({callback: this.tasks}, 'callback', child => child.name === name).callback
+    this.tasks = this.tasks.filter(task => task.name === name)
     return this
   }
 }
@@ -59,24 +59,21 @@ export async function execHook (name: string, ...args: any) {
   // NOTE: to be removed once make clipped factory
   await this.init()
 
-  await promiseSerial(
-    [
-      ...this.hook('pre') .tasks,
-      ...this.hook(`pre-${name}`).tasks,
-      ...this.hook(name).tasks,
-      ...this.hook(`post-${name}`).tasks,
-      ...this.hook('post').tasks
-    ].map(task => {
-      // Distinguish concurrernt tasks
-      switch (task.constructor) {
-        case Array:
-          return args => Promise.all(task.map(tk => tk.callback(args)))
-        default:
-          return task.callback
-      }
-    }),
-    (result, curr) => curr(this, ...args)
-  )
+  // await promiseSerial(
+  //   [
+  //     ...this.hook('pre').tasks,
+  //     ...this.hook(`pre-${name}`).tasks,
+  //     ...this.hook(name).tasks,
+  //     ...this.hook(`post-${name}`).tasks,
+  //     ...this.hook('post').tasks
+  //   ].map(task => args => Promise.all(task.callback(args))),
+  //   (result, curr) => curr(this, ...args)
+  // )
+  for (let hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
+    await Promise.all(
+      this.hook(hook).tasks.map(tk => tk.callback(this, ...args))
+    )
+  }
 
   return this
 }
