@@ -1,6 +1,6 @@
 import path from 'path'
 import {castArray} from 'lodash'
-import {ncp} from '../utils'
+import {ncp, cloneRepo} from '../utils'
 import fs from 'fs-extra'
 
 /**
@@ -30,6 +30,8 @@ export function initHelper (Clipped: Object) {
   Clipped.prototype.resolve = resolvePath
 
   Clipped.prototype.copy = copyFiles.bind(Clipped.prototype)
+
+  Clipped.prototype.clone = cloneRepo
 
   return Clipped
 }

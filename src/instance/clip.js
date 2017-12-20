@@ -81,7 +81,7 @@ export async function cloneClip (clip: string = 'nodejs', target: string = ''): 
 }
 
 export function initClip (Clipped: Object) {
-  Clipped.prototype.clone = cloneClip
+  // Clipped.prototype.cloneClip = cloneClip
 
   return Clipped
 }

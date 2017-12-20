@@ -1,6 +1,6 @@
 {
   "name": "clipped-preset-docker",
-  "version": "0.1.1",
+  "version": "0.1.4",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {

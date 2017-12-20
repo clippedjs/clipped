@@ -4,9 +4,11 @@ const tar = require('tar-fs')
 const {Docker} = require('node-docker-api')
 
 const promisifyStream = (stream) => new Promise((resolve, reject) => {
-  stream.on('data', (d) => console.log(d.toString()))
-  stream.on('end', resolve)
-  stream.on('error', (e) => { console.log(e.toString()); reject(e) })
+  if (stream) {
+    stream.on('data', (d) => console.log(d.toString()))
+    stream.on('end', resolve)
+    stream.on('error', (e) => { console.log(e.toString()); reject(e) })
+  }
 })
 
 module.exports = async clipped => {
@@ -23,19 +25,16 @@ module.exports = async clipped => {
 
         let docker = new Docker({ socketPath: '/var/run/docker.sock' })
 
-        // const stream = await tar.pack(clipped.config.dist)
-        const files = fs.readdirSync(clipped.config.dist)
-        console.log(`name is ${clipped.config.name}, ${files}`)
+        const stream = await tar.pack(clipped.config.dist)
+        // const files = fs.readdirSync(clipped.config.dist)
+        // console.log(`name is ${clipped.config.name}, ${files}`)
         await clipped.docker.build(
-          {
-            context: clipped.config.dist,
-            src: files
-          },
+          stream,
           {
             t: clipped.config.name,
             // dockerfile: path.join(clipped.config.dist, 'Dockerfile')
           }
-        ).then(stream => promisifyStream(stream))
+        )
       } catch (e) {
         console.error(e)
       }

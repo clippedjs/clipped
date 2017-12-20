@@ -21,7 +21,7 @@ function dockerImageFactory (pack: any, opts: Object = {}): Promise<void> {
         }
         if (output) {
           output.pipe(process.stdout, {end: true})
-          output.on('end', () => resolve())
+          output.on('end', resolve)
         }
       }
     )

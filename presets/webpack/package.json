@@ -1,12 +1,13 @@
 {
   "name": "clipped-preset-webpack",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-core": "^6.26.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
     "clean-webpack-plugin": "^0.1.17",

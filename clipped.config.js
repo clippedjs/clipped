@@ -1,4 +1,1 @@
-module.exports = {
-  name: 'clipped',
-  type: 'npm'
-}
+module.exports = clipped => clipped.use(require('clipped-preset-webpack-nodejs'))
