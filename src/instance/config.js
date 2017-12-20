@@ -7,10 +7,14 @@
  */
 async function execConfig (opt: Object = {}) { // eslint-disable-line
   if (this.__initialized__) return this
+  const packageJson = __non_webpack_require__(this.resolve('package.json'))
+  this.config.packageJson = packageJson
+  this.config.name = this.config.name || packageJson.name
 
   // eslint-disable-next-line no-undef
   const script = __non_webpack_require__(this.resolve(opt.configPath || 'clipped.config.js'))
   await this.use(script, opt)
+  console.log(this.config)
 
   this.__initialized__ = true
   return this
