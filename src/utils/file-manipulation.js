@@ -13,7 +13,7 @@ const mmkdirp = require('mkdirp')
 */
 function ncp (src: string, dest: string, opts: Object = {}): Promise<void> {
   return new Promise((resolve, reject) => {
-    nncp(src, dest, opts, err => {
+    nncp(src, dest, {dereference: true, ...opts}, err => {
       if (err) reject(err)
       resolve()
     })

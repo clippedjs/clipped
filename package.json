@@ -1,26 +1,36 @@
 {
   "name": "clipped",
   "description": "Tool to handle scaffold, dev, build and deploy",
-  "version": "0.0.0",
-  "main": "dist/index.js",
-  "bin": {
-    "clipped": "dist/clipping.js"
-  },
+  "version": "0.0.5",
   "engines": {
     "node": ">=8"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clippedjs/clipped.git"
+  },
+  "author": "IniZio",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/clippedjs/clipped/issues"
+  },
+  "main": "dist/index.js",
+  "bin": {
+    "clipped": "clipped.js"
+  },
   "scripts": {
     "commit": "git-cz",
-    "flow": "flow",
-    "flow-typed": "flow-typed",
-    "standard": "standard",
-    "snazzy": "snazzy",
     "flow:deps": "flow-typed install",
-    "standard:lint": "standard --verbose --fix | snazzy",
+    "//postinstall": "npm run flow:deps",
     "dev": "clipped dev",
     "build": "clipped build",
     "test": "echo \"Error: no test specified\" && exit 0",
     "semantic-release": "semantic-release pre && npm publish && semantic-release post"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   },
   "standard": {
     "globals": [
@@ -45,27 +55,18 @@
       "flowtype/define-flow-type": 2
     }
   },
-  "czConfig": {
-    "path": "node_modules/cz-conventional-changelog"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/clippedjs/clipped.git"
-  },
-  "author": "IniZio",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/clippedjs/clipped/issues"
-  },
   "homepage": "https://github.com/clippedjs/clipped#readme",
   "dependencies": {
     "cross-spawn": "^5.1.0",
     "dockerode": "^2.5.3",
-    "flow-typed": "^2.2.3",
+    "extends-classes": "^1.0.5",
+    "fs-extra": "^5.0.0",
     "git-url-parse": "^7.0.1",
+    "lodash": "^4.17.4",
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
+    "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.2",
     "simple-git": "^1.84.0",
     "source-map-support": "^0.5.0",
@@ -74,20 +75,19 @@
     "yarn-install": "^0.5.1"
   },
   "devDependencies": {
-    "babel-eslint": "^8.0.2",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-es2015": "^6.24.1",
-    "babel-preset-stage-0": "^6.24.1",
+    "babel-eslint": "^8.0.3",
     "backpack-core": "^0.4.3",
+    "clipped-preset-webpack-nodejs": "^0.1.2",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
     "eslint-plugin-flowtype": "^2.39.1",
-    "flow-bin": "^0.59.0",
-    "flow-copy-source": "^1.2.1",
-    "flow-remove-types": "^1.2.3",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "flow-bin": "^0.61.0",
+    "flow-typed": "^2.2.3",
     "pre-commit": "^1.2.2",
     "semantic-release": "^8.2.0",
-    "snazzy": "^7.0.0",
     "standard": "^10.0.3"
   }
 }

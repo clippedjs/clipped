@@ -1,9 +1,7 @@
 import yarnInstall from 'yarn-install'
-// const git = __non_webpack_require__('nodegit')
 const git = require('simple-git/promise')
 const gitUrlParse = require('git-url-parse')
-const {promisify} = require('util')
-const {cwd, exec} = require('../utils')
+const {cwd, exec, resolvePath} = require('../utils')
 
 /**
  * getGitUsername - get username from git config
@@ -19,13 +17,12 @@ export async function getGitUsername (): Promise<string> {
 /**
  * getRepoOwner - get owner from git repo url
  *
- * @async
  * @export
  * @param {string} url
  *
  * @returns {Promise<string>} org
  */
-export async function getRepoOwner (url: string = cwd): Promise<string> {
+export function getRepoOwner (url: string = cwd): Promise<string> {
   return gitUrlParse(url).owner
 }
 
@@ -46,25 +43,25 @@ export async function cloneRepo (repo: string, dest: string = __dirname, opt: Ob
 
 /**
  * fetchRepo - fetch repo at origin
- * 
+ *
  * @export
- * @param {string} path 
- * @returns {Promise<void>} 
+ * @param {string} path
+ * @returns {Promise<void>}
  */
 export async function fetchRepo (path: string, remote: string ='origin'): Promise<void> {
   await git(path).fetch()
   await yarnInstall({cwd: path})
-  await cloneSubmodules(path)  
+  await cloneSubmodules(path)
 }
 
 /**
  * cloneSubmodules - clone all submodules of current folder
- * 
+ *
  * @export
- * @param {string} path 
- * @returns {Promise<void>} 
+ * @param {string} path
+ * @returns {Promise<void>}
  */
 export async function cloneSubmodules (path: string, opt: Object = {}): Promise<void> {
   await exec(`cd ${path} && git submodule update --init --recursive`)
-  await exec(`cd ${path} && git submodule foreach --recursive 'npm i'`)
+  await exec(`cd ${path} && git submodule foreach --recursive '${resolvePath('./node_modules/yarn-install/bin/yarn-install.js')}'`)
 }
