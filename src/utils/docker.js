@@ -15,7 +15,10 @@ function dockerImageFactory (pack: any, opts: Object = {}): Promise<void> {
       pack,
       opts,
       (err, output:stream$Readable) => {
-        if (err) reject(err)
+        if (err) {
+          console.error(err)
+          reject(err)
+        }
         if (output) {
           output.pipe(process.stdout, {end: true})
           output.on('end', () => resolve())

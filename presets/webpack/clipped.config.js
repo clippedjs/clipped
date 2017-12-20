@@ -70,7 +70,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
           .add(clipped.config.src)
           .end()
         .use('babel')
-          .loader('babel-loader')
+          .loader(require.resolve('babel-loader'))
           .options(Object.assign({
             presets: [
               [require.resolve('babel-preset-env'), { modules: false }]
@@ -107,7 +107,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       .add('default', clipped =>
         new Promise((resolve, reject) => {
           const webpackInstance = getWebpackInstance()
-          webpackInstance.run((err, stats) => {
+          webpackInstance.run((err, stats = {}) => {
             if (err || stats.hasErrors()) {
               console.error(err)
               reject(err)

@@ -24,7 +24,7 @@ class Hook {
   }
 
   prepend (name: string, callback: Function | Function[]) {
-    this.add(name, castArray(callback), 0)
+    this.add(name, callback, 0)
     return this
   }
 
@@ -70,9 +70,11 @@ export async function execHook (name: string, ...args: any) {
   //   (result, curr) => curr(this, ...args)
   // )
   for (let hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
+    console.log(this.hook(hook).tasks.map(tk => `${hook}>${tk.name}`))
     await Promise.all(
       this.hook(hook).tasks.map(tk => tk.callback(this, ...args))
     )
+    console.log(`ended ${hook}`)
   }
 
   return this

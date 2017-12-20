@@ -17,7 +17,7 @@ module.exports = async (clipped, opt = {}) => {
         .add(clipped.resolve('src'))
         .end()
       .use('css')
-        .loader('css-loader')
+        .loader(require.resolve('css-loader'))
 
   clipped.config.webpack
     .plugin('html')

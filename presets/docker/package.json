@@ -1,6 +1,6 @@
 {
   "name": "clipped-preset-docker",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -8,5 +8,9 @@
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "node-docker-api": "^1.1.18",
+    "tar-fs": "^1.16.0"
+  }
 }

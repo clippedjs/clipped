@@ -1,6 +1,7 @@
 import path from 'path'
 import {castArray} from 'lodash'
 import {ncp} from '../utils'
+import fs from 'fs-extra'
 
 /**
  * resolvePath - Resolve path from cwd
@@ -20,14 +21,15 @@ export function resolvePath (...dirs: string[]) {
  */
 export async function copyFiles (operations: Object | Object[]) {
   await Promise.all(castArray(operations).map(
-    operation => ncp(operation.src, operation.dest, operation.opt)
+    operation => fs.copy(operation.src, operation.dest)
   ))
+  return this
 }
 
 export function initHelper (Clipped: Object) {
   Clipped.prototype.resolve = resolvePath
 
-  Clipped.prototype.copy = copyFiles
+  Clipped.prototype.copy = copyFiles.bind(Clipped.prototype)
 
   return Clipped
 }

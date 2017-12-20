@@ -53,7 +53,7 @@ module.exports = async (clipped, opt = {babel: {options: {}}}) => {
       .rule('babel')
         .test(/\.js$/)
         .use('babel')
-        .loader('babel-loader')
+        .loader(require.resolve('babel-loader'))
         .options(Object.assign({
           presets: [
             [require.resolve('babel-preset-backpack')]

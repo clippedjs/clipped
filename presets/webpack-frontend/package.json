@@ -1,13 +1,13 @@
 {
   "name": "clipped-preset-webpack-frontend",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "clipped-preset-webpack": "file:../webpack",
+    "clipped-preset-webpack": "^0.3.2",
     "css-loader": "^0.28.7",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-template": "^6.1.0"
