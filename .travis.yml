@@ -9,16 +9,10 @@ notifications:
 node_js:
   - '8'
 script:
-  - npm i -g clipped
+  - npm i -g clipped@alpha
   - npm run build
 after_success:
   - npm run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
-addons:
-  apt:
-    sources:
-      - ubuntu-toolchain-r-test
-    packages:
-      - libstdc++-4.9-dev

@@ -1,0 +1,16 @@
+{
+  "name": "clipped-preset-docker",
+  "version": "0.1.4",
+  "description": "",
+  "main": "clipped.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "node-docker-api": "^1.1.18",
+    "tar-fs": "^1.16.0"
+  }
+}

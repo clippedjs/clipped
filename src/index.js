@@ -1,37 +1,32 @@
 import minimist from 'minimist'
-import dev from './actions/dev'
-import build from './actions/build'
-import scaffold from './actions/scaffold'
-
-const {getConfig} = require('./actions/config')
-
-const actions = {dev, build, scaffold}
+import Clipped from './instance'
 
 /**
- * main - Entry function
+ * cli - Entry function
  *
  * @async
  * @param {Object} [args={}] Arguments to command
  *
  */
-async function main (args: Object = parseArgs()) {
+export async function cli (args: Object = parseArgs()) {
   const {action, opt} = args
 
-  if (Object.keys(actions).includes(action)) {
-    let config = {}
-    try {
-      if (action != 'scaffold') config = await getConfig()
-      await actions[action]({...config, ...opt})
-    } catch (e) {
-      console.error(e)
-    }
+  // eslint-disable-next-line no-undef
+  const clipped: clippedInstance = await new Clipped().init()
+
+  if (Object.keys(clipped.hooks).includes(action)) {
+    try { await clipped.execHook(action, opt) } catch (e) { console.error(e) }
   } else {
     console.log(`
       Usage:
       $ clipped <action>
 
       Available actions:
-      ${Object.keys(actions).join(', ')}
+      ${
+        Object.keys(clipped.hooks).filter(hook =>
+          !hook.includes('pre') && !hook.includes('post')
+        ).join(', ')
+      }
     `)
   }
 
@@ -50,4 +45,4 @@ function parseArgs () {
   return {action, opt}
 }
 
-export default main
+export default Clipped

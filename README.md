@@ -1,44 +1,34 @@
-# Clipped [![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped) [![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+# :paperclip: Clipped [![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped) [![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped) [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Build Status](https://travis-ci.org/clippedjs/clipped.svg?branch=reborn)](https://travis-ci.org/clippedjs/clipped)
 
-There should be "the best way" to optimization.
-Project configuration should be about options only.
-
-**Clipped handles the `...`**
+Configuration hurts :confounded:. Clipped makes it once (or even fun :smirk:).
 
 ## Requirements
 - Git installed and available as command `git`
 - NodeJs >= 8.0.0
 
-## How to Install
-```sh
-npm i -g clipped
+## How to use
+1. `npm i -g clipped`
+2. Add a clipped.config.js to your project with content:
+```js
+module.exports = async clipped => {
+  // blablabla...
+}
 ```
-
-## Available commands
-```sh
-npm i -g clipped # Install this module
-
-clipped scaffold --type=nodejs # Scaffold a project
-
-clipped dev # Hot reload the project (both nodejs and frontend)
-
-clipped build # Build project natively
-
-clipped build --platform=docker # Build docker image
+3. To use presets, search 'clipped-preset` on [npm website](npmjs.com). Install them as devDependencies and to use them:
+```js
+module.exports = async clipped => {
+  clipped.config.name = 'magic' // defaults to 'name' property in package.json
+  await clipped.use(require('clipped-preset-some-preset'))
+}
 ```
+4. Run `clipped` to see available actions, and use them!
 
-## Things handled
-- [ ] Scaffolding: (eliminates need for devDependencies)
-  - [ ] frontend: ReactJs (WIP)
-  - [x] frontend: VueJs
-  - [x] backend: Express
-- [x] Dev:
-  - [x] frontend: webpack-dev-server
-  - [x] backend: backpack
-- [x] Build (Docker Image):
-  - [x] frontend: webpack
-  - [x] backend: backpack
-- [ ] Deploy: Docker push (Planning)
+## How it works
+Most often our configurations are disposable items i.e. we cannot share them across projects. For example we use are likely to use similar loaders and plugins across webpack projects, yet we keep having to rewrite them over and over again.
+
+Clipped makes it so configurations are functions of static configurations and dynamic task runners. You can even use existing projects as preset!
+
+You do not have to use Webpack to use Clipped, feel free to contribute to presets like Rollup, Parcel, Fuse-box, Marko.js... :blush:
 
 ## How to contribute
 ```bash
@@ -48,33 +38,18 @@ git clone git@github.com:IniZio/usthing-clipped.git
 # Install dependencies
 npm i
 
-# Use nodemon to continuously build
-npm run dev
+# Build the project
+clipped build
 ```
 
-## Structure
-```
-.
-├── clips
-│   ├── frontend # Vuejs
-│   │   ├── docker-image
-│   │   ├── scaffold
-│   │   └── wrapper
-│   │── nodejs # Server in Nodejs
-│   │   ├── docker-image
-│   │   ├── scaffold
-│   │   └── wrapper
-│   └── npm # NPM module
-│       ├── docker-image
-│       ├── scaffold
-│       └── wrapper
-└── src
-    ├── actions
-    └── utils
-```
+## 
+You are free to make your very own presets and put on your own npm account, but if the preset is for new extensions or build tools, we encourage to contribute to our presets folder so that others can hurt less :smile:
 
 ## FAQ
-### Does Clipped suport Flowtype / Typescript ?
-Flowtype: :construction: WIP to make it supported on all clips
 
-Typescript: waiting for babel to support Typescript :sleeping:
+WIP :construction:
+
+## Credits
+Made with code and :heart: by [USThing team](https://github.com/USThing)
+
+Heavily inspired by [mozilla-neutrino](https://github.com/mozilla-neutrino/neutrino-dev)

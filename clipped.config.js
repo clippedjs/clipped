@@ -1,7 +1,1 @@
-module.exports = {
-  name: 'clipped',
-  type: 'npm',
-  build: {
-    docker: {}
-  }
-}
+module.exports = clipped => clipped.use(require('clipped-preset-webpack-nodejs'))
