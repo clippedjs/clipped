@@ -34,7 +34,7 @@ class Hook {
   }
 
   delete (name: string) {
-    this.tasks = this.tasks.filter(task => task.name === name)
+    this.tasks = this.tasks.filter(task => task.name !== name)
     return this
   }
 }
