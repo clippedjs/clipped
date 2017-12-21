@@ -5,6 +5,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const webpackDevServer = require('webpack-dev-server')
 
 module.exports = async (clipped) => {
+  clipped.config.dockerTemplate = path.resolve(__dirname, 'docker-template')
+
   if (!clipped.config.webpackFrontend) clipped.config.webpackFrontend = {}
   await clipped.use(presetWebpack)
 
