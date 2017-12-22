@@ -9,7 +9,7 @@ notifications:
 node_js:
   - '8'
 script:
-  - npm i -g clipped@alpha
+  - npm i -g clipped
   - npm run build
 after_success:
   - npm run semantic-release
