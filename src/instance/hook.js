@@ -2,13 +2,17 @@ import {castArray} from 'lodash'
 import {exec} from '../utils'
 
 class Task {
-  constructor (name: string, callback: Function = () => {}) {
+  name: string
+  callbacks: Function []
+  constructor (name: string, callbacks: Function[]) {
     this.name = name
-    this.callback = callback
+    this.callbacks = callbacks
   }
 }
 
 class Hook {
+  name: string
+  tasks: Task[]
   constructor (name: string) {
     this.name = name
     this.tasks = []
@@ -18,13 +22,13 @@ class Hook {
     return this.tasks.find(task => task.name === name)
   }
 
-  add (name: string, callback: Function | Function[], index = Math.max(this.tasks.length, 0)) {
-    this.tasks.splice(index, 0, new Task(name, callback))
+  add (name: string, callbacks: Function | Function[], index = Math.max(this.tasks.length, 0)) {
+    this.tasks.splice(index, 0, new Task(name, castArray(callbacks)))
     return this
   }
 
-  prepend (name: string, callback: Function | Function[]) {
-    this.add(name, callback, 0)
+  prepend (name: string, callbacks: Function | Function[]) {
+    this.add(name, castArray(callbacks), 0)
     return this
   }
 
@@ -50,33 +54,23 @@ export function hookContext (name: string) {
 }
 
 /**
- * exec - Execute hook, including pre and post hooks
+ * execHook - Execute concurrent tasks in sequential hooks, including pre and post
  *
  * @export
  * @param {string} name
+ * @param {any[]} args
+ *
  */
 export async function execHook (name: string, ...args: any) {
-  // NOTE: to be removed once make clipped factory
-  await this.init()
-
-  // await promiseSerial(
-  //   [
-  //     ...this.hook('pre').tasks,
-  //     ...this.hook(`pre-${name}`).tasks,
-  //     ...this.hook(name).tasks,
-  //     ...this.hook(`post-${name}`).tasks,
-  //     ...this.hook('post').tasks
-  //   ].map(task => args => Promise.all(task.callback(args))),
-  //   (result, curr) => curr(this, ...args)
-  // )
   for (let hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
-    console.log(this.hook(hook).tasks.map(tk => `${hook}>${tk.name}`))
-    await Promise.all(
-      this.hook(hook).tasks.map(tk => tk.callback(this, ...args))
-    )
-    console.log(`ended ${hook}`)
+    for (let task of this.hook(hook).tasks) {
+      this.print(`${hook} > ${task.name}`)
+      await Promise.all(
+        task.callbacks.map(func => func(this, ...args))
+      )
+    }
+    if (this.hook(hook).tasks.length) this.print(`ended ${hook}`)
   }
-
   return this
 }
 
@@ -101,7 +95,7 @@ export function initHook (Clipped: Object) {
   Clipped.prototype.execHook = execHook
 
   Clipped.prototype.hook('version')
-    .add('default', async clipped => {
+    .add('clipped', async clipped => {
       const version = await exec('npm view clipped version')
       clipped.print(version)
     })
