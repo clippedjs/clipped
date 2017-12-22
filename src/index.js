@@ -1,3 +1,4 @@
+import fs from 'fs'
 import minimist from 'minimist'
 import Clipped from './instance'
 
@@ -11,11 +12,22 @@ import Clipped from './instance'
 export async function cli (args: Object = parseArgs()) {
   const {action, opt} = args
 
-  // eslint-disable-next-line no-undef
-  const clipped: clippedInstance = await new Clipped().init()
+  // Execute project preset
+  const clipped = new Clipped(opt)
+  if (fs.existsSync(clipped.resolve('clipped.config.js'))) {
+    try {
+      // eslint-disable-next-line no-undef
+      await clipped.use(__non_webpack_require__(clipped.resolve('clipped.config.js')))
+    } catch (e) {
+      clipped.print(e)
+      process.exit(1)
+    }
+  } else {
+    clipped.print('No clipped.config.js found, using default settings...')
+  }
 
   if (Object.keys(clipped.hooks).includes(action)) {
-    try { await clipped.execHook(action, opt) } catch (e) { console.error(e) }
+    try { await clipped.execHook(action) } catch (e) { console.error(e) }
   } else {
     console.log(`
       Usage:
@@ -23,9 +35,11 @@ export async function cli (args: Object = parseArgs()) {
 
       Available actions:
       ${
-        Object.keys(clipped.hooks).filter(hook =>
-          !hook.includes('pre') && !hook.includes('post')
-        ).join(', ')
+        Object.keys(clipped.hooks)
+          .filter(hook =>
+            !hook.includes('pre') && !hook.includes('post')
+          )
+          .join(', ')
       }
     `)
   }
