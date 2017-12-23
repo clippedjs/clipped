@@ -9,8 +9,10 @@ notifications:
 node_js:
   - '8'
 script:
-  - npm i -g clipped
+  - npm i -g clipped codecov istanbul
   - npm run build
+  - istanbul cover ./node_modules/mocha/bin/_mocha  -- -R spec
+  - codecov
 after_success:
   - npm run semantic-release
 branches:
