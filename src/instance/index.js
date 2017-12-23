@@ -2,7 +2,6 @@ import {initConfig} from './config'
 import {initHook} from './hook'
 import {initLog} from './log'
 import {initPreset} from './preset'
-import {initDocker} from './docker'
 import {initHelper} from './helper'
 
 function Clipped (opt: Object = {}) {
@@ -15,13 +14,14 @@ function Clipped (opt: Object = {}) {
 
   this.opt = opt
 
+  this.use(require('./preset').basePreset)
+
   return this
 }
 
 initHelper(Clipped)
 initHook(Clipped)
 initLog(Clipped)
-initDocker(Clipped)
 initPreset(Clipped)
 initConfig(Clipped)
 

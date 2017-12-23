@@ -1,6 +1,31 @@
-import {isString, isFunction} from 'lodash'
+import fs from 'fs-extra'
+import {isString, isFunction, castArray} from 'lodash'
+import {dockerImageFactory} from '../utils/docker'
 
 const stockPresets = {}
+
+// NOTE: Need to be synchronous
+export const basePreset = (clipped: Object) => {
+  // Filesystem manipulations
+  function fileOperations (callback: Function) {
+    return async function (operations: Object | Object[]) {
+      await Promise.all(castArray(operations).map(
+        operation => callback(operation)
+      ))
+      return this
+    }
+  }
+
+  clipped.fs = {
+    copy: fileOperations(({src, dest}) => fs.copy(src, dest)),
+    remove: fileOperations(({path}) => fs.remove(path)),
+    move: fileOperations(({src, dest, opt = {}}) => fs.move(src, dest, opt)),
+    mkdir: fileOperations(({path}) => fs.ensureDir(path)),
+    emptydir: fileOperations(({path}) => fs.emptyDir(path))
+  }
+
+  Object.assign(clipped, clipped.fs)
+}
 
 /**
  * normalizePreset - Normalize normalize to same format

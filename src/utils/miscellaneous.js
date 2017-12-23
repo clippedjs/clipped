@@ -12,7 +12,7 @@ export const cwd: string = process.cwd()
  *
  * @returns {string} Resolved path
  */
-export function resolvePath (dir: string = '', parent: string = path.join(__dirname, '../')): string {
+export function resolvePath (dir: string = '', parent: string = cwd): string {
   return path.join(parent, dir)
 }
 
@@ -63,19 +63,4 @@ export const exec = promisify(
  */
 export function insertIf (condition: boolean, ...elements: any) {
   return condition ? elements : []
-}
-
-/**
- * filterFromTree - filter child node from tree
- *
- * @param {any} parent tree
- * @param {string} el
- * @param {type} filter
- *
- * @returns {any}
- */
-export function filterFromTree (parent, el, filter) {
-  return parent[el]
-    .filter(filter)
-    .map(child => filterFromTree(child, el, filter))
 }
