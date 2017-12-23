@@ -13,6 +13,5 @@ declare type clippedInstance = {
   // Helper
   resolve: Function,
 
-  // Config
-  init: Function
+  use: Function
 }

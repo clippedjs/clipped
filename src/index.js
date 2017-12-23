@@ -1,4 +1,2 @@
-import Clipped from './instance'
+export {default} from './instance'
 export {cli} from './cli'
-
-export default Clipped

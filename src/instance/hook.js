@@ -8,6 +8,10 @@ class Task {
     this.name = name
     this.callbacks = callbacks
   }
+
+  modify (operation: Function) {
+    this.callbacks = operation(this.callbacks)
+  }
 }
 
 class Hook {
@@ -29,11 +33,6 @@ class Hook {
 
   prepend (name: string, callbacks: Function | Function[]) {
     this.add(name, castArray(callbacks), 0)
-    return this
-  }
-
-  modify (name: string, operation: Function) {
-    this.tasks[this.tasks.findIndex(task => task.name === name)] = operation(this.tasks[this.tasks.findIndex(task => task.name === name)])
     return this
   }
 
@@ -64,12 +63,12 @@ export function hookContext (name: string) {
 export async function execHook (name: string, ...args: any) {
   for (let hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
     for (let task of this.hook(hook).tasks) {
-      this.print(`${hook} > ${task.name}`)
+      // this.print(`${hook} > ${task.name}`)
       await Promise.all(
         task.callbacks.map(func => func(this, ...args))
       )
     }
-    if (this.hook(hook).tasks.length) this.print(`ended ${hook}`)
+    // if (this.hook(hook).tasks.length) this.print(`ended ${hook}`)
   }
   return this
 }
@@ -93,12 +92,6 @@ export function initHook (Clipped: Object) {
   Clipped.prototype.hook = hookContext
 
   Clipped.prototype.execHook = execHook
-
-  Clipped.prototype.hook('version')
-    .add('clipped', async clipped => {
-      const version = await exec('npm view clipped version')
-      clipped.print(version)
-    })
 
   return Clipped
 }

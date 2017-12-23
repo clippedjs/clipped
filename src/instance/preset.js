@@ -1,11 +1,28 @@
 import fs from 'fs-extra'
 import {isString, isFunction, castArray} from 'lodash'
-import {dockerImageFactory} from '../utils/docker'
 
 const stockPresets = {}
 
 // NOTE: Need to be synchronous
-export const basePreset = (clipped: Object) => {
+export function basePreset (clipped: Object, opt: Object = {}) {
+  // Initialize properties
+  clipped.opt = opt
+  clipped.config = ({
+    context: clipped.opt.context || process.cwd()
+  }: clippedConfig)
+
+  const packageJson = __non_webpack_require__(clipped.resolve('package.json'))
+
+  Object.assign(clipped.config, ({
+    name: packageJson.name,
+    src: clipped.resolve('src'),
+    dist: clipped.resolve('dist'),
+    dockerTemplate: clipped.resolve('docker-template'),
+    packageJson
+  }: clippedConfig))
+
+  clipped._hooks = []
+
   // Filesystem manipulations
   function fileOperations (callback: Function) {
     return async function (operations: Object | Object[]) {
@@ -25,17 +42,28 @@ export const basePreset = (clipped: Object) => {
   }
 
   Object.assign(clipped, clipped.fs)
+
+  // Logging
+  clipped.log = console.log
+  clipped.print = clipped.log
+
+  clipped.hook('version')
+    .add('clipped', async clipped => {
+      const version = await clipped.exec('npm view clipped version')
+      clipped.print(version)
+    })
+
+  clipped.__initialized__ = true
 }
 
 /**
  * normalizePreset - Normalize normalize to same format
  *
- * @async
  * @param {any} ware
  *
  * @returns {Function}
  */
-async function normalizePreset (ware: any) {
+function normalizePreset (ware: any) {
   const preset = ware.default || ware
   if (isString(preset)) { // String i.e. stock
     return stockPresets[preset]
@@ -47,8 +75,7 @@ async function normalizePreset (ware: any) {
 }
 
 export async function execPreset (ware: any = () => {}, ...args: any) {
-  const preset = await normalizePreset(ware)
-  await preset(this, ...args)
+  await normalizePreset(ware)(this, ...args)
   return this
 }
 

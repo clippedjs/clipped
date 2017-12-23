@@ -1,10 +1,8 @@
-import {initConfig} from './config'
 import {initHook} from './hook'
-import {initLog} from './log'
-import {initPreset} from './preset'
+import {initPreset, basePreset} from './preset'
 import {initHelper} from './helper'
 
-function Clipped (opt: Object = {}) {
+function Clipped (opt: Object = {}): clippedInstance {
   if (
     process.env.NODE_ENV !== 'production' &&
     !(this instanceof Clipped)
@@ -12,17 +10,13 @@ function Clipped (opt: Object = {}) {
     console.log('Clipped is a constructor and should be called with the `new` keyword')
   }
 
-  this.opt = opt
-
-  this.use(require('./preset').basePreset)
+  basePreset(this, opt)
 
   return this
 }
 
 initHelper(Clipped)
 initHook(Clipped)
-initLog(Clipped)
 initPreset(Clipped)
-initConfig(Clipped)
 
 export default Clipped
