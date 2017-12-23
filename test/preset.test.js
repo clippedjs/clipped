@@ -1,5 +1,5 @@
 const assert = require('assert')
-const Clipped = require('../dist').default
+const Clipped = require('../src').default
 
 describe('preset', function () {
   let clipped = new Clipped()

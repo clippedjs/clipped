@@ -1,5 +1,5 @@
 const assert = require('assert')
-const Clipped = require('../dist').default
+const Clipped = require('../src').default
 
 describe('hook', function () {
   let clipped = new Clipped()
@@ -12,9 +12,9 @@ describe('hook', function () {
   describe('#add', function () {
     it('should be able to add task to hook', async function () {
       clipped.hook('testing')
-        .add('add-task', () => {})
+        .add('add-task', () => 'abc')
 
-      assert.equal(clipped.hook('testing').task('add-task').callbacks.toString(), [() => {}].toString())
+      assert.equal(clipped.hook('testing').task('add-task').callbacks[0](), 'abc')
     })
   })
 
