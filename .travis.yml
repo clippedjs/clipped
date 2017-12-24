@@ -9,12 +9,13 @@ notifications:
 node_js:
   - '8'
 script:
-  - npm i -g clipped@1.1.0 codecov
+  - npm i -g clipped codecov autopublish
   - npm test
   - codecov
   - npm run build
 after_success:
   - npm run semantic-release
+  - for d in presets/*; do autopublish "$d"; done
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
