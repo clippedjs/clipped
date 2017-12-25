@@ -17,6 +17,9 @@ Configuration hurts. Clipped makes it once only. :muscle:
   <a href="https://greenkeeper.io/">
     <img src="https://badges.greenkeeper.io/clippedjs/clipped.svg" alt="Greenkeeper badge">
   </a>
+  <a href="https://www.codacy.com/app/digit4free/clipped?utm_source=github.com&utm_medium=referral&utm_content=clippedjs/clipped&utm_campaign=badger">
+    <img src="https://api.codacy.com/project/badge/Grade/5aa76c8c90ca4d329317c9b401cf8a67" alt="Codacy Badge">
+  </a>
   <a href="https://codecov.io/gh/clippedjs/clipped">
     <img src="https://codecov.io/gh/clippedjs/clipped/branch/develop/graph/badge.svg" alt="codecov">
   </a>
