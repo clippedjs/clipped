@@ -1,6 +1,6 @@
 {
   "name": "clipped-preset-webpack-backend",
-  "version": "0.2.3",
+  "version": "0.3.1",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -10,10 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "babel-preset-backpack": "^0.4.3",
-    "clipped-preset-webpack": "^0.3.3",
-    "source-map-support": "^0.5.0",
-    "webpack": "^3.10.0",
-    "webpack-node-externals": "^1.6.0"
+    "clipped-preset-webpack-nodejs": "^0.1.2"
   }
 }
