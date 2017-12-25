@@ -1,14 +1,35 @@
-# :paperclip: Clipped
+[![Clipped](static/clipped-banner.jpg)](https://clippedjs.github.io)
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5aa76c8c90ca4d329317c9b401cf8a67)](https://www.codacy.com/app/digit4free/clipped?utm_source=github.com&utm_medium=referral&utm_content=clippedjs/clipped&utm_campaign=badger)
-[![Greenkeeper badge](https://badges.greenkeeper.io/clippedjs/clipped.svg)](https://greenkeeper.io/)
-[![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped)
-[![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Build Status](https://travis-ci.org/clippedjs/clipped.svg?branch=master)](https://travis-ci.org/clippedjs/clipped)
-[![codecov](https://codecov.io/gh/clippedjs/clipped/branch/develop/graph/badge.svg)](https://codecov.io/gh/clippedjs/clipped)
+<p align="center">
+Configuration hurts. Clipped makes it once only. :muscle:
+</p>
 
-Configuration hurts :confounded:. Clipped makes it once (or even fun :smirk:).
+<p align="center">
+  <a href="https://badge.fury.io/js/clipped">
+    <img src="https://badge.fury.io/js/clipped.svg" alt="npm version">
+  </a>
+  <a href="https://badge.fury.io/gh/IniZio%2Fusthing-clipped">
+    <img src="https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg" alt="GitHub version">
+  </a>
+  <a href="https://travis-ci.org/clippedjs/clipped">
+    <img src="https://travis-ci.org/clippedjs/clipped.svg?branch=master" alt="Build Status">
+  </a>
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/clippedjs/clipped.svg" alt="Greenkeeper badge">
+  </a>
+  <a href="https://www.codacy.com/app/digit4free/clipped?utm_source=github.com&utm_medium=referral&utm_content=clippedjs/clipped&utm_campaign=badger">
+    <img src="https://api.codacy.com/project/badge/Grade/5aa76c8c90ca4d329317c9b401cf8a67" alt="Codacy Badge">
+  </a>
+  <a href="https://codecov.io/gh/clippedjs/clipped">
+    <img src="https://codecov.io/gh/clippedjs/clipped/branch/develop/graph/badge.svg" alt="codecov">
+  </a>
+  <a href="https://github.com/semantic-release/semantic-release">
+    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release">
+  </a>
+  <a href="https://standardjs.com">
+    <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="standardjs">
+  </a>
+</p>
 
 ## Requirements
 - NodeJs >= 8.0.0
@@ -21,7 +42,7 @@ module.exports = async clipped => {
   // blablabla...
 }
 ```
-3. To use presets, search 'clipped-preset` on [npm website](npmjs.com). Install them as devDependencies and to use them:
+3. To use presets, search 'clipped-preset` on [npm website](npmjs.com). Install them as devDependencies and use them:
 ```js
 module.exports = async clipped => {
   clipped.config.name = 'magic' // defaults to 'name' property in package.json
@@ -35,7 +56,7 @@ Most often our configurations are disposable items i.e. we cannot share them acr
 
 Clipped makes it so configurations are functions of static configurations and dynamic task runners. You can even use existing projects as preset!
 
-You do not have to use Webpack to use Clipped, feel free to contribute to presets like Rollup, Parcel, Fuse-box, Marko.js... :blush:
+You do not have to use Webpack to use Clipped, feel free to contribute to presets like Rollup, Parcel, Fuse-box... :blush:
 
 ## How to contribute
 ```bash
@@ -45,12 +66,11 @@ git clone git@github.com:IniZio/usthing-clipped.git
 # Install dependencies
 npm i
 
-# Build the project
-clipped build
+# Watch the project
+npm run dev
 ```
 
-##
-You are free to make your very own presets and put on your own npm account, but if the preset is for new extensions or build tools, we encourage to contribute to our presets folder so that others can hurt less :smile:
+You are free to make your very own presets and put on your own npm account, but if the preset is for new extensions or build tools, we encourage you to contribute to our presets folder so that others can hurt less as well :smile:
 
 ## FAQ
 

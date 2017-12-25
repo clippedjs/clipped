@@ -1,4 +1,5 @@
 FROM mhart/alpine-node:8
+LABEL maintainer="newman.kcchow@gmail.com"
 
 WORKDIR /app
 COPY . .
