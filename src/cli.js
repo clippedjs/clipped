@@ -1,5 +1,6 @@
 import fs from 'fs'
 import minimist from 'minimist'
+import updateNotifier from 'update-notifier'
 import Clipped from '.'
 
 /**
@@ -14,6 +15,14 @@ export async function cli (args: Object = parseArgs()) {
 
   // Execute project preset
   const clipped = new Clipped(opt)
+
+  // Notify update
+  if (process.env.NODE_ENV === 'production') {
+    const pkg = __non_webpack_require__('../package.json')
+    updateNotifier({pkg}).notify()
+  }
+
+  // Execute custom preset
   if (fs.existsSync(clipped.resolve('clipped.config.js'))) {
     try {
       // eslint-disable-next-line no-undef
