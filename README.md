@@ -1,5 +1,6 @@
 # :paperclip: Clipped
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/5aa76c8c90ca4d329317c9b401cf8a67)](https://www.codacy.com/app/digit4free/clipped?utm_source=github.com&utm_medium=referral&utm_content=clippedjs/clipped&utm_campaign=badger)
 [![Greenkeeper badge](https://badges.greenkeeper.io/clippedjs/clipped.svg)](https://greenkeeper.io/)
 [![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped)
 [![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped)
