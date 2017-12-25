@@ -44,12 +44,12 @@ export async function cli (args: Object = parseArgs()) {
 
       Available actions:
       ${
-        Object.keys(clipped.hooks)
-          .filter(hook =>
-            !hook.includes('pre') && !hook.includes('post')
-          )
-          .join(', ')
-      }
+  Object.keys(clipped.hooks)
+    .filter(hook =>
+      !hook.includes('pre') && !hook.includes('post')
+    )
+    .join(', ')
+}
     `)
   }
 
