@@ -1,11 +1,28 @@
-# :paperclip: Clipped
+[![Clipped](static/clipped-banner.jpg)](https://clippedjs.github.io)
 
-[![Greenkeeper badge](https://badges.greenkeeper.io/clippedjs/clipped.svg)](https://greenkeeper.io/)
-[![npm version](https://badge.fury.io/js/clipped.svg)](https://badge.fury.io/js/clipped)
-[![GitHub version](https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg)](https://badge.fury.io/gh/IniZio%2Fusthing-clipped)
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
-[![Build Status](https://travis-ci.org/clippedjs/clipped.svg?branch=master)](https://travis-ci.org/clippedjs/clipped)
-[![codecov](https://codecov.io/gh/clippedjs/clipped/branch/develop/graph/badge.svg)](https://codecov.io/gh/clippedjs/clipped)
+<p align="center">
+  <a href="https://badge.fury.io/js/clipped">
+    <img src="https://badge.fury.io/js/clipped.svg" alt="npm version">
+  </a>
+  <a href="https://badge.fury.io/gh/IniZio%2Fusthing-clipped">
+    <img src="https://badge.fury.io/gh/IniZio%2Fusthing-clipped.svg" alt="GitHub version">
+  </a>
+  <a href="https://travis-ci.org/clippedjs/clipped">
+    <img src="https://travis-ci.org/clippedjs/clipped.svg?branch=master" alt="Build Status">
+  </a>
+  <a href="https://greenkeeper.io/">
+    <img src="https://badges.greenkeeper.io/clippedjs/clipped.svg" alt="Greenkeeper badge">
+  </a>
+  <a href="https://codecov.io/gh/clippedjs/clipped">
+    <img src="https://codecov.io/gh/clippedjs/clipped/branch/develop/graph/badge.svg" alt="codecov">
+  </a>
+  <a href="https://github.com/semantic-release/semantic-release">
+    <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release">
+  </a>
+  <a href="https://standardjs.com">
+    <img src="https://img.shields.io/badge/code_style-standard-brightgreen.svg" alt="standardjs">
+  </a>
+</p>
 
 Configuration hurts :confounded:. Clipped makes it once (or even fun :smirk:).
 
