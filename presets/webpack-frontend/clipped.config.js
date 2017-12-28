@@ -2,7 +2,8 @@ const path = require('path')
 const presetWebpack = require('clipped-preset-webpack')
 const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpackDevServer = require('webpack-dev-server')
+const WebpackDevServer = require('webpack-dev-server')
+const merge = require('deepmerge')
 
 module.exports = async (clipped) => {
   clipped.config.dockerTemplate = path.resolve(__dirname, 'docker-template')
@@ -17,12 +18,82 @@ module.exports = async (clipped) => {
 
   clipped.config.webpack.module
     .rule('css')
-      .test(/\.css$/)
-      .include
-        .add(clipped.resolve('src'))
-        .end()
-      .use('css')
-        .loader(require.resolve('css-loader'))
+    .test(/\.css$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+
+  clipped.config.webpack.module
+    .rule('stylus')
+    .test(/\.styl$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+    .loader(require.resolve('stylus-loader'))
+
+  clipped.config.webpack.module
+    .rule('scss')
+    .test(/\.scss$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+    .loader(require.resolve('sass-loader'))
+
+  clipped.config.webpack.module
+    .rule('sass')
+    .test(/\.sass$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+    .loader(require.resolve('sass-loader'))
+    .options({
+      indentedSyntax: true
+    })
+
+  clipped.config.webpack.module
+    .rule('vue')
+    .test(/\.vue$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('vue')
+    .loader(require.resolve('vue-loader'))
+    .options({
+      loaders: {
+        // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
+        // the "scss" and "sass" values for the lang attribute to the right configs here.
+        // other preprocessors should work out of the box, no loader config like this necessary.
+        'scss': [
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('sass-loader')
+        ],
+        'sass': [
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('sass-loader') + '?indentedSyntax'
+        ],
+        'stylus': [
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('stylus-loader')
+        ]
+}
+    })
+  clipped.config.webpack.resolve.alias
+    .set('vue', 'vue/dist/vue.js')
 
   clipped.config.webpack
     .plugin('html')
@@ -31,6 +102,30 @@ module.exports = async (clipped) => {
       inject: false,
       appMountId: 'root'
     }])
+
+  clipped.config.webpack.module
+    .rule('babel')
+    .use('babel')
+    .tap(options => merge(options, {presets: [require.resolve('babel-preset-react')]}))
+
+  clipped.config.webpack.merge({
+    output: {
+      filename: '[name].[chunkhash].js',
+      chunkFilename: '[chunkhash].js'
+    },
+    plugins: [
+      new Webpack.HashedModuleIdsPlugin(),
+      new Webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
+      new Webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
+        chunks: ['vendor']
+      })
+    ]
+  })
+
+  console.log(JSON.stringify(clipped.config.webpack.toConfig().module.rules, null, 2))
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
@@ -45,7 +140,7 @@ module.exports = async (clipped) => {
 
         // console.log(clipped.config.webpack.toConfig())
         const compiler = Webpack(clipped.config.webpack.toConfig())
-        new webpackDevServer(
+        new WebpackDevServer(
           compiler,
           {
             contentBase: clipped.config.dist,
@@ -77,7 +172,7 @@ module.exports = async (clipped) => {
           if (err) {
             reject(err)
           }
-          console.log(`Starting server on ${url}`);
+          console.log(`Starting server on ${url}`)
         })
       })
     )
