@@ -21,8 +21,78 @@ module.exports = async (clipped) => {
     .include
     .add(clipped.resolve('src'))
     .end()
-    .use('css')
+    .use('style')
+    .loader(require.resolve('style-loader'))
     .loader(require.resolve('css-loader'))
+
+  clipped.config.webpack.module
+    .rule('stylus')
+    .test(/\.styl$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+    .loader(require.resolve('stylus-loader'))
+
+  clipped.config.webpack.module
+    .rule('scss')
+    .test(/\.scss$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+    .loader(require.resolve('sass-loader'))
+
+  clipped.config.webpack.module
+    .rule('sass')
+    .test(/\.sass$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('style')
+    .loader(require.resolve('style-loader'))
+    .loader(require.resolve('css-loader'))
+    .loader(require.resolve('sass-loader'))
+    .options({
+      indentedSyntax: true
+    })
+
+  clipped.config.webpack.module
+    .rule('vue')
+    .test(/\.vue$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('vue')
+    .loader(require.resolve('vue-loader'))
+    .options({
+      loaders: {
+        // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
+        // the "scss" and "sass" values for the lang attribute to the right configs here.
+        // other preprocessors should work out of the box, no loader config like this necessary.
+        'scss': [
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('sass-loader')
+        ],
+        'sass': [
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('sass-loader') + '?indentedSyntax'
+        ],
+        'stylus': [
+          require.resolve('vue-style-loader'),
+          require.resolve('css-loader'),
+          require.resolve('stylus-loader')
+        ]
+}
+    })
+  clipped.config.webpack.resolve.alias
+    .set('vue', 'vue/dist/vue.js')
 
   clipped.config.webpack
     .plugin('html')
@@ -49,7 +119,7 @@ module.exports = async (clipped) => {
     ]
   })
 
-  console.log(clipped.config.webpack.toConfig())
+  console.log(JSON.stringify(clipped.config.webpack.toConfig().module.rules, null, 2))
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
