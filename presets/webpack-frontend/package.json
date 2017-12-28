@@ -7,8 +7,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "babel-preset-react": "^6.24.1",
     "clipped-preset-webpack": "^0.3.3",
     "css-loader": "^0.28.7",
+    "deepmerge": "^2.0.1",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-template": "^6.1.0",
     "node-sass": "^4.7.2",

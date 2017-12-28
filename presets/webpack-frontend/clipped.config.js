@@ -3,6 +3,7 @@ const presetWebpack = require('clipped-preset-webpack')
 const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackDevServer = require('webpack-dev-server')
+const merge = require('deepmerge')
 
 module.exports = async (clipped) => {
   clipped.config.dockerTemplate = path.resolve(__dirname, 'docker-template')
@@ -101,6 +102,11 @@ module.exports = async (clipped) => {
       inject: false,
       appMountId: 'root'
     }])
+
+  clipped.config.webpack.module
+    .rule('babel')
+    .use('babel')
+    .tap(options => merge(options, {presets: [require.resolve('babel-preset-react')]}))
 
   clipped.config.webpack.merge({
     output: {
