@@ -95,7 +95,7 @@
     "eslint-plugin-node": "^5.2.1",
     "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
-    "flow-bin": "^0.61.0",
+    "flow-bin": "^0.62.0",
     "flow-typed": "^2.2.3",
     "glob": "^7.1.2",
     "istanbul": "^0.4.5",
