@@ -22,9 +22,8 @@ module.exports = async (clipped) => {
     .include
     .add(clipped.resolve('src'))
     .end()
-    .use('style')
-    .loader(require.resolve('style-loader'))
-    .loader(require.resolve('css-loader'))
+    .use('style').loader(require.resolve('style-loader')).end()
+    .use('css').loader(require.resolve('css-loader'))
 
   clipped.config.webpack.module
     .rule('stylus')
@@ -32,10 +31,9 @@ module.exports = async (clipped) => {
     .include
     .add(clipped.resolve('src'))
     .end()
-    .use('style')
-    .loader(require.resolve('style-loader'))
-    .loader(require.resolve('css-loader'))
-    .loader(require.resolve('stylus-loader'))
+    .use('style').loader(require.resolve('style-loader')).end()
+    .use('css').loader(require.resolve('css-loader')).end()
+    .use('stylus').loader(require.resolve('stylus-loader'))
 
   clipped.config.webpack.module
     .rule('scss')
@@ -43,10 +41,9 @@ module.exports = async (clipped) => {
     .include
     .add(clipped.resolve('src'))
     .end()
-    .use('style')
-    .loader(require.resolve('style-loader'))
-    .loader(require.resolve('css-loader'))
-    .loader(require.resolve('sass-loader'))
+    .use('style').loader(require.resolve('style-loader')).end()
+    .use('css').loader(require.resolve('css-loader')).end()
+    .use('sass').loader(require.resolve('sass-loader'))
 
   clipped.config.webpack.module
     .rule('sass')
@@ -54,10 +51,9 @@ module.exports = async (clipped) => {
     .include
     .add(clipped.resolve('src'))
     .end()
-    .use('style')
-    .loader(require.resolve('style-loader'))
-    .loader(require.resolve('css-loader'))
-    .loader(require.resolve('sass-loader'))
+    .use('style').loader(require.resolve('style-loader')).end()
+    .use('css').loader(require.resolve('css-loader')).end()
+    .use('sass').loader(require.resolve('sass-loader'))
     .options({
       indentedSyntax: true
     })
@@ -90,7 +86,7 @@ module.exports = async (clipped) => {
           require.resolve('css-loader'),
           require.resolve('stylus-loader')
         ]
-}
+      }
     })
   clipped.config.webpack.resolve.alias
     .set('vue', 'vue/dist/vue.js')
@@ -124,8 +120,6 @@ module.exports = async (clipped) => {
       })
     ]
   })
-
-  console.log(JSON.stringify(clipped.config.webpack.toConfig().module.rules, null, 2))
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
