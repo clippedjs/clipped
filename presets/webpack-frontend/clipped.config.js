@@ -2,7 +2,7 @@ const path = require('path')
 const presetWebpack = require('clipped-preset-webpack')
 const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
-const webpackDevServer = require('webpack-dev-server')
+const WebpackDevServer = require('webpack-dev-server')
 
 module.exports = async (clipped) => {
   clipped.config.dockerTemplate = path.resolve(__dirname, 'docker-template')
@@ -17,12 +17,12 @@ module.exports = async (clipped) => {
 
   clipped.config.webpack.module
     .rule('css')
-      .test(/\.css$/)
-      .include
-        .add(clipped.resolve('src'))
-        .end()
-      .use('css')
-        .loader(require.resolve('css-loader'))
+    .test(/\.css$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('css')
+    .loader(require.resolve('css-loader'))
 
   clipped.config.webpack
     .plugin('html')
@@ -31,6 +31,25 @@ module.exports = async (clipped) => {
       inject: false,
       appMountId: 'root'
     }])
+
+  clipped.config.webpack.merge({
+    output: {
+      filename: '[name].[chunkhash].js',
+      chunkFilename: '[chunkhash].js'
+    },
+    plugins: [
+      new Webpack.HashedModuleIdsPlugin(),
+      new Webpack.optimize.CommonsChunkPlugin({
+        name: 'vendor'
+      }),
+      new Webpack.optimize.CommonsChunkPlugin({
+        name: 'manifest',
+        chunks: ['vendor']
+      })
+    ]
+  })
+
+  console.log(clipped.config.webpack.toConfig())
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
@@ -45,7 +64,7 @@ module.exports = async (clipped) => {
 
         // console.log(clipped.config.webpack.toConfig())
         const compiler = Webpack(clipped.config.webpack.toConfig())
-        new webpackDevServer(
+        new WebpackDevServer(
           compiler,
           {
             contentBase: clipped.config.dist,
@@ -77,7 +96,7 @@ module.exports = async (clipped) => {
           if (err) {
             reject(err)
           }
-          console.log(`Starting server on ${url}`);
+          console.log(`Starting server on ${url}`)
         })
       })
     )
