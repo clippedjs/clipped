@@ -1,5 +1,9 @@
 import fs from 'fs-extra'
+import path from 'path'
 import {isString, isFunction, castArray} from 'lodash'
+import yeoman from 'yeoman-environment'
+import {promisify} from 'util'
+const baseGenerator = require('generator-clipped-base')
 
 const stockPresets = {}
 
@@ -11,14 +15,18 @@ export function basePreset (clipped: Object, opt: Object = {}) {
     context: clipped.opt.context || process.cwd()
   }: clippedConfig)
 
-  const packageJson = __non_webpack_require__(clipped.resolve('package.json'))
+  let packageJson = {}
+  try {
+    packageJson = __non_webpack_require__(clipped.resolve('package.json'))
+  } catch (e) {}
 
   Object.assign(clipped.config, ({
     name: packageJson.name,
     src: clipped.resolve('src'),
     dist: clipped.resolve('dist'),
     dockerTemplate: clipped.resolve('docker-template'),
-    packageJson
+    packageJson,
+    generator: baseGenerator
   }: clippedConfig))
 
   clipped._hooks = []
@@ -51,6 +59,18 @@ export function basePreset (clipped: Object, opt: Object = {}) {
     .add('clipped', async clipped => {
       const version = await clipped.exec('npm view clipped version')
       clipped.print(version)
+    })
+
+  clipped.hook('init')
+    .add('yeoman', async clipped => {
+      const env = yeoman.createEnv()
+      env.registerStub(baseGenerator, 'clipped:app')
+
+      env.lookup()
+
+      await new Promise((resolve, reject) => {
+        env.run('clipped:app', resolve)
+      })
     })
 
   clipped.__initialized__ = true
