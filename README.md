@@ -42,7 +42,7 @@ module.exports = async clipped => {
   // blablabla...
 }
 ```
-3. To use presets, search 'clipped-preset` on [npm website](npmjs.com). Install them as devDependencies and use them:
+3. To use presets, search 'clipped-preset` on [npm](https://www.npmjs.com/search?q=clipped-preset). Install them as devDependencies and use them:
 ```js
 module.exports = async clipped => {
   clipped.config.name = 'magic' // defaults to 'name' property in package.json
