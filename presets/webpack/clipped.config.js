@@ -54,29 +54,28 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
             NODE_ENV: process.env.NODE_ENV ? '"production"' : '"development"'
           }
         }),
-        new webpack.NamedModulesPlugin(),
         new webpack.HotModuleReplacementPlugin()
       ]
     })
 
     clipped.config.webpack
       .entry('index')
-        .add(path.join(clipped.config.src, 'index.js'))
-        .end()
+      .add(path.join(clipped.config.src, 'index.js'))
+      .end()
 
     clipped.config.webpack.module
       .rule('babel')
-        .test(/\.jsx?$/)
-        .include
-          .add(clipped.config.src)
-          .end()
-        .use('babel')
-          .loader(require.resolve('babel-loader'))
-          .options(Object.assign({
-            presets: [
-              [require.resolve('babel-preset-env'), { modules: false }]
-            ]
-          }, opt.babel.options))
+      .test(/\.jsx?$/)
+      .include
+      .add(clipped.config.src)
+      .end()
+      .use('babel')
+      .loader(require.resolve('babel-loader'))
+      .options(Object.assign({
+        presets: [
+          [require.resolve('babel-preset-env'), { modules: false }]
+        ]
+      }, opt.babel.options))
 
     const getWebpackInstance = () =>
       webpack(clipped.config.webpack.toConfig())
@@ -96,8 +95,8 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
             }
 
             console.log(stats.toString({
-              chunks: false,  // Makes the build much quieter
-              colors: true    // Shows colors in the console
+              chunks: false, // Makes the build much quieter
+              colors: true // Shows colors in the console
             }))
             // resolve()
           })
@@ -115,8 +114,8 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
             }
 
             console.log(stats.toString({
-              chunks: false,  // Makes the build much quieter
-              colors: true    // Shows colors in the console
+              chunks: false, // Makes the build much quieter
+              colors: true // Shows colors in the console
             }))
             resolve()
           })
