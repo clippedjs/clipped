@@ -20,6 +20,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       },
       resolveLoader: {
         modules: [
+          'node_modules',
           clipped.resolve('node_modules'),
           path.join(__dirname, 'node_modules')
         ]
@@ -31,6 +32,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
         },
         extensions: ['*', '.js', '.vue', '.jsx', '.json', '.marko', '.ts', '.tsx'],
         modules: [
+          'node_modules',
           clipped.resolve('node_modules'),
           path.join(__dirname, 'node_modules')
         ]

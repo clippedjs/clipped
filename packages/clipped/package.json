@@ -100,11 +100,14 @@
     "flow-bin": "^0.62.0",
     "flow-typed": "^2.2.3",
     "glob": "^7.1.2",
+    "imports-loader": "^0.7.1",
     "istanbul": "^0.4.5",
     "mocha": "^4.0.1",
     "nyc": "^11.4.1",
     "pre-commit": "^1.2.2",
     "semantic-release": "^11.0.2",
-    "standard": "^10.0.3"
+    "shebang-loader": "^0.0.1",
+    "standard": "^10.0.3",
+    "webpack": "^3.10.0"
   }
 }
