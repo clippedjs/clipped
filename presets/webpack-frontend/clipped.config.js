@@ -17,6 +17,42 @@ module.exports = async (clipped) => {
     .add(path.join(__dirname, 'node_modules'))
 
   clipped.config.webpack.module
+    .rule('img')
+    .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('url').loader(require.resolve('url-loader'))
+    .options({
+      limit: 10000,
+      name: '[name].[hash:7].[ext]'
+    }).end()
+
+  clipped.config.webpack.module
+    .rule('audio')
+    .test(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('url').loader(require.resolve('url-loader'))
+    .options({
+      limit: 10000,
+      name: '[name].[hash:7].[ext]'
+    }).end()
+
+  clipped.config.webpack.module
+    .rule('font')
+    .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)
+    .include
+    .add(clipped.resolve('src'))
+    .end()
+    .use('url').loader(require.resolve('url-loader'))
+    .options({
+      limit: 10000,
+      name: '[name].[hash:7].[ext]'
+    }).end()
+
+  clipped.config.webpack.module
     .rule('css')
     .test(/\.css$/)
     .include

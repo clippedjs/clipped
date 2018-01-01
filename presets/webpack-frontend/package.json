@@ -1,6 +1,6 @@
 {
   "name": "clipped-preset-webpack-frontend",
-  "version": "0.3.2",
+  "version": "0.4.0",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
@@ -8,9 +8,10 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-react": "^6.24.1",
-    "clipped-preset-webpack": "^0.3.3",
+    "clipped-preset-webpack": "^0.4.0",
     "css-loader": "^0.28.7",
     "deepmerge": "^2.0.1",
+    "file-loader": "^1.1.6",
     "html-webpack-plugin": "^2.30.1",
     "html-webpack-template": "^6.1.0",
     "node-sass": "^4.7.2",
@@ -18,6 +19,7 @@
     "style-loader": "^0.19.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
+    "url-loader": "^0.6.2",
     "vue-loader": "^13.6.1",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
