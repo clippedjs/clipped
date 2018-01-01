@@ -26,7 +26,8 @@ export function basePreset (clipped: Object, opt: Object = {}) {
     dist: clipped.resolve('dist'),
     dockerTemplate: clipped.resolve('docker-template'),
     packageJson,
-    generator: baseGenerator
+    generator: baseGenerator,
+    eslintPath: clipped.resolve('.eslintrc.js')
   }: clippedConfig))
 
   clipped._hooks = []

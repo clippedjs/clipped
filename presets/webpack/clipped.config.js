@@ -1,3 +1,4 @@
+const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 // const webpackDevServer = require('webpack-dev-server')
@@ -5,6 +6,8 @@ const Chain = require('webpack-chain')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = (clipped, opt = {babel: {options: {}}}) => {
+  clipped.config = Object.assign({dev: {enableLint: false}}, clipped.config)
+
   try {
     clipped.config['webpack'] = new Chain()
     clipped.config.webpack.merge({
@@ -20,6 +23,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       },
       resolveLoader: {
         modules: [
+          'node_modules',
           clipped.resolve('node_modules'),
           path.join(__dirname, 'node_modules')
         ]
@@ -31,6 +35,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
         },
         extensions: ['*', '.js', '.vue', '.jsx', '.json', '.marko', '.ts', '.tsx'],
         modules: [
+          'node_modules',
           clipped.resolve('node_modules'),
           path.join(__dirname, 'node_modules')
         ]
@@ -62,6 +67,26 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       .entry('index')
       .add(path.join(clipped.config.src, 'index.js'))
       .end()
+
+    clipped.config.webpack
+      .when(clipped.config.dev.enableLint, config =>
+        config.module
+          .rule('lint')
+          .test(/\.(js|vue)$/)
+          .pre()
+          .include
+          .add(clipped.resolve('src'))
+          .add(clipped.resolve('test'))
+          .end()
+          .use('eslint').loader(require.resolve('eslint-loader'))
+          .options({
+            fix: true,
+            formatter: require('eslint-friendly-formatter'),
+            emitWarning: true,
+            eslintPath: require.resolve('eslint'),
+            configFile: fs.existsSync(clipped.config.eslintPath) ? clipped.config.eslintPath : path.join(__dirname, '.eslintrc.js')
+          })
+      )
 
     clipped.config.webpack.module
       .rule('babel')
