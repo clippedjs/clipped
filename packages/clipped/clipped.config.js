@@ -2,6 +2,7 @@ const glob = require('glob')
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
+const nodeExternals = require('webpack-node-externals')
 
 module.exports = async clipped => {
   await clipped.use(require('clipped-preset-webpack-nodejs'))
@@ -14,6 +15,11 @@ module.exports = async clipped => {
       symlinks: true
     }
   })
+
+  clipped.config.webpack.externals([nodeExternals({
+    modulesFromFile: true,
+    whitelist: [/^webpack/]
+  })])
 
   clipped.config.webpack.module
     .rule('shebang')

@@ -108,6 +108,7 @@
     "semantic-release": "^11.0.2",
     "shebang-loader": "^0.0.1",
     "standard": "^10.0.3",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
   }
 }
