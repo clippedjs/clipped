@@ -4,7 +4,6 @@ cache:
   directories:
     - ~/.npm
     - node_modules
-    - $(npm config get prefix)/lib/node_modules
 notifications:
   email: false
 node_js:
@@ -15,7 +14,8 @@ script:
   - lerna run test
   - lerna run build
 after_success:
-  - $(npm config get prefix)/bin/lerna exec --concurrency 1 semantic-release -e semantic-release-monorepo
+  - lerna run semantic-release
+  - for d in presets/*; do autopublish "$d"; done
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
