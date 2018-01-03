@@ -21,6 +21,14 @@ module.exports = async clipped => {
     whitelist: [/^webpack/]
   })])
 
+  clipped.config.webpack
+    .plugin('banner')
+    .tap(args => {
+      args[0].banner = `require('source-map-support/register')`
+      console.log(args)
+      return args
+    })
+
   clipped.config.webpack.module
     .rule('shebang')
     .test( /node_modules[/\\]jsonstream/i)
