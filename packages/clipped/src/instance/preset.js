@@ -3,6 +3,8 @@ import path from 'path'
 import {isString, isFunction, castArray} from 'lodash'
 import yeoman from 'yeoman-environment'
 import {promisify} from 'util'
+import memFs from 'mem-fs'
+import fsEditor from 'mem-fs-editor'
 const baseGenerator = require('generator-clipped-base')
 
 const stockPresets = {}
@@ -47,7 +49,15 @@ export function basePreset (clipped: Object, opt: Object = {}) {
     remove: fileOperations(({path}) => fs.remove(path)),
     move: fileOperations(({src, dest, opt = {}}) => fs.move(src, dest, opt)),
     mkdir: fileOperations(({path}) => fs.ensureDir(path)),
-    emptydir: fileOperations(({path}) => fs.emptyDir(path))
+    emptydir: fileOperations(({path}) => fs.emptyDir(path)),
+    copyTpl: fileOperations(
+      ({src, dest, context = clipped, tplOptions = {}, options = {}}) =>
+        new Promise((resolve, reject) => {
+          const editor = fsEditor.create(memFs.create())
+          editor.copyTpl(src, dest, context, tplOptions, options)
+          editor.commit(resolve)
+        })
+    )
   }
 
   Object.assign(clipped, clipped.fs)
