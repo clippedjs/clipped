@@ -17,5 +17,9 @@
   "dependencies": {
     "axios": "^0.17.1",
     "yeoman-generator": "^2.0.2"
+  },
+  "devDependencies": {
+    "semantic-release": "11.1.0",
+    "semantic-release-monorepo": "^4.0.3"
   }
 }

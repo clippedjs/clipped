@@ -12,5 +12,9 @@
   "dependencies": {
     "clipped-preset-webpack-nodejs": "^0.1.2",
     "nodemon": "^1.14.7"
+  },
+  "devDependencies": {
+    "semantic-release": "11.1.0",
+    "semantic-release-monorepo": "^4.0.3"
   }
 }

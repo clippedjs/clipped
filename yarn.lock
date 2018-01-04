@@ -78,21 +78,6 @@
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/@semantic-release/error/-/error-2.1.0.tgz#44771f676f5b148da309111285a97901aa95a6e0"
 
-"@semantic-release/github@^2.0.0":
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/@semantic-release/github/-/github-2.2.3.tgz#2323d6c9f6ba602fea1eda4f7efdc8ec96333ac0"
-  dependencies:
-    "@semantic-release/error" "^2.1.0"
-    debug "^3.1.0"
-    fs-extra "^5.0.0"
-    github "^13.0.0"
-    globby "^7.1.1"
-    lodash "^4.17.4"
-    mime "^2.0.3"
-    p-reduce "^1.0.0"
-    parse-github-url "^1.0.1"
-    url-join "^2.0.2"
-
 "@semantic-release/github@^3.0.0":
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/@semantic-release/github/-/github-3.0.1.tgz#e1fe6128562dcd1d9acd9a4143ecb4ed8be6ace0"
@@ -7366,9 +7351,9 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "0.6.33"
 
-semantic-release-monorepo@^4.0.1:
-  version "4.0.1"
-  resolved "https://registry.yarnpkg.com/semantic-release-monorepo/-/semantic-release-monorepo-4.0.1.tgz#1a1a6144db508cfa663c6f7ec6e9e5a383baf7b7"
+semantic-release-monorepo@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/semantic-release-monorepo/-/semantic-release-monorepo-4.0.3.tgz#d830b902ea12470e9a387b34fb33f0bd13bd06a6"
   dependencies:
     debug "^3.1.0"
     execa "^0.8.0"
@@ -7378,20 +7363,20 @@ semantic-release-monorepo@^4.0.1:
     semantic-release-plugin-decorators "^1.2.0"
 
 semantic-release-plugin-decorators@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/semantic-release-plugin-decorators/-/semantic-release-plugin-decorators-1.2.0.tgz#7371b14f67c2aa78d559adc3433679e304e7ade6"
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/semantic-release-plugin-decorators/-/semantic-release-plugin-decorators-1.2.1.tgz#7301ee6a0dc86923899e01680d00daaea1bd531c"
   dependencies:
     import-from "^2.1.0"
     lodash "^4.17.4"
 
-semantic-release@^11.0.2:
-  version "11.0.2"
-  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-11.0.2.tgz#2a09baa33a0e41926ac3290c8b110d22a5ba2a48"
+semantic-release@11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-11.1.0.tgz#db0316065d7612d1db5a2e26aaa0c3f7edebb6c3"
   dependencies:
     "@semantic-release/commit-analyzer" "^5.0.0"
     "@semantic-release/condition-travis" "^7.0.0"
     "@semantic-release/error" "^2.1.0"
-    "@semantic-release/github" "^2.0.0"
+    "@semantic-release/github" "^3.0.0"
     "@semantic-release/npm" "^2.0.0"
     "@semantic-release/release-notes-generator" "^6.0.0"
     chalk "^2.3.0"
@@ -7401,12 +7386,12 @@ semantic-release@^11.0.2:
     execa "^0.8.0"
     get-stream "^3.0.0"
     git-log-parser "^1.2.0"
-    import-from "^2.1.0"
     lodash "^4.0.0"
     marked "^0.3.6"
     marked-terminal "^2.0.0"
     p-reduce "^1.0.0"
     read-pkg-up "^3.0.0"
+    resolve-from "^4.0.0"
     semver "^5.4.1"
 
 semantic-release@^11.1.0:
