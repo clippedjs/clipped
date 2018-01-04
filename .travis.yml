@@ -15,7 +15,7 @@ script:
   - lerna run test
   - lerna run build
 after_success:
-  - $(npm config get prefix)/bin/lerna exec --concurrency 1 -- npx semantic-release@11.1.0 -e semantic-release-monorepo --debug --dry-run
+  - $(npm config get prefix)/bin/lerna exec --concurrency 1 -- npx semantic-release@11.1.0 -e semantic-release-monorepo
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
