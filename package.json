@@ -6,8 +6,6 @@
     "presets/*"
   ],
   "devDependencies": {
-    "lerna": "^2.5.1",
-    "semantic-release": "^11.1.0",
-    "semantic-release-monorepo": "^4.0.1"
+    "lerna": "^2.5.1"
   }
 }
