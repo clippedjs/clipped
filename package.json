@@ -5,7 +5,9 @@
     "generators/*",
     "presets/*"
   ],
-	"devDependencies": {
-		"lerna": "^2.5.1"
-	}
+  "devDependencies": {
+    "lerna": "^2.5.1",
+    "semantic-release": "^11.1.0",
+    "semantic-release-monorepo": "^4.0.1"
+  }
 }
