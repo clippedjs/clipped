@@ -1,6 +1,6 @@
 {
   "name": "clipped-preset-docker",
-  "version": "0.1.6",
+  "version": "1.7.0",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -15,6 +15,6 @@
   },
   "devDependencies": {
     "semantic-release": "11.1.0",
-    "semantic-release-monorepo": "^4.0.3"
+    "semantic-release-monorepo": "^4.1.0"
   }
 }
