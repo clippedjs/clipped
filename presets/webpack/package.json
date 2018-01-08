@@ -3,8 +3,18 @@
   "version": "1.7.0",
   "description": "",
   "main": "clipped.config.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clippedjs/clipped.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clippedjs/clipped/issues"
+  },
   "keywords": [],
-  "author": "",
+  "author": "IniZio",
   "license": "ISC",
   "dependencies": {
     "babel-core": "^6.26.0",
