@@ -7351,18 +7351,18 @@ selfsigned@^1.9.1:
   dependencies:
     node-forge "0.6.33"
 
-semantic-release-monorepo@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/semantic-release-monorepo/-/semantic-release-monorepo-4.0.3.tgz#d830b902ea12470e9a387b34fb33f0bd13bd06a6"
+semantic-release-monorepo@^4.1.0:
+  version "4.1.0"
+  resolved "https://registry.yarnpkg.com/semantic-release-monorepo/-/semantic-release-monorepo-4.1.0.tgz#3ca0bbd84dba8c29898498398ebd62160721f6c1"
   dependencies:
     debug "^3.1.0"
     execa "^0.8.0"
     pkg-up "^2.0.0"
     ramda "^0.25.0"
     read-pkg "^3.0.0"
-    semantic-release-plugin-decorators "^1.2.0"
+    semantic-release-plugin-decorators "^1.2.1"
 
-semantic-release-plugin-decorators@^1.2.0:
+semantic-release-plugin-decorators@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/semantic-release-plugin-decorators/-/semantic-release-plugin-decorators-1.2.1.tgz#7301ee6a0dc86923899e01680d00daaea1bd531c"
   dependencies:

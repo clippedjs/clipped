@@ -1,6 +1,6 @@
 {
   "name": "generator-clipped-base",
-  "version": "0.1.3",
+  "version": "1.7.0",
   "main": "./generators/app/index.js",
   "description": "Generator for Clippedjs webpack preset",
   "files": [
@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "semantic-release": "11.1.0",
-    "semantic-release-monorepo": "^4.0.3"
+    "semantic-release-monorepo": "^4.1.0"
   }
 }
