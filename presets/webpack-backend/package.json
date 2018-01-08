@@ -3,11 +3,21 @@
   "version": "0.0.0",
   "description": "",
   "main": "clipped.config.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clippedjs/clipped.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clippedjs/clipped/issues"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0"
   },
   "keywords": [],
-  "author": "",
+  "author": "IniZio",
   "license": "ISC",
   "dependencies": {
     "clipped-preset-webpack-nodejs": "^0.1.2",

@@ -1,6 +1,6 @@
 {
   "name": "clipped",
-  "description": "Reduce pain of configuration to once",
+  "description": "Preset-based configuration solution",
   "version": "0.0.0",
   "engines": {
     "node": ">=8"

@@ -1,6 +1,16 @@
 {
   "name": "generator-clipped-base",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clippedjs/clipped.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clippedjs/clipped/issues"
+  },
   "main": "./generators/app/index.js",
   "description": "Generator for Clippedjs webpack preset",
   "files": [

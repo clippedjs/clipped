@@ -1,6 +1,16 @@
 {
   "name": "clipped-preset-docker",
   "version": "0.0.0",
+  "engines": {
+    "node": ">=8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/clippedjs/clipped.git"
+  },
+  "bugs": {
+    "url": "https://github.com/clippedjs/clipped/issues"
+  },
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
