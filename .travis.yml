@@ -19,4 +19,4 @@ after_success:
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
-    - /*.v\d+\.\d+\.\d+$/
+    - /^.*-v\d+\.\d+\.\d+$/
