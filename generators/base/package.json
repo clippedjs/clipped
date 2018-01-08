@@ -1,6 +1,6 @@
 {
   "name": "generator-clipped-base",
-  "version": "1.7.0",
+  "version": "0.0.0",
   "engines": {
     "node": ">=8"
   },
