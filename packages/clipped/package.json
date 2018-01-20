@@ -86,7 +86,7 @@
   "devDependencies": {
     "babel-eslint": "^8.0.3",
     "backpack-core": "^0.4.3",
-    "clipped-preset-webpack-nodejs": "^0.1.2",
+    "clipped-preset-webpack-nodejs": "1.9.1",
     "codacy-coverage": "^2.0.3",
     "commitizen": "^2.9.6",
     "cross-env": "^5.1.3",
