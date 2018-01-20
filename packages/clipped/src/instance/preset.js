@@ -68,7 +68,7 @@ export function basePreset (clipped: Object, opt: Object = {}) {
 
   clipped.hook('version')
     .add('clipped', async clipped => {
-      const version = await clipped.exec('npm view clipped version')
+      const version = await clipped.exec('npm', ['view', 'clipped', 'version'])
       clipped.print(version)
     })
 
