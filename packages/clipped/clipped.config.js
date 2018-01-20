@@ -25,7 +25,6 @@ module.exports = async clipped => {
     .plugin('banner')
     .tap(args => {
       args[0].banner = `require('source-map-support/register')`
-      console.log(args)
       return args
     })
 
