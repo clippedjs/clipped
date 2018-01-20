@@ -1,4 +1,5 @@
 import path from 'path'
+import execa from 'execa'
 import {isFunction} from 'lodash'
 import {promisify} from 'util'
 
@@ -48,10 +49,8 @@ export function promiseSerial (
  * @param {Function} callback
  * @returns
  */
-export const exec = promisify(
-  (command: string, opts, callback) =>
-    require('child_process').exec(command, opts, callback)
-)
+export const exec = (cmd, parameters, opt) =>
+  execa(cmd, parameters, {stdio: 'inherit', ...opt})
 
 /**
  * insertIf - Return element if condition satisfied
