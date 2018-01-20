@@ -116,7 +116,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
           webpackInstance.watch({}, (err, stats) => {
             if (err || stats.hasErrors()) {
               console.error(err)
-              reject(err)
+              // reject(err)
             }
 
             console.log(stats.toString({
