@@ -61,7 +61,7 @@ You do not have to use Webpack to use Clipped, feel free to contribute to preset
 ## How to contribute
 ```bash
 # Clone the repo
-git clone git@github.com:IniZio/usthing-clipped.git
+git clone git@github.com:clippedjs/clipped.git
 
 # Install dependencies
 npm i
