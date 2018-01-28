@@ -6,7 +6,7 @@ const Chain = require('webpack-chain')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = (clipped, opt = {babel: {options: {}}}) => {
-  clipped.config = Object.assign({dev: {enableLint: false}}, clipped.config)
+  clipped.config.dev = {enableLint: false}
 
   try {
     clipped.config['webpack'] = new Chain()

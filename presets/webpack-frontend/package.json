@@ -1,6 +1,6 @@
 {
   "name": "clipped-preset-webpack-frontend",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
@@ -8,7 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "babel-preset-react": "^6.24.1",
-    "clipped-preset-webpack": "^0.4.0",
+    "clipped-preset-webpack": "latest",
     "css-loader": "^0.28.7",
     "deepmerge": "^2.0.1",
     "file-loader": "^1.1.6",
