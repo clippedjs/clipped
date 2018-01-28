@@ -1564,9 +1564,9 @@ cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
 
-clipped-preset-webpack@^0.4.0:
-  version "0.4.0"
-  resolved "https://registry.yarnpkg.com/clipped-preset-webpack/-/clipped-preset-webpack-0.4.0.tgz#09b3df9c6214527def901f4d3e969b32f4afb88f"
+clipped-preset-webpack@latest:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/clipped-preset-webpack/-/clipped-preset-webpack-1.9.1.tgz#1fcdb7b289e445532ca957ef62af8bbc9e728902"
   dependencies:
     babel-core "^6.26.0"
     babel-eslint "^8.1.2"
@@ -4874,6 +4874,15 @@ joi@^6.4.x:
     moment "2.x.x"
     topo "1.x.x"
 
+jointed@^1.4.2:
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.4.2.tgz#39dcbdeb1541b27e5eb6886d1438c0f79cf8ac4f"
+  dependencies:
+    deepmerge "^2.0.1"
+    lodash "^4.17.4"
+    node-uuid "^1.4.8"
+    webpack-chain "^4.5.0"
+
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.4.0.tgz#9e566fee624751a1d720c966cd6226d29d4025aa"
@@ -5739,6 +5748,10 @@ node-sass@^4.7.2:
     sass-graph "^2.2.4"
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
+
+node-uuid@^1.4.8:
+  version "1.4.8"
+  resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
 nodemon@^1.11.0:
   version "1.14.6"
