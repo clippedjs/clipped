@@ -2,41 +2,44 @@ const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
 const nodeExternals = require('webpack-node-externals')
-const presetWebpack = require('clipped-preset-webpack')
 
-let nodeModules = {}
-fs.readdirSync('node_modules')
-  .filter(function (x) {
-    return ['.bin'].indexOf(x) === -1
-  })
-  .forEach(function (mod) {
-    nodeModules[mod] = 'commonjs ' + mod
-  })
-
-module.exports = async (clipped, opt = {babel: {options: {}}}) => {
+module.exports = async clipped => {
   try {
-    await clipped.use(presetWebpack)
+    await clipped.use(require('clip-webpack'))
 
-    clipped.config.webpack.resolve.modules
-      .add(path.join(__dirname, 'node_modules'))
-    clipped.config.webpack.resolveLoader.modules
-      .add(path.join(__dirname, 'node_modules'))
-
+    // Add resolves
     clipped.config.webpack
-      .target('node')
-      .node
-        .set('__filename', false)
-        .set('__dirname', false)
-        .end()
-        .externals(nodeModules)
-
+      .mark()
+        .resolve
+          .modules
+            .add(path.join(__dirname, 'node_modules'))
+      .back()
+        .resolveLoader
+          .modules
+            .add(path.join(__dirname, 'node_modules'))
+    
+    // Target at node
     clipped.config.webpack
+      .set('target', 'node')
+      .set('node', {
+        __filename: false,
+        __dirname: false
+      })
+      .set('externals', nodeExternals({
+        whitelist: [
+          /\.(eot|woff|woff2|ttf|otf)$/,
+          /\.(svg|png|jpg|jpeg|gif|ico|webm)$/,
+          /\.(mp4|mp3|ogg|swf|webp)$/,
+          /\.(css|scss|sass|less|styl)$/
+        ]
+      }))
       .output
-        .libraryTarget('commonjs2')
+        .set('libraryTarget', 'commonjs2')
 
+    // Sourcemap banner
     clipped.config.webpack
-      .plugin('banner')
-        .use(webpack.BannerPlugin, [{
+      .plugins
+        .use('banner', webpack.BannerPlugin, [{
           raw: true,
           entryOnly: false,
           banner: `require('${
@@ -49,28 +52,17 @@ module.exports = async (clipped, opt = {babel: {options: {}}}) => {
           }')`
         }])
 
-    clipped.config.webpack.module
-      .rule('babel')
-        .test(/\.js$/)
-        .use('babel')
-        .loader(require.resolve('babel-loader'))
-        .options(Object.assign({
-          presets: [
-            [require.resolve('babel-preset-backpack')],
-            [require.resolve('babel-preset-flow')]
-          ]
-        }))
-
-    clipped.config.webpack.merge({
-      externals: nodeExternals({
-        whitelist: [
-          /\.(eot|woff|woff2|ttf|otf)$/,
-          /\.(svg|png|jpg|jpeg|gif|ico|webm)$/,
-          /\.(mp4|mp3|ogg|swf|webp)$/,
-          /\.(css|scss|sass|less|styl)$/
-        ]
-      })
-    })
+    //  Support flowtype and backpack
+    clipped.config.webpack
+      .module
+        .rules
+          .babel
+            .set('options', {
+              presets: [
+                [require.resolve('babel-preset-backpack')],
+                [require.resolve('babel-preset-flow')]
+              ]
+            })
   } catch (e) {
     console.error(e)
     process.exit(0)

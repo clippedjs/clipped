@@ -1564,7 +1564,18 @@ cli-width@^2.0.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/cli-width/-/cli-width-2.2.0.tgz#ff19ede8a9a5e579324147b0c11f0fbcbabed639"
 
-clipped-preset-webpack@latest:
+clipped-preset-webpack-nodejs@latest:
+  version "1.9.1"
+  resolved "https://registry.yarnpkg.com/clipped-preset-webpack-nodejs/-/clipped-preset-webpack-nodejs-1.9.1.tgz#532132ae5af59d2bf74dd43dc64a9cd7384cd088"
+  dependencies:
+    babel-preset-backpack "^0.4.3"
+    babel-preset-flow "^6.23.0"
+    clipped-preset-webpack "^1.9.1"
+    source-map-support "^0.5.0"
+    webpack "^3.10.0"
+    webpack-node-externals "^1.6.0"
+
+clipped-preset-webpack@^1.9.1, clipped-preset-webpack@latest:
   version "1.9.1"
   resolved "https://registry.yarnpkg.com/clipped-preset-webpack/-/clipped-preset-webpack-1.9.1.tgz#1fcdb7b289e445532ca957ef62af8bbc9e728902"
   dependencies:
@@ -4874,9 +4885,9 @@ joi@^6.4.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@^1.4.2:
-  version "1.4.2"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.4.2.tgz#39dcbdeb1541b27e5eb6886d1438c0f79cf8ac4f"
+jointed@1.5.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.5.1.tgz#c27d9ab6ababee2684178970a2dfed148a4c5171"
   dependencies:
     deepmerge "^2.0.1"
     lodash "^4.17.4"
