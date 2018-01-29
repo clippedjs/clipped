@@ -1,6 +1,6 @@
 {
-  "name": "clipped-preset-webpack-nodejs",
-  "version": "1.9.2",
+  "name": "clip-webpack-nodejs",
+  "version": "0.1.2",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -12,7 +12,7 @@
   "dependencies": {
     "babel-preset-backpack": "^0.4.3",
     "babel-preset-flow": "^6.23.0",
-    "clipped-preset-webpack": "latest",
+    "clip-webpack": "0.1.2",
     "source-map-support": "^0.5.0",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"

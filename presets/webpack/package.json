@@ -1,6 +1,6 @@
 {
-  "name": "clipped-preset-webpack",
-  "version": "1.9.2",
+  "name": "clip-webpack",
+  "version": "0.1.2",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
