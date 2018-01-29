@@ -25,7 +25,7 @@
     "dev": "clipped watch",
     "build": "clipped build",
     "pretest": "cross-env NODE_ENV=test clipped test",
-    "//test": " ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test-dist --report lcovonly -- -R spec",
+    "test": " ./node_modules/.bin/istanbul cover ./node_modules/.bin/_mocha test-dist --report lcovonly -- -R spec",
     "semantic-release": "semantic-release"
   },
   "config": {
