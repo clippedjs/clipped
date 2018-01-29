@@ -14,9 +14,9 @@ script:
   - lerna run test
   - lerna run build
 after_success:
-  - lerna run semantic-release
   - for d in presets/*; do autopublish "$d"; done
   - for d in generators/*; do autopublish "$d"; done
+  - lerna run semantic-release
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
