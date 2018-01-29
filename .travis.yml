@@ -9,7 +9,7 @@ notifications:
 node_js:
   - '8'
 script:
-  - npm i -g clipped@1.9.2 lerna autopublish
+  - npm i -g clipped lerna autopublish
   - cd packages/clipped && npm run build && cd ../../ # Build clippped to use it in lerna run build
   - lerna run test
   - lerna run build
