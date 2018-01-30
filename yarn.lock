@@ -4859,18 +4859,18 @@ joi@^6.4.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@1.5.3:
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.5.3.tgz#9b4619eb3d2bf75fa8cc7ea221e29b2f88466a04"
+jointed@1.5.4:
+  version "1.5.4"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.5.4.tgz#f6b14ab2ab241751459c2b7c3af71bc46f2a0091"
   dependencies:
     deepmerge "^2.0.1"
     lodash "^4.17.4"
     node-uuid "^1.4.8"
     webpack-chain "^4.5.0"
 
-jointed@1.5.4:
-  version "1.5.4"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.5.4.tgz#f6b14ab2ab241751459c2b7c3af71bc46f2a0091"
+jointed@1.5.5:
+  version "1.5.5"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.5.5.tgz#fc6b5f71424b8f20174ed553684eb94c7fd34375"
   dependencies:
     deepmerge "^2.0.1"
     lodash "^4.17.4"

@@ -24,12 +24,11 @@ module.exports = async clipped => {
 
   clipped.config.webpack
     .plugins
-      .mark()
-        .banner
-          .modify('args', args => {
-            args[0].banner = "require('source-map-support/register')"
-            return args
-          })
+      .banner
+        .modify('args', args => {
+          args[0].banner = "require('source-map-support/register')"
+          return args
+        })
 
   clipped.config.webpack
     .mark()

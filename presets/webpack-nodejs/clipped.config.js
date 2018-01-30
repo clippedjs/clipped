@@ -54,16 +54,19 @@ module.exports = async clipped => {
 
   //  Support flowtype and backpack
   clipped.config.webpack
-  .module
-    .rules
-      .babel
-        .use
-          .babel
-            .options
-              .set('presets', [
-                [require.resolve('babel-preset-backpack')],
-                [require.resolve('babel-preset-flow')]
-              ])
+    .module
+      .rules
+        .babel
+          .use
+            .set('babel', {
+              loader: require.resolve('babel-loader'),
+              options: {
+                presets: [
+                  [require.resolve('babel-preset-backpack')],
+                  [require.resolve('babel-preset-flow')]
+                ]
+              }
+            })
   } catch (e) {
     console.error(e)
     process.exit(0)
