@@ -3,7 +3,7 @@ const fs = require('fs')
 const nodemon = require('nodemon')
 
 module.exports = async clipped => {
-  await clipped.use(require('clipped-preset-webpack-nodejs'))
+  await clipped.use(require('clip-webpack-nodejs'))
 
   let mainFile = path.join(clipped.config.context, clipped.config.packageJson.main)
   try {
