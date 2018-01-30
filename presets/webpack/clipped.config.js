@@ -67,13 +67,22 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
           .set('babel', {
             test: /\.jsx?$/,
             include: [clipped.config.src],
-            loader: require.resolve('babel-loader'),
-            options: {
-              presets: [
-                [require.resolve('babel-preset-env'), { modules: false }]
-              ]
-            }
+            exclude: /(node_modules|bower_components)/,
+            use: []
           })
+            .babel
+              .use
+                .add('babel', {
+                  loader: require.resolve('babel-loader'),
+                  options: {
+                    presets: [
+                      [require.resolve('babel-preset-env'), { modules: false }]
+                    ]
+                  }
+                })
+console.log( clipped.config.webpack
+  .module
+    .rules.babel.use)
 
     const getWebpackInstance = () =>
       webpack(clipped.config.webpack.toJSON())
