@@ -26,7 +26,7 @@ module.exports = async clipped => {
     .plugins
       .banner
         .modify('args', args => {
-          args[0].banner = "require('source-map-support/register')"
+          args[0].set('banner', "require('source-map-support/register')")
           return args
         })
 
