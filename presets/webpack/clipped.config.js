@@ -80,9 +80,6 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
                     ]
                   }
                 })
-console.log( clipped.config.webpack
-  .module
-    .rules.babel.use)
 
     const getWebpackInstance = () =>
       webpack(clipped.config.webpack.toJSON())
