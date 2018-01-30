@@ -5,7 +5,7 @@ const nodeExternals = require('webpack-node-externals')
 
 module.exports = async clipped => {
   try {
-    await clipped.use(require('clip-webpack'))
+    await clipped.use(require('@clipped/preset-webpack'))
 
     // Add resolves
     clipped.config.webpack

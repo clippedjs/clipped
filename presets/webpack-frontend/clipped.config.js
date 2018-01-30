@@ -8,7 +8,7 @@ module.exports = async (clipped) => {
   try {
   clipped.config.dockerTemplate = path.resolve(__dirname, 'docker-template')
 
-  await clipped.use(require('clip-webpack'))
+  await clipped.use(require('@clipped/preset-webpack'))
 
   // Other assets
   clipped.config.webpack
@@ -187,8 +187,6 @@ module.exports = async (clipped) => {
         .use('hashedModule', Webpack.HashedModuleIdsPlugin)
         .use('vendor-commonsChunk', Webpack.optimize.CommonsChunkPlugin, [{name: 'vendor'}])
         .use('manifest-commonsChunk', Webpack.optimize.CommonsChunkPlugin, [{name: 'manifest', chunks: ['vendor']}])
-
-  console.log(JSON.stringify(clipped.config.webpack.module.rules, null, 2))
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
