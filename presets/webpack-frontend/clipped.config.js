@@ -1,180 +1,213 @@
 const path = require('path')
-const presetWebpack = require('clipped-preset-webpack')
 const Webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackDevServer = require('webpack-dev-server')
 const merge = require('deepmerge')
 
 module.exports = async (clipped) => {
+  try {
   clipped.config.dockerTemplate = path.resolve(__dirname, 'docker-template')
 
-  if (!clipped.config.webpackFrontend) clipped.config.webpackFrontend = {}
-  await clipped.use(presetWebpack)
+  await clipped.use(require('clip-webpack'))
 
-  clipped.config.webpack.resolve.modules
-    .add(path.join(__dirname, 'node_modules'))
-  clipped.config.webpack.resolveLoader.modules
-    .add(path.join(__dirname, 'node_modules'))
-
-  clipped.config.webpack.module
-    .rule('img')
-    .test(/\.(png|jpe?g|gif|svg)(\?.*)?$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('url').loader(require.resolve('url-loader'))
-    .options({
-      limit: 10000,
-      name: '[name].[hash:7].[ext]'
-    }).end()
-
-  clipped.config.webpack.module
-    .rule('audio')
-    .test(/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('url').loader(require.resolve('url-loader'))
-    .options({
-      limit: 10000,
-      name: '[name].[hash:7].[ext]'
-    }).end()
-
-  clipped.config.webpack.module
-    .rule('font')
-    .test(/\.(woff2?|eot|ttf|otf)(\?.*)?$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('url').loader(require.resolve('url-loader'))
-    .options({
-      limit: 10000,
-      name: '[name].[hash:7].[ext]'
-    }).end()
-
-  clipped.config.webpack.module
-    .rule('css')
-    .test(/\.css$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('style').loader(require.resolve('style-loader')).end()
-    .use('css').loader(require.resolve('css-loader'))
-
-  clipped.config.webpack.module
-    .rule('stylus')
-    .test(/\.styl$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('style').loader(require.resolve('style-loader')).end()
-    .use('css').loader(require.resolve('css-loader')).end()
-    .use('stylus').loader(require.resolve('stylus-loader'))
-
-  clipped.config.webpack.module
-    .rule('scss')
-    .test(/\.scss$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('style').loader(require.resolve('style-loader')).end()
-    .use('css').loader(require.resolve('css-loader')).end()
-    .use('sass').loader(require.resolve('sass-loader'))
-
-  clipped.config.webpack.module
-    .rule('sass')
-    .test(/\.sass$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('style').loader(require.resolve('style-loader')).end()
-    .use('css').loader(require.resolve('css-loader')).end()
-    .use('sass').loader(require.resolve('sass-loader'))
-    .options({
-      indentedSyntax: true
-    })
-
-  clipped.config.webpack.module
-    .rule('vue')
-    .test(/\.vue$/)
-    .include
-    .add(clipped.resolve('src'))
-    .end()
-    .use('vue')
-    .loader(require.resolve('vue-loader'))
-    .options({
-      loaders: {
-        // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
-        // the "scss" and "sass" values for the lang attribute to the right configs here.
-        // other preprocessors should work out of the box, no loader config like this necessary.
-        'scss': [
-          require.resolve('vue-style-loader'),
-          require.resolve('css-loader'),
-          require.resolve('sass-loader')
-        ],
-        'sass': [
-          require.resolve('vue-style-loader'),
-          require.resolve('css-loader'),
-          require.resolve('sass-loader') + '?indentedSyntax'
-        ],
-        'stylus': [
-          require.resolve('vue-style-loader'),
-          require.resolve('css-loader'),
-          require.resolve('stylus-loader')
-        ]
-      }
-    })
-  clipped.config.webpack.resolve.alias
-    .set('vue', 'vue/dist/vue.js')
-
+  // Other assets
   clipped.config.webpack
-    .plugin('html')
-    .use(HtmlWebpackPlugin, [{
-      template: require.resolve('html-webpack-template/index.ejs'),
-      inject: false,
-      appMountId: 'root'
-    }])
+    .module
+      .rules
+        .mark()
+          .set('image', {
+            test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
+            include: [clipped.config.src],
+            use: []
+          })
+            .image
+              .use
+                .add('url', {
+                  loader: require.resolve('url-loader'),
+                  options: {
+                    limit: 10000,
+                    name: '[name].[hash:7].[ext]'
+                  }
+                })
+        .back()
+          .set('audio', {
+            test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
+            include: [clipped.config.src],
+            use: []
+          })
+            .audio
+              .use
+                .add('url', {
+                  loader: require.resolve('url-loader'),
+                  options: {
+                    limit: 10000,
+                    name: '[name].[hash:7].[ext]'
+                  }
+                })
+        .back()
+          .set('font', {
+            test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
+            include: [clipped.config.src],
+            use: []
+          })
+            .font
+              .use
+                .add('url', {
+                  loader: require.resolve('url-loader'),
+                  options: {
+                    limit: 10000,
+                    name: '[name].[hash:7].[ext]'
+                  }
+                })
 
-  clipped.config.webpack.module
-    .rule('babel')
-    .use('babel')
-    .tap(options => merge(options, {presets: [require.resolve('babel-preset-react')]}))
+  // Stylesheet
+  clipped.config.webpack
+    .module
+      .rules
+        .mark()
+          .set('css', {
+            test: /\.css$/,
+            include: [clipped.config.src],
+            use: []
+          })
+          .css
+            .use
+              .add('style', require.resolve('style-loader'))
+              .add('css', require.resolve('css-loader'))
+        .back()
+          .set('stylus', {
+            test: /\.styl$/,
+            include: [clipped.config.src],
+            use: []
+          })
+          .stylus
+            .use
+              .add('style', require.resolve('style-loader'))
+              .add('css', require.resolve('css-loader'))
+              .add('stylus', require.resolve('stylus-loader'))
+        .back()
+          .set('scss', {
+            test: /\.scss$/,
+            include: [clipped.config.src],
+            use: []
+          })
+          .scss
+            .use
+              .add('style', require.resolve('style-loader'))
+              .add('css', require.resolve('css-loader'))
+              .add('sass', require.resolve('sass-loader'))
+        .back()
+          .set('sass', {
+            test: /\.sass$/,
+            include: [clipped.config.src],
+            use: []
+          })
+          .sass
+            .use
+              .add('style', require.resolve('style-loader'))
+              .add('css', require.resolve('css-loader'))
+              .add('sass', {
+                loader: require.resolve('sass-loader'),
+                options: {
+                  indentedSyntax: true
+                }
+              })
 
-  clipped.config.webpack.merge({
-    output: {
-      filename: '[name].[chunkhash].js',
-      chunkFilename: '[chunkhash].js'
-    },
-    plugins: [
-      new Webpack.HashedModuleIdsPlugin(),
-      new Webpack.optimize.CommonsChunkPlugin({
-        name: 'vendor'
-      }),
-      new Webpack.optimize.CommonsChunkPlugin({
-        name: 'manifest',
-        chunks: ['vendor']
-      })
-    ]
-  })
+  // Framework specific
+  // Vuejs
+  clipped.config.webpack
+    .mark()
+      .module
+        .rules
+            .set('vue', {
+              test: /\.vue$/,
+              include: [clipped.resolve('src')],
+              use: []
+            })
+              .vue
+                .use
+                  .add('vue', {
+                    loader: require.resolve('vue-loader'),
+                    options: {
+                      loaders: {
+                        // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
+                        // the "scss" and "sass" values for the lang attribute to the right configs here.
+                        // other preprocessors should work out of the box, no loader config like this necessary.
+                        'scss': [
+                          require.resolve('vue-style-loader'),
+                          require.resolve('css-loader'),
+                          require.resolve('sass-loader')
+                        ],
+                        'sass': [
+                          require.resolve('vue-style-loader'),
+                          require.resolve('css-loader'),
+                          require.resolve('sass-loader') + '?indentedSyntax'
+                        ],
+                        'stylus': [
+                          require.resolve('vue-style-loader'),
+                          require.resolve('css-loader'),
+                          require.resolve('stylus-loader')
+                        ]
+                      }
+                    }
+                  })
+    .back()
+      .resolve
+        .alias
+          .set('vue', 'vue/dist/vue.js')
+
+  // React.js
+  clipped.config.webpack
+    .module
+      .rules
+        .babel
+          .use
+            .babel
+              .options
+                .presets
+                  .add('react', [require.resolve('babel-preset-react')])
+
+  // HTML template plugin
+  clipped.config.webpack
+    .plugins
+      .use('html', HtmlWebpackPlugin, [{
+        template: require.resolve('html-webpack-template/index.ejs'),
+        inject: false,
+        appMountId: 'root'
+      }])
+
+  // Chunk and hash
+  clipped.config.webpack
+    .mark()
+      .output
+        .set('filename', '[name].[hash].js')
+        .set('chunkFilename',  '[hash].js')
+    .back()
+      .plugins
+        .use('hashedModule', Webpack.HashedModuleIdsPlugin)
+        .use('vendor-commonsChunk', Webpack.optimize.CommonsChunkPlugin, [{name: 'vendor'}])
+        .use('manifest-commonsChunk', Webpack.optimize.CommonsChunkPlugin, [{name: 'manifest', chunks: ['vendor']}])
+
+  console.log(JSON.stringify(clipped.config.webpack.module.rules, null, 2))
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
       new Promise((resolve, reject) => {
         const HOST = 'localhost'
-        const PORT = clipped.config.webpackFrontend.port || 8080
+        const PORT = clipped.config.port || 8080
         const url = `http://${HOST}:${PORT}`
 
         // clipped.config.webpack.entry('index')
         //   .prepend(require.resolve('webpack/hot/dev-server'))
         //   .prepend(`${require.resolve('webpack-dev-server/client')}?${url}`)
 
-        // console.log(clipped.config.webpack.toConfig())
-        const compiler = Webpack(clipped.config.webpack.toConfig())
+        // console.log(clipped.config.webpack.toJSON())
+        const compiler = Webpack(clipped.config.webpack.toJSON())
         new WebpackDevServer(
           compiler,
           {
             contentBase: clipped.config.dist,
-            port: clipped.config.webpackFrontend.port || 8080,
+            port: clipped.config.port || 8080,
             https: false,
             historyApiFallback: true,
             noInfo: false,
@@ -196,7 +229,7 @@ module.exports = async (clipped) => {
               version: false,
               warnings: true
             },
-            ...clipped.config.webpack.toConfig().devServer
+            ...clipped.config.webpack.toJSON().devServer
           }
         ).listen(PORT, HOST, (err, result) => {
           if (err) {
@@ -206,4 +239,8 @@ module.exports = async (clipped) => {
         })
       })
     )
+  } catch (e) {
+    console.error(e)
+    process.exit(1)
+  }
 }
