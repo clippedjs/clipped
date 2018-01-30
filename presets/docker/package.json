@@ -1,6 +1,6 @@
 {
-  "name": "clipped-preset-docker",
-  "version": "1.9.0",
+  "name": "@clipped/preset-docker",
+  "version": "0.1.0",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -9,6 +9,9 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "dockerode": "^2.5.3",
     "tar-fs": "^1.16.0"

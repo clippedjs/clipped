@@ -1,7 +1,6 @@
 const fs = require('fs')
 const path = require('path')
 const webpack = require('webpack')
-const Chain = require('webpack-chain')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
 module.exports = (clipped, opt = {babel: {options: {}}}) => {

@@ -1,5 +1,5 @@
 {
-  "name": "clip-webpack-backend",
+  "name": "@clipped/preset-webpack-backend",
   "version": "0.1.0",
   "description": "",
   "main": "clipped.config.js",
@@ -9,8 +9,11 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
-    "clip-webpack-nodejs": "^0.1.0",
+    "@clipped/preset-webpack-nodejs": "^0.1.0",
     "nodemon": "^1.14.7"
   }
 }

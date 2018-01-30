@@ -1,6 +1,6 @@
 {
-  "name": "clip-webpack-nodejs",
-  "version": "0.1.2",
+  "name": "@clipped/preset-webpack-nodejs",
+  "version": "0.1.0",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -9,10 +9,13 @@
   "keywords": [],
   "author": "",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "babel-preset-backpack": "^0.4.3",
     "babel-preset-flow": "^6.23.0",
-    "clip-webpack": "0.1.3",
+    "@clipped/preset-webpack": "0.1.0",
     "source-map-support": "^0.5.0",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
