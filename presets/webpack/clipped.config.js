@@ -71,14 +71,16 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
           })
             .babel
               .use
-                .add('babel', {
+                .set('babel', {
                   loader: require.resolve('babel-loader'),
                   options: {
-                    presets: [
-                      [require.resolve('babel-preset-env'), { modules: false }]
-                    ]
+                    presets: []
                   }
                 })
+                  .babel
+                    .options
+                      .presets
+                        .set('env', [require.resolve('babel-preset-env'), { modules: false }])
 
     const getWebpackInstance = () =>
       webpack(clipped.config.webpack.toJSON())
