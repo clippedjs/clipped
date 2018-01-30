@@ -9,6 +9,6 @@
     "lerna": "^2.5.1"
   },
   "dependencies": {
-    "jointed": "1.5.4"
+    "jointed": "1.5.6"
   }
 }
