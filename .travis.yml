@@ -14,7 +14,7 @@ script:
   - lerna run test
   - lerna run build
 after_success:
-  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./publish.sh; fi
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then lerna publish --conventional-commits --yes; fi
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
