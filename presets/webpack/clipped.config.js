@@ -58,7 +58,6 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
             NODE_ENV: process.env.NODE_ENV ? '"production"' : '"development"'
           }
         }])
-        .use('hot', webpack.HotModuleReplacementPlugin)
 
     clipped.config.webpack
       .module
