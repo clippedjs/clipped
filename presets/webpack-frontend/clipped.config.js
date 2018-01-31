@@ -3,6 +3,7 @@ const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackDevServer = require('webpack-dev-server')
 const merge = require('deepmerge')
+const autoprefixer = require('autoprefixer')
 
 module.exports = async (clipped) => {
   try {
@@ -60,6 +61,25 @@ module.exports = async (clipped) => {
                   }
                 })
 
+  const postcssOptions = {
+    // Necessary for external CSS imports to work
+    // https://github.com/facebookincubator/create-react-app/issues/2677
+    ident: 'postcss',
+    exec: true,
+    plugins: [
+      require('postcss-flexbugs-fixes'),
+      autoprefixer({
+        browsers: [
+          '>1%',
+          'last 4 versions',
+          'Firefox ESR',
+          'not ie < 9'
+        ],
+        flexbox: 'no-2009',
+      }),
+    ],
+  }
+
   // Stylesheet
   clipped.config.webpack
     .module
@@ -74,6 +94,10 @@ module.exports = async (clipped) => {
             .use
               .add('style', require.resolve('style-loader'))
               .add('css', require.resolve('css-loader'))
+              .add('postcss', {
+                loader: require.resolve('postcss-loader'),
+                options: {...postcssOptions}
+              })
         .back()
           .set('stylus', {
             test: /\.styl$/,
@@ -84,6 +108,10 @@ module.exports = async (clipped) => {
             .use
               .add('style', require.resolve('style-loader'))
               .add('css', require.resolve('css-loader'))
+              .add('postcss', {
+                loader: require.resolve('postcss-loader'),
+                options: {...postcssOptions}
+              })
               .add('stylus', require.resolve('stylus-loader'))
         .back()
           .set('scss', {
@@ -95,6 +123,10 @@ module.exports = async (clipped) => {
             .use
               .add('style', require.resolve('style-loader'))
               .add('css', require.resolve('css-loader'))
+              .add('postcss', {
+                loader: require.resolve('postcss-loader'),
+                options: {...postcssOptions}
+              })
               .add('sass', require.resolve('sass-loader'))
         .back()
           .set('sass', {
@@ -106,6 +138,10 @@ module.exports = async (clipped) => {
             .use
               .add('style', require.resolve('style-loader'))
               .add('css', require.resolve('css-loader'))
+              .add('postcss', {
+                loader: require.resolve('postcss-loader'),
+                options: {...postcssOptions}
+              })
               .add('sass', {
                 loader: require.resolve('sass-loader'),
                 options: {
