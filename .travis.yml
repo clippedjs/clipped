@@ -14,9 +14,7 @@ script:
   - lerna run test
   - lerna run build
 after_success:
-  - for d in presets/*; do autopublish "$d"; done
-  - for d in generators/*; do autopublish "$d"; done
-  - lerna run semantic-release
+  - if [ "$TRAVIS_BRANCH" = "master" ]; then ./publish.sh; fi
 branches:
   except:
     - /^v\d+\.\d+\.\d+$/
