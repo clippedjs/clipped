@@ -1,5 +1,5 @@
 const path = require('path')
-const Webpack = require('webpack')
+const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const WebpackDevServer = require('webpack-dev-server')
 const merge = require('deepmerge')
@@ -184,9 +184,9 @@ module.exports = async (clipped) => {
         .set('chunkFilename',  '[hash].js')
     .back()
       .plugins
-        .use('hashedModule', Webpack.HashedModuleIdsPlugin)
-        .use('vendor-commonsChunk', Webpack.optimize.CommonsChunkPlugin, [{name: 'vendor'}])
-        .use('manifest-commonsChunk', Webpack.optimize.CommonsChunkPlugin, [{name: 'manifest', chunks: ['vendor']}])
+        .use('hashedModule', webpack.HashedModuleIdsPlugin)
+        .use('vendor-commonsChunk', webpack.optimize.CommonsChunkPlugin, [{name: 'vendor'}])
+        .use('manifest-commonsChunk', webpack.optimize.CommonsChunkPlugin, [{name: 'manifest', chunks: ['vendor']}])
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
@@ -195,12 +195,16 @@ module.exports = async (clipped) => {
         const PORT = clipped.config.port || 8080
         const url = `http://${HOST}:${PORT}`
 
-        // clipped.config.webpack.entry('index')
-        //   .prepend(require.resolve('webpack/hot/dev-server'))
-        //   .prepend(`${require.resolve('webpack-dev-server/client')}?${url}`)
+        clipped.config.webpack
+          .entry
+            .index
+              .add('dev-server', `webpack-dev-server/client?http://${HOST}:${PORT}`, 0)
+              .add('only-dev-server', 'webpack/hot/only-dev-server', 0)
+        clipped.config.webpack
+          .plugins
+            .use('hot', webpack.HotModuleReplacementPlugin)
 
-        // console.log(clipped.config.webpack.toJSON())
-        const compiler = Webpack(clipped.config.webpack.toJSON())
+        const compiler = webpack(clipped.config.webpack.toJSON())
         new WebpackDevServer(
           compiler,
           {
@@ -210,9 +214,15 @@ module.exports = async (clipped) => {
             historyApiFallback: true,
             noInfo: false,
             overlay: true,
+            hot: true,
+            headers: {
+              'access-control-allow-origin': '*'
+            },
+            watchOptions: {
+              ignored: /node_modules/
+            },
             quiet: false,
             publicPath: '/',
-            // hot: true,
             stats: {
               assets: false,
               children: false,
