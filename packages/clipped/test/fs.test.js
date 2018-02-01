@@ -1,6 +1,6 @@
 const path = require('path')
 const assert = require('assert')
-const Clipped = require('../src').default
+const Clipped = require('../dist').default
 
 const testSite = path.resolve(__dirname, '../test/site')
 const testDefaults = path.resolve(__dirname, '../test/defaults')

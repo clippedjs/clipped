@@ -7,7 +7,7 @@
   ],
   "scripts": {
     "commit": "git-cz",
-    "test:all": "lerna run pretest && nyc mocha packages/*/test-dist presets/*/test",
+    "test:all": "lerna run build && nyc --reporter=html --reporter=text mocha packages/*/test presets/*/test",
     "coverage": "nyc report --reporter=text-lcov > coverage.lcov && codecov"
   },
   "devDependencies": {
