@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const PrerenderSpaPlugin = require('prerender-spa-plugin')
 const WebpackDevServer = require('webpack-dev-server')
 const merge = require('deepmerge')
 const autoprefixer = require('autoprefixer')
@@ -210,6 +211,16 @@ module.exports = async (clipped) => {
         inject: false,
         appMountId: 'root'
       }])
+
+  if (process.env.NODE_ENV === 'production') {
+    clipped.config.webpack
+      .plugins
+      .use('prerender', PrerenderSpaPlugin, [
+        clipped.config.webpack.dist,
+        ['/'],
+        []
+      ])
+  }
 
   // Chunk and hash
   clipped.config.webpack

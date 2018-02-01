@@ -5,7 +5,17 @@
     "generators/*",
     "presets/*"
   ],
+  "scripts": {
+    "commit": "git-cz"
+  },
   "devDependencies": {
+    "commitizen": "^2.9.6",
+    "cz-conventional-changelog": "^2.1.0",
     "lerna": "^2.5.1"
+  },
+  "config": {
+    "commitizen": {
+      "path": "node_modules/cz-conventional-changelog"
+    }
   }
 }
