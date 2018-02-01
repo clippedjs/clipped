@@ -1,6 +1,9 @@
 import path from 'path'
 import {isFunction} from 'lodash'
 import {promisify} from 'util'
+import dargs from 'dargs'
+
+export const toArgs = dargs
 
 export const cwd: string = process.cwd()
 
