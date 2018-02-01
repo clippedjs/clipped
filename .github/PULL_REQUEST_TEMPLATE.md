@@ -13,11 +13,6 @@
 **Does this PR introduce a breaking change?** (check one)
 
 - [ ] Yes
-- [ ] No
+- [x] No
 
 If yes, please describe the impact and migration path for existing applications:
-
-If adding a **new feature**, the PR's description includes:
-- [ ] A convincing reason for adding this feature (to avoid wasting your time, it's best to open a suggestion issue first and wait for approval before working on it)
-
-**Other information:**
