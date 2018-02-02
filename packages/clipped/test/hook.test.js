@@ -24,7 +24,7 @@ describe('hook', function () {
         .add('modify-task', () => 'xyz')
 
       clipped.hook('testing')
-        .modify('modify-task', callbacks => () => 'pony')
+        .modify('modify-task', callbacks => [() => 'pony'])
 
       assert.equal(clipped.hook('testing').task('modify-task').callbacks[0](), 'pony')
     })
