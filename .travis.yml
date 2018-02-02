@@ -11,7 +11,7 @@ node_js:
 script:
   - npm i -g clipped lerna autopublish
   - cd packages/clipped && npm run build && cd ../../ # Build clippped to use it in lerna run build
-  - lerna run test
+  - npm run test:all && npm run coverage
   - lerna run build
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./publish.sh; fi

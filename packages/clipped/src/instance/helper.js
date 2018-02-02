@@ -1,5 +1,5 @@
 import path from 'path'
-import {cloneRepo, exec} from '../utils'
+import {cloneRepo, exec, toArgs} from '../utils'
 
 /**
  * resolvePath - Resolve path from cwd
@@ -17,6 +17,8 @@ export function initHelper (Clipped: Object) {
   Clipped.prototype.clone = cloneRepo
 
   Clipped.prototype.exec = exec
+
+  Clipped.prototype.toArgs = toArgs
 
   return Clipped
 }

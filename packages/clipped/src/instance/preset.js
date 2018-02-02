@@ -16,7 +16,7 @@ export function basePreset (clipped: Object, opt: Object = {}) {
   clipped.opt = opt
   clipped.config = createChainable({
     context: clipped.opt.context || process.cwd()
-  }: clippedConfig)
+  })
 
   let packageJson = {}
   try {

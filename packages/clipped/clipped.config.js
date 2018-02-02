@@ -45,27 +45,40 @@ module.exports = async clipped => {
     .back()
       .plugins
         .use('ignore-electron', webpack.IgnorePlugin, [/^electron$/])
+      
+        clipped.config.webpack.devtool = 'source-map'
 
   if (process.env.NODE_ENV === 'test') {
-    clipped.config.webpack
-      .mark()
-        .entry
-          .set('index', glob.sync('./test/**/*.test.js'))
-      .back()
-        .output
-          .set('path', clipped.resolve('test-dist'))
+    // clipped.config.webpack
+    //   .mark()
+    //     .entry
+    //       .set('index', glob.sync('./test/**/*.test.js'))
+    //   .back()
+    //     .output
+    //       .set('path', clipped.resolve('test-dist'))
 
     
-    clipped.config.webpack
-      .module
-        .rules
-          .babel
-            .include
-              .add(clipped.resolve('test'))
+    // clipped.config.webpack
+    //   .module
+    //     .rules
+    //       .babel
+    //         .include
+    //           .add(clipped.resolve('test'))
+    // clipped.config.webpack.devtool = 'inline-source-map'
+
+    // clipped.config.webpack
+    //   .module
+    //       .rules
+    //         .babel
+    //           .use
+    //             .babel
+    //               .set('plugins', [
+    //                 [require.resolve('babel-plugin-istanbul')]
+    //               ])
   }
 
-  clipped.hook('pre-test')
-    .add('build', clipped => clipped.execHook('build'))
-  clipped.hook('test')
-    .add('placeholder', clipped => {})
+  // clipped.hook('pre-test')
+  //   .add('build', clipped => clipped.execHook('build'))
+  // clipped.hook('test')
+  //   .add('placeholder', clipped => {})
 }
