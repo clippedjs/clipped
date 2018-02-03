@@ -19,9 +19,9 @@ describe('clippedCli', async function () {
     })
   })
 
-  describe('#init', function () {
-    const response = clippedCli({action: 'init'})
+  // describe('#init', function () {
+  //   const response = clippedCli({action: 'init'})
 
-    assert.ok(response)
-  })
+  //   assert.ok(response)
+  // })
 })

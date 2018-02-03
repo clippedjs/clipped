@@ -42,18 +42,18 @@ export async function cloneRepo (repo: string, dest: string = __dirname, opt: Ob
   await cloneSubmodules(dest)
 }
 
-/**
- * fetchRepo - fetch repo at origin
- *
- * @export
- * @param {string} path
- * @returns {Promise<void>}
- */
-export async function fetchRepo (path: string, remote: string ='origin'): Promise<void> {
-  await git(path).fetch()
-  await yarnInstall({cwd: path})
-  await cloneSubmodules(path)
-}
+// /**
+//  * fetchRepo - fetch repo at origin
+//  *
+//  * @export
+//  * @param {string} path
+//  * @returns {Promise<void>}
+//  */
+// export async function fetchRepo (path: string, remote: string ='origin'): Promise<void> {
+//   await git(path).fetch()
+//   await yarnInstall({cwd: path})
+//   await cloneSubmodules(path)
+// }
 
 /**
  * cloneSubmodules - clone all submodules of current folder
