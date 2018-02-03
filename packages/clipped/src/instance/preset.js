@@ -40,6 +40,8 @@ export function basePreset (clipped: Object, opt: Object = {}) {
 
   Object.assign(clipped, clipped.fs)
 
+  clipped._hooks = []
+
   clipped.hook('version')
     .add('clipped', async clipped => {
       const version = await clipped.exec('npm view clipped version')
