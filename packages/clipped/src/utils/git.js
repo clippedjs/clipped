@@ -15,17 +15,17 @@ export async function getGitUsername (): Promise<string> {
   return exec('git config --global user.name')
 }
 
-/**
- * getRepoOwner - get owner from git repo url
- *
- * @export
- * @param {string} url
- *
- * @returns {Promise<string>} org
- */
-export function getRepoOwner (url: string = cwd): Promise<string> {
-  return gitUrlParse(url).owner
-}
+// /**
+//  * getRepoOwner - get owner from git repo url
+//  *
+//  * @export
+//  * @param {string} url
+//  *
+//  * @returns {Promise<string>} org
+//  */
+// export function getRepoOwner (url: string = cwd): Promise<string> {
+//   return gitUrlParse(url).owner
+// }
 
 /**
  * cloneRepo - clone repo into dest path
