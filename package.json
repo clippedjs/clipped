@@ -10,10 +10,11 @@
     "commit": "git-cz",
     "test:all": "cross-env NODE_ENV='test' lerna run build && nyc --reporter=json --reporter=text --reporter=lcov mocha packages/*/test presets/*/test && ./fix-coverage.sh",
     "//test:all": "cross-env NODE_ENV='test' lerna run build && nyc --reporter=json mocha packages/*/test presets/*/test && remap-istanbul -i coverage/coverage-final.json -o coverage/coverage.json",
-    "coverage": "codecov"
+    "coverage": "codecov && cat ./coverage/lcov.info | codacy-coverage"
   },
   "devDependencies": {
     "babel-runtime": "^6.26.0",
+    "codacy-coverage": "^2.0.3",
     "codecov": "^3.0.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
