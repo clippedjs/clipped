@@ -21,7 +21,7 @@ Configuration hurts. Clipped makes it once only. :muscle:
     <img src="https://api.codacy.com/project/badge/Grade/5aa76c8c90ca4d329317c9b401cf8a67" alt="Codacy Badge">
   </a>
   <a href="https://codecov.io/gh/clippedjs/clipped">
-    <img src="https://codecov.io/gh/clippedjs/clipped/branch/develop/graph/badge.svg" alt="codecov">
+    <img src="https://codecov.io/gh/clippedjs/clipped/branch/master/graph/badge.svg" alt="codecov">
   </a>
   <a href="https://github.com/semantic-release/semantic-release">
     <img src="https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg" alt="semantic-release">
