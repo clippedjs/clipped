@@ -1,6 +1,6 @@
 {
   "name": "generator-clipped-base",
-  "version": "1.11.6",
+  "version": "1.11.7",
   "main": "./generators/app/index.js",
   "description": "Generator for Clippedjs webpack preset",
   "files": [

@@ -1,4 +1,5 @@
 {
+  "name": "clipped-dev",
   "private": true,
   "workspaces": [
     "packages/*",
