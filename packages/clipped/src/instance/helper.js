@@ -8,7 +8,7 @@ import {cloneRepo, exec, toArgs} from '../utils'
  * @memberof Clipped
  */
 export function resolvePath (...dirs: string[]) {
-  return path.join((this.config && this.config.context) || process.cwd(), ...dirs)
+  return path.join((this && this.config && this.config.context) || process.cwd(), ...dirs)
 }
 
 export function initHelper (Clipped: Object) {

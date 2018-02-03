@@ -48,4 +48,18 @@ describe('helper', function () {
       ].toString())
     })
   })
+
+  describe('#clone', function () {
+    it('should be able to clone git repo', async function () {
+      await clipped.fs.remove([
+        {path: 'test/somewhere'}
+      ])
+      
+      await clipped.clone('https://github.com/clippedjs/clipped.git', 'test/somewhere')
+
+      await clipped.fs.remove([
+        {path: 'test/somewhere'}
+      ])
+    }).timeout(25000)
+  })
 })

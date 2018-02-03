@@ -1,7 +1,8 @@
 import yarnInstall from 'yarn-install'
 const git = require('simple-git/promise')
 const gitUrlParse = require('git-url-parse')
-const {cwd, exec, resolvePath} = require('../utils')
+const {cwd, exec} = require('../utils')
+const {resolvePath} = require('../instance/helper')
 
 /**
  * getGitUsername - get username from git config

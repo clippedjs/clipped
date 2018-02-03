@@ -1,5 +1,3 @@
 export * from './miscellaneous'
-export * from './docker'
-export * from './file-manipulation'
 export * from './git'
 export * from './process-spawn'
