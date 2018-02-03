@@ -1,4 +1,5 @@
 {
+  "name": "clipped-dev",
   "private": true,
   "workspaces": [
     "packages/*",
@@ -7,9 +8,9 @@
   ],
   "scripts": {
     "commit": "git-cz",
-    "test:all": "cross-env NODE_ENV='test' lerna run build && nyc --reporter=json --reporter=text mocha packages/*/test presets/*/test",
+    "test:all": "cross-env NODE_ENV='test' lerna run build && nyc --reporter=json --reporter=text --reporter=lcov mocha packages/*/test presets/*/test && ./fix-coverage.sh",
     "//test:all": "cross-env NODE_ENV='test' lerna run build && nyc --reporter=json mocha packages/*/test presets/*/test && remap-istanbul -i coverage/coverage-final.json -o coverage/coverage.json",
-    "coverage": "nyc report --reporter=json > coverage.lcov && codecov"
+    "coverage": "codecov"
   },
   "devDependencies": {
     "babel-runtime": "^6.26.0",

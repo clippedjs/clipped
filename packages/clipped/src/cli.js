@@ -29,7 +29,7 @@ export async function cli (args: Object = parseArgs()) {
       await clipped.use(__non_webpack_require__(clipped.resolve('clipped.config.js')))
     } catch (e) {
       clipped.print(e)
-      process.exit(1)
+      // process.exit(1)
     }
   } else {
     clipped.print('No clipped.config.js found, using default settings...')
@@ -53,7 +53,7 @@ export async function cli (args: Object = parseArgs()) {
     `)
   }
 
-  process.exit(0)
+  return true
 }
 
 /**

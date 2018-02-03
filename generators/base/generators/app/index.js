@@ -12,6 +12,11 @@ module.exports = class extends Generator {
     this.sourceRoot(path.resolve(__dirname, 'templates'))
   }
 
+  initializing() {
+    // Yeoman replaces dashes with spaces. We want dashes.
+    this.appname = this.appname.replace(/\s+/g, '-');
+  }
+
   async prompting () {
     const presetChoices = await axios.get(presetListUrl).then(({data}) => data)
 

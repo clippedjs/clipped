@@ -8,10 +8,6 @@ class Task {
     this.name = name
     this.callbacks = callbacks
   }
-
-  modify (operation: Function) {
-    this.callbacks = operation(this.callbacks)
-  }
 }
 
 class Hook {
@@ -29,6 +25,10 @@ class Hook {
   add (name: string, callbacks: Function | Function[], index = Math.max(this.tasks.length, 0)) {
     this.tasks.splice(index, 0, new Task(name, castArray(callbacks)))
     return this
+  }
+
+  modify (name: string, operation: Function) {
+    this.task(name).callbacks = operation(this.task(name).callbacks)
   }
 
   prepend (name: string, callbacks: Function | Function[]) {
@@ -55,12 +55,11 @@ export function hookContext (name: string) {
 /**
  * execHook - Execute concurrent tasks in sequential hooks, including pre and post
  *
- * @export
  * @param {string} name
  * @param {any[]} args
  *
  */
-export async function execHook (name: string, ...args: any) {
+async function execHook (name: string, ...args: any) {
   for (let hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
     for (let task of this.hook(hook).tasks) {
       // this.print(`${hook} > ${task.name}`)

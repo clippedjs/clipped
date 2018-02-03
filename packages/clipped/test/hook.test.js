@@ -18,6 +18,18 @@ describe('hook', function () {
     })
   })
 
+  describe('#modify', function () {
+    it('should be able to modify callback of a task', function () {
+      clipped.hook('testing')
+        .add('modify-task', () => 'xyz')
+
+      clipped.hook('testing')
+        .modify('modify-task', callbacks => [() => 'pony'])
+
+      assert.equal(clipped.hook('testing').task('modify-task').callbacks[0](), 'pony')
+    })
+  })
+
   describe('#delete', function () {
     it('should be able to delete task from hook', async function () {
       clipped.hook('testing')
