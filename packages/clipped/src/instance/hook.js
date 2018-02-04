@@ -82,7 +82,7 @@ export function initHook (Clipped: Object) {
   /**
    * @private
    **/
-  Clipped.prototype._hooks = {}
+  Clipped.prototype._hooks = []
 
   Object.defineProperty(Clipped.prototype, 'hooks', ({
     get: function () { return {...this._hooks} }

@@ -2,7 +2,7 @@ const path = require('path')
 const assert = require('assert')
 const {default: Clipped, cli: clippedCli} = require('../dist')
 
-describe('clippedCli', async function () {
+describe('CLI', async function () {
   describe('#parameterless', function () {
     it('should return help when no parameters given', async function () {
         const response = await clippedCli()

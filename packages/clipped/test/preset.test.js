@@ -22,4 +22,15 @@ describe('preset', function () {
       assert.equal(clipped[trial], true)
     })
   })
+
+  describe('#static', function () {
+    it('should be able to merge object config', async function () {
+      const trial = Math.random().toString(36).substring(2, 115) + Math.random().toString(36).substring(2, 15)
+      await clipped.use({
+        [trial]: 'abc'
+      })
+
+      assert.equal(clipped.config[trial], 'abc')
+    })
+  })
 })

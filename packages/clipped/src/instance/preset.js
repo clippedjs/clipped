@@ -1,4 +1,3 @@
-import fs from 'fs-extra'
 import path from 'path'
 import {isString, isFunction, castArray} from 'lodash'
 import yeoman from 'yeoman-environment'
@@ -11,8 +10,14 @@ const baseGenerator = require('generator-clipped-base')
 const stockPresets = {}
 
 // NOTE: Need to be synchronous
+/**
+ * basePreset - Initializes default value
+ * 
+ * @param {Object} clipped 
+ * @param {Object={}} opt 
+ */
 export function basePreset (clipped: Object, opt: Object = {}) {
-  // Initialize properties
+  // Initialize config
   clipped.opt = opt
   clipped.config = createChainable({
     context: clipped.opt.context || process.cwd()
@@ -29,43 +34,13 @@ export function basePreset (clipped: Object, opt: Object = {}) {
     dist: clipped.resolve('dist'),
     dockerTemplate: clipped.resolve('docker-template'),
     packageJson,
-    generator: baseGenerator,
+    generator: clipped.opt.generator || baseGenerator,
     eslintPath: clipped.resolve('.eslintrc.js')
   }: clippedConfig))
 
-  clipped._hooks = []
-
-  // Filesystem manipulations
-  function fileOperations (callback: Function) {
-    return async function (operations: Object | Object[]) {
-      await Promise.all(castArray(operations).map(
-        operation => callback(operation)
-      ))
-      return this
-    }
-  }
-
-  clipped.fs = {
-    copy: fileOperations(({src, dest}) => fs.copy(src, dest)),
-    remove: fileOperations(({path}) => fs.remove(path)),
-    move: fileOperations(({src, dest, opt = {}}) => fs.move(src, dest, opt)),
-    mkdir: fileOperations(({path}) => fs.ensureDir(path)),
-    emptydir: fileOperations(({path}) => fs.emptyDir(path)),
-    copyTpl: fileOperations(
-      ({src, dest, context = clipped, tplOptions = {}, options = {}}) =>
-        new Promise((resolve, reject) => {
-          const editor = fsEditor.create(memFs.create())
-          editor.copyTpl(src, dest, context, tplOptions, options)
-          editor.commit(resolve)
-        })
-    )
-  }
-
   Object.assign(clipped, clipped.fs)
 
-  // Logging
-  clipped.log = console.log
-  clipped.print = clipped.log
+  clipped._hooks = []
 
   clipped.hook('version')
     .add('clipped', async clipped => {
@@ -76,7 +51,7 @@ export function basePreset (clipped: Object, opt: Object = {}) {
   clipped.hook('init')
     .add('yeoman', async clipped => {
       const env = yeoman.createEnv()
-      env.registerStub(baseGenerator, 'clipped:app')
+      env.registerStub(clipped.config.generator, 'clipped:app')
 
       env.lookup()
 
