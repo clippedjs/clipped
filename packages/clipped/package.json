@@ -56,6 +56,7 @@
   },
   "homepage": "https://github.com/clippedjs/clipped#readme",
   "dependencies": {
+    "cosmiconfig": "^4.0.0",
     "cross-spawn": "^5.1.0",
     "dargs": "^5.1.0",
     "dockerode": "^2.5.3",
