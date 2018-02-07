@@ -1,7 +1,7 @@
 [![Clipped](static/clipped-banner.jpg)](https://clippedjs.github.io)
 
 <p align="center">
-Configuration hurts. Clipped makes it once only. :muscle:
+Make configuration great again :muscle:
 </p>
 
 <p align="center">
