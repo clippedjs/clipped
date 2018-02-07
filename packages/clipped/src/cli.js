@@ -17,16 +17,17 @@ export async function cli (args: Object = parseArgs()) {
   // Execute project preset
   const clipped = new Clipped(opt)
 
+  const pkg = __non_webpack_require__('../package.json')
+
   // Notify update
   try {
-    const pkg = __non_webpack_require__('../package.json')
     updateNotifier({pkg}).notify()
   } catch (e) {}
 
-  const config = await cosmic(pkg.name).load()
+  const config = await cosmic('clipped').load()
 
   // Execute custom preset
-  if (config.config) {
+  if (config && config.config) {
     try {
       // eslint-disable-next-line no-undef
       await clipped.use(config.config)

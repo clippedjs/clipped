@@ -5127,9 +5127,9 @@ joi@^6.4.x, joi@^6.7.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.6.1.tgz#e42c3aff38f8ce9f739ab9224e958511a8e0cd64"
+jointed@1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.6.3.tgz#abad623b91fbe9880eb0ef68ed65d0bcf8dfdfc4"
   dependencies:
     deepmerge "^2.0.1"
     lodash "^4.17.4"
