@@ -37,7 +37,7 @@ module.exports = class extends Generator {
 
     this.projectName = answers.name
     this.clippedPresets = (answers.presets.includes('none') ? [] : answers.presets).map(
-      preset => `clipped-preset-${preset}`
+      preset => `@clipped/preset-${preset}`
     )
   }
 
