@@ -51,7 +51,7 @@ export function basePreset (clipped: Object, opt: Object = {}) {
   clipped.hook('init')
     .add('yeoman', async clipped => {
       const env = yeoman.createEnv()
-      env.registerStub(clipped.config.generator, 'clipped:app')
+      env.registerStub(baseGenerator, 'clipped:app')
 
       env.lookup()
 

@@ -1,6 +1,7 @@
 import fs from 'fs'
 import minimist from 'minimist'
 import updateNotifier from 'update-notifier'
+import cosmic from 'cosmiconfig'
 import Clipped from '.'
 
 /**
@@ -16,23 +17,23 @@ export async function cli (args: Object = parseArgs()) {
   // Execute project preset
   const clipped = new Clipped(opt)
 
+  const pkg = __non_webpack_require__('../package.json')
+
   // Notify update
-  if (process.env.NODE_ENV === 'production') {
-    const pkg = __non_webpack_require__('../package.json')
+  try {
     updateNotifier({pkg}).notify()
-  }
+  } catch (e) {}
+
+  const config = await cosmic('clipped').load()
 
   // Execute custom preset
-  if (fs.existsSync(clipped.resolve('clipped.config.js'))) {
+  if (config && config.config) {
     try {
       // eslint-disable-next-line no-undef
-      await clipped.use(__non_webpack_require__(clipped.resolve('clipped.config.js')))
+      await clipped.use(config.config)
     } catch (e) {
       clipped.print(e)
-      // process.exit(1)
     }
-  } else {
-    clipped.print('No clipped.config.js found, using default settings...')
   }
 
   if (Object.keys(clipped.hooks).includes(action)) {

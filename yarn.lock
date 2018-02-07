@@ -2160,6 +2160,15 @@ cosmiconfig@^3.1.0:
     parse-json "^3.0.0"
     require-from-string "^2.0.1"
 
+cosmiconfig@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/cosmiconfig/-/cosmiconfig-4.0.0.tgz#760391549580bbd2df1e562bc177b13c290972dc"
+  dependencies:
+    is-directory "^0.3.1"
+    js-yaml "^3.9.0"
+    parse-json "^4.0.0"
+    require-from-string "^2.0.1"
+
 coveralls@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/coveralls/-/coveralls-3.0.0.tgz#22ef730330538080d29b8c151dc9146afde88a99"
@@ -3831,13 +3840,6 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
-generator-clipped-base@^0.1.3:
-  version "0.1.4"
-  resolved "https://registry.yarnpkg.com/generator-clipped-base/-/generator-clipped-base-0.1.4.tgz#de8d561f9255722988f8ffe3c5915b61f0b9587d"
-  dependencies:
-    axios "^0.17.1"
-    yeoman-generator "^2.0.2"
-
 get-caller-file@^1.0.1:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-1.0.2.tgz#f702e63127e7e231c160a80c1554acb70d5047e5"
@@ -5118,9 +5120,9 @@ joi@^6.4.x, joi@^6.7.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@1.6.1:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.6.1.tgz#e42c3aff38f8ce9f739ab9224e958511a8e0cd64"
+jointed@1.6.3:
+  version "1.6.3"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.6.3.tgz#abad623b91fbe9880eb0ef68ed65d0bcf8dfdfc4"
   dependencies:
     deepmerge "^2.0.1"
     lodash "^4.17.4"
