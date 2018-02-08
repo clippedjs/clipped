@@ -46,7 +46,7 @@ module.exports = async (clipped) => {
                     name: '[name].[hash:7].[ext]'
                   }
                 })
-        .back()
+  clipped.config.webpack.module.rules
           .set('font', {
             test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
             include: [clipped.config.src],
