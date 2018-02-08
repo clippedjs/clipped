@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs-extra'
 import {castArray} from 'lodash'
+import Logger from 'artzlogger'
 import {cloneRepo, exec, toArgs} from '../utils'
 
 /**
@@ -39,6 +40,8 @@ const fsOperations = {
   )
 }
 
+const logger = new Logger()
+
 export function initHelper (Clipped: Object) {
   Clipped.prototype.resolve = resolvePath
 
@@ -50,9 +53,11 @@ export function initHelper (Clipped: Object) {
 
   Clipped.prototype.fs = fsOperations
 
-  Clipped.prototype.log = console.log
+  Clipped.prototype.logger = logger
 
-  Clipped.prototype.print = Clipped.prototype.log
+  Clipped.prototype.log = logger.log
+
+  Clipped.prototype.print = console.log
 
   return Clipped
 }
