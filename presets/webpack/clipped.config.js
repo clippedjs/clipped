@@ -3,6 +3,8 @@ const path = require('path')
 const webpack = require('webpack')
 const CleanWebpackPlugin = require('clean-webpack-plugin')
 
+const isDevelopement = process.env.NODE_ENV && process.env.NODE_ENV.includes('dev')
+
 module.exports = (clipped, opt = {babel: {options: {}}}) => {
   clipped.config.dev = {enableLint: false}
   
@@ -52,10 +54,12 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
 
     clipped.config.webpack
       .plugins
-        .use('clean', CleanWebpackPlugin, [clipped.config.dist])
+        .use('clean', CleanWebpackPlugin, [[clipped.config.dist], {
+          root: clipped.config.context
+        }])
         .use('define', webpack.DefinePlugin, [{
           'process.env': {
-            NODE_ENV: process.env.NODE_ENV ? '"production"' : '"development"'
+            NODE_ENV: isDevelopement ? '"development"' : '"production"'
           }
         }])
 
@@ -81,6 +85,13 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
                       .presets
                         .set('env', [require.resolve('babel-preset-env'), { modules: false }])
 
+    if (!isDevelopement) {
+      clipped.config.webpack
+        .module
+          .rules.babel.use.babel.options.presets
+            .set('uglify', [require.resolve('babel-preset-minify')])
+    }
+
     const getWebpackInstance = () =>
       webpack(clipped.config.webpack.toJSON())
 
@@ -104,6 +115,8 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
     clipped.hook('build')
       .add('default', clipped =>
         new Promise((resolve, reject) => {
+          process.env.NODE_ENV = 'production'
+          
           const webpackInstance = getWebpackInstance()
           webpackInstance.run((err, stats = {}) => {
             if (err || stats.hasErrors()) {
