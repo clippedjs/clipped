@@ -1,3 +1,4 @@
+const path = require('path')
 import yarnInstall from 'yarn-install'
 const git = require('simple-git/promise')
 const gitUrlParse = require('git-url-parse')
@@ -37,7 +38,11 @@ export async function getGitUsername (): Promise<string> {
  *
  */
 export async function cloneRepo (repo: string, dest: string = __dirname, opt: Object = {}): Promise<void> {
-  await git().clone(repo, dest)
+  try {
+    await git().clone(repo, dest)
+  } catch (e) {
+    await exec(`cd ${dest} && git pull origin master`)
+  }
   await yarnInstall({cwd: dest})
   await cloneSubmodules(dest)
 }
@@ -59,10 +64,10 @@ export async function cloneRepo (repo: string, dest: string = __dirname, opt: Ob
  * cloneSubmodules - clone all submodules of current folder
  *
  * @export
- * @param {string} path
+ * @param {string} repoPath
  * @returns {Promise<void>}
  */
-export async function cloneSubmodules (path: string, opt: Object = {}): Promise<void> {
-  await exec(`cd ${path} && git submodule update --init --recursive`)
-  await exec(`cd ${path} && git submodule foreach --recursive '${resolvePath('./node_modules/yarn-install/bin/yarn-install.js')}'`)
+export async function cloneSubmodules (repoPath: string, opt: Object = {}): Promise<void> {
+  await exec(`cd ${repoPath} && git submodule update --init --recursive`)
+  await exec(`cd ${repoPath} && git submodule foreach --recursive npm i`)
 }
