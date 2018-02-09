@@ -41,7 +41,7 @@ export async function cloneRepo (repo: string, dest: string = __dirname, opt: Ob
   try {
     await git().clone(repo, dest)
   } catch (e) {
-    await exec(`cd ${dest} && git pull origin master`)
+    await git(dest).pull()
   }
   await yarnInstall({cwd: dest})
   await cloneSubmodules(dest)
