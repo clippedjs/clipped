@@ -60,6 +60,6 @@ describe('helper', function () {
       await clipped.fs.remove([
         {path: 'test/somewhere'}
       ])
-    }).timeout(35000)
+    }).timeout(40000)
   })
 })

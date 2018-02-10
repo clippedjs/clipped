@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack-frontend",
-  "version": "0.2.2",
+  "version": "0.2.0",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@clipped/preset-webpack": "^0.1.1",
+    "@clipped/preset-webpack": "0.2.1",
     "autoprefixer": "^7.2.5",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
