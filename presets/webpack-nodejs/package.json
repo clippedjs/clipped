@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack-nodejs",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -13,7 +13,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@clipped/preset-webpack": "0.2.1",
+    "@clipped/preset-webpack": "0.3.0",
     "babel-preset-backpack": "^0.4.3",
     "babel-preset-flow": "^6.23.0",
     "source-map-support": "^0.5.0",

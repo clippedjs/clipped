@@ -7,7 +7,7 @@ const isDevelopement = process.env.NODE_ENV && process.env.NODE_ENV.includes('de
 
 module.exports = (clipped, opt = {babel: {options: {}}}) => {
   clipped.config.dev = {enableLint: false}
-  
+
   try {
     clipped.config.webpack = {
       context: clipped.config.context,
@@ -86,10 +86,13 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
                         .set('env', [require.resolve('babel-preset-env'), { modules: false }])
 
     if (!isDevelopement) {
+      // clipped.config.webpack
+      //   .module
+      //     .rules.babel.use.babel.options.presets
+      //       .set('uglify', [require.resolve('babel-preset-minify')])
       clipped.config.webpack
-        .module
-          .rules.babel.use.babel.options.presets
-            .set('uglify', [require.resolve('babel-preset-minify')])
+        .plugins
+          .use('uglify', require('uglifyjs-webpack-plugin'))
     }
 
     const getWebpackInstance = () =>
@@ -116,7 +119,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
       .add('default', clipped =>
         new Promise((resolve, reject) => {
           process.env.NODE_ENV = 'production'
-          
+
           const webpackInstance = getWebpackInstance()
           webpackInstance.run((err, stats = {}) => {
             if (err || stats.hasErrors()) {
