@@ -2,8 +2,6 @@ import path from 'path'
 import {isString, isFunction, castArray} from 'lodash'
 import yeoman from 'yeoman-environment'
 import {promisify} from 'util'
-import memFs from 'mem-fs'
-import fsEditor from 'mem-fs-editor'
 import {createChainable} from 'jointed'
 const baseGenerator = require('generator-clipped-base')
 
@@ -12,9 +10,9 @@ const stockPresets = {}
 // NOTE: Need to be synchronous
 /**
  * basePreset - Initializes default value
- * 
- * @param {Object} clipped 
- * @param {Object={}} opt 
+ *
+ * @param {Object} clipped
+ * @param {Object={}} opt
  */
 export function basePreset (clipped: Object, opt: Object = {}) {
   // Initialize config

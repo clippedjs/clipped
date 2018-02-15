@@ -1,6 +1,8 @@
 import path from 'path'
 import fs from 'fs-extra'
 import {castArray} from 'lodash'
+import fsEditor from 'mem-fs-editor'
+import memFs from 'mem-fs'
 import Logger from 'artzlogger'
 import {cloneRepo, exec, toArgs} from '../utils'
 
