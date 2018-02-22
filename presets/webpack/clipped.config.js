@@ -83,7 +83,7 @@ module.exports = (clipped, opt = {babel: {options: {}}}) => {
                   .babel
                     .options
                       .presets
-                        .set('env', [require.resolve('babel-preset-env'), { modules: false }])
+                        .set('poi', [require.resolve('babel-preset-poi')])
 
     if (!isDevelopement) {
       // clipped.config.webpack

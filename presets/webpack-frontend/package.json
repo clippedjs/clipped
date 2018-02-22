@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack-frontend",
-  "version": "0.3.0",
+  "version": "0.3.3",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
@@ -10,7 +10,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@clipped/preset-webpack": "0.3.0",
+    "@clipped/preset-webpack": "0.3.1",
     "autoprefixer": "^7.2.5",
     "babel-preset-react": "^6.24.1",
     "css-loader": "^0.28.7",
@@ -30,6 +30,7 @@
     "vue-loader": "^13.6.1",
     "vue-template-compiler": "^2.5.13",
     "webpack": "^3.10.0",
-    "webpack-dev-server": "^2.9.7"
+    "webpack-dev-server": "^2.9.7",
+    "webpack-md5-hash": "^0.0.6"
   }
 }

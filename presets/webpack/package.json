@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "",
   "main": "clipped.config.js",
   "keywords": [],
@@ -13,7 +13,7 @@
     "babel-core": "^6.26.0",
     "babel-eslint": "^8.1.2",
     "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
+    "babel-preset-poi": "^1.1.2",
     "clean-webpack-plugin": "^0.1.17",
     "eslint-friendly-formatter": "^3.0.0",
     "eslint-loader": "^1.9.0",

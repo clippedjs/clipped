@@ -226,13 +226,21 @@ module.exports = async (clipped) => {
   clipped.config.webpack
     .mark()
       .output
-        .set('filename', '[name].[hash].js')
-        .set('chunkFilename',  '[hash].js')
-    .back()
-      .plugins
-        .use('hashedModule', webpack.HashedModuleIdsPlugin)
-        .use('vendor-commonsChunk', webpack.optimize.CommonsChunkPlugin, [{name: 'vendor'}])
-        .use('manifest-commonsChunk', webpack.optimize.CommonsChunkPlugin, [{name: 'manifest', chunks: ['vendor']}])
+        .set('filename', '[name].js')
+        .set('chunkFilename',  '[name].js')
+  if (process.env.NODE_ENV && !process.env.NODE_ENV.includes('dev')) {
+    clipped.config.webpack
+      .mark()
+        .output
+          .set('filename', '[name].[chunkhash].js')
+          .set('chunkFilename',  '[name].[chunkhash].js')
+      .back()
+        .plugins
+          .use('hashedModule', webpack.HashedModuleIdsPlugin)
+          .use('vendor-commonsChunk', webpack.optimize.CommonsChunkPlugin, [{name: 'vendor'}])
+          .use('manifest-commonsChunk', webpack.optimize.CommonsChunkPlugin, [{name: 'manifest', chunks: ['vendor']}])
+          .use('md5-hash', require('webpack-md5-hash'))
+  }
 
   clipped.hook('dev')
     .add('webpack-dev-server', clipped =>
