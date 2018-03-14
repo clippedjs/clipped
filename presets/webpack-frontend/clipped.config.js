@@ -216,7 +216,7 @@ module.exports = async (clipped) => {
     clipped.config.webpack
       .plugins
       .use('prerender', PrerenderSpaPlugin, [
-        clipped.config.webpack.dist,
+        clipped.config.dist,
         ['/'],
         {}
       ])
