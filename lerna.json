@@ -1,11 +1,12 @@
 {
-  "lerna": "2.5.1",
+  "lerna": "2.9.0",
   "packages": [
     "packages/*",
     "generators/*",
+    "presets/webpack4/*",
     "presets/*"
   ],
-  "version": "1.11.6",
+  "version": "independent",
   "npmClient": "yarn",
   "conventionalCommits": true,
   "useWorkspaces": true
