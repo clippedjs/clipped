@@ -80,14 +80,14 @@
     regenerator-runtime "^0.11.1"
     webpack "^3.10.0"
 
-"@clipped/preset-webpack@0.3.1":
-  version "0.3.1"
-  resolved "https://registry.yarnpkg.com/@clipped/preset-webpack/-/preset-webpack-0.3.1.tgz#d85674b5c601ec8f996c306f6082cdfa4d4ae0a9"
+"@clipped/preset-webpack@0.3.0":
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/@clipped/preset-webpack/-/preset-webpack-0.3.0.tgz#1658c78dec74bda9a5b015eb777fb91a63af5c7e"
   dependencies:
     babel-core "^6.26.0"
     babel-eslint "^8.1.2"
     babel-loader "^7.1.2"
-    babel-preset-poi "^1.1.2"
+    babel-preset-env "^1.6.1"
     clean-webpack-plugin "^0.1.17"
     eslint-friendly-formatter "^3.0.0"
     eslint-loader "^1.9.0"
@@ -505,6 +505,10 @@ async@^2.0.1, async@^2.1.2, async@^2.1.5, async@^2.5.0:
 asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
+
+auto-bind@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/auto-bind/-/auto-bind-1.2.0.tgz#8b7e318aad53d43ba8a8ecaf0066d85d5f798cd6"
 
 autoprefixer@^6.3.1:
   version "6.7.7"
@@ -2669,10 +2673,6 @@ deep-extend@^0.4.0, deep-extend@~0.4.0:
 deep-is@~0.1.3:
   version "0.1.3"
   resolved "https://registry.yarnpkg.com/deep-is/-/deep-is-0.1.3.tgz#b369d6fb5dbc13eecf524f91b070feedc357cf34"
-
-deepmerge@^1.5.2:
-  version "1.5.2"
-  resolved "https://registry.yarnpkg.com/deepmerge/-/deepmerge-1.5.2.tgz#10499d868844cdad4fee0842df8c7f6f0c95a753"
 
 deepmerge@^2.0.1:
   version "2.0.1"
@@ -5328,14 +5328,13 @@ joi@^6.4.x, joi@^6.7.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@1.6.3:
-  version "1.6.3"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.6.3.tgz#abad623b91fbe9880eb0ef68ed65d0bcf8dfdfc4"
+jointed@1.7.9:
+  version "1.7.9"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-1.7.9.tgz#11a699d94ccc4a4a412b529db6917685334b1c8f"
   dependencies:
+    auto-bind "^1.2.0"
     deepmerge "^2.0.1"
     lodash "^4.17.4"
-    node-uuid "^1.4.8"
-    webpack-chain "^4.5.0"
 
 js-base64@^2.1.8, js-base64@^2.1.9:
   version "2.4.0"
@@ -6286,7 +6285,7 @@ node-sass@^4.7.2:
     stdout-stream "^1.4.0"
     "true-case-path" "^1.0.2"
 
-node-uuid@^1.4.8, node-uuid@~1.4.7:
+node-uuid@~1.4.7:
   version "1.4.8"
   resolved "https://registry.yarnpkg.com/node-uuid/-/node-uuid-1.4.8.tgz#b040eb0923968afabf8d32fb1f17f1167fdab907"
 
@@ -9442,12 +9441,6 @@ wcwidth@^1.0.0:
   resolved "https://registry.yarnpkg.com/wcwidth/-/wcwidth-1.0.1.tgz#f0b0dcf915bc5ff1528afadb2c0e17b532da2fe8"
   dependencies:
     defaults "^1.0.3"
-
-webpack-chain@^4.5.0:
-  version "4.5.0"
-  resolved "https://registry.yarnpkg.com/webpack-chain/-/webpack-chain-4.5.0.tgz#390835bca2950f0f62fe3182ab90839ea8f6239d"
-  dependencies:
-    deepmerge "^1.5.2"
 
 webpack-dev-middleware@^1.11.0:
   version "1.12.2"
