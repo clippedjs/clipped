@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack4-library",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -8,6 +8,9 @@
   },
   "author": "IniZio",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@clipped/preset-webpack4": "^0.2.*",
     "babel-preset-backpack": "^0.7.0",
