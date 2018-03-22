@@ -1,0 +1,20 @@
+{
+  "name": "@clipped/preset-webpack4",
+  "version": "0.2.0",
+  "description": "",
+  "main": "clipped.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "IniZio",
+  "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "babel-core": "^6.26.0",
+    "babel-loader": "^7.1.4",
+    "babel-preset-poi": "^1.1.2",
+    "webpack": "^4.1.1"
+  }
+}
