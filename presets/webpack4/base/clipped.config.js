@@ -62,7 +62,8 @@ module.exports = clipped => {
             presets: [{
               key: 'poi',
               value: [require.resolve('babel-preset-poi')]
-            }]
+            }],
+            plugins: []
           }
         }
       }]
