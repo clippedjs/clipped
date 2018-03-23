@@ -66,15 +66,6 @@
     webpack "^3.10.0"
     webpack-node-externals "^1.6.0"
 
-"@clipped/preset-webpack4-library@/home/iniz/magic/clippedjs/clipped/presets/webpack4/library":
-  version "0.0.0"
-  dependencies:
-    "@clipped/preset-webpack4" "^0.2.*"
-    babel-preset-backpack "^0.7.0"
-    babel-preset-flow "^6.23.0"
-    source-map-support "^0.5.4"
-    webpack-node-externals "^1.6.0"
-
 "@clipped/preset-webpack@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@clipped/preset-webpack/-/preset-webpack-0.1.1.tgz#855659a3ed9b8d47737587ca4a5b200cdd92f8ca"
