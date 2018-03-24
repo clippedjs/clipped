@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack4-frontend",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
