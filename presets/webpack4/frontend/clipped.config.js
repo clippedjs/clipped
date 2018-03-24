@@ -221,7 +221,7 @@ module.exports = async clipped => {
     .add('webpack-dev-server', clipped =>
       new Promise((resolve, reject) => {
         const HOST = 'localhost'
-        const PORT = clipped.config.port || 8080
+        const PORT = process.env.PORT || clipped.config.port || 8080
         const url = `http://${HOST}:${PORT}`
 
         Object.keys(clipped.config.webpack.entry.toJSON()).map(key => {
