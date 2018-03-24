@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack4-frontend",
-  "version": "0.1.0",
+  "version": "0.2.1",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -12,11 +12,13 @@
     "access": "public"
   },
   "dependencies": {
-    "@clipped/preset-webpack4": "^0.2.*",
+    "@clipped/preset-webpack4": "^0.3.*",
     "autoprefixer": "^8.1.0",
     "css-loader": "^0.28.11",
     "html-webpack-plugin": "^3.0.7",
+    "html-webpack-template": "^6.1.0",
     "loader-utils": "^1.1.0",
+    "offline-plugin": "^4.9.0",
     "optional-require": "^1.0.0",
     "postcss-flexbugs-fixes": "^3.3.0",
     "postcss-loader": "^2.1.3",
@@ -26,6 +28,8 @@
     "vue-loader": "^14.2.1",
     "vue-style-loader": "^4.1.0",
     "vue-template-compiler": "^2.5.16",
-    "webpack-dev-server": "^3.1.1"
+    "webpack-dev-server": "^3.1.1",
+    "webpack-plugin-hash-output": "^2.0.0",
+    "webpack-pwa-manifest": "^3.6.2"
   }
 }

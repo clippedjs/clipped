@@ -69,6 +69,15 @@ module.exports = clipped => {
       }]
     })
 
+  if (clipped.config.webpack.mode === 'production') {
+    clipped.config.webpack
+      .plugins
+        .use('clean', require('clean-webpack-plugin'), [
+          [clipped.config.dist],
+          {root: clipped.config.context}
+        ])
+  }
+
   const getWebpackInstance = () =>
     clipped.webpack(clipped.config.webpack.toJSON())
 
