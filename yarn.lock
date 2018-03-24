@@ -66,15 +66,6 @@
     webpack "^3.10.0"
     webpack-node-externals "^1.6.0"
 
-"@clipped/preset-webpack4@^0.3.*":
-  version "0.2.0"
-  dependencies:
-    babel-core "^6.26.0"
-    babel-loader "^7.1.4"
-    babel-preset-poi "^1.1.2"
-    clean-webpack-plugin "^0.1.19"
-    webpack "^4.1.1"
-
 "@clipped/preset-webpack@0.1.1":
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/@clipped/preset-webpack/-/preset-webpack-0.1.1.tgz#855659a3ed9b8d47737587ca4a5b200cdd92f8ca"
@@ -10779,6 +10770,10 @@ webpack-merge@^4.1.1:
 webpack-node-externals@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/webpack-node-externals/-/webpack-node-externals-1.6.0.tgz#232c62ec6092b100635a3d29d83c1747128df9bd"
+
+webpack-plugin-hash-output@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/webpack-plugin-hash-output/-/webpack-plugin-hash-output-2.0.0.tgz#492d5a49a2987337353ce7b8bda9cc29a32d577f"
 
 webpack-pwa-manifest@^3.6.2:
   version "3.6.2"

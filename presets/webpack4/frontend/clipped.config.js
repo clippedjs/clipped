@@ -181,6 +181,13 @@ module.exports = async clipped => {
           maxInitialRequests: 3,
           name: true
         }])
+        .use('hash-output', require('webpack-plugin-hash-output'), [{
+          manifestFiles: [
+              // Because 'vendor' will contain the webpack manifest that references
+              // other entry points
+              'vendor'
+          ]}
+        ])
 
     // PWA
     if (clipped.config.pwa) {
