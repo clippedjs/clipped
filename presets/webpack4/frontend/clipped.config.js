@@ -71,25 +71,33 @@ module.exports = async clipped => {
       .set('scss', {
         test: /\.scss$/,
         include: [clipped.config.src],
-        use: [...useStyle, {
-          key: 'sass',
-          value: {
-            loader: require.resolve('sass-loader')
-          }
-        }]
+        use: [
+          ...useStyle,
+          ...optionalRequire.resolve('sass-loader') ? [{
+            key: 'sass',
+            value: {
+              loader: optionalRequire.resolve('sass-loader')
+            }
+          }]
+          : []
+        ]
       })
       .set('sass', {
         test: /\.sass$/,
         include: [clipped.config.src],
-        use: [...useStyle, {
-          key: 'sass',
-          value: {
-            loader: require.resolve('sass-loader'),
-            options: {
-              indentedSyntax: true
+        use: [
+          ...useStyle,
+          ...optionalRequire.resolve('sass-loader') ? [{
+            key: 'sass',
+            value: {
+              loader: optionalRequire.resolve('sass-loader'),
+              options: {
+                indentedSyntax: true
+              }
             }
-          }
-        }]
+          }]
+          : []
+        ]
       })
 
   // Vuejs
@@ -142,13 +150,18 @@ module.exports = async clipped => {
   // HTML template
   clipped.config.webpack
     .plugins
-      .use('html', require('html-webpack-plugin'))
+      .use('html', require('html-webpack-plugin'), [{
+        template: require.resolve('html-webpack-template/index.ejs'),
+        inject: false,
+        appMountId: 'root',
+        mobile: true
+      }])
 
   if (clipped.config.webpack.mode === 'production') {
     // Chunk and hash
     clipped.config.webpack
       .set('output.chunkFilename',  '[name].[chunkhash].js')
-      // .set('output.filename', '[name].[chunkhash].js')
+      .set('output.filename', '[name].[chunkhash].js')
       .set('optimization', {
         splitChunks: {
          chunks: 'all',
@@ -168,6 +181,39 @@ module.exports = async clipped => {
           maxInitialRequests: 3,
           name: true
         }])
+
+    // PWA
+    if (clipped.config.pwa) {
+      clipped.config.webpack
+        .plugins
+          .use('offline', require('offline-plugin'), [{
+            autoUpdate: 1000 * 60 * 5,
+            caches: {
+              main: [
+                '*.css',
+                '*.*.js'
+              ]
+            },
+            ServiceWorker: {
+              output: 'service-worker.js',
+              navigateFallbackURL: '/',
+              // NOTE: disable minify temporarily until the plugin is updated for webpack4
+              // https://github.com/NekR/offline-plugin/issues/351
+              minify: false
+            }
+          }])
+          .use('pwa-manifest', require('webpack-pwa-manifest'), [{
+            filename: 'manifest.json',
+            name: '',
+            short_name: '',
+            description: '',
+            background_color: '#fff',
+            theme_color: '#4990e2',
+            'theme-color': '#4990e2',
+            start_url: '/',
+            icons: []
+          }])
+    }
   }
 
   // Dev server
@@ -183,8 +229,6 @@ module.exports = async clipped => {
             .set('only-dev-server', 'webpack/hot/only-dev-server')
             .set('dev-server', `webpack-dev-server/client?http://${HOST}:${PORT}`)
         })
-
-        console.log('entries: ', clipped.config.webpack.entry.toJSON())
 
         clipped.config.webpack
           .plugins
