@@ -12,7 +12,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@clipped/preset-webpack4": "^0.3.0",
+    "@clipped/preset-webpack4": "^0.4.0",
     "babel-preset-backpack": "^0.7.0",
     "babel-preset-flow": "^6.23.0",
     "source-map-support": "^0.5.4",
