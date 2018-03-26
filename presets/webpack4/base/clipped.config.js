@@ -69,6 +69,26 @@ module.exports = clipped => {
       }]
     })
 
+  clipped.config.webpack
+    .plugins
+      .use('bar', require('webpackbar'))
+      .use('friendly-errors', require('friendly-errors-webpack-plugin'), [{
+        onErrors: (severity, errors) => {
+          if (severity !== 'error') {
+            return;
+          }
+          const error = errors[0];
+          require('node-notifier').notify({
+            title: clipped.config.packageJson.name,
+            message: severity + ': ' + error.name,
+            subtitle: error.file || '',
+            icon: path.join(__dirname, 'clipped.png')
+          });
+        }
+      }])
+
+  clipped.config.webpack.devServer = {quiet: true}
+
   if (clipped.config.webpack.mode === 'production') {
     clipped.config.webpack
       .plugins
