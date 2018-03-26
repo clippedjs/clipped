@@ -12,7 +12,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@clipped/preset-webpack4": "/home/iniz/magic/clippedjs/clipped/presets/webpack4/base",
+    "@clipped/preset-webpack4": "^0.4.0",
     "autoprefixer": "^8.1.0",
     "css-loader": "^0.28.11",
     "html-webpack-plugin": "^3.0.7",
