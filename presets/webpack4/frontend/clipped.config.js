@@ -99,6 +99,20 @@ module.exports = async clipped => {
           : []
         ]
       })
+      .set('stylus', {
+        test: /\.styl/,
+        include: [clipped.config.src],
+        use: [
+          ...useStyle,
+          ...optionalRequire.resolve('stylus-loader') ? [{
+            key: 'stylus',
+            value: {
+              loader: optionalRequire.resolve('stylus-loader')
+            }
+          }]
+          : []
+        ]
+      })
 
   // Vuejs
   clipped.config.vue = !!clipped.config.packageJson.dependencies.vue || clipped.config.vue
