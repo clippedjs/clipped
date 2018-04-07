@@ -71,7 +71,7 @@ module.exports = clipped => {
 
   clipped.config.webpack
     .plugins
-      .use('bar', require('webpackbar'))
+      // .use('bar', require('webpackbar'))
       .use('friendly-errors', require('friendly-errors-webpack-plugin'), [{
         onErrors: (severity, errors) => {
           if (severity !== 'error') {
