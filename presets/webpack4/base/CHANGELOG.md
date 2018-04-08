@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/clippedjs/clipped/compare/@clipped/preset-webpack4@0.4.0...@clipped/preset-webpack4@0.4.1) (2018-04-08)
+
+
+### Bug Fixes
+
+* **preset:** disables webpackbar to fix circular json structure ([#98](https://github.com/clippedjs/clipped/issues/98)) ([967213b](https://github.com/clippedjs/clipped/commit/967213b))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/clippedjs/clipped/compare/@clipped/preset-webpack4@0.3.0...@clipped/preset-webpack4@0.4.0) (2018-03-26)
 
