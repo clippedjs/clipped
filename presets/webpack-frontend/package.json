@@ -27,8 +27,9 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "url-loader": "^0.6.2",
+    "vue": "2.5.13",
     "vue-loader": "^13.6.1",
-    "vue-template-compiler": "^2.5.13",
+    "vue-template-compiler": "2.5.13",
     "webpack": "^3.10.0",
     "webpack-dev-server": "^2.9.7",
     "webpack-md5-hash": "^0.0.6"
