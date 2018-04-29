@@ -86,6 +86,7 @@ module.exports = clipped => {
           });
         }
       }])
+      .use('error-overlay', require('error-overlay-webpack-plugin'), [])
 
   clipped.config.webpack.devServer = {quiet: true}
 
