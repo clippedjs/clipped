@@ -8,6 +8,9 @@
   },
   "author": "IniZio",
   "license": "ISC",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@clipped/preset-webpack4-library": "^0.2.2",
     "nodemon": "^1.17.3"
