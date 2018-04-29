@@ -1,0 +1,15 @@
+{
+  "name": "@clipped/preset-webpack4-backend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "clipped.config.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "IniZio",
+  "license": "ISC",
+  "dependencies": {
+    "@clipped/preset-webpack4-library": "^0.2.1",
+    "nodemon": "^1.17.3"
+  }
+}
