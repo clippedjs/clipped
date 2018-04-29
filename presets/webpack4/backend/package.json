@@ -1,6 +1,6 @@
 {
   "name": "@clipped/preset-webpack4-backend",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "",
   "main": "clipped.config.js",
   "scripts": {
@@ -9,7 +9,7 @@
   "author": "IniZio",
   "license": "ISC",
   "dependencies": {
-    "@clipped/preset-webpack4-library": "^0.2.1",
+    "@clipped/preset-webpack4-library": "^0.2.2",
     "nodemon": "^1.17.3"
   }
 }
