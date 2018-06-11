@@ -49,28 +49,28 @@ module.exports = async clipped => {
       // Assets
       .set('image', {
         test: /\.(png|jpe?g|gif|svg)(\?.*)?$/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [useUrlLoader()]
       })
       .set('audio', {
         test: /\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [useUrlLoader()]
       })
       .set('font', {
         test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [useUrlLoader()]
       })
       // Styles
       .set('css', {
         test: /\.css$/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [...useStyle]
       })
       .set('scss', {
         test: /\.scss$/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [
           ...useStyle,
           ...optionalRequire.resolve('sass-loader') ? [{
@@ -84,7 +84,7 @@ module.exports = async clipped => {
       })
       .set('sass', {
         test: /\.sass$/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [
           ...useStyle,
           ...optionalRequire.resolve('sass-loader') ? [{
@@ -101,7 +101,7 @@ module.exports = async clipped => {
       })
       .set('stylus', {
         test: /\.styl/,
-        include: [clipped.config.src],
+        include: [clipped.config.src, 'node_modules'],
         use: [
           ...useStyle,
           ...optionalRequire.resolve('stylus-loader') ? [{
@@ -165,6 +165,7 @@ module.exports = async clipped => {
   clipped.config.webpack
     .plugins
       .use('html', require('html-webpack-plugin'), [{
+        baseHref: '/',
         template: require.resolve('html-webpack-template/index.ejs'),
         inject: false,
         appMountId: 'root',
