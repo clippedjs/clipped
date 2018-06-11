@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.6"></a>
+## [0.4.6](https://github.com/clippedjs/clipped/compare/@clipped/preset-webpack4-frontend@0.4.5...@clipped/preset-webpack4-frontend@0.4.6) (2018-06-11)
+
+
+
+
+**Note:** Version bump only for package @clipped/preset-webpack4-frontend
+
 <a name="0.4.5"></a>
 ## [0.4.5](https://github.com/clippedjs/clipped/compare/@clipped/preset-webpack4-frontend@0.4.4...@clipped/preset-webpack4-frontend@0.4.5) (2018-04-29)
 
