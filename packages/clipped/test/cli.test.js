@@ -2,24 +2,24 @@ const path = require('path')
 const assert = require('assert')
 const {default: Clipped, cli: clippedCli} = require('../dist')
 
-describe('CLI', async function () {
-  describe('#parameterless', function () {
-    it('should return help when no parameters given', async function () {
-        const response = await clippedCli()
+describe('CLI', async () => {
+  describe('#parameterless', () => {
+    it('should return help when no parameters given', async () => {
+      const response = await clippedCli()
 
-        assert.ok(response)
+      assert.ok(response)
     })
   })
 
-  describe('#action', function () {
-    it('should run action when given action', async function () {
+  describe('#action', () => {
+    it('should run action when given action', async () => {
       const response = await clippedCli({action: 'version'})
 
       assert.ok(response)
     })
   })
 
-  // describe('#init', function () {
+  // Describe('#init', function () {
   //   const response = clippedCli({action: 'init'})
 
   //   assert.ok(response)

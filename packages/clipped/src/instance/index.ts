@@ -3,14 +3,13 @@ import {initPreset, basePreset} from './preset'
 import {initHelper} from './helper'
 
 export class Clipped {
-  constructor(opt: {[index: string]: any} = {}) {
+  constructor(opt: any = {}) {
     basePreset.call(this, opt)
   }
 }
 
-
 declare module '.' {
-  interface Clipped {[index: string]: any}
+  interface Clipped {[index: string]: any} // eslint-disable-line no-undef, typescript/no-use-before-define
 }
 
 initHelper(Clipped)

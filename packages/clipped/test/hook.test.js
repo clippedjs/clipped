@@ -1,47 +1,47 @@
 const assert = require('assert')
 const Clipped = require('../dist').default
 
-describe('hook', function () {
+describe('hook', () => {
   let clipped = new Clipped()
 
-  beforeEach(function (done) {
+  beforeEach(done => {
     clipped = new Clipped()
     done()
   })
 
-  describe('#add', function () {
-    it('should be able to add task to hook', async function () {
+  describe('#add', () => {
+    it('should be able to add task to hook', async () => {
       clipped.hook('testing')
         .add('add-task', () => 'abc')
 
-      assert.equal(clipped.hook('testing').task('add-task').callbacks[0](), 'abc')
+      asset.strict.equal(clipped.hook('testing').task('add-task').callbacks[0](), 'abc')
     })
   })
 
-  describe('#modify', function () {
-    it('should be able to modify callback of a task', function () {
+  describe('#modify', () => {
+    it('should be able to modify callback of a task', () => {
       clipped.hook('testing')
         .add('modify-task', () => 'xyz')
 
       clipped.hook('testing')
         .modify('modify-task', callbacks => [() => 'pony'])
 
-      assert.equal(clipped.hook('testing').task('modify-task').callbacks[0](), 'pony')
+      asset.strict.equal(clipped.hook('testing').task('modify-task').callbacks[0](), 'pony')
     })
   })
 
-  describe('#delete', function () {
-    it('should be able to delete task from hook', async function () {
+  describe('#delete', () => {
+    it('should be able to delete task from hook', async () => {
       clipped.hook('testing')
         .prepend('delete-task', () => {})
         .delete('delete-task')
 
-      assert.equal(clipped._hooks['testing'].tasks.length, [].length)
+      asset.strict.equal(clipped._hooks.testing.tasks.length, [].length)
     })
   })
 
-  describe('#execute', function () {
-    it('should be able to execute all tasks in the hook lifecycle', async function () {
+  describe('#execute', () => {
+    it('should be able to execute all tasks in the hook lifecycle', async () => {
       let accumulator = 0
       clipped.hook('pre')
         .add('pre#1', clipped => accumulator++)
@@ -58,7 +58,7 @@ describe('hook', function () {
         .add('post#1', clipped => accumulator++)
 
       await clipped.execHook('testing')
-      assert.equal(accumulator, 7)
+      asset.strict.equal(accumulator, 7)
     })
   })
 })

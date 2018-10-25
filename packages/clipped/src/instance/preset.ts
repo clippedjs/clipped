@@ -1,34 +1,34 @@
-import {isString, isFunction, castArray} from 'lodash'
+import {isString, isFunction} from 'lodash'
 import yeoman from 'yeoman-environment'
 import {createChainable} from 'jointed'
-const baseGenerator = require('generator-clipped-base')
-
-declare module '.' {
-  interface Clipped {
-    prototype: any
-    __initialized__: boolean
-
-    opt: {[index: string]: any}
-    config: {[index: string]: any}
-
-    use(ware: any): Promise<Clipped>
-
-    resolve(...paths: string[]): string
-  }
-}
+import baseGenerator from 'generator-clipped-base'
 
 import {Clipped} from '.'
 
+declare module '.' {
+  interface Clipped {
+    prototype: any; // eslint-disable-line no-undef, typescript/no-use-before-define
+    __initialized__: boolean; // eslint-disable-line no-undef, typescript/no-use-before-define
+
+    opt: {[index: string]: any}; // eslint-disable-line no-undef, typescript/no-use-before-define
+    config: {[index: string]: any}; // eslint-disable-line no-undef, typescript/no-use-before-define
+
+    use(ware: any): Promise<Clipped>; // eslint-disable-line no-undef, typescript/no-use-before-define
+
+    resolve(...paths: string[]): string; // eslint-disable-line no-undef, typescript/no-use-before-define
+  }
+}
+
 const stockPresets: {[index:string] : {ware: any}} = {}
 
-// NOTE: Need to be synchronous
 /**
  * basePreset - Initializes default value
  *
- * @param {Object} this
- * @param {Object={}} opt
+ * @export
+ * @param {Clipped} this
+ * @param {Object} [opt={}]
  */
-export function basePreset (this: Clipped, opt: Object = {}) {
+export function basePreset(this: Clipped, opt: Object = {}): void {
   // Initialize config
   this.opt = opt
   this.config = createChainable({
@@ -38,7 +38,7 @@ export function basePreset (this: Clipped, opt: Object = {}) {
   let packageJson: any = {}
   try {
     packageJson = require(this.resolve('package.json'))
-  } catch (e) {}
+  } catch (error) {}
 
   Object.assign(this.config, ({
     name: packageJson.name,
@@ -63,7 +63,7 @@ export function basePreset (this: Clipped, opt: Object = {}) {
 
       env.lookup()
 
-      await new Promise((resolve, reject) => {
+      await new Promise(resolve => {
         env.run('clipped:app', resolve)
       })
     })
@@ -72,29 +72,30 @@ export function basePreset (this: Clipped, opt: Object = {}) {
 }
 
 /**
- * normalizePreset - Normalize normalize to same format
+ * NormalizePreset - Normalize normalize to same format
  *
  * @param {any} ware
  *
  * @returns {Function}
  */
-function normalizePreset (ware: any): any {
+function normalizePreset(ware: any): any {
   const preset = ware.default || ware
   if (isString(preset)) { // String i.e. stock
     return stockPresets[preset]
-  } else if (isFunction(preset)) { // Function
+  }
+  if (isFunction(preset)) { // Function
     return preset
-  } else {
-    return (clipped: Clipped) => { clipped.config = {...clipped.config, ...preset} }
+  }
+  return (clipped: Clipped) => {
+    clipped.config = {...clipped.config, ...preset}
   }
 }
 
-export async function execPreset (this: Clipped, ware: any = () => {}, ...args: any[]): Promise<Clipped> {
+export async function execPreset(this: Clipped, ware: any = () => {}, ...args: any[]): Promise<Clipped> {
   await normalizePreset(ware)(this, ...args)
   return this
 }
 
-export function initPreset (clipped: typeof Clipped) {
+export function initPreset(clipped: typeof Clipped): void {
   clipped.prototype.use = execPreset
-  return clipped
 }

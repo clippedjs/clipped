@@ -1,18 +1,17 @@
-const path = require('path')
 import yarnInstall from 'yarn-install'
-const git = require('simple-git/promise')
-const gitUrlParse = require('git-url-parse')
-const {cwd, exec} = require('../utils')
-const {resolvePath} = require('../instance/helper')
+
+import * as git from 'simple-git/promise'
+// import gitUrlParse from 'git-url-parse'// eslint-disable-line capitalized-comments
+import {exec} from '.'
 
 /**
- * getGitUsername - get username from git config
+ * GetGitUsername - get username from git config
  *
  * @async
  * @export
  * @returns {Promise<string>} username
  */
-export async function getGitUsername (): Promise<string> {
+export function getGitUsername(): Promise<string> {
   return exec('git config --global user.name')
 }
 
@@ -29,18 +28,30 @@ export async function getGitUsername (): Promise<string> {
 // }
 
 /**
+ * cloneSubmodules - clone all submodules of current folder
+ *
+ * @export
+ * @param {string} repoPath
+ * @returns {Promise<void>}
+ */
+export async function cloneSubmodules(repoPath: string): Promise<void> {
+  await exec(`cd ${repoPath} && git submodule update --init --recursive`)
+  await exec(`cd ${repoPath} && git submodule foreach --recursive npm i`)
+}
+
+/**
  * cloneRepo - clone repo into dest path
  *
  * @export
  * @param {string} repo
  * @param {string} dest
- * @param {Object} opt
+ * @returns {Promise<void>}
  *
  */
-export async function cloneRepo (repo: string, dest: string = __dirname, opt: Object = {}): Promise<void> {
+export async function cloneRepo(repo: string, dest: string = __dirname): Promise<void> {
   try {
     await git().clone(repo, dest)
-  } catch (e) {
+  } catch (error) {
     await git(dest).pull()
   }
   await yarnInstall({cwd: dest})
@@ -59,15 +70,3 @@ export async function cloneRepo (repo: string, dest: string = __dirname, opt: Ob
 //   await yarnInstall({cwd: path})
 //   await cloneSubmodules(path)
 // }
-
-/**
- * cloneSubmodules - clone all submodules of current folder
- *
- * @export
- * @param {string} repoPath
- * @returns {Promise<void>}
- */
-export async function cloneSubmodules (repoPath: string, opt: Object = {}): Promise<void> {
-  await exec(`cd ${repoPath} && git submodule update --init --recursive`)
-  await exec(`cd ${repoPath} && git submodule foreach --recursive npm i`)
-}
