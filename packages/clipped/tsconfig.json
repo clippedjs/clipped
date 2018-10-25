@@ -6,7 +6,9 @@
     "moduleResolution": "node",
     "declaration": true,
     "outDir": "./dist",
-    "strict": true
+    "strict": true,
+    "declarationMap": true,
+    "sourceMap": true
   },
   "include": ["./src/**/*", "./typings/**/*"]
 }
