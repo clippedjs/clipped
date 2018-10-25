@@ -1,7 +1,6 @@
-import fs from 'fs'
-import minimist from 'minimist'
-import updateNotifier from 'update-notifier'
-import cosmic from 'cosmiconfig'
+import * as minimist from 'minimist'
+import * as updateNotifier from 'update-notifier'
+import * as cosmic from 'cosmiconfig'
 import Clipped from '.'
 
 /**
@@ -11,20 +10,20 @@ import Clipped from '.'
  * @param {Object} [args={}] Arguments to command
  *
  */
-export async function cli (args: Object = parseArgs()) {
+export async function cli (args: {action: string, opt: any} = parseArgs()) {
   const {action, opt} = args
 
   // Execute project preset
   const clipped = new Clipped(opt)
 
-  const pkg = __non_webpack_require__('../package.json')
+  const pkg = require('../package.json')
 
   // Notify update
   try {
     updateNotifier({pkg}).notify()
   } catch (e) {}
 
-  const config = await cosmic('clipped').load()
+  const config = await cosmic('clipped').load('')
 
   // Execute custom preset
   if (config && config.config) {
@@ -36,7 +35,7 @@ export async function cli (args: Object = parseArgs()) {
     }
   }
 
-  if (Object.keys(clipped.hooks).includes(action)) {
+  if (clipped.hooks[action]) {
     try { await clipped.execHook(action) } catch (e) { console.error(e) }
   } else {
     console.log(`

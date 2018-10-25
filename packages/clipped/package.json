@@ -15,14 +15,15 @@
     "url": "https://github.com/clippedjs/clipped/issues"
   },
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "bin": {
     "clipped": "clipped.js"
   },
   "scripts": {
     "flow:deps": "flow-typed install",
-    "//postinstall": "npm run flow:deps",
+    "type:deps": "typesync ./package.json",
     "dev": "clipped watch",
-    "build": "clipped build",
+    "build": "tsc",
     "pretest": "cross-env NODE_ENV=test clipped test",
     "test": "nyc --reporter=html --reporter=text mocha test-dist",
     "coverage": "nyc report --reporter=text-lcov | ../../node_modules/.bin/coveralls",
@@ -83,6 +84,29 @@
     "yeoman-environment": "^2.0.5"
   },
   "devDependencies": {
+    "@types/cosmiconfig": "^5.0.3",
+    "@types/cross-spawn": "^6.0.0",
+    "@types/dargs": "^5.1.0",
+    "@types/dockerode": "^2.5.5",
+    "@types/eslint": "^4.16.4",
+    "@types/fs-extra": "^5.0.4",
+    "@types/git-url-parse": "^9.0.0",
+    "@types/glob": "^7.1.1",
+    "@types/istanbul": "^0.4.30",
+    "@types/lodash": "^4.14.117",
+    "@types/mem-fs": "^1.1.1",
+    "@types/mem-fs-editor": "^4.0.1",
+    "@types/minimist": "^1.2.0",
+    "@types/mkdirp": "^0.5.2",
+    "@types/mocha": "^5.2.5",
+    "@types/ncp": "^2.0.1",
+    "@types/rimraf": "^2.0.2",
+    "@types/source-map-support": "^0.4.1",
+    "@types/tar-fs": "^1.16.1",
+    "@types/update-notifier": "^2.2.0",
+    "@types/webpack": "^4.4.17",
+    "@types/webpack-merge": "^4.1.3",
+    "@types/webpack-node-externals": "^1.6.3",
     "babel-eslint": "^8.0.3",
     "babel-plugin-__coverage__": "^11.0.0",
     "babel-plugin-istanbul": "^4.1.5",
@@ -109,6 +133,8 @@
     "semantic-release": "^11.0.2",
     "shebang-loader": "^0.0.1",
     "standard": "^10.0.3",
+    "typescript": "^3.1.3",
+    "typesync": "^0.4.0",
     "webpack": "^3.10.0",
     "webpack-node-externals": "^1.6.0"
   }
