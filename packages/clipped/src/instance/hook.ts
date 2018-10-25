@@ -1,5 +1,16 @@
 import {castArray} from 'lodash'
-import {exec} from '../utils'
+
+declare module '.' {
+  interface Clipped {
+    _hooks: {[index: string]: Hook}
+    hooks: {[index: string]: Hook}
+
+    hook(name: string): Hook
+    execHook(name: string): any
+  }
+}
+
+import {Clipped} from '.'
 
 class Task {
   name: string
@@ -18,7 +29,7 @@ class Hook {
     this.tasks = []
   }
 
-  task (name: string) {
+  task (name: string): Task | undefined {
     return this.tasks.find(task => task.name === name)
   }
 
@@ -28,7 +39,9 @@ class Hook {
   }
 
   modify (name: string, operation: Function) {
-    this.task(name).callbacks = operation(this.task(name).callbacks)
+    if (this.task(name)) {
+      this.task(name)!.callbacks = operation(this.task(name)!.callbacks)
+    }
   }
 
   prepend (name: string, callbacks: Function | Function[]) {
@@ -42,7 +55,7 @@ class Hook {
   }
 }
 
-export function hookContext (name: string) {
+export function hookContext (this: Clipped, name: string) {
   if (!(this.hooks[name] instanceof Hook)) {
     this._hooks[name] = new Hook(name)
   }
@@ -59,7 +72,7 @@ export function hookContext (name: string) {
  * @param {any[]} args
  *
  */
-async function execHook (name: string, ...args: any) {
+async function execHook (this: Clipped, name: string, ...args: any[]) {
   for (let hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
     for (let task of this.hook(hook).tasks) {
       // this.print(`${hook} > ${task.name}`)
@@ -78,19 +91,19 @@ async function execHook (name: string, ...args: any) {
  * @param {Object} Clipped
  *
  */
-export function initHook (Clipped: Object) {
+export function initHook (clipped: typeof Clipped) {
   /**
    * @private
    **/
-  Clipped.prototype._hooks = []
+  clipped.prototype._hooks = {}
 
-  Object.defineProperty(Clipped.prototype, 'hooks', ({
+  Object.defineProperty(clipped.prototype, 'hooks', ({
     get: function () { return {...this._hooks} }
-  }: Object))
+  }))
 
-  Clipped.prototype.hook = hookContext
+  clipped.prototype.hook = hookContext
 
-  Clipped.prototype.execHook = execHook
+  clipped.prototype.execHook = execHook
 
-  return Clipped
+  return clipped
 }
