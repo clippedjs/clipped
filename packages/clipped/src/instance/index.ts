@@ -3,6 +3,7 @@ import {initPreset, basePreset} from './preset'
 import {initHelper} from './helper'
 
 export class Clipped {
+  _hooks: {[index: string]: Hook} = {}
   constructor(opt: any = {}) {
     basePreset.call(this, opt)
   }

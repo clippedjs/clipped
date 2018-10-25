@@ -1,5 +1,5 @@
 import * as path from 'path'
-import fs from 'fs-extra'
+import * as fs from 'fs-extra'
 import {castArray} from 'lodash'
 import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
@@ -9,9 +9,16 @@ import {Clipped} from '.'
 
 declare module '.' {
   interface Clipped {
-    fs: {[index: string]: Function}; // eslint-disable-line no-undef, typescript/no-use-before-define
+    fs: {
+      copy(opt: {src: string, dest: string} | {src: string, dest: string}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+      remove(opt: {path: string} | {path: string}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+      move(opt: {src: string, dest: string, opt?: any} | {src: string, dest: string, opt?: any}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+      mkdir(opt: {path: string} | {path: string}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+      emptydir(opt: {path: string} | {path: string}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+      copyTpl(opt: {src: string, dest: string, context: any, tplOptions: any, options: any, opt: any} | {src: string, dest: string, context: any, tplOptions: any, options: any, opt: any}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+    }
 
-    exec(cmd: string, args?: object): Promise<{}>; // eslint-disable-line no-undef, typescript/no-use-before-define
+    exec(cmd: string, args?: object): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
     print(msg: any): void; // eslint-disable-line no-undef, typescript/no-use-before-define
   }
 }
@@ -29,7 +36,7 @@ export function resolvePath(this: Clipped, ...dirs: string[]): string {
 }
 
 // Filesystem manipulations
-function operations(callback: Function): Function {
+function operations(callback: Function): (s: any) => Promise<any> {
   return async function (operations: Object | Object[]) {
     await Promise.all(castArray(operations).map(
       operation => callback(operation)

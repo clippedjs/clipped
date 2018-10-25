@@ -24,6 +24,8 @@
     "type:deps": "typesync ./package.json",
     "dev": "tsc --watch",
     "build": "tsc",
+    "test": "tsc && ava",
+    "test:watch": "tsc --watch & ava --watch",
     "lint": "xo",
     "semantic-release": "semantic-release"
   },
@@ -45,6 +47,18 @@
     "rules": {
       "capitalized-comments": 0
     }
+  },
+  "ava": {
+    "files": [
+			"dist/test/**/*.test.js"
+		],
+    "compileEnhancements": false,
+    "extensions": [
+      "ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
   },
   "dependencies": {
     "artzlogger": "^0.0.12",
@@ -97,12 +111,14 @@
     "@types/webpack": "^4.4.17",
     "@types/webpack-merge": "^4.1.3",
     "@types/webpack-node-externals": "^1.6.3",
+    "ava": "^1.0.0-rc.1",
     "cross-env": "^5.1.3",
     "eslint-config-xo-typescript": "^0.2.0",
     "eslint-plugin-typescript": "^0.12.0",
     "glob": "^7.1.2",
     "pre-commit": "^1.2.2",
     "semantic-release": "^11.0.2",
+    "ts-node": "^7.0.1",
     "typescript": "^3.1.3",
     "typescript-eslint-parser": "^20.0.0",
     "typesync": "^0.4.0",

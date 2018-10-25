@@ -12,7 +12,7 @@ declare module '.' {
   }
 }
 
-class Task {
+class Tasker implements Task {
   name = '' // eslint-disable-line no-undef
 
   callbacks: Function [] = [] // eslint-disable-line no-undef
@@ -29,22 +29,22 @@ class Task {
   }
 }
 
-class Hook {
+class Hooker implements Hook {
   name = '' // eslint-disable-line no-undef
 
-  tasks: Task[] = [] // eslint-disable-line no-undef
+  tasks: Tasker[] = [] // eslint-disable-line no-undef
 
   constructor(name: string) {
     this.name = name
     this.tasks = []
   }
 
-  task(name: string): Task | undefined {
+  task(name: string): Tasker | undefined {
     return this.tasks.find(task => task.name === name)
   }
 
   add(name: string, callbacks: Function | Function[], index = Math.max(this.tasks.length, 0)) {
-    this.tasks.splice(index, 0, new Task(name, castArray(callbacks)))
+    this.tasks.splice(index, 0, new Tasker(name, castArray(callbacks)))
     return this
   }
 
@@ -53,6 +53,7 @@ class Hook {
     if (task !== undefined) {
       task.callbacks = operation(task.callbacks)
     }
+    return this
   }
 
   prepend(name: string, callbacks: Function | Function[]) {
@@ -67,8 +68,8 @@ class Hook {
 }
 
 export function hookContext(this: Clipped, name: string): Hook {
-  if (!(this.hooks[name] instanceof Hook)) {
-    this._hooks[name] = new Hook(name)
+  if (!(this.hooks[name] instanceof Hooker)) {
+    this._hooks[name] = new Hooker(name)
   }
 
   this[name] = () => this.execHook(name)
@@ -102,10 +103,10 @@ async function execHook(this: Clipped, name: string, ...args: any[]): Promise<Cl
  *
  */
 export function initHook(clipped: typeof Clipped): void {
-  /**
-   * @private
-   **/
-  clipped.prototype._hooks = {}
+  // /**
+  //  * @private
+  //  **/
+  // clipped.prototype._hooks = {}
 
   Object.defineProperty(clipped.prototype, 'hooks', ({
     get() {

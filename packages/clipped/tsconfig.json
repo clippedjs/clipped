@@ -10,5 +10,5 @@
     "declarationMap": true,
     "sourceMap": true
   },
-  "include": ["./src/**/*", "./typings/**/*"]
+  "include": ["./test/**/*", "./src/**/*", "./typings/**/*"]
 }

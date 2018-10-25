@@ -8,7 +8,7 @@ import Clipped from '.'
  *
  * @returns {Object} action and options
  */
-function parseArgs(): {action: string, opt: any} {
+function parseArgs(): {action: string, opt?: any} {
   const action: string = process.argv[2]
   const opt: Object = minimist(process.argv, {default: {platform: 'native'}})
 
@@ -22,16 +22,15 @@ function parseArgs(): {action: string, opt: any} {
  * @param {Object} [args={}] Arguments to command
  *
  */
-export async function cli(args: {action: string, opt: any} = parseArgs()): Promise<boolean> {
+export async function cli(args: {action: string, opt?: any} = parseArgs()): Promise<boolean> {
   const {action, opt} = args
 
   // Execute project preset
   const clipped = new Clipped(opt)
-
-  const pkg = require('../package.json') // eslint-disable-line typescript/no-var-requires
-
+  
   // Notify update
   try {
+    const pkg = require('../package.json') // eslint-disable-line typescript/no-var-requires
     updateNotifier({pkg}).notify()
   } catch (error) {}
 
