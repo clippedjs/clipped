@@ -5,29 +5,31 @@ import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
 import {cloneRepo, exec, toArgs} from '../utils'
 
+import {Clipped} from '.'
+
 declare module '.' {
   interface Clipped {
-    fs: {[index: string]: Function}
+    fs: {[index: string]: Function}; // eslint-disable-line no-undef, typescript/no-use-before-define
 
-    exec(cmd: string, args?: object): Promise<{}>
-    print(msg: any): void
+    exec(cmd: string, args?: object): Promise<{}>; // eslint-disable-line no-undef, typescript/no-use-before-define
+    print(msg: any): void; // eslint-disable-line no-undef, typescript/no-use-before-define
   }
 }
 
-import {Clipped} from '.'
-
 /**
- * resolvePath - Resolve path from cwd
+ * ResolvePath - Resolve path from cwd
  *
- * @param {string | string[]} dirs
- * @memberof Clipped
+ * @export
+ * @param {Clipped} this
+ * @param {...string[]} dirs
+ * @returns {string}
  */
-export function resolvePath (this: Clipped, ...dirs: string[]) {
+export function resolvePath(this: Clipped, ...dirs: string[]): string {
   return path.join((this && this.config && this.config.context) || process.cwd(), ...dirs)
 }
 
 // Filesystem manipulations
-function operations (callback: Function) {
+function operations(callback: Function): Function {
   return async function (operations: Object | Object[]) {
     await Promise.all(castArray(operations).map(
       operation => callback(operation)
@@ -43,7 +45,7 @@ const fsOperations = {
   emptydir: operations(({path}: {path: string}) => fs.emptyDir(path)),
   copyTpl: operations(
     ({src, dest, context, tplOptions = {}, options = {}, opt = {}}: {src: string, dest: string, context: any, tplOptions: any, options: any, opt: any}) =>
-      new Promise((resolve, reject) => {
+      new Promise(resolve => {
         const editor = fsEditor.create(memFs.create())
         editor.copyTpl(src, dest, context, tplOptions, {...options, ...opt})
         editor.commit(resolve)
@@ -53,7 +55,7 @@ const fsOperations = {
 
 const logger = console
 
-export function initHelper (clipped: typeof Clipped) {
+export function initHelper(clipped: typeof Clipped): void {
   clipped.prototype.resolve = resolvePath
 
   clipped.prototype.clone = cloneRepo
@@ -71,6 +73,4 @@ export function initHelper (clipped: typeof Clipped) {
   clipped.prototype.print = console.log
 
   Object.assign(clipped.prototype, clipped.prototype.fs)
-
-  return Clipped
 }

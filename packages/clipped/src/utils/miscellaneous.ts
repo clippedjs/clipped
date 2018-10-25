@@ -6,15 +6,15 @@ export const toArgs = dargs
 export const cwd: string = process.cwd()
 
 /**
- * exec - run shell command as promise
+ * Exec - run shell command as promise
  *
  * @param {string} command
  * @param {any[]} opts
  * @param {Function} callback
  * @returns
  */
-export const exec = promisify(
-  (command: string, opts: Object, callback: Function) =>
+export const exec: (command: string, opts?: any, callback?: Function) => Promise<any> = promisify(
+  (command: string, opts?: any, callback: Function = () => {}) =>
     require('child_process').exec(command, opts, callback)
 )
 
