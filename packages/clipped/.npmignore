@@ -1,3 +1,4 @@
 flow-typed
 presets
 src
+dist/test

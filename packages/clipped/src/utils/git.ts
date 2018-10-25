@@ -1,4 +1,4 @@
-import yarnInstall from 'yarn-install'
+import * as yarnInstall from 'yarn-install'
 
 import * as git from 'simple-git/promise'
 // import gitUrlParse from 'git-url-parse'// eslint-disable-line capitalized-comments
