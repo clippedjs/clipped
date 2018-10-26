@@ -38,7 +38,7 @@ test('it should be able to use v2 preset format', async t => {
   t.is(clipped.config.xyz, uniq)
 })
 
-test('it should be able to handle first preset being plugin', async t => {
+test('it should be able to handle preset being v2 plugin', async t => {
   /**
    * e.g. module.exports = opt => [clipped => {}]
    */
@@ -49,4 +49,35 @@ test('it should be able to handle first preset being plugin', async t => {
     }
   ])
   t.is(clipped.config.xxx, uniq)
+})
+
+test.only('it should modify config with object return value of plugins', async t => {
+  await clipped.use([
+    // Plain object
+    {webpack: {entry: ['app.js']}, babel: {}},
+    // Object returned by preset
+    () => ({
+      babel: {presets: ['env']}
+    }),
+    // Object with function properties that mutates config
+    {
+      babel(cfg: any) {
+        cfg.plugins = ['jsx']
+      }
+    },
+    // Function that returns object with function properties that mutates config
+    (ci: Clipped) => ({
+      webpack: (cfg: any) => {
+        cfg.output = {
+          library: 'blablabla'
+        }
+      }
+    })
+  ])
+  t.log('and now: ', clipped.config.babel.toConfig())
+
+  t.is(clipped.config.webpack.entry[0], 'app.js')
+  t.is(clipped.config.babel.presets[0], 'env')
+  t.is(clipped.config.babel.plugins[0], 'jsx')
+  t.is(clipped.config.webpack.output.library, 'blablabla')
 })

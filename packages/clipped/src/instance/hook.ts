@@ -89,10 +89,12 @@ async function execHook(this: Clipped, name: string, ...args: any[]): Promise<Cl
   const callbacks = []
   for (const hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
     for (const task of this.hook(hook).tasks) {
-      callbacks.push(Promise.all(task.callbacks.map(func => func(this, ...args))))
+      callbacks.push(...task.callbacks.map(func => () => func(this, ...args)))
     }
   }
-  await Promise.all(callbacks)
+  for (let cb of callbacks) {
+    await cb()
+  }
   return this
 }
 

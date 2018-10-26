@@ -1,4 +1,4 @@
-import {isString, isFunction} from 'lodash'
+import {isString, isFunction, isPlainObject} from 'lodash'
 import yeoman from 'yeoman-environment'
 import {createChainable} from 'jointed'
 import baseGenerator from 'generator-clipped-base'
@@ -86,18 +86,28 @@ function normalizePreset(ware: any): any {
   if (isFunction(preset)) { // Function
     return preset
   }
+  
   return (clipped: Clipped) => {
-    Object.assign(clipped.config, preset)
+    Object.keys(preset).map(key => {
+      if (isFunction(preset[key])) {
+        preset[key](clipped.config[key])
+      } else if (isPlainObject(preset[key])) {
+        clipped.config[key] = preset[key]
+      } else {
+        clipped.config[key] = preset[key]
+      }
+    })
   }
 }
 
-export async function execPreset(this: Clipped, ware: any = () => {}, ...args: any[]): Promise<Clipped> {
-  await Promise.all([].concat(ware).map(normalizePreset).map(async w => {
-    const res = await w(this, ...args)
-    if (isFunction(res) || Array.isArray(res)) {
-      return execPreset.call(this, res)
+export async function execPreset(this: Clipped, ware: any = () => {}): Promise<Clipped> {
+  for (let w of [].concat(ware).map(normalizePreset)) {
+    const res = await w.call(this, this)
+    if (res !== null && res !== undefined) {
+      await execPreset.call(this, res)
     }
-  }))
+  }
+
   return this
 }
 
