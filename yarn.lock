@@ -7728,9 +7728,9 @@ joi@^6.7.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@^1.7.11:
-  version "1.7.11"
-  resolved "http://registry.npmjs.org/jointed/-/jointed-1.7.11.tgz#02236aca1cc78f595483d5a850bf14de64be1859"
+jointed@^2.0.0-beta0:
+  version "2.0.0-beta0"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-2.0.0-beta0.tgz#f18b8d159bbe2416a4d36d23813b401d4a29c3fe"
   dependencies:
     auto-bind "^1.2.0"
     deepmerge "^2.0.1"
@@ -8190,7 +8190,7 @@ lodash@4.17.2:
   version "4.17.2"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.2.tgz#34a3055babe04ce42467b607d700072c7ff6bf42"
 
-lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@~4.17.10:
+lodash@^4.0.0, lodash@^4.17.10, lodash@^4.17.11, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.2.0, lodash@~4.17.10:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
 
