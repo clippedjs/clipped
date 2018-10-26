@@ -90,9 +90,11 @@ function normalizePreset(ware: any): any {
   return (clipped: Clipped) => {
     Object.keys(preset).map(key => {
       if (isFunction(preset[key])) {
-        preset[key](clipped.config[key])
+        if (clipped.config[key] !== undefined && clipped.config[key] !== null) {
+          preset[key](clipped.config[key])
+        }
       } else if (isPlainObject(preset[key])) {
-        clipped.config[key] = preset[key]
+        clipped.config[key] = Object.assign({}, clipped.config[key] || {}, preset[key])
       } else {
         clipped.config[key] = preset[key]
       }
