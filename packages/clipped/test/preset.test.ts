@@ -24,3 +24,29 @@ test('it should be able to merge object preset', async t => {
   })
   t.is(clipped.config.abc, uniq)
 })
+
+test('it should be able to use v2 preset format', async t => {
+  /**
+   * e.g. module.exports = [clipped => {}]
+   */
+  const uniq = Symbol()
+  await clipped.use([
+    (cl: Clipped) => {
+      cl.config.xyz = uniq
+    }
+  ])
+  t.is(clipped.config.xyz, uniq)
+})
+
+test('it should be able to handle first preset being plugin', async t => {
+  /**
+   * e.g. module.exports = opt => [clipped => {}]
+   */
+  const uniq = Symbol()
+  await clipped.use(() => [
+    (cl: Clipped) => {
+      cl.config.xxx = uniq
+    }
+  ])
+  t.is(clipped.config.xxx, uniq)
+})

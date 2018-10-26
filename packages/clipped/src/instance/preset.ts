@@ -87,12 +87,17 @@ function normalizePreset(ware: any): any {
     return preset
   }
   return (clipped: Clipped) => {
-    clipped.config = {...clipped.config, ...preset}
+    Object.assign(clipped.config, preset)
   }
 }
 
 export async function execPreset(this: Clipped, ware: any = () => {}, ...args: any[]): Promise<Clipped> {
-  await normalizePreset(ware)(this, ...args)
+  await Promise.all([].concat(ware).map(normalizePreset).map(async w => {
+    const res = await w(this, ...args)
+    if (isFunction(res) || Array.isArray(res)) {
+      return execPreset.call(this, res)
+    }
+  }))
   return this
 }
 
