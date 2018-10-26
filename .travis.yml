@@ -7,12 +7,9 @@ cache:
 notifications:
   email: false
 node_js:
-  - '8'
+  - '10'
 script:
-  - npm i -g clipped lerna autopublish
-  - cd packages/clipped && npm run build && cd ../../ # Build clippped to use it in lerna run build
-  - npm run test:all && npm run coverage
-  - lerna run build
+  - (cd packages/clipped && npm run test:ci)
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./publish.sh; fi
 branches:
