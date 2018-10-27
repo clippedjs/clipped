@@ -52,8 +52,7 @@ export function basePreset(this: Clipped, opt: Object = {}): void {
 
   this.hook('version')
     .add('clipped', async (clipped: Clipped) => {
-      const version = await clipped.exec('npm view clipped version')
-      clipped.print(version)
+      clipped.print(await clipped.exec('npm view clipped version'))
     })
 
   this.hook('init')
@@ -88,19 +87,21 @@ function normalizePreset(ware: any): any {
   }
   
   return (clipped: Clipped) => {
-    Object.keys(preset).map(key => {
-      if (isFunction(preset[key])) {
-        preset[key](clipped.config[key])
-      } else if (isPlainObject(preset[key])) {
-        if (!clipped.config[key]) {
-          clipped.config[key] = preset[key]
+    if (isPlainObject(preset)) {
+      Object.keys(preset).map(key => {
+        if (isFunction(preset[key])) {
+          preset[key](clipped.config[key])
+        } else if (isPlainObject(preset[key])) {
+          if (!clipped.config[key]) {
+            clipped.config[key] = preset[key]
+          } else {
+            Object.assign(clipped.config[key], preset[key])
+          }
         } else {
-          Object.assign(clipped.config[key], preset[key])
+          clipped.config[key] = preset[key]
         }
-      } else {
-        clipped.config[key] = preset[key]
-      }
-    })
+      })
+    }
   }
 }
 
