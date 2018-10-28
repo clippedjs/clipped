@@ -78,6 +78,7 @@
     "minimist": "^1.2.0",
     "mkdirp": "^0.5.1",
     "ncp": "^2.0.0",
+    "prompts": "^1.1.1",
     "regenerator-runtime": "^0.11.1",
     "rimraf": "^2.6.2",
     "simple-git": "^1.84.0",

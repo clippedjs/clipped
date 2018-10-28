@@ -51,3 +51,13 @@ test('helper should be able to convert object to cli arguments', t => {
     ])
   })
 // }
+
+test('helper should be able to prompt', async t => {
+  clipped.prompt.inject({ q1: 'a1', q2: 'q2' })
+  const response = await clipped.prompt({
+    type: 'text',
+    name: 'q1',
+    message: 'Question 1'
+  })
+  t.is(response.q1, 'a1')
+})
