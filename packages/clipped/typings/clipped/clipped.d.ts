@@ -12,8 +12,8 @@ interface Hook {
   tasks: Task[]
 
   task (name: string): Task | undefined
-  add (name: string, callbacks: Function | Function[], index?: Number): Clipped
-  modify (name: string, operation: Function): Clipped
-  prepend (name: string, callbacks: Function | Function[]): Clipped
-  delete (name: string): Clipped
+  add (name: string, callbacks: Function | Function[], index?: Number): Hook
+  modify (name: string, operation: Function): Hook
+  prepend (name: string, callbacks: Function | Function[]): Hook
+  delete (name: string): Hook
 }
