@@ -3,6 +3,7 @@ import * as fs from 'fs-extra'
 import {castArray} from 'lodash'
 import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
+import * as prompt from 'prompts'
 import {cloneRepo, exec, toArgs} from '../utils'
 
 import {Clipped} from '.'
@@ -20,6 +21,7 @@ declare module '.' {
 
     exec(cmd: string, args?: object): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
     print(msg: any): void; // eslint-disable-line no-undef, typescript/no-use-before-define
+    prompt: prompts
   }
 }
 
@@ -78,6 +80,8 @@ export function initHelper(clipped: typeof Clipped): void {
   clipped.prototype.log = logger.log
 
   clipped.prototype.print = console.log
+
+  clipped.prototype.prompt = prompt
 
   Object.assign(clipped.prototype, clipped.prototype.fs)
 }
