@@ -1,7 +1,7 @@
+import {spawn, spawnSync} from 'child_process'
 import {isString, isFunction, isPlainObject} from 'lodash'
 import yeoman from 'yeoman-environment'
 import {createChainable} from 'jointed'
-import baseGenerator from 'generator-clipped-base'
 
 import {Clipped} from '.'
 
@@ -45,26 +45,12 @@ export function basePreset(this: Clipped, opt: Object = {}): void {
     src: this.resolve('src'),
     dist: this.resolve('dist'),
     dockerTemplate: this.resolve('docker-template'),
-    packageJson,
-    generator: this.opt.generator || baseGenerator,
-    eslintPath: this.resolve('.eslintrc.js')
+    packageJson
   }))
 
   this.hook('version')
     .add('clipped', async (clipped: Clipped) => {
       clipped.print(await clipped.exec('npm view clipped version'))
-    })
-
-  this.hook('init')
-    .add('yeoman', async () => {
-      const env = yeoman.createEnv()
-      env.registerStub(baseGenerator, 'clipped:app')
-
-      env.lookup()
-
-      await new Promise(resolve => {
-        env.run('clipped:app', resolve)
-      })
     })
 
   this.__initialized__ = true
