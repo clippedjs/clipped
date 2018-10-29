@@ -63,6 +63,7 @@
   },
   "dependencies": {
     "artzlogger": "^0.0.12",
+    "axios": "^0.18.0",
     "cosmiconfig": "^4.0.0",
     "cross-spawn": "^5.1.0",
     "dargs": "^5.1.0",

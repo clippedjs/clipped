@@ -1,4 +1,5 @@
 import {promisify} from 'util'
+import * as childProcess from 'child_process'
 import * as dargs from 'dargs'
 
 export const toArgs = dargs
@@ -10,22 +11,33 @@ export const cwd: string = process.cwd()
  *
  * @param {string} command
  * @param {any[]} opts
- * @param {Function} callback
  * @returns
  */
-export const exec: (command: string, opts?: any, callback?: Function) => Promise<any> = promisify(
-  (command: string, opts?: any, callback: Function = () => {}) =>
-    require('child_process').exec(command, opts, callback)
-)
+export const exec: (command: string, opts?: any) => Promise<any> =
+  (command: string, opts: any) => new Promise((resolve, reject) => {
+    require('child_process').exec(command, {stdio: 'inherit', ...opts}, (err: any, ...values: any[]) => {
+      if (err) {
+        reject(err)
+      } else {
+        resolve(...values)
+      }
+  })
+})
 
-// /**
-//  * insertIf - Return element if condition satisfied
-//  *
-//  * @param {boolean}  condition
-//  * @param {any[]} elements
-//  *
-//  * @returns {any[]} Description
-//  */
-// export function insertIf (condition: boolean, ...elements: any) {
-//   return condition ? elements : []
-// }
+export const spawn = (cmd: string, args: any[], opt?: childProcess.SpawnOptions) => new Promise((resolve, reject) => {
+  const [command, ...argss] = [...cmd.split(' '), ...args]
+  let stdout = ''
+  let stderr = ''
+  const cp = childProcess.spawn(command, argss, {stdio: 'inherit', ...opt})
+  // process.stdin.pipe(cp.stdin)
+  cp.stdout && cp.stdout.on('data', chunk => stdout += chunk)
+  cp.stderr && cp.stderr.on('data', chunk => stderr += chunk)
+  cp.on('error', reject)
+    .on('close', code => {
+      if (code === 0) {
+        resolve(stdout)
+      } else {
+        reject(stderr)
+      }
+    })
+})

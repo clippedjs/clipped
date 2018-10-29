@@ -4,9 +4,10 @@ import {castArray} from 'lodash'
 import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
 import * as prompt from 'prompts'
-import {cloneRepo, exec, toArgs} from '../utils'
+import {cloneRepo, exec, toArgs, spawn} from '../utils'
 
 import {Clipped} from '.'
+import * as childProcess from 'child_process';
 
 declare module '.' {
   interface Clipped {
@@ -16,11 +17,12 @@ declare module '.' {
       move(opt: {src: string, dest: string, opt?: any} | {src: string, dest: string, opt?: any}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
       mkdir(opt: {path: string} | {path: string}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
       emptydir(opt: {path: string} | {path: string}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
-      copyTpl(opt: {src: string, dest: string, context: any, tplOptions: any, options: any, opt: any} | {src: string, dest: string, context: any, tplOptions: any, options: any, opt: any}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
+      copyTpl(opt: {src: string, dest: string, context?: any, tplOptions?: any, options?: any, opt?: any} | {src: string, dest: string, context?: any, tplOptions?: any, options?: any, opt?: any}[]): Promise<void>,  // eslint-disable-line no-undef, typescript/no-use-before-define
     }
 
-    exec(cmd: string, args?: object): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
-    print(msg: any): void; // eslint-disable-line no-undef, typescript/no-use-before-define
+    exec(cmd: string, opt?: object): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
+    spawn(cmd: string, args?: any[], opt?: childProcess.SpawnOptions): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
+    print(...msg: any[]): void; // eslint-disable-line no-undef, typescript/no-use-before-define
     prompt: prompts
   }
 }
@@ -70,6 +72,7 @@ export function initHelper(clipped: typeof Clipped): void {
   clipped.prototype.clone = cloneRepo
 
   clipped.prototype.exec = exec
+  clipped.prototype.spawn = spawn
 
   clipped.prototype.toArgs = toArgs
 

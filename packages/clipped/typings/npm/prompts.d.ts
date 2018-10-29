@@ -1,12 +1,15 @@
+interface prompt {
+  type: String | Function,
+  name: String | Function,
+  message: String | Function,
+  initial?: String | Function
+  format?: Function,
+  onState?: Function,
+  choices?: {title: any, value: any}[]
+}
+
 interface prompts {
-  (opts: {
-    type: String | Function,
-    name: String | Function,
-    message: String | Function,
-    initial?: String | Function
-    format?: Function,
-    onState?: Function
-  }): Promise<any>,
+  (prompts: prompt | prompt[], options?: {[index: string]: any}): Promise<any>,
   inject(values: {[index: string]: any}): any
 }
 

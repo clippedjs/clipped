@@ -1,6 +1,9 @@
+import * as path from 'path'
 import * as minimist from 'minimist'
 import * as updateNotifier from 'update-notifier'
 import * as cosmic from 'cosmiconfig'
+import * as yarnInstall from 'yarn-install'
+import * as axios from 'axios'
 import Clipped from '.'
 
 /**
@@ -15,16 +18,7 @@ function parseArgs(): {action: string, opt?: any} {
   return {action, opt}
 }
 
-/**
- * Cli - Entry function
- *
- * @async
- * @param {Object} [args={}] Arguments to command
- *
- */
-export async function cli(args: {action: string, opt?: any} = parseArgs()): Promise<boolean> {
-  const {action, opt} = args
-
+async function loadConfig(opt: any): Promise<Clipped> {
   // Execute project preset
   const clipped = new Clipped(opt)
   
@@ -45,6 +39,47 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
       clipped.print(error)
     }
   }
+  return clipped
+}
+
+/**
+ * Cli - Entry function
+ *
+ * @async
+ * @param {Object} [args={}] Arguments to command
+ *
+ */
+export async function cli(args: {action: string, opt?: any} = parseArgs()): Promise<boolean> {
+  const {action, opt} = args
+
+  const clipped = await loadConfig(opt)
+
+  clipped.hook('create')
+    .add('init-package.json', async (api: Clipped) => api.spawn('npm', ['init'], {stdio: 'inherit'}))
+    .add('install-presets', async (api: Clipped) => {
+      const presetListUrl = 'https://api.github.com/repos/clippedjs/clipped/contents/presets/?ref=master'
+      const presetChoices = await (
+        axios.get(presetListUrl)
+          .then(({data}: {data: any}) =>
+            data.map((preset: any) => ({title: `@clipped/preset-${preset.name}`, value: `@clipped/preset-${preset.name}`}))
+          )
+      )
+
+      const {packages} = await api.prompt({
+        type: 'multiselect',
+        name: 'packages',
+        message: 'Pick your packages',
+        choices: [...presetChoices]
+      }, {
+        onCancel: () => {
+          throw new Error('Aborted')
+        }
+      })
+      await api.fs.copyTpl({src: path.resolve(__dirname, '../../template/_clipped.config.js'), dest: api.resolve('clipped.config.js'), context: {packages}})
+      await yarnInstall(packages, {cwd: api.config.context})
+    })
+    .add('install-deps', (api: Clipped) => yarnInstall({cwd: api.config.context}))
+    .add('start-init-hook', () => loadConfig(opt).then((api1: Clipped) => api1.execHook('init')))
 
   if (clipped.hooks[action]) {
     try {
@@ -53,19 +88,12 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
       console.error(error)
     }
   } else {
-    console.log(`
-      Usage:
-      $ clipped <action>
+    clipped.print(`
+Usage:    clipped ACTION
 
-      Available actions:
-      ${
-  Object.keys(clipped.hooks)
-    .filter(hook =>
-      !hook.includes('pre') && !hook.includes('post')
-    )
-    .join(', ')
-}
-    `)
+Actions:
+${Object.keys(clipped.hooks).filter(hook => !hook.includes('pre') && !hook.includes('post')).join(', ')}
+`)
   }
 
   return true
