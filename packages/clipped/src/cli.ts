@@ -1,3 +1,5 @@
+import * as util from 'util'
+import * as fs from 'fs'
 import * as path from 'path'
 import * as minimist from 'minimist'
 import * as updateNotifier from 'update-notifier'
@@ -80,6 +82,13 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
     })
     .add('install-deps', (api: Clipped) => yarnInstall({cwd: api.config.context}))
     .add('start-init-hook', () => loadConfig(opt).then((api1: Clipped) => api1.execHook('init')))
+
+  clipped.hook('config:watch')
+    .add('write-to-json', async (api: Clipped) => {
+      const writeConfigJSON = async () => fs.writeFileSync('clipped-result.json', await loadConfig(opt).then(({config}) => JSON.stringify(config.toJSON(), null, 2)), {encoding: 'utf8'})
+      fs.watchFile(api.resolve('clipped.config.js'), writeConfigJSON)
+      await writeConfigJSON()
+    })
 
   if (clipped.hooks[action]) {
     try {
