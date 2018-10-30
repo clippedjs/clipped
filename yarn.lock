@@ -7728,9 +7728,9 @@ joi@^6.7.x:
     moment "2.x.x"
     topo "1.x.x"
 
-jointed@^2.0.0-beta0:
-  version "2.0.0-beta0"
-  resolved "https://registry.yarnpkg.com/jointed/-/jointed-2.0.0-beta0.tgz#f18b8d159bbe2416a4d36d23813b401d4a29c3fe"
+jointed@2.0.0-beta3:
+  version "2.0.0-beta3"
+  resolved "https://registry.yarnpkg.com/jointed/-/jointed-2.0.0-beta3.tgz#c7312b263510b971e51a6bf56c877cc7b4995d7b"
   dependencies:
     auto-bind "^1.2.0"
     deepmerge "^2.0.1"
