@@ -6000,6 +6000,13 @@ generate-object-property@^1.1.0:
   dependencies:
     is-property "^1.0.0"
 
+generator-clipped-base@^1.12.0:
+  version "1.12.0"
+  resolved "https://registry.yarnpkg.com/generator-clipped-base/-/generator-clipped-base-1.12.0.tgz#138a1ca880b88ae431c6c4aa62e679ac3ac21135"
+  dependencies:
+    axios "^0.17.1"
+    yeoman-generator "^2.0.2"
+
 genfun@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/genfun/-/genfun-4.0.1.tgz#ed10041f2e4a7f1b0a38466d17a5c3e27df1dfc1"
