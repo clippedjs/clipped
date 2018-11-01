@@ -2,9 +2,9 @@
   "lerna": "2.9.0",
   "packages": [
     "packages/*",
-    "generators/*",
     "presets/webpack4/*",
-    "presets/*"
+    "presets/*",
+    "plugins/*"
   ],
   "version": "independent",
   "npmClient": "yarn",
