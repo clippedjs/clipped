@@ -3,9 +3,9 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "generators/*",
     "presets/webpack4/*",
-    "presets/*"
+    "presets/*",
+    "plugins/*"
   ],
   "scripts": {
     "commit": "git-cz",
