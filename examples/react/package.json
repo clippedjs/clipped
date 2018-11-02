@@ -1,0 +1,11 @@
+{
+  "name": "@clipped/example-react",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "html-webpack-plugin": "^4.0.0-beta.2",
+    "react": "^16.6.0",
+    "react-dom": "^16.6.0"
+  }
+}

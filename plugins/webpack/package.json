@@ -1,0 +1,25 @@
+{
+  "name": "@clipped/plugin-webpack",
+  "version": "1.0.0",
+  "description": "Webpack plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "dependencies": {
+    "autoprefixer": "^9.3.1",
+    "babel-loader": "^8.0.4",
+    "clean-webpack-plugin": "^0.1.19",
+    "css-loader": "^1.0.1",
+    "friendly-errors-webpack-plugin": "^1.7.0",
+    "html-webpack-plugin": "^4.0.0-beta.2",
+    "html-webpack-template": "^6.2.0",
+    "node-notifier": "^5.3.0",
+    "postcss-flexbugs-fixes": "^4.1.0",
+    "postcss-loader": "^3.0.0",
+    "source-map-support": "^0.5.9",
+    "style-loader": "^0.23.1",
+    "url-loader": "^1.1.2",
+    "webpack": "^4.23.1",
+    "webpack-dev-server": "^3.1.10",
+    "webpack-node-externals": "^1.7.2"
+  }
+}

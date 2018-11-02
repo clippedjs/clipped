@@ -1,0 +1,12 @@
+{
+  "name": "@clipped/template-vue",
+  "description": "Vue template for clipped",
+  "version": "1.0.0",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "dependencies": {
+    "vue-loader": "^15.4.2",
+    "vue-style-loader": "^4.1.2",
+    "vue-template-compiler": "2.5.13"
+  }
+}

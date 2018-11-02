@@ -1,0 +1,11 @@
+{
+  "name": "@clipped/plugin-docker",
+  "version": "1.0.0",
+  "description": "Docker plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "dependencies": {
+    "docker": "^1.0.0",
+    "tar-fs": "^1.16.3"
+  }
+}
