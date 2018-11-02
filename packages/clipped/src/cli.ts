@@ -67,8 +67,8 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   clipped.hook('create')
     .add('init-package.json', async (api: Clipped) => api.spawn('npm', ['init'], {stdio: 'inherit'}))
     .add('install-presets', async (api: Clipped) => {
-      const [templates, plugins]: any[] = await Promise.all(['templates', 'plugins'].map(async type => {
-        const url = `https://api.github.com/repos/clippedjs/clipped/contents/${type}/?ref=master`
+      const [templates, plugins]: any[] = await Promise.all(['template', 'plugin'].map(async type => {
+        const url = `https://api.github.com/repos/clippedjs/clipped/contents/${type}s/?ref=master`
         return (
           axios.get(url)
             .then(({data}: {data: any}) =>
@@ -87,6 +87,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
           throw new Error('Aborted')
         }
       })
+      api.print(packages)
       await api.fs.copyTpl({src: path.resolve(__dirname, '../../template/_clipped.config.js'), dest: api.resolve('clipped.config.js'), context: {packages}})
       await yarnInstall(packages, {cwd: api.config.context})
     })
