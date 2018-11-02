@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.2"></a>
+## [2.1.2](https://github.com/clippedjs/clipped/compare/clipped@2.1.1...clipped@2.1.2) (2018-11-02)
+
+
+### Bug Fixes
+
+* **cli:** typo... ([dccc232](https://github.com/clippedjs/clipped/commit/dccc232))
+
+
+
+
+
 <a name="2.1.1"></a>
 ## [2.1.1](https://github.com/clippedjs/clipped/compare/clipped@2.1.0...clipped@2.1.1) (2018-11-02)
 
