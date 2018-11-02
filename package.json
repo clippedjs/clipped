@@ -3,6 +3,7 @@
   "private": true,
   "workspaces": [
     "packages/*",
+    "templates/*",
     "presets/webpack4/*",
     "presets/*",
     "plugins/*"

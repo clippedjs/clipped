@@ -52,7 +52,15 @@ async function loadConfig(opt: any): Promise<Clipped> {
  *
  */
 export async function cli(args: {action: string, opt?: any} = parseArgs()): Promise<boolean> {
-  const {action, opt} = args
+  const {action = '', opt} = args
+
+  if (action.includes('build') || action.includes('deploy')) {
+    process.env.NODE_ENV = 'production'
+  } else if (action.includes('dev') || action.includes('watch')) {
+    process.env.NODE_ENV = 'development'
+  } else if (action.includes('test')) {
+    process.env.NODE_ENV = 'test'
+  }
 
   const clipped = await loadConfig(opt)
 

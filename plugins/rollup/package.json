@@ -1,0 +1,14 @@
+{
+  "name": "@clipped/plugin-rollup",
+  "version": "1.0.0",
+  "description": "Rollup plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "dependencies": {
+    "rollup": "^0.66.6",
+    "rollup-plugin-babel": "^4.0.3",
+    "rollup-plugin-node-resolve": "^3.4.0",
+    "rollup-plugin-uglify": "^6.0.0",
+    "uglify-es": "^3.3.9"
+  }
+}
