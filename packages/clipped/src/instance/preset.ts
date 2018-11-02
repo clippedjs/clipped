@@ -31,6 +31,7 @@ const stockPresets: {[index:string] : {ware: any}} = {}
 export function basePreset(this: Clipped, opt: Object = {}): void {
   // Initialize config
   this.opt = opt
+  Object.assign(this, opt)
   this.config = createChainable({
     context: this.opt.context || process.cwd()
   })
