@@ -4,11 +4,15 @@
   "description": "Rollup plugin for clipped",
   "main": "clipped.config.js",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "rollup": "^0.66.6",
     "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-node-resolve": "^3.4.0",
     "rollup-plugin-uglify": "^6.0.0",
     "uglify-es": "^3.3.9"
-  }
+  },
+  "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }

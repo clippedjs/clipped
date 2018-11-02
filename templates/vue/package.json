@@ -4,9 +4,13 @@
   "version": "1.1.0",
   "main": "clipped.config.js",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "2.5.13"
-  }
+  },
+  "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }

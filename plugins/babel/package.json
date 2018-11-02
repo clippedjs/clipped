@@ -3,6 +3,9 @@
   "version": "1.1.0",
   "description": "Babel plugin for clipped",
   "main": "clipped.config.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
@@ -11,5 +14,6 @@
     "@babel/preset-env": "^7.1.0",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-backpack": "^0.8.0"
-  }
+  },
+  "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }

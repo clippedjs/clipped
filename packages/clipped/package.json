@@ -128,5 +128,6 @@
     "typescript-eslint-parser": "^20.0.0",
     "typesync": "^0.4.0",
     "xo": "^0.23.0"
-  }
+  },
+  "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }
