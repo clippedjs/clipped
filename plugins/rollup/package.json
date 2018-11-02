@@ -1,6 +1,6 @@
 {
   "name": "@clipped/plugin-rollup",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Rollup plugin for clipped",
   "main": "clipped.config.js",
   "license": "MIT",

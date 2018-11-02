@@ -3,6 +3,35 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.1.0"></a>
+# [2.1.0](https://github.com/clippedjs/clipped/compare/clipped@1.17.0...clipped@2.1.0) (2018-11-02)
+
+
+### Bug Fixes
+
+* **cli:** suggest plugins and templates instead of presets ([1758644](https://github.com/clippedjs/clipped/commit/1758644))
+* **options:** make options accessible in preset ([54740c2](https://github.com/clippedjs/clipped/commit/54740c2))
+* **plugin:** safer preset execution ([f1a63f1](https://github.com/clippedjs/clipped/commit/f1a63f1))
+* **plugin:** safer preset execution 2 ([d68eee9](https://github.com/clippedjs/clipped/commit/d68eee9))
+* **preset:** enables array-in-array presets ([3468704](https://github.com/clippedjs/clipped/commit/3468704))
+* **preset:** ignore primitive return value ([c382dd7](https://github.com/clippedjs/clipped/commit/c382dd7))
+* **typings:** wow so i ignored the typings the whole time... ([b67b228](https://github.com/clippedjs/clipped/commit/b67b228))
+* **typings:** wrong return type of Hook ([f7564e1](https://github.com/clippedjs/clipped/commit/f7564e1))
+
+
+### Features
+
+* **generator:** adds 'create' hook to install presets and add config file ([639c1af](https://github.com/clippedjs/clipped/commit/639c1af))
+* **plugin:** allows using return value of plugins to modify config ([417a3cb](https://github.com/clippedjs/clipped/commit/417a3cb))
+* **plugins:** transform various plugins from presets ([fcc5dc6](https://github.com/clippedjs/clipped/commit/fcc5dc6))
+* **preset:** support new preset format ([654450b](https://github.com/clippedjs/clipped/commit/654450b))
+* **prompt:** adds prompts as helper function ([3c2c09e](https://github.com/clippedjs/clipped/commit/3c2c09e))
+* **verbose:** write json from config ([f26fd6b](https://github.com/clippedjs/clipped/commit/f26fd6b))
+
+
+
+
+
 <a name="1.17.0"></a>
 # 1.17.0 (2018-03-22)
 
