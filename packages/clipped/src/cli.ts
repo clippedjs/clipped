@@ -67,19 +67,21 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   clipped.hook('create')
     .add('init-package.json', async (api: Clipped) => api.spawn('npm', ['init'], {stdio: 'inherit'}))
     .add('install-presets', async (api: Clipped) => {
-      const presetListUrl = 'https://api.github.com/repos/clippedjs/clipped/contents/presets/?ref=master'
-      const presetChoices = await (
-        axios.get(presetListUrl)
-          .then(({data}: {data: any}) =>
-            data.map((preset: any) => ({title: `@clipped/preset-${preset.name}`, value: `@clipped/preset-${preset.name}`}))
-          )
-      )
+      const [templates, plugins]: any[] = await Promise.all(['templates', 'plugins'].map(async type => {
+        const url = `https://api.github.com/repos/clippedjs/clipped/contents/${type}/?ref=master`
+        return (
+          axios.get(url)
+            .then(({data}: {data: any}) =>
+              data.map((item: any) => ({title: `@clipped/${type}-${item.name}`, value: `@clipped/${type}-${item.name}`}))
+            )
+        )
+      }))
 
       const {packages} = await api.prompt({
         type: 'multiselect',
         name: 'packages',
         message: 'Pick your packages',
-        choices: [...presetChoices]
+        choices: [...templates, ...plugins]
       }, {
         onCancel: () => {
           throw new Error('Aborted')
