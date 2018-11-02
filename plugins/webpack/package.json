@@ -1,6 +1,6 @@
 {
   "name": "@clipped/plugin-webpack",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Webpack plugin for clipped",
   "main": "clipped.config.js",
   "license": "MIT",
