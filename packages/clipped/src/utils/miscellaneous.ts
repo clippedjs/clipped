@@ -1,5 +1,7 @@
 import {promisify} from 'util'
 import * as childProcess from 'child_process'
+const crossSpawn: (command: string, args?: ReadonlyArray<string> | undefined, options?: any | undefined) => childProcess.ChildProcess = require('cross-spawn')
+// import * as crossSpawn from 'cross-spawn'
 import * as dargs from 'dargs'
 
 export const toArgs = dargs
@@ -28,7 +30,7 @@ export const spawn = (cmd: string, args: any[], opt?: childProcess.SpawnOptions)
   const [command, ...argss] = [...cmd.split(' '), ...args]
   let stdout = ''
   let stderr = ''
-  const cp = childProcess.spawn(command, argss, {stdio: 'inherit', ...opt})
+  const cp = crossSpawn(command, argss, {stdio: 'inherit', ...opt})
   // process.stdin.pipe(cp.stdin)
   cp.stdout && cp.stdout.on('data', chunk => stdout += chunk)
   cp.stderr && cp.stderr.on('data', chunk => stderr += chunk)
