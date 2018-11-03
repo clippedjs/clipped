@@ -1,7 +1,7 @@
 {
   "name": "clipped",
   "description": "Reduce pain of configuration to once",
-  "version": "2.1.4",
+  "version": "2.1.4-patch1",
   "engines": {
     "node": ">=8"
   },
