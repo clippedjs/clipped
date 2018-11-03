@@ -1,4 +1,5 @@
 import * as util from 'util'
+import * as os from 'os'
 import * as fs from 'fs'
 import * as path from 'path'
 import * as minimist from 'minimist'
@@ -65,7 +66,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   const clipped = await loadConfig(opt)
 
   clipped.hook('create')
-    .add('init-package.json', async (api: Clipped) => api.spawn('npm', ['init'], {stdio: 'inherit'}))
+    .add('init-package.json', async (api: Clipped) => api.spawn(os.platform().includes('win') ? 'npm.cmd' : 'npm', ['init'], {stdio: 'inherit', shell: true}))
     .add('install-presets', async (api: Clipped) => {
       const [templates, plugins]: any[] = await Promise.all(['template', 'plugin'].map(async type => {
         const url = `https://api.github.com/repos/clippedjs/clipped/contents/${type}s/?ref=master`
