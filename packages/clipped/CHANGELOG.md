@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
 <a name="2.1.4"></a>
+## [2.1.4](https://github.com/clippedjs/clipped/compare/clipped@2.1.4...clipped@2.1.4) (2018-11-04)
+
+
+### Bug Fixes
+
+* **spawn:** use cross-spawn and window-specific command ([324ca41](https://github.com/clippedjs/clipped/commit/324ca41))
+
+
+
+
+
+<a name="2.1.4"></a>
 ## [2.1.4](https://github.com/clippedjs/clipped/compare/clipped@2.1.2...clipped@2.1.4) (2018-11-03)
 
 
