@@ -74,6 +74,7 @@ test.only('it should modify config with object return value of plugins', async t
       }
     })
   ])
+  clipped.execDefer()
   t.log('and now: ', clipped.config.babel.toConfig())
 
   t.is(clipped.config.webpack.entry[0], 'app.js')

@@ -3,15 +3,15 @@ const rollup = require('rollup')
 
 module.exports = ({type = 'library', babel = {}, formats = ['cjs']} = {}) => [
   babel && require('@clipped/plugin-babel')({type, ...babel}),
-  ({config}) => ({
+  {
     rollup: {
-      input: path.resolve(config.src, 'index.js'),
       external: [],
       plugins: []
     }
-  }),
-  ({config}) => ({
-    rollup(cfg) {
+  },
+  {
+    rollup(cfg, {config}) {
+      cfg.input = config.src
       cfg.output = formats.map(format => ({
         file: path.resolve(config.dist, `index.${format}.js`),
         format,
@@ -42,7 +42,7 @@ module.exports = ({type = 'library', babel = {}, formats = ['cjs']} = {}) => [
         cfg.plugins.use('uglify', require('rollup-plugin-uglify').uglify, [{}, require('uglify-es').minify])
       }
     }
-  }),
+  },
   api => {
     api.hook('build')
       .add('rollup', async api => {

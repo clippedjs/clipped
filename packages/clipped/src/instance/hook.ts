@@ -1,4 +1,4 @@
-import {castArray} from 'lodash'
+import {omit, castArray} from 'lodash'
 
 import {Clipped} from '.'
 
@@ -86,6 +86,12 @@ export function hookContext(this: Clipped, name: string): Hook {
  *
  */
 async function execHook(this: Clipped, name: string, ...args: any[]): Promise<Clipped> {
+  if (Object.keys(omit(this.config.toConfig(), ['context', 'name', 'src', 'dist', 'dockerTemplate', 'packageJson'])).length !== 0) {
+    console.warn('Mutating config directly will be deprecated in v3.0. Use `defer` method instead')
+  }
+
+  this.execDefer()
+
   const callbacks = []
   for (const hook of ['pre', `pre-${name}`, name, `post-${name}`, 'post']) {
     for (const task of this.hook(hook).tasks) {
