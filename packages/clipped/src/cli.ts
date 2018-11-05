@@ -98,7 +98,11 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   clipped.hook('config:watch')
     .add('write-to-json', async (api: Clipped) => {
       const writeConfigJSON = async () => {
-        fs.writeFileSync('clipped-result.json', await loadConfig(opt).then(({config}) => JSON.stringify(config.toJSON(), null, 2)), {encoding: 'utf8'})
+        fs.writeFileSync('clipped-result.json', await loadConfig(opt).then((api: Clipped) => {
+          api.execDefer()
+
+          return JSON.stringify(api.config.toJSON(), null, 2)
+        }), {encoding: 'utf8'})
         api.print('Reloaded Config at', new Date().toLocaleString())
       }
       fs.watchFile(api.resolve('clipped.config.js'), writeConfigJSON)

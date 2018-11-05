@@ -64,7 +64,7 @@ export function basePreset(this: Clipped, opt: Object = {}): void {
  *
  * @returns {Function}
  */
-function normalizePreset(ware: any): any {
+function normalizePreset(this: Clipped, ware: any): any {
   const preset = ware.default || ware
   if (isString(preset)) { // String i.e. stock
     return stockPresets[preset]
@@ -74,22 +74,9 @@ function normalizePreset(ware: any): any {
     return preset
   }
   
+  // Config mutation
   if (isPlainObject(preset)) {
-    return (clipped: Clipped) => {
-      Object.keys(preset).map(key => {
-        if (isFunction(preset[key])) {
-          if(clipped.config[key]) preset[key](clipped.config[key])
-        } else if (isPlainObject(preset[key])) {
-          if (!clipped.config[key]) {
-            clipped.config[key] = preset[key]
-          } else {
-            Object.assign(clipped.config[key], preset[key])
-          }
-        } else {
-          clipped.config[key] = preset[key]
-        }
-      })
-    }
+    this.defer(preset)
   }
 
   if (Array.isArray(preset)) {
@@ -98,7 +85,7 @@ function normalizePreset(ware: any): any {
 }
 
 export async function execPreset(this: Clipped, ware: any = () => {}): Promise<Clipped> {
-  for (let w of [].concat(ware).map(normalizePreset).filter(Boolean)) {
+  for (let w of [].concat(ware).map(normalizePreset.bind(this)).filter(Boolean)) {
     const res = await (isFunction(w) ? w.call(this, this) : execPreset.call(this, w))
     if (res !== null && res !== undefined) {
       await execPreset.call(this, res)

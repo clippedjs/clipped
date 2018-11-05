@@ -1,6 +1,7 @@
 import {initHook} from './hook'
 import {initPreset, basePreset} from './preset'
 import {initHelper} from './helper'
+import {initDefer} from './defer'
 
 export class Clipped {
   _hooks: {[index: string]: Hook} = {}
@@ -14,5 +15,6 @@ declare module '.' {
 }
 
 initHelper(Clipped)
+initDefer(Clipped)
 initHook(Clipped)
 initPreset(Clipped)

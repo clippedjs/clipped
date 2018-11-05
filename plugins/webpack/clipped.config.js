@@ -296,17 +296,24 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
     if (!['frontend'].includes(type)) return
 
     if (process.env.NODE_ENV === 'development') {
-      api.config.webpack.plugins.use('hot-module', webpack.HotModuleReplacementPlugin, [])
+      api.defer({
+        webpack(cfg) {
+          cfg.plugins.use('hot-module', webpack.HotModuleReplacementPlugin, [])
+        }
+      })
     }
 
-    api.config.webpack.plugins
-      .use('html', require('html-webpack-plugin'), [{
-        baseHref: '/',
-        template: require.resolve('html-webpack-template/index.ejs'),
-        inject: true,
-        appMountId: 'app',
-        mobile: true
-      }])
+    api.defer({
+      webpack(cfg) {
+        cfg.plugins.use('html', require('html-webpack-plugin'), [{
+          baseHref: '/',
+          template: require.resolve('html-webpack-template/index.ejs'),
+          inject: true,
+          appMountId: 'app',
+          mobile: true
+        }])
+      }
+    })
 
     api.hook('dev')
       .add('webpack-dev-server', api => {
