@@ -1,0 +1,14 @@
+{
+  "name": "@clipped/plugin-eslint",
+  "version": "1.1.1",
+  "description": "Eslint plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "eslint": "^5.8.0",
+    "eslint-loader": "^2.1.1"
+  }
+}
