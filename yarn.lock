@@ -14856,6 +14856,7 @@ xo-init@^0.7.0:
 xo@^0.23.0:
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/xo/-/xo-0.23.0.tgz#dbc709b0e5e38060a497a39d147a173ddd36d355"
+  integrity sha512-jyNZrGULm1oPgL0AMWWFWr3Q2cLsULrIkBsogIGWEUw/wGu47N3XGNmUwB4AvJcMhveNK2gqndY3+z8m0CJFEA==
   dependencies:
     arrify "^1.0.1"
     debug "^3.1.0"
