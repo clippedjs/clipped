@@ -9,6 +9,7 @@ module.exports = ({
   extensions = ['vue', 'js', 'ts', 'tsx', 'jsx', 'marko', 'radi'],
   mode = 'xo'
 } = {}) => [
+  require('@clipped/plugin-webpack')(),
   {
     eslint: {
       globals: [],
@@ -26,8 +27,13 @@ module.exports = ({
         exclude: /node_modules/,
         loader: require.resolve('eslint-loader')
       })
+      
+      cfg.module.alias('rules.eslint.options', () => api.config.eslint)
+    },
+    rollup(cfg, api) {
+      cfg.plugins.use('eslint', require('rollup-plugin-eslint').eslint, [])
 
-      cfg.module.rules.eslint.alias('options', () => api.config.eslint)
+      cfg.plugins.eslint.args.alias('0', () => api.config.eslint)
     }
   },
   mode === 'xo' && {
