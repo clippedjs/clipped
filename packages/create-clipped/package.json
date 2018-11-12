@@ -1,6 +1,6 @@
 {
   "name": "create-clipped",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a Clipped app",
   "main": "index.js",
   "license": "MIT",
@@ -15,6 +15,6 @@
     "access": "public"
   },
   "dependencies": {
-    "clipped": "^2.3.0"
+    "clipped": "^2.3.1"
   }
 }
