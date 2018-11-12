@@ -1,0 +1,20 @@
+{
+  "name": "create-clipped",
+  "version": "0.0.0",
+  "description": "Create a Clipped app",
+  "main": "index.js",
+  "license": "MIT",
+  "files": [
+    "index.js",
+    "create-clipped.js"
+  ],
+  "bin": {
+    "create-clipped": "./index.js"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "clipped": "^2.2.0"
+  }
+}
