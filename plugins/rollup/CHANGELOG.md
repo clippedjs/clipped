@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.1.1...@clipped/plugin-rollup@1.2.0) (2018-11-12)
+
+
+### Features
+
+* **defer:** defer config mutation to hook exe ([3c9244d](https://github.com/clippedjs/clipped/commit/3c9244d))
+* **typescript:** adds typescript plugin ([#124](https://github.com/clippedjs/clipped/issues/124)) ([45abbc7](https://github.com/clippedjs/clipped/commit/45abbc7)), closes [#122](https://github.com/clippedjs/clipped/issues/122)
+
+
+
+
+
 <a name="1.1.1"></a>
 ## [1.1.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.1.0...@clipped/plugin-rollup@1.1.1) (2018-11-02)
 
