@@ -29,8 +29,12 @@ More than boilerplate :muscle:
 - Node.js >= 8.0.0
 
 ## How to use
+If you have yarn:
+1. `yarn create clipped`
+
+Otherwise:
 1. `npm i -g clipped`
-2. `clipped create`
+2. `clipped create <app-name>`
 4. Run `clipped` to see available actions, and use them!
 
 ## How it works
