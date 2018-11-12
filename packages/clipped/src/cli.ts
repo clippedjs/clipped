@@ -68,10 +68,10 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   clipped.hook('create')
     .add('create-folder', async (api: Clipped) => {
       if (process.argv[3]) {
-        await api.fs.mkdir({path: api.resolve(process.argv[3])})
-        process.chdir(api.resolve(process.argv[3]))
-        api.config.context = api.resolve(process.argv[3])
-      }
+          await api.fs.mkdir({path: api.resolve(process.argv[3])})
+          process.chdir(api.resolve(process.argv[3]))
+          api.config.context = api.resolve(process.argv[3])
+        }
     })
     .add('init-package.json', async (api: Clipped) => api.spawn(os.platform().includes('win') ? 'npm.cmd' : 'npm', ['init'], {stdio: 'inherit', shell: true}))
     .add('install-presets', async (api: Clipped) => {
@@ -95,7 +95,8 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
           throw new Error('Aborted')
         }
       })
-      packages = packages.sort((a: string) => /(webpack|rollup)/.test(a))
+      packages = packages.sort((a: string, b: string) => !/(webpack|rollup)/.test(a) && /(webpack|rollup)/.test(b))
+
       await api.fs.copyTpl({src: path.resolve(__dirname, '../../template/_clipped.config.js'), dest: api.resolve('clipped.config.js'), context: {packages}})
       await yarnInstall([...packages, 'clipped'], {cwd: api.config.context})
     })
