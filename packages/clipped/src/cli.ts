@@ -66,6 +66,13 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   const clipped = await loadConfig(opt)
 
   clipped.hook('create')
+    .add('create-folder', async (api: Clipped) => {
+      if (process.argv[3]) {
+        await api.fs.mkdir({path: api.resolve(process.argv[3])})
+        process.chdir(api.resolve(process.argv[3]))
+        api.config.context = api.resolve(process.argv[3])
+      }
+    })
     .add('init-package.json', async (api: Clipped) => api.spawn(os.platform().includes('win') ? 'npm.cmd' : 'npm', ['init'], {stdio: 'inherit', shell: true}))
     .add('install-presets', async (api: Clipped) => {
       const [templates, plugins]: any[] = await Promise.all(['template', 'plugin'].map(async type => {
