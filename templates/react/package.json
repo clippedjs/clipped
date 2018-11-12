@@ -1,7 +1,7 @@
 {
   "name": "@clipped/template-react",
   "description": "React template for clipped",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "clipped.config.js",
   "license": "MIT",
   "publishConfig": {
@@ -9,7 +9,7 @@
   },
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
-    "@clipped/plugin-webpack": "^1.2.0",
+    "@clipped/plugin-webpack": "^1.2.1",
     "react-hot-loader": "^4.3.12"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"

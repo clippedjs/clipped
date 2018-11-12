@@ -1,14 +1,14 @@
 {
   "name": "@clipped/template-vue",
   "description": "Vue template for clipped",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "main": "clipped.config.js",
   "license": "MIT",
   "publishConfig": {
     "access": "public"
   },
   "dependencies": {
-    "@clipped/plugin-webpack": "^1.2.0",
+    "@clipped/plugin-webpack": "^1.2.1",
     "vue-loader": "^15.4.2",
     "vue-style-loader": "^4.1.2",
     "vue-template-compiler": "2.5.13"
