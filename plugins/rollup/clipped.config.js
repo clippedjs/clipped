@@ -26,7 +26,7 @@ module.exports = ({name = null, type = 'library', babel = {}, formats = ['cjs'],
       if (babel) {
         cfg.plugins
           .use('babel', require('rollup-plugin-babel'), [{}])
-          .alias('args.0', () => config.babel)
+          .alias('babel.args.0', () => config.babel)
       }
 
       if (postcss) {
