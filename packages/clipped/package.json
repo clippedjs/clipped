@@ -92,6 +92,7 @@
     "tar-fs": "^1.16.0",
     "update-notifier": "^2.3.0",
     "webpack-merge": "^4.1.1",
+    "write-pkg": "^3.2.0",
     "yarn-install": "^0.5.1",
     "yeoman-environment": "^2.0.5"
   },

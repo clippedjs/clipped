@@ -85,7 +85,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
         )
       }))
 
-      const {packages} = await api.prompt({
+      let {packages} = await api.prompt({
         type: 'multiselect',
         name: 'packages',
         message: 'Pick your packages',
@@ -95,12 +95,22 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
           throw new Error('Aborted')
         }
       })
-      api.print(packages)
+      packages = packages.sort((a: string) => /(webpack|rollup)/.test(a))
       await api.fs.copyTpl({src: path.resolve(__dirname, '../../template/_clipped.config.js'), dest: api.resolve('clipped.config.js'), context: {packages}})
-      await yarnInstall(packages, {cwd: api.config.context})
+      await yarnInstall([...packages, 'clipped'], {cwd: api.config.context})
     })
-    .add('install-deps', (api: Clipped) => yarnInstall({cwd: api.config.context}))
-    .add('start-init-hook', () => loadConfig(opt).then((api1: Clipped) => api1.execHook('init')))
+    .add('start-init-hook', () =>
+      loadConfig(opt)
+        .then(async (api1: Clipped) => {
+          await api1.editPkg((pkg: any) => {
+            const scripts = Object.keys(clipped.hooks)
+              .filter(h => !(/^(pre|post|version|create)$/.test(h) || /^(pre|post)-/.test(h)))
+              .reduce((acc, hook) => ({...acc, [hook]: `clipped ${hook}`}), {})
+            Object.assign(pkg.scripts, scripts)
+          })
+          return api1.execHook('init')
+        })
+    )
 
   clipped.hook('config:watch')
     .add('write-to-json', async (api: Clipped) => {
@@ -110,7 +120,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
 
           return JSON.stringify(api.config.toJSON(), null, 2)
         }), {encoding: 'utf8'})
-        api.print('Reloaded Config at', new Date().toLocaleString())
+        api.print('🔃  Reloaded Config at', new Date().toLocaleString())
       }
       fs.watchFile(api.resolve('clipped.config.js'), writeConfigJSON)
       await writeConfigJSON()

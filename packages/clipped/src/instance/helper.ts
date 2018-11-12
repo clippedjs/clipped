@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as fs from 'fs-extra'
-import {castArray} from 'lodash'
+import {castArray, merge, isPlainObject, isFunction} from 'lodash'
 import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
 import * as prompt from 'prompts'
@@ -23,7 +23,8 @@ declare module '.' {
     exec(cmd: string, opt?: object): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
     spawn(cmd: string, args?: any[], opt?: childProcess.SpawnOptions): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
     print(...msg: any[]): void; // eslint-disable-line no-undef, typescript/no-use-before-define
-    prompt: prompts
+    prompt: prompts,
+    editPkg(mutator: Object | Function): Promise<any>
   }
 }
 
@@ -64,6 +65,23 @@ const fsOperations = {
   )
 }
 
+
+/**
+ * editPkg - writes to pacakge.json
+ *
+ * @param {Clipped} this
+ * @param {(Object | Function)} mutator
+ * @returns Promise<any>
+ */
+function editPkg(this: Clipped, mutator: Object | Function): Promise<any> {
+  if (isPlainObject(mutator)) {
+    merge(this.config.packageJson, mutator)
+  } else if (isFunction(mutator)) {
+    mutator(this.config.packageJson)
+  }
+  return require('write-pkg')(this.config.context, this.config.packageJson.toConfig())
+}
+
 const logger = console
 
 export function initHelper(clipped: typeof Clipped): void {
@@ -85,6 +103,8 @@ export function initHelper(clipped: typeof Clipped): void {
   clipped.prototype.print = console.log
 
   clipped.prototype.prompt = prompt
+
+  clipped.prototype.editPkg = editPkg
 
   Object.assign(clipped.prototype, clipped.prototype.fs)
 }
