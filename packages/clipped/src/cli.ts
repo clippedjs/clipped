@@ -5,7 +5,6 @@ import * as path from 'path'
 import * as minimist from 'minimist'
 import * as updateNotifier from 'update-notifier'
 import * as cosmic from 'cosmiconfig'
-import * as yarnInstall from 'yarn-install'
 
 import Clipped from '.'
 import {searchNpm} from './utils/npm'
@@ -97,14 +96,14 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
       packages = packages.sort((a: string, b: string) => !/(webpack|rollup)/.test(a) && /(webpack|rollup)/.test(b))
 
       await api.fs.copyTpl({src: path.resolve(__dirname, '../../template/_clipped.config.js'), dest: api.resolve('clipped.config.js'), context: {packages}})
-      await yarnInstall([...packages, 'clipped'], {cwd: api.config.context})
+      await api.install([...packages, 'clipped'])
     })
     .add('start-init-hook', () =>
       loadConfig(opt)
         .then(async (api1: Clipped) => {
           await api1.editPkg((pkg: any) => {
-            const scripts = Object.keys(clipped.hooks)
-              .filter(h => !(/^(pre|post|version|create)$/.test(h) || /^(pre|post)-/.test(h)))
+            const scripts = Object.keys(api1.hooks)
+              .filter(h => !(/^(pre|post|version|create|init)$/.test(h) || /^(pre|post)-/.test(h)))
               .reduce((acc, hook) => ({...acc, [hook]: `clipped ${hook}`}), {})
             Object.assign(pkg.scripts, scripts)
           })

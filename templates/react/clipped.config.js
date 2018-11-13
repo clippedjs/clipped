@@ -19,7 +19,8 @@ module.exports = () => [
   api => {
     api.hook('init')
       .add('scaffold-react', async api => {
-        api.fs.copy({src: path.resolve(__dirname, 'template'), dest: api.config.src})
+        await api.fs.copy({src: path.resolve(__dirname, 'template'), dest: api.config.src})
+        await api.install(['react', 'react-dom'])
       })
   }
 ]

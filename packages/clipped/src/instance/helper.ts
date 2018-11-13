@@ -1,13 +1,14 @@
 import * as path from 'path'
 import * as fs from 'fs-extra'
+import * as childProcess from 'child_process';
 import {castArray, merge, isPlainObject, isFunction} from 'lodash'
 import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
 import * as prompt from 'prompts'
-import {cloneRepo, exec, toArgs, spawn} from '../utils'
+import * as yarnInstall from 'yarn-install'
 
 import {Clipped} from '.'
-import * as childProcess from 'child_process';
+import {cloneRepo, exec, toArgs, spawn} from '../utils'
 
 declare module '.' {
   interface Clipped {
@@ -25,6 +26,7 @@ declare module '.' {
     print(...msg: any[]): void; // eslint-disable-line no-undef, typescript/no-use-before-define
     prompt: prompts,
     editPkg(mutator: Object | Function): Promise<any>
+    install(deps: string[], opt?: any): Promise<any>
   }
 }
 
@@ -67,6 +69,22 @@ const fsOperations = {
 
 
 /**
+ * installDeps - install dependencies
+ *
+ * @param {Clipped} this
+ * @param {string[]} deps
+ * @param {*} opt
+ * @returns
+ */
+function installDeps (this: Clipped, deps: string[], opt: any = {}) {
+  return yarnInstall({
+    cwd: this.config.context,
+    deps,
+    ...opt
+  })
+}
+
+/**
  * editPkg - writes to pacakge.json
  *
  * @param {Clipped} this
@@ -105,6 +123,8 @@ export function initHelper(clipped: typeof Clipped): void {
   clipped.prototype.prompt = prompt
 
   clipped.prototype.editPkg = editPkg
+
+  clipped.prototype.install = installDeps
 
   Object.assign(clipped.prototype, clipped.prototype.fs)
 }

@@ -1,7 +1,7 @@
 const path = require('path')
 const {VueLoaderPlugin} = require('vue-loader')
 
-module.exports = ({jsx}) => [
+module.exports = ({jsx} = {}) => [
   require('@clipped/plugin-webpack')({jsx: jsx ? 'vue' : false}),
   ({config}) => ({
     webpack(cfg) {
@@ -28,7 +28,8 @@ module.exports = ({jsx}) => [
   api => {
     api.hook('init')
       .add('scaffold-vue', async api => {
-        api.fs.copy({src: path.resolve(__dirname, 'template'), dest: api.config.src})
+        await api.fs.copy({src: path.resolve(__dirname, 'template'), dest: api.config.src})
+        await api.install(['vue'])
       })
   }
 ]
