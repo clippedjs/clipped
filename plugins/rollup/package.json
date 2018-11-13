@@ -7,6 +7,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "plugin",
+    "rollup"
+  ],
   "dependencies": {
     "@clipped/plugin-babel": "^1.1.1",
     "rollup": "^0.66.6",

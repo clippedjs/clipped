@@ -6,8 +6,9 @@ import * as minimist from 'minimist'
 import * as updateNotifier from 'update-notifier'
 import * as cosmic from 'cosmiconfig'
 import * as yarnInstall from 'yarn-install'
-import * as axios from 'axios'
+
 import Clipped from '.'
+import {searchNpm} from './utils/npm'
 
 /**
  * ParseArgs - Parse cli arguments
@@ -75,15 +76,13 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
     })
     .add('init-package.json', async (api: Clipped) => api.spawn(os.platform().includes('win') ? 'npm.cmd' : 'npm', ['init'], {stdio: 'inherit', shell: true}))
     .add('install-presets', async (api: Clipped) => {
-      const [templates, plugins]: any[] = await Promise.all(['template', 'plugin'].map(async type => {
-        const url = `https://api.github.com/repos/clippedjs/clipped/contents/${type}s/?ref=master`
-        return (
-          axios.get(url)
-            .then(({data}: {data: any}) =>
-              data.map((item: any) => ({title: `@clipped/${type}-${item.name}`, value: `@clipped/${type}-${item.name}`}))
+      const [templates, plugins]: any[] = await Promise.all(
+        ['template', 'plugin'].map(type => 
+          searchNpm(`${type} keywords:clipped+${type}`)
+            .then((data: any) =>
+              data.map((item: any) => ({title: item.name, value: item.name}))
             )
-        )
-      }))
+      ))
 
       let {packages} = await api.prompt({
         type: 'multiselect',

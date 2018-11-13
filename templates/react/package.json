@@ -7,6 +7,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "template",
+    "react"
+  ],
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
     "@clipped/plugin-webpack": "^1.2.1",

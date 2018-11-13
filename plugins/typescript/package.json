@@ -7,6 +7,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "plugin",
+    "typescript"
+  ],
   "dependencies": {
     "rollup-plugin-typescript2": "^0.17.2",
     "ts-loader": "^5.3.0",

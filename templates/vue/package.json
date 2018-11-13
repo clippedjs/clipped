@@ -7,6 +7,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "template",
+    "vue"
+  ],
   "dependencies": {
     "@clipped/plugin-webpack": "^1.2.1",
     "vue-loader": "^15.4.2",

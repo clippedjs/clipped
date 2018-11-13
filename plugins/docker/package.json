@@ -7,6 +7,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "plugin",
+    "docker"
+  ],
   "dependencies": {
     "docker": "^1.0.0",
     "tar-fs": "^1.16.3"

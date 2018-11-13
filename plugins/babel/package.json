@@ -6,6 +6,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "plugin",
+    "babel"
+  ],
   "license": "MIT",
   "dependencies": {
     "@babel/plugin-proposal-class-properties": "^7.1.0",
