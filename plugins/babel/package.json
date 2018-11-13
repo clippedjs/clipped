@@ -1,6 +1,6 @@
 {
   "name": "@clipped/plugin-babel",
-  "version": "1.1.1",
+  "version": "1.1.2",
   "description": "Babel plugin for clipped",
   "main": "clipped.config.js",
   "publishConfig": {
