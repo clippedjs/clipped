@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/clippedjs/clipped/compare/@clipped/template-react@1.1.3...@clipped/template-react@1.2.0) (2018-11-13)
+
+
+### Features
+
+* **cli:** install needed deps on template init ([179b83d](https://github.com/clippedjs/clipped/commit/179b83d))
+
+
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/clippedjs/clipped/compare/@clipped/template-react@1.1.2...@clipped/template-react@1.1.3) (2018-11-13)
 
