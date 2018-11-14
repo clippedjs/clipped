@@ -9,19 +9,12 @@
     "plugins/*"
   ],
   "scripts": {
-    "commit": "git-cz",
-    "test:all": "cross-env NODE_ENV=test lerna run build && nyc --reporter=json --reporter=text --reporter=lcov mocha packages/*/test presets/*/test && ./fix-coverage.sh",
-    "coverage": "codecov && cat ./coverage/lcov.info | codacy-coverage"
+    "commit": "git-cz"
   },
   "devDependencies": {
-    "babel-runtime": "^6.26.0",
-    "codacy-coverage": "^3.0.0",
-    "codecov": "^3.0.0",
     "commitizen": "^2.9.6",
     "cz-conventional-changelog": "^2.1.0",
-    "lerna": "^3.4.3",
-    "mocha": "^5.0.0",
-    "nyc": "12.0.1"
+    "lerna": "^3.4.3"
   },
   "config": {
     "commitizen": {

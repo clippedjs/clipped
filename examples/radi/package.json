@@ -2,8 +2,17 @@
   "name": "@clipped/example-radi",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "clipped watch",
+    "build": "clipped build",
+    "dev": "clipped dev"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
+    "@clipped/template-radi": "^0.0.0-beta0",
+    "clipped": "^2.4.0-beta1",
     "radi": "^0.4.2"
   }
 }
