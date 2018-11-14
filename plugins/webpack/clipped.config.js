@@ -76,8 +76,8 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
       }
     }
   }),
-  api => ({
-    webpack(cfg) {
+  {
+    webpack(cfg, api) {
       cfg.set('module.rules.js', {
         test: /\.jsx?$/,
         include: [api.config.src],
@@ -182,7 +182,7 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
           }
         }])
     }
-  }),
+  },
   api => {
     api.hook('watch')
       .add('webpack', api =>
@@ -229,50 +229,50 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
       )
   },
   // Library / Backend-specific
-  api => ({
-    webpack(cfg) {
-      if (!['library', 'backend'].includes(type)) return
-      cfg
-        .set('target', 'node')
-        .set('node', {
-          __filename: false,
-          __dirname: false
-        })
-        .set('externals', require('webpack-node-externals')({
-          whitelist: [
-            /\.(eot|woff|woff2|ttf|otf)$/,
-            /\.(svg|png|jpg|jpeg|gif|ico|webm)$/,
-            /\.(mp4|mp3|ogg|swf|webp)$/,
-            /\.(css|scss|sass|less|styl)$/,
-            /^webpack/
-          ]
-        }))
-        .set('output.libraryTarget', 'commonjs2')
-      
-      cfg.plugins
-        .use('banner', webpack.BannerPlugin,  [{
-          raw: true,
-          entryOnly: false,
-          banner: `require('${
-            // Is source-map-support installed as project dependency, or linked?
-            (require.resolve('source-map-support').indexOf(process.cwd()) === 0)
-              // If it's resolvable from the project root, it's a project dependency.
-              ? 'source-map-support/register'
-              // It's not under the project, it's linked via lerna.
-              : require.resolve('source-map-support/register')
-          }')`
-        }])
+  ['library', 'backend'].includes(type) && [
+    {
+      webpack(cfg, api) {
+        cfg
+          .set('target', 'node')
+          .set('node', {
+            __filename: false,
+            __dirname: false
+          })
+          .set('externals', require('webpack-node-externals')({
+            whitelist: [
+              /\.(eot|woff|woff2|ttf|otf)$/,
+              /\.(svg|png|jpg|jpeg|gif|ico|webm)$/,
+              /\.(mp4|mp3|ogg|swf|webp)$/,
+              /\.(css|scss|sass|less|styl)$/,
+              /^webpack/
+            ]
+          }))
+          .set('output.libraryTarget', 'commonjs2')
+        
+        cfg.plugins
+          .use('banner', webpack.BannerPlugin,  [{
+            raw: true,
+            entryOnly: false,
+            banner: `require('${
+              // Is source-map-support installed as project dependency, or linked?
+              (require.resolve('source-map-support').indexOf(process.cwd()) === 0)
+                // If it's resolvable from the project root, it's a project dependency.
+                ? 'source-map-support/register'
+                // It's not under the project, it's linked via lerna.
+                : require.resolve('source-map-support/register')
+            }')`
+          }])
+      }
     }
-  }),
-  // Backend-specific
-  api => {
-    if (!['backend'].includes(type)) return
-
-    const main = api.config.packageJson.main ? api.resolve(api.config.packageJson.main) : api.config.dist
-    api.hook('dev')
+  ]
+  (type === 'backend') && [
+    api => {
+      api.hook('dev')
       .add('watch-and-nodemon', [
         api => api.execHook('watch'),
         api => new Promise((resolve, reject) => {
+          const main = api.config.packageJson.main ? api.resolve(api.config.packageJson.main) : api.config.dist
+          
           nodemon({
             // Main field in package.json or dist/index.js
             script: main || api.config.main || api.config.dist,
@@ -290,49 +290,45 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
           })
         })
       ])
-  },
-  // Frontend specific
-  api => {
-    if (!['frontend'].includes(type)) return
-
-    if (process.env.NODE_ENV === 'development') {
-      api.defer({
-        webpack(cfg) {
-          cfg.plugins.use('hot-module', webpack.HotModuleReplacementPlugin, [])
-        }
-      })
     }
-
-    api.defer({
+  ],
+  // Frontend specific
+  (type === 'frontend') && [
+    {
       webpack(cfg) {
-        cfg.plugins.use('html', require('html-webpack-plugin'), [{
-          baseHref: '/',
-          template: require.resolve('html-webpack-template/index.ejs'),
-          inject: true,
-          appMountId: 'app',
-          mobile: true
-        }])
+        if (process.env.NODE_ENV === 'development') {
+          cfg.plugins
+            .use('hot-module', webpack.HotModuleReplacementPlugin, [])
+            .use('html', require('html-webpack-plugin'), [{
+              baseHref: '/',
+              template: require.resolve('html-webpack-template/index.ejs'),
+              inject: true,
+              appMountId: 'app',
+              mobile: true
+            }])
+        }
       }
-    })
-
-    api.hook('dev')
-      .add('webpack-dev-server', api => {
-        return new Promise((resolve, reject) => {
-          for (key in api.config.webpack.entry.toConfig()) {
-            api.config.webpack.entry[key]
-              .set('only-dev-server', require.resolve('webpack/hot/only-dev-server'))
-              .set('dev-server', require.resolve(`webpack-dev-server/client`))
-          }
-
-          new WebpackDevServer(
-            webpack(api.config.webpack.toConfig())
-          ).listen(api.config.webpack.devServer.port, api.config.webpack.devServer.host, (err, result) => {
-            if (err) {
-              reject(err)
+    },
+    api => {
+      api.hook('dev')
+        .add('webpack-dev-server', api => {
+          return new Promise((resolve, reject) => {
+            for (key in api.config.webpack.entry.toConfig()) {
+              api.config.webpack.entry[key]
+                .set('only-dev-server', require.resolve('webpack/hot/only-dev-server'))
+                .set('dev-server', require.resolve(`webpack-dev-server/client`))
             }
-            api.print(`🚀 App has started on http${api.config.webpack.devServer.https ? 's' : ''}://${api.config.webpack.devServer.host}:${api.config.webpack.devServer.port}`)
+  
+            new WebpackDevServer(
+              webpack(api.config.webpack.toConfig())
+            ).listen(api.config.webpack.devServer.port, api.config.webpack.devServer.host, (err, result) => {
+              if (err) {
+                reject(err)
+              }
+              api.print(`🚀 App has started on http${api.config.webpack.devServer.https ? 's' : ''}://${api.config.webpack.devServer.host}:${api.config.webpack.devServer.port}`)
+            })
           })
         })
-      })
-  }
+    }
+  ],  
 ]

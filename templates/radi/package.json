@@ -1,0 +1,15 @@
+{
+  "name": "@clipped/template-radi",
+  "description": "Radi template for clipped",
+  "version": "0.0.0",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@clipped/plugin-webpack": "^1.2.2",
+    "babel-plugin-transform-radi-listen": "^0.3.4",
+    "radi-loader": "^1.0.0"
+  }
+}
