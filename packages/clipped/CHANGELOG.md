@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.4.1"></a>
+## [2.4.1](https://github.com/clippedjs/clipped/compare/clipped@2.4.0...clipped@2.4.1) (2018-11-14)
+
+
+### Bug Fixes
+
+* **defer:** config were not ordered correcrly ([270c75b](https://github.com/clippedjs/clipped/commit/270c75b))
+
+
+
+
+
 <a name="2.4.0"></a>
 # [2.4.0](https://github.com/clippedjs/clipped/compare/clipped@2.3.2...clipped@2.4.0) (2018-11-13)
 

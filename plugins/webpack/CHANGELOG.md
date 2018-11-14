@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-webpack@1.2.2...@clipped/plugin-webpack@1.3.0) (2018-11-14)
+
+
+### Features
+
+* **radi:** adds template for radi ([9931b49](https://github.com/clippedjs/clipped/commit/9931b49))
+
+
+
+
+
 <a name="1.2.2"></a>
 ## [1.2.2](https://github.com/clippedjs/clipped/compare/@clipped/plugin-webpack@1.2.1...@clipped/plugin-webpack@1.2.2) (2018-11-13)
 

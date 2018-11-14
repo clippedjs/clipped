@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.1"></a>
+## [1.2.1](https://github.com/clippedjs/clipped/compare/@clipped/template-vue@1.2.0...@clipped/template-vue@1.2.1) (2018-11-14)
+
+**Note:** Version bump only for package @clipped/template-vue
+
+
+
+
+
 <a name="1.2.0"></a>
 # [1.2.0](https://github.com/clippedjs/clipped/compare/@clipped/template-vue@1.1.3...@clipped/template-vue@1.2.0) (2018-11-13)
 
