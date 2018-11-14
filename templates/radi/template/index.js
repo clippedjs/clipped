@@ -1,4 +1,5 @@
 import Radi from 'radi'
+import App from './App'
 
 class Hello extends Radi.component {
   state() {
@@ -6,7 +7,7 @@ class Hello extends Radi.component {
   }
   view() {
     return (
-      <h1>Hello { this.state.sample } !</h1>
+      <App/>
     )
   }
 }

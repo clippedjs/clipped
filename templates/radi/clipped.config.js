@@ -26,6 +26,7 @@ module.exports = () => [
     api.hook('init')
       .add('scaffold-radi', async api => {
         await api.fs.copy({src: path.resolve(__dirname, 'template'), dest: api.config.src})
+        await api.install(['radi'])
       })
   }
 ]
