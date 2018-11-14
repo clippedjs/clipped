@@ -11,11 +11,18 @@ declare module '.' {
 }
 
 function deferConfig(this: Clipped, mutator: any = () => {}): Clipped {
+  this._defers.push(mutator)
+  return this
+}
+
+function normalizeDefer(mutator: any = () => {}): any {
   if (isPlainObject(mutator)) {
-    this._defers.push((clipped: Clipped) => {
+    return (clipped: Clipped) => {
       Object.keys(mutator).map(key => {
         if (isFunction(mutator[key])) {
-          if(clipped.config[key]) mutator[key](clipped.config[key], clipped)
+          if (clipped.config.toConfig()[key]) {
+            mutator[key](clipped.config[key], clipped)
+          }
         } else if (isPlainObject(mutator[key])) {
           if (!clipped.config[key]) {
             clipped.config[key] = mutator[key]
@@ -26,16 +33,15 @@ function deferConfig(this: Clipped, mutator: any = () => {}): Clipped {
           clipped.config[key] = mutator[key]
         }
       })
-    })
-  } else if (isFunction(mutator)) {
-    this._defers.push(mutator)
+    }
+  } else {
+    return mutator
   }
-  
-  return this
 }
 
 function execDefer(this: Clipped): any {
-  (this._defers || []).forEach(cb => cb.call(this, this))
+  (this._defers || []).map(normalizeDefer).forEach(cb => cb.call(this, this))
+  
   return this.config
 }
 
