@@ -13,7 +13,7 @@
     "docker"
   ],
   "dependencies": {
-    "docker": "^1.0.0",
+    "dockerode": "^2.5.7",
     "tar-fs": "^1.16.3"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"

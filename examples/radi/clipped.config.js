@@ -1,1 +1,1 @@
-module.exports = require('@clipped/template-react')
+module.exports = require('@clipped/template-radi')

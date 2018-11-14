@@ -1,6 +1,5 @@
 import {spawn, spawnSync} from 'child_process'
 import {isString, isFunction, isPlainObject} from 'lodash'
-import yeoman from 'yeoman-environment'
 import {createChainable} from 'jointed'
 
 import {Clipped} from '.'
