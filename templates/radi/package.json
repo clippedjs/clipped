@@ -7,6 +7,11 @@
   "publishConfig": {
     "access": "public"
   },
+  "keywords": [
+    "clipped",
+    "template",
+    "radi"
+  ],
   "dependencies": {
     "@clipped/plugin-webpack": "^1.2.2",
     "babel-plugin-transform-radi-listen": "^0.3.4",

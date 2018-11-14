@@ -1,0 +1,26 @@
+state: {
+  count: 0
+}
+
+@action change(diff) {
+  return {
+    count: this.state.count + diff
+  }
+}
+
+<template>
+  <h2>{ this.state.count }</h2>
+
+  <button
+    class="btn"
+    disabled={ this.state.count <= 0 }
+    onclick={ () => -1 |> this.change }>
+    -
+  </button>
+
+  <button
+    class="btn"
+    onclick={ () => 1 |> this.change }>
+    +
+  </button>
+</template>

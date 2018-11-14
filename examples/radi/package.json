@@ -1,0 +1,9 @@
+{
+  "name": "@clipped/example-radi",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "radi": "^0.4.2"
+  }
+}
