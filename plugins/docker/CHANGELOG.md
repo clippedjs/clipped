@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/clippedjs/clipped/compare/@clipped/plugin-docker@1.1.2...@clipped/plugin-docker@1.1.3) (2018-11-14)
+
+**Note:** Version bump only for package @clipped/plugin-docker
+
+
+
+
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/clippedjs/clipped/compare/@clipped/plugin-docker@1.1.1...@clipped/plugin-docker@1.1.2) (2018-11-13)
 
