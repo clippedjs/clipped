@@ -1,0 +1,22 @@
+{
+  "name": "@clipped/plugin-jest",
+  "version": "0.0.0",
+  "description": "Jest plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "clipped",
+    "plugin",
+    "jest"
+  ],
+  "dependencies": {
+    "@babel/core": "^7.1.6",
+    "babel-core": "^7.0.0-bridge",
+    "babel-jest": "^23.6.0",
+    "jest": "^23.6.0"
+  },
+  "jest": {}
+}
