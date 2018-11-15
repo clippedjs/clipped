@@ -1,6 +1,6 @@
 {
   "name": "@clipped/plugin-jest",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Jest plugin for clipped",
   "main": "clipped.config.js",
   "license": "MIT",
