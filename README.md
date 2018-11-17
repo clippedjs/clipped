@@ -23,6 +23,9 @@ More than boilerplate :muscle:
   <a href="https://github.com/xojs/xo">
     <img src="https://img.shields.io/badge/code_style-XO-5ed9c7.svg" alt="XO code style">
   </a>
+  <a href="https://usthing.xyz">
+    <img src="https://badgen.net/badge/%E2%99%A5/USThing/blue" alt="USThing">
+  </a>
 </p>
 
 ## Requirements
