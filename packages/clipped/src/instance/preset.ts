@@ -8,11 +8,14 @@ declare module '.' {
   interface Clipped {
     prototype: any; // eslint-disable-line no-undef, typescript/no-use-before-define
     __initialized__: boolean; // eslint-disable-line no-undef, typescript/no-use-before-define
+    _presets: {info: presetInfo, plugin: any}[],
+    presets: {info: presetInfo, plugin: any}[],
 
     opt: {[index: string]: any}; // eslint-disable-line no-undef, typescript/no-use-before-define
     config: {[index: string]: any}; // eslint-disable-line no-undef, typescript/no-use-before-define
 
     use(ware: any): Promise<Clipped>; // eslint-disable-line no-undef, typescript/no-use-before-define
+    describe(info: presetInfo): void;
 
     resolve(...paths: string[]): string; // eslint-disable-line no-undef, typescript/no-use-before-define
   }
@@ -73,6 +76,13 @@ function normalizePreset(this: Clipped, ware: any): any {
 }
 
 export async function execPreset(this: Clipped, ware?: any): Promise<Clipped> {
+  this.describe = (info: presetInfo) => {
+    if (this._presets.findIndex(p => p.info.id === info.id) > -1) {
+      throw new Error(`Duplicate presets found for ${info.id}`)
+    }
+    this._presets.unshift({info, plugin: ware})
+  }
+  
   for (let w of [].concat(ware).map(normalizePreset.bind(this)).filter(Boolean)) {
     let res: any = w
     while (res !== null && res !== undefined && res !== this) {
@@ -93,4 +103,10 @@ export async function execPreset(this: Clipped, ware?: any): Promise<Clipped> {
 
 export function initPreset(clipped: typeof Clipped): void {
   clipped.prototype.use = execPreset
+
+  Object.defineProperty(clipped.prototype, 'presets', ({
+    get() {
+      return this._presets
+    }
+  }))
 }

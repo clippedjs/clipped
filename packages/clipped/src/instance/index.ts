@@ -5,6 +5,7 @@ import {initDefer} from './defer'
 
 export class Clipped {
   _hooks: {[index: string]: Hook} = {}
+  _presets: {info: presetInfo, plugin: any}[] = []
   constructor(opt: any = {}) {
     basePreset.call(this, opt)
   }

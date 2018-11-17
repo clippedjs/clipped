@@ -1,4 +1,24 @@
 module.exports = ({type = 'library', target = 'browser', jsx = false} = {}) => [
+  api => api.describe({
+    id: 'org.clipped.babel',
+    name: 'Babel plugin',
+    description: 'Provides support for Babel transpiler',
+    options: {
+      jsx: {
+        type: 'enum',
+        default: false,
+        valid: [false, String, 'vue', 'react'],
+        description: 'What jsx pragma to use in Babel'
+      },
+      target: {
+        type: 'enum',
+        default: 'browser',
+        valid: ['browser', 'library'],
+        description: 'Build target of Babel'
+      }
+    },
+    after: ['org.clipped.webpack']
+  }),
   {
     babel: {
       presets: [],
@@ -36,7 +56,6 @@ module.exports = ({type = 'library', target = 'browser', jsx = false} = {}) => [
           { pragma: jsx }
         ])
       }
-      
     },
   }
 ]
