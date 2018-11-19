@@ -1,5 +1,9 @@
 module.exports = () => [
-  require('@clipped/plugin-rollup')(),
+  api => api.describe({
+    id: 'org.clipped.typescript',
+    name: 'Typescript plugin',
+    description: 'Provides support for Typescript'
+  }),
   {
     typescript: {
       compilerOptions: {

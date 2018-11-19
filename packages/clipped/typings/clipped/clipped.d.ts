@@ -17,3 +17,15 @@ interface Hook {
   prepend (name: string, callbacks: Function | Function[]): Hook
   delete (name: string): Hook
 }
+
+interface presetInfo {
+  id: string,
+  name: string,
+  description: string,
+  options: {[index: string]: {
+    type: any,
+    description: string,
+    before: string[],
+    after: string[]
+  }}
+}

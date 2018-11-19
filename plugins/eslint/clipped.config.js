@@ -9,7 +9,12 @@ module.exports = ({
   extensions = ['vue', 'js', 'ts', 'tsx', 'jsx', 'marko', 'radi'],
   mode = 'xo'
 } = {}) => [
-  require('@clipped/plugin-webpack')(),
+  api => api.describe({
+    id: 'org.clipped.eslint',
+    name: 'Eslint Plugin',
+    description: 'Support for Eslint',
+    after: ['org.clipped.webpack', 'org.clipped.rollup']
+  }),
   {
     eslint: {
       globals: [],

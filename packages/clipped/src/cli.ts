@@ -35,12 +35,8 @@ async function loadConfig(opt: any): Promise<Clipped> {
 
   // Execute custom preset
   if (config && config.config) {
-    try {
-      // eslint-disable-next-line no-undef
-      await clipped.use(config.config)
-    } catch (error) {
-      clipped.print(error)
-    }
+    // eslint-disable-next-line no-undef
+    await clipped.use(config.config)
   }
   return clipped
 }
@@ -64,6 +60,20 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
   }
 
   const clipped = await loadConfig(opt)
+
+  clipped.hook('help')
+    .add('readme', (api: Clipped) => {
+      api.print(
+        'Usage:    clipped ACTION\n\n' +
+        'Actions:\n' + Object.keys(clipped.hooks).filter(hook => !hook.includes('pre') && !hook.includes('post')).join(', ')) +
+        '\n'
+    })
+    .add('presets', (api: Clipped) => {
+      api.print(
+        '\nPresets found:\n\n',
+        api.presets.map(({info}) => `- ${info.id}:\n    name: ${info.name || ''}\n    description: ${info.description || ''}`).join('\n\n')
+      )
+    })
 
   clipped.hook('create')
     .add('create-folder', async (api: Clipped) => {
@@ -137,12 +147,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
       console.error(error)
     }
   } else {
-    clipped.print(`
-Usage:    clipped ACTION
-
-Actions:
-${Object.keys(clipped.hooks).filter(hook => !hook.includes('pre') && !hook.includes('post')).join(', ')}
-`)
+    await clipped.execHook('help')
   }
 
   return true
