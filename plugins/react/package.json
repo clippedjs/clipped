@@ -1,7 +1,7 @@
 {
-  "name": "@clipped/template-vue",
-  "description": "Vue template for clipped",
-  "version": "1.2.2",
+  "name": "@clipped/plugin-react",
+  "description": "React plugin for clipped",
+  "version": "1.2.1",
   "main": "clipped.config.js",
   "license": "MIT",
   "publishConfig": {
@@ -9,14 +9,13 @@
   },
   "keywords": [
     "clipped",
-    "template",
-    "vue"
+    "plugin",
+    "react"
   ],
   "dependencies": {
+    "@babel/preset-react": "^7.0.0",
     "@clipped/plugin-webpack": "^1.4.0",
-    "vue-loader": "^15.4.2",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "2.5.13"
+    "react-hot-loader": "^4.3.12"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }

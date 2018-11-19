@@ -1,8 +1,13 @@
 const path = require('path')
 const {VueLoaderPlugin} = require('vue-loader')
 
-module.exports = ({jsx} = {}) => [
-  require('@clipped/plugin-webpack')({jsx: jsx ? 'vue' : false}),
+module.exports = () => [
+  api => api.describe({
+    id: 'org.clipped.vue',
+    name: 'Vue plugin',
+    description: 'Provides support for Vue',
+    before: ['org.clipped.webpack']
+  }),
   ({config}) => ({
     webpack(cfg) {
       cfg.resolve.extensions.push('.vue')
@@ -29,7 +34,7 @@ module.exports = ({jsx} = {}) => [
     api.hook('init')
       .add('scaffold-vue', async api => {
         await api.fs.copy({src: path.resolve(__dirname, 'template'), dest: api.config.src})
-        await api.install(['vue'])
+        await api.install(['vue', 'vue-template-compiler'])
       })
   }
 ]

@@ -1,7 +1,12 @@
 const path = require('path')
 
 module.exports = () => [
-  require('@clipped/plugin-webpack')({jsx: 'react'}),
+  api => api.describe({
+    id: 'org.clipped.react',
+    name: 'React plugin',
+    description: 'Provides support for React',
+    before: ['org.clipped.webpack']
+  }),
   {
     babel(cfg) {
       cfg.presets.set('react', [require.resolve('@babel/preset-react'), {}])

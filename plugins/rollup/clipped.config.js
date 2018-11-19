@@ -3,7 +3,7 @@ const rollup = require('rollup')
 // const {uglify} = require('rollup-plugin-uglify')
 // const {minify} = require('uglify-es')
 
-module.exports = ({name = '', type = 'library', babel = {}, formats = ['cjs'], commonjs = {}, postcss = {}, globals = {}, external = [], moduleName = '', alias = {}, replace = {}} = {}) => [
+module.exports = ({name = '', formats = ['cjs'], commonjs = {}, postcss = {}, globals = {}, external = [], moduleName = '', alias = {}, replace = {}} = {}) => [
   api => api.describe({
     id: 'org.clipped.rollup',
     name: 'Rollup plugin',
@@ -18,12 +18,6 @@ module.exports = ({name = '', type = 'library', babel = {}, formats = ['cjs'], c
         type: String,
         default: '',
         description: 'Module name of umd bundle'
-      },
-      type: {
-        type: 'enum',
-        default: 'frontend',
-        valid: ['frontend', 'backend', 'library'],
-        description: 'Build target of Webpack'
       },
       formats: {
         type: 'multiple',
@@ -50,7 +44,6 @@ module.exports = ({name = '', type = 'library', babel = {}, formats = ['cjs'], c
       }
     }
   }),
-  babel && require('@clipped/plugin-babel')({type, ...babel}),
   {
     rollup: {
       external,
@@ -67,13 +60,6 @@ module.exports = ({name = '', type = 'library', babel = {}, formats = ['cjs'], c
         globals,
         sourcemap: true
       }))
-
-      // Support babel
-      if (babel) {
-        cfg.plugins
-          .use('babel', require('rollup-plugin-babel'), [{}])
-          .alias('babel.args.0', () => config.babel)
-      }
 
       if (postcss) {
         cfg.plugins
@@ -112,14 +98,6 @@ module.exports = ({name = '', type = 'library', babel = {}, formats = ['cjs'], c
             browser: true
           }])
       // }
-
-      if (process.env.NODE_ENV !== 'development') {
-        if (babel) {
-          cfg.plugins.use('babel-minify', require('rollup-plugin-babel-minify'), [{}])
-        } else {
-          cfg.plugins.use('uglify', uglify, [{}, minify])
-        }
-      }
 
       cfg.plugins.use('multi-entry', require('rollup-plugin-multi-entry'), [])
     }

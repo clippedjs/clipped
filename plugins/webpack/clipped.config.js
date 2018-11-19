@@ -11,7 +11,7 @@ const hasDeps = (deps = []) => {
   return true
 }
 
-module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
+module.exports = ({target = 'web'} = {}) => [
   api => api.describe({
     id: 'org.clipped.webpack',
     name: 'Webpack plugin',
@@ -22,16 +22,9 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
         default: false,
         valid: [false, String, 'vue', 'react'],
         description: 'What jsx pragma to use in Babel'
-      },
-      type: {
-        type: 'enum',
-        default: 'frontend',
-        valid: ['frontend', 'backend', 'library'],
-        description: 'Build target of Webpack'
       }
     }
   }),
-  babel && require('@clipped/plugin-babel')({type, jsx, ...babel}),
   ({config, resolve}) => ({
     webpack: {
       mode: process.env.NODE_ENV,
@@ -101,15 +94,8 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
         test: /\.jsx?$/,
         include: [api.config.src],
         exclude: /(node_modules|bower_components)/,
-        use: [{
-          key: 'babel',
-          value: {
-            loader: require.resolve('babel-loader')
-          }
-        }]
+        use: []
       })
-
-      cfg['module.rules.js.use.babel'].alias('options', () => api.config.babel)
 
       const paths = ['node_modules']
 
@@ -167,9 +153,9 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
         font: [/\.(woff2?|eot|ttf|otf)(\?.*)?$/]
       }
 
-      for (type in assets) {
-        const asset = assets[type]
-        cfg.module.rules.set(type, {
+      for (target in assets) {
+        const asset = assets[target]
+        cfg.module.rules.set(target, {
           test: asset[0],
           include: [api.config.src],
           use: [{
@@ -247,8 +233,7 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
         })
       )
   },
-  // Library / Backend-specific
-  ['library', 'backend'].includes(type) && [
+  api => api.config.target === 'node' && [
     {
       webpack(cfg, api) {
         cfg
@@ -282,9 +267,7 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
             }')`
           }])
       }
-    }
-  ]
-  (type === 'backend') && [
+    },
     api => {
       api.hook('dev')
       .add('watch-and-nodemon', [
@@ -311,8 +294,7 @@ module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
       ])
     }
   ],
-  // Frontend specific
-  (type === 'frontend') && [
+  api => api.config.target === 'web' && [
     {
       webpack(cfg) {
         if (process.env.NODE_ENV === 'development') {
