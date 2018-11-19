@@ -2,7 +2,6 @@
   "lerna": "2.9.0",
   "packages": [
     "packages/*",
-    "templates/*",
     "presets/webpack4/*",
     "presets/*",
     "plugins/*"
