@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.5](https://github.com/clippedjs/clipped/compare/@clipped/plugin-vue@1.3.4...@clipped/plugin-vue@1.3.5) (2018-11-19)
+
+
+### Bug Fixes
+
+* **vue:** make resolving template-compiler less strict 1 ([5d45392](https://github.com/clippedjs/clipped/commit/5d45392))
+
+
+
+
+
 ## [1.3.4](https://github.com/clippedjs/clipped/compare/@clipped/plugin-vue@1.3.3...@clipped/plugin-vue@1.3.4) (2018-11-19)
 
 
