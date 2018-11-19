@@ -5,7 +5,7 @@ module.exports = () => [
     id: 'org.clipped.radi',
     name: 'Radi plugin',
     description: 'Provides support for Radi',
-    before: ['org.clipped.webpack', 'org.clipped.babel']
+    after: ['org.clipped.webpack', 'org.clipped.babel']
   }),
   {
     babel(cfg, api) {

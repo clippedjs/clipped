@@ -21,11 +21,13 @@ interface Hook {
 interface presetInfo {
   id: string,
   name: string,
-  description: string,
-  options: {[index: string]: {
+  description?: string,
+  options?: {[index: string]: {
     type: any,
     description: string,
     before: string[],
     after: string[]
-  }}
+  }},
+  before?: string[]
+  after?: string[]
 }

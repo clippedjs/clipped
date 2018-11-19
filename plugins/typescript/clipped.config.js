@@ -3,6 +3,7 @@ module.exports = () => [
     id: 'org.clipped.typescript',
     name: 'Typescript plugin',
     description: 'Provides support for Typescript'
+    after: ['org.clipped.webpack']
   }),
   {
     typescript: {

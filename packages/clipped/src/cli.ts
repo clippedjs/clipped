@@ -103,10 +103,23 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
           throw new Error('Aborted')
         }
       })
-      packages = packages.sort((a: string, b: string) => !/(webpack|rollup)/.test(a) && /(webpack|rollup)/.test(b))
+      await api.install([...packages, 'clipped'])
+      const infos = await Promise.all(packages.map((p: string) => {
+        const c = new Clipped(opt)
+        return c.use(require(c.resolve('./node_modules/' + p))).then(clip => clip.presets[0]) // only take the first-level preset
+      }))
+
+      packages = packages.sort((a: string, b: string) => {
+        const pkgA: any = infos.find((i: any) => i.info.id === a)
+        const pkgB: any = infos.find((i: any) => i.info.id === b)
+
+        return (
+          (pkgA && pkgB && pkgA.after && pkgA.after.includes(pkgB.info.id)) // A should have been after B
+          (pkgA && pkgB && pkgB.before && pkgB.before.includes(pkgA.info.id)) // B should have been before A
+        )
+      })
 
       await api.fs.copyTpl({src: path.resolve(__dirname, '../../template/_clipped.config.js'), dest: api.resolve('clipped.config.js'), context: {packages}})
-      await api.install([...packages, 'clipped'])
     })
     .add('start-init-hook', () =>
       loadConfig(opt)

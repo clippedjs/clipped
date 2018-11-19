@@ -33,7 +33,7 @@ module.exports = ({
         loader: require.resolve('eslint-loader')
       })
       
-      cfg.module.alias('rules.eslint.options', () => api.config.eslint)
+      cfg.module.rules.alias('eslint.options', () => api.config.eslint)
     },
     rollup(cfg, api) {
       cfg.plugins.use('eslint', require('rollup-plugin-eslint').eslint, [])
