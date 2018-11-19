@@ -23,7 +23,7 @@ module.exports = () => [
 
       let templateCompiler = null
       try {
-        templateCompiler = require.resolve('vue-template-compiler')
+        templateCompiler = require('vue-template-compiler')
       } catch (_) {}
 
       cfg.module.rules.set('vue', {
