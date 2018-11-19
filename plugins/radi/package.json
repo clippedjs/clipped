@@ -1,6 +1,6 @@
 {
-  "name": "@clipped/template-radi",
-  "description": "Radi template for clipped",
+  "name": "@clipped/plugin-radi",
+  "description": "Radi plugin for clipped",
   "version": "0.1.1",
   "main": "clipped.config.js",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "keywords": [
     "clipped",
-    "template",
+    "plugin",
     "radi"
   ],
   "dependencies": {

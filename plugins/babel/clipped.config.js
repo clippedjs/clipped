@@ -1,4 +1,4 @@
-module.exports = ({type = 'library', target = 'browser', jsx = false} = {}) => [
+module.exports = ({jsx = false} = {}) => [
   api => api.describe({
     id: 'org.clipped.babel',
     name: 'Babel plugin',
@@ -9,12 +9,6 @@ module.exports = ({type = 'library', target = 'browser', jsx = false} = {}) => [
         default: false,
         valid: [false, String, 'vue', 'react'],
         description: 'What jsx pragma to use in Babel'
-      },
-      target: {
-        type: 'enum',
-        default: 'browser',
-        valid: ['browser', 'library'],
-        description: 'Build target of Babel'
       }
     },
     after: ['org.clipped.webpack']
@@ -32,16 +26,31 @@ module.exports = ({type = 'library', target = 'browser', jsx = false} = {}) => [
         ],
         [require.resolve('@babel/plugin-proposal-class-properties')]
       ]
+    },
+    webpack(cfg) {
+      cfg.set('module.rules.js.use.babel', {
+        loader: require.resolve('babel-loader'),
+      })
+      cfg.module.alias('rules.js.use.babel.options', () => api.config.babel)
+    },
+    rollup(cfg) {
+      cfg.plugins
+        .use('babel', require('rollup-plugin-babel'), [{}])
+        .alias('babel.args.0', () => config.babel)
+
+      if (process.env.NODE_ENV !== 'development') {
+        cfg.plugins.use('babel-minify', require('rollup-plugin-babel-minify'), [{}])
+      }
     }
   },
   {
-    babel(cfg) {
+    babel(cfg, api) {
       cfg.presets.set('env', [
         require.resolve('@babel/preset-env'),
         {
-          ...(type === 'library' ? {useBuiltIns: false} : {}),
+          ...(api.config.target !== 'web' ? {useBuiltIns: false} : {}),
           modules: false,
-          targets: target === 'browser' ? {ie: 9} : {node: target.replace('node:', '') || 6},
+          targets: api.config.target === 'web' ? {ie: 9} : {node: api.config.target.replace('node:', '') || 6},
           exclude: ['transform-regenerator', 'transform-async-to-generator'],
         }
       ])

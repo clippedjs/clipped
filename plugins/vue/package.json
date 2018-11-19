@@ -1,6 +1,6 @@
 {
-  "name": "@clipped/template-vue",
-  "description": "Vue template for clipped",
+  "name": "@clipped/plugin-vue",
+  "description": "Vue plugin for clipped",
   "version": "1.2.1",
   "main": "clipped.config.js",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "keywords": [
     "clipped",
-    "template",
+    "plugin",
     "vue"
   ],
   "dependencies": {

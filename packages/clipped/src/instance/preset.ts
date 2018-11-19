@@ -44,6 +44,7 @@ export function basePreset(this: Clipped, opt: Object = {}): void {
   } catch (error) {}
 
   Object.assign(this.config, ({
+    target: 'web',
     name: packageJson.name,
     src: this.resolve('src'),
     dist: this.resolve('dist'),

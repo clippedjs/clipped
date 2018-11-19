@@ -17,8 +17,10 @@
     "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
     "@babel/plugin-transform-react-jsx": "^7.0.0",
     "@babel/preset-env": "^7.1.0",
+    "babel-loader": "^8.0.4",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
-    "babel-preset-backpack": "^0.8.0"
+    "babel-preset-backpack": "^0.8.0",
+    "rollup-plugin-babel-minify": "^6.1.1"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }
