@@ -289,16 +289,17 @@ module.exports = ({target = 'web'} = {}) => [
   api => api.config.target === 'web' && [
     {
       webpack(cfg) {
+        cfg.plugins.use('html', require('html-webpack-plugin'), [{
+          baseHref: '/',
+          template: require.resolve('html-webpack-template/index.ejs'),
+          inject: true,
+          appMountId: 'app',
+          mobile: true
+        }])
+
         if (process.env.NODE_ENV === 'development') {
           cfg.plugins
             .use('hot-module', webpack.HotModuleReplacementPlugin, [])
-            .use('html', require('html-webpack-plugin'), [{
-              baseHref: '/',
-              template: require.resolve('html-webpack-template/index.ejs'),
-              inject: true,
-              appMountId: 'app',
-              mobile: true
-            }])
         }
       }
     },
