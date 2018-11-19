@@ -1,5 +1,5 @@
 import {spawn, spawnSync} from 'child_process'
-import {isString, isFunction, isPlainObject} from 'lodash'
+import {isString, isFunction, isPlainObject, intersection} from 'lodash'
 import {createChainable} from 'jointed'
 
 import {Clipped} from '.'
@@ -78,8 +78,14 @@ function normalizePreset(this: Clipped, ware: any): any {
 
 export async function execPreset(this: Clipped, ware?: any): Promise<Clipped> {
   this.describe = (info: presetInfo) => {
-    if (this._presets.findIndex(p => p.info.id === info.id) > -1) {
+    if (this.presets.findIndex(p => p.info.id === info.id) > -1) {
       throw new Error(`Duplicate presets found for ${info.id}`)
+    }
+    if (
+      (info.before && intersection(info.before, this.presets.map(p => p.info.id))) || // is after presets that it should be before
+      (this.presets.reduce((acc: string[], p) => [...acc, ...(p.info.after || [])], []).indexOf(info.id) > -1) // is before presets that it should be after
+    ) {
+      throw new Error(`Incorrect order for ${info.id}, please re-arrange it`)
     }
     this._presets.unshift({info, plugin: ware})
   }

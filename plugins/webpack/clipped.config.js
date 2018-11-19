@@ -15,15 +15,7 @@ module.exports = ({target = 'web'} = {}) => [
   api => api.describe({
     id: 'org.clipped.webpack',
     name: 'Webpack plugin',
-    description: 'Provides support for Webpack bundler',
-    options: {
-      jsx: {
-        type: 'enum',
-        default: false,
-        valid: [false, String, 'vue', 'react'],
-        description: 'What jsx pragma to use in Babel'
-      }
-    }
+    description: 'Provides support for Webpack bundler'
   }),
   ({config, resolve}) => ({
     webpack: {
