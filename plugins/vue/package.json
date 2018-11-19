@@ -15,8 +15,7 @@
   "dependencies": {
     "@clipped/plugin-webpack": "^1.5.1",
     "vue-loader": "^15.4.2",
-    "vue-style-loader": "^4.1.2",
-    "vue-template-compiler": "2.5.13"
+    "vue-style-loader": "^4.1.2"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
 }
