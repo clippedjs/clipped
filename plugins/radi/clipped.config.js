@@ -1,7 +1,12 @@
 const path = require('path')
 
 module.exports = () => [
-  require('@clipped/plugin-webpack')({jsx: 'Radi.r'}),
+  api => api.describe({
+    id: 'org.clipped.radi',
+    name: 'Radi plugin',
+    description: 'Provides support for Radi',
+    before: ['org.clipped.webpack', 'org.clipped.babel']
+  }),
   {
     babel(cfg, api) {
       cfg.plugins.set('radi-listen', require.resolve('babel-plugin-transform-radi-listen'))

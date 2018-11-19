@@ -85,8 +85,8 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
     })
     .add('init-package.json', async (api: Clipped) => api.spawn(os.platform().includes('win') ? 'npm.cmd' : 'npm', ['init'], {stdio: 'inherit', shell: true}))
     .add('install-presets', async (api: Clipped) => {
-      const [templates, plugins]: any[] = await Promise.all(
-        ['template', 'plugin'].map(type => 
+      const [plugins]: any[] = await Promise.all(
+        ['plugin'].map(type => 
           searchNpm(`${type} keywords:clipped+${type}`)
             .then((data: any) =>
               data.map((item: any) => ({title: item.name, value: item.name}))
@@ -97,7 +97,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
         type: 'multiselect',
         name: 'packages',
         message: 'Pick your packages',
-        choices: [...templates, ...plugins]
+        choices: plugins
       }, {
         onCancel: () => {
           throw new Error('Aborted')

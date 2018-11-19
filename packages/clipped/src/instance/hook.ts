@@ -86,7 +86,7 @@ export function hookContext(this: Clipped, name: string): Hook {
  *
  */
 async function execHook(this: Clipped, name: string, ...args: any[]): Promise<Clipped> {
-  if (Object.keys(omit(this.config.toConfig(), ['context', 'name', 'src', 'dist', 'dockerTemplate', 'packageJson'])).length !== 0) {
+  if (Object.keys(omit(this.config.toConfig(), ['target', 'context', 'name', 'src', 'dist', 'dockerTemplate', 'packageJson'])).length !== 0) {
     console.warn('Mutating config directly will be deprecated in v3.0. Use `defer` method instead')
   }
 
