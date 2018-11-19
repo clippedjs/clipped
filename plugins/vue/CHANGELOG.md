@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/clippedjs/clipped/compare/@clipped/plugin-vue@1.3.1...@clipped/plugin-vue@1.3.2) (2018-11-19)
+
+
+### Bug Fixes
+
+* **vue:** sync vue-template-compiler version with vue ([6b8888b](https://github.com/clippedjs/clipped/commit/6b8888b))
+
+
+
+
+
 ## [1.3.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-vue@1.3.0...@clipped/plugin-vue@1.3.1) (2018-11-19)
 
 **Note:** Version bump only for package @clipped/plugin-vue
