@@ -6,7 +6,7 @@ module.exports = () => [
     id: 'org.clipped.vue',
     name: 'Vue plugin',
     description: 'Provides support for Vue',
-    before: ['org.clipped.webpack']
+    after: ['org.clipped.webpack']
   }),
   ({config}) => ({
     webpack(cfg) {

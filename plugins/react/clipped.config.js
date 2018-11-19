@@ -5,7 +5,7 @@ module.exports = () => [
     id: 'org.clipped.react',
     name: 'React plugin',
     description: 'Provides support for React',
-    before: ['org.clipped.webpack']
+    after: ['org.clipped.webpack', 'org.clipped.babel']
   }),
   {
     babel(cfg) {
