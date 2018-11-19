@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/clippedjs/clipped/compare/@clipped/template-react@1.2.1...@clipped/template-react@1.2.2) (2018-11-19)
+
+**Note:** Version bump only for package @clipped/template-react
+
+
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/clippedjs/clipped/compare/@clipped/template-react@1.2.0...@clipped/template-react@1.2.1) (2018-11-14)
 

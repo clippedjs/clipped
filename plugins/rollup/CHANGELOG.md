@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.2.1...@clipped/plugin-rollup@1.3.0) (2018-11-19)
+
+
+### Features
+
+* **plugin:** adds plugin description function ([#136](https://github.com/clippedjs/clipped/issues/136)) ([5fbfd69](https://github.com/clippedjs/clipped/commit/5fbfd69))
+
+
+
+
+
 <a name="1.2.1"></a>
 ## [1.2.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.2.0...@clipped/plugin-rollup@1.2.1) (2018-11-13)
 
