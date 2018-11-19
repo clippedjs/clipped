@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-webpack@1.5.0...@clipped/plugin-webpack@1.5.1) (2018-11-19)
+
+**Note:** Version bump only for package @clipped/plugin-webpack
+
+
+
+
+
 # [1.5.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-webpack@1.4.0...@clipped/plugin-webpack@1.5.0) (2018-11-19)
 
 

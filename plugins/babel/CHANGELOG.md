@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.2](https://github.com/clippedjs/clipped/compare/@clipped/plugin-babel@1.2.1...@clipped/plugin-babel@1.2.2) (2018-11-19)
+
+
+### Bug Fixes
+
+* **babel:** fix alias temporarily ([052745c](https://github.com/clippedjs/clipped/commit/052745c))
+
+
+
+
+
 ## [1.2.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-babel@1.2.0...@clipped/plugin-babel@1.2.1) (2018-11-19)
 
 **Note:** Version bump only for package @clipped/plugin-babel
