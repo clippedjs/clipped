@@ -3,7 +3,53 @@ const rollup = require('rollup')
 // const {uglify} = require('rollup-plugin-uglify')
 // const {minify} = require('uglify-es')
 
-module.exports = ({name = null, type = 'library', babel = {}, formats = ['cjs'], commonjs = {}, postcss = {}, globals = {}, external = [], moduleName = '', alias = {}, replace = {}} = {}) => [
+module.exports = ({name = '', type = 'library', babel = {}, formats = ['cjs'], commonjs = {}, postcss = {}, globals = {}, external = [], moduleName = '', alias = {}, replace = {}} = {}) => [
+  api => api.describe({
+    id: 'org.clipped.rollup',
+    name: 'Rollup plugin',
+    description: 'Provides support for Rollup bundler',
+    options: {
+      name: {
+        type: String,
+        default: '',
+        description: 'File name of result bundle'
+      },
+      moduleName: {
+        type: String,
+        default: '',
+        description: 'Module name of umd bundle'
+      },
+      type: {
+        type: 'enum',
+        default: 'frontend',
+        valid: ['frontend', 'backend', 'library'],
+        description: 'Build target of Webpack'
+      },
+      formats: {
+        type: 'multiple',
+        default: ['cjs'],
+        valid: ['cjs', 'esm', 'iife', 'umd']
+      },
+      commonjs: {
+        type: 'object'
+      },
+      postcss: {
+        type: 'object'
+      },
+      globals: {
+        type: 'object',
+      },
+      external: {
+        type: 'multiple'
+      },
+      alias: {
+        type: 'object'
+      },
+      replace: {
+        type: 'object'
+      }
+    }
+  }),
   babel && require('@clipped/plugin-babel')({type, ...babel}),
   {
     rollup: {

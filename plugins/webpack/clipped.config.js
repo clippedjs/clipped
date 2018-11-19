@@ -12,6 +12,25 @@ const hasDeps = (deps = []) => {
 }
 
 module.exports = ({type = 'frontend', jsx, babel = {}} = {}) => [
+  api => api.describe({
+    id: 'org.clipped.webpack',
+    name: 'Webpack plugin',
+    description: 'Provides support for Webpack bundler',
+    options: {
+      jsx: {
+        type: 'enum',
+        default: false,
+        valid: [false, String, 'vue', 'react'],
+        description: 'What jsx pragma to use in Babel'
+      },
+      type: {
+        type: 'enum',
+        default: 'frontend',
+        valid: ['frontend', 'backend', 'library'],
+        description: 'Build target of Webpack'
+      }
+    }
+  }),
   babel && require('@clipped/plugin-babel')({type, jsx, ...babel}),
   ({config, resolve}) => ({
     webpack: {

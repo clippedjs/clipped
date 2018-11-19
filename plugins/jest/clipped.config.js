@@ -2,6 +2,12 @@ const path = require('path')
 const jest = require('jest')
 
 module.exports = () => [
+  api => api.describe({
+    id: 'org.clipped.jest',
+    name: 'Jest plugin',
+    description: `Adds Jest testing`,
+    after: ['org.clipped.webpack', 'org.clipped.eslint']
+  }),
   {
     jest: {
       modulePaths: [],
@@ -32,9 +38,11 @@ module.exports = () => [
   api => {
     api.hook('pre')
       .add('jest-transformer', api => {
-        // Has to use this way because transform has to provide path instead of a function
-        process.env.JEST_BABEL_OPTIONS = JSON.stringify(api.config.babel.toConfig())
-        api.config.jest.transform = {"^.+\\.(j|t)sx?$": require.resolve('./transformer')}
+        if (api.config.babel) {
+          // Has to use this way because transform has to provide path instead of a function
+          process.env.JEST_BABEL_OPTIONS = JSON.stringify(api.config.babel.toConfig())
+          api.config.jest.transform = {"^.+\\.(j|t)sx?$": require.resolve('./transformer')}
+        }
       })
     api.hook('test:unit').add('jest', async api => {
       await api.editPkg(pkg => {

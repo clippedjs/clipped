@@ -1,4 +1,10 @@
 module.exports = () => [
+  api => api.describe({
+    id: 'org.clipped.mdx',
+    name: 'Mdx plugin',
+    description: `Adds '.mdx' support`,
+    after: ['org.clipped.webpack']
+  }),
   {
     webpack(cfg) {
       cfg.module.rules.use('mdx', {
