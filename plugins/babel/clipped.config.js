@@ -27,11 +27,11 @@ module.exports = ({jsx = false} = {}) => [
         [require.resolve('@babel/plugin-proposal-class-properties')]
       ]
     },
-    webpack(cfg) {
+    webpack(cfg, api) {
       cfg.set('module.rules.js.use.babel', {
         loader: require.resolve('babel-loader'),
       })
-      cfg.module.alias('rules.js.use.babel.options', () => api.config.babel)
+      cfg.module.rules.alias('js.use.babel.options', () => api.config.babel)
     },
     rollup(cfg) {
       cfg.plugins

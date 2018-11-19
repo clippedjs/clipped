@@ -89,14 +89,14 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
         ['plugin'].map(type => 
           searchNpm(`${type} keywords:clipped+${type}`)
             .then((data: any) =>
-              data.map((item: any) => ({title: item.name, value: item.name}))
+              data.map((item: any) => ({title: item.name.replace(/\@clipped\/(.*)-/, ''), value: item.name}))
             )
       ))
 
       let {packages} = await api.prompt({
         type: 'multiselect',
         name: 'packages',
-        message: 'Pick your packages',
+        message: 'Pick your plugins (You will need Babel and Webpack also if you want React/Vue/Radi)',
         choices: plugins
       }, {
         onCancel: () => {
@@ -114,7 +114,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
         const pkgB: any = infos.find((i: any) => i.info.id === b)
 
         return (
-          (pkgA && pkgB && pkgA.after && pkgA.after.includes(pkgB.info.id)) // A should have been after B
+          (pkgA && pkgB && pkgA.after && pkgA.after.includes(pkgB.info.id)) || // A should have been after B
           (pkgA && pkgB && pkgB.before && pkgB.before.includes(pkgA.info.id)) // B should have been before A
         )
       })

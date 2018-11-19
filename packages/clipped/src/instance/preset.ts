@@ -87,7 +87,7 @@ export async function execPreset(this: Clipped, ware?: any): Promise<Clipped> {
     ) {
       throw new Error(`Incorrect order for ${info.id}, please re-arrange it`)
     }
-    this._presets.unshift({info, plugin: ware})
+    this._presets.push({info, plugin: ware})
   }
   
   for (let w of [].concat(ware).map(normalizePreset.bind(this)).filter(Boolean)) {
