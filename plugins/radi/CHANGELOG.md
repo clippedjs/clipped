@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.2.0 (2018-11-19)
+
+
+### Features
+
+* **order:** adds order checking for presets ([7732b8e](https://github.com/clippedjs/clipped/commit/7732b8e))
+
+
+
+
+
 ## [0.1.2](https://github.com/clippedjs/clipped/compare/@clipped/template-radi@0.1.1...@clipped/template-radi@0.1.2) (2018-11-19)
 
 **Note:** Version bump only for package @clipped/template-radi

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-eslint@1.3.0...@clipped/plugin-eslint@1.4.0) (2018-11-19)
+
+
+### Features
+
+* **order:** adds order checking for presets ([7732b8e](https://github.com/clippedjs/clipped/commit/7732b8e))
+
+
+
+
+
 # [1.3.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-eslint@1.2.1...@clipped/plugin-eslint@1.3.0) (2018-11-19)
 
 
