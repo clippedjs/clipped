@@ -9,7 +9,8 @@ notifications:
 node_js:
   - '10'
 script:
-  - (cd packages/clipped && npm run test:ci)
+  - lerna run test
+  - lerna run test:ci
 after_success:
   - if [ "$TRAVIS_BRANCH" = "master" ] && [ "$TRAVIS_PULL_REQUEST" == "false" ]; then ./publish.sh; fi
 branches:
