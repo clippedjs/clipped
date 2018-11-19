@@ -21,10 +21,15 @@ module.exports = () => [
         }
       })
 
+      let templateCompiler = null
+      try {
+        templateCompiler = require.resolve('vue-template-compiler')
+      } catch (_) {}
+
       cfg.module.rules.set('vue', {
         test: /\.vue$/,
         include: [config.src],
-        use: [{key: 'vue', value: {loader: require.resolve('vue-loader'), options: {compiler: require('vue-template-compiler')}}}],
+        use: [{key: 'vue', value: {loader: require.resolve('vue-loader'), options: {compiler: templateCompiler}}}],
       })
 
       cfg.plugins.use('vue-loader-plugin', VueLoaderPlugin, [{productionMode: process.env.NODE_ENV === 'production'}])
