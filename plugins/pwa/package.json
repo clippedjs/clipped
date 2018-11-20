@@ -1,0 +1,23 @@
+{
+  "name": "@clipped/plugin-pwa",
+  "version": "0.0.0",
+  "description": "Pwa plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "pwa.js",
+    "clipped.config.js"
+  ],
+  "keywords": [
+    "clipped",
+    "plugin",
+    "pwa"
+  ],
+  "dependencies": {
+    "offline-plugin": "^5.0.6",
+    "webpack-pwa-manifest": "^3.7.1"
+  }
+}

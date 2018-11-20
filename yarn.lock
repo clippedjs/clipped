@@ -5854,6 +5854,11 @@ deep-extend@^0.4.0:
   version "0.4.2"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.4.2.tgz#48b699c27e334bf89f10892be432f6e4c7d34a7f"
 
+deep-extend@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.5.1.tgz#b894a9dd90d3023fbf1c55a394fb858eb2066f1f"
+  integrity sha512-N8vBdOa+DF7zkRrDCsaOXoCs/E2fJfx9B9MrKnnSiHNh4ws7eSys6YQE4KvT1cecKmOASYQBhbKjeuDD9lT81w==
+
 deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://registry.yarnpkg.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
@@ -11831,6 +11836,17 @@ offline-plugin@^4.9.0:
     minimatch "^3.0.3"
     slash "^1.0.0"
 
+offline-plugin@^5.0.6:
+  version "5.0.6"
+  resolved "https://registry.yarnpkg.com/offline-plugin/-/offline-plugin-5.0.6.tgz#7a7b244220cddb8a8cabecb172ec5c0be03e74b2"
+  integrity sha512-qvcDmeI30xmvSlmqjopAj7QCuM1MEzvmDyuMTN2saDReSay5nUqCpKysexH1KUNXv5H/TfmHd+rngNPkRFj3YA==
+  dependencies:
+    deep-extend "^0.5.1"
+    ejs "^2.3.4"
+    loader-utils "0.2.x"
+    minimatch "^3.0.3"
+    slash "^1.0.0"
+
 on-finished@~2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
@@ -16917,7 +16933,7 @@ webpack-plugin-hash-output@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/webpack-plugin-hash-output/-/webpack-plugin-hash-output-2.1.0.tgz#b09fa7a1a9cafc9fe956f22662fb29c58296b2b4"
 
-webpack-pwa-manifest@^3.6.2:
+webpack-pwa-manifest@^3.6.2, webpack-pwa-manifest@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/webpack-pwa-manifest/-/webpack-pwa-manifest-3.7.1.tgz#ef3ca4571b1f799a470225be537c0ca6a1ac9505"
   dependencies:
