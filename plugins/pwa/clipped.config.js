@@ -14,7 +14,7 @@ module.exports = ({offline = {}, manifest = {}} = {}) => [
         type: 'object',
         description: 'Options for webpack-pwa-manifest'
       }
-    }
+    },
     after: ['org.clipped.webpack']
   }),
   {
