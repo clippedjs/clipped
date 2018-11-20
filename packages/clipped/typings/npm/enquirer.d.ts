@@ -17,5 +17,9 @@ declare module 'enquirer' {
     [index: string]: any
   }
 
-  export function prompt(opt: promptOpt | promptOpt[]): Promise<any>
+  interface Enquirer {
+    (opt: promptOpt | promptOpt[]): Promise<any>,
+    on(event: string, cb: Function): any
+  }
+  export var prompt: Enquirer
 }

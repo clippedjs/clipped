@@ -4,7 +4,7 @@ import * as childProcess from 'child_process';
 import {castArray, merge, isPlainObject, isFunction} from 'lodash'
 import * as fsEditor from 'mem-fs-editor'
 import * as memFs from 'mem-fs'
-import {prompt, promptOpt} from 'enquirer'
+import {prompt, Enquirer} from 'enquirer'
 import * as yarnInstall from 'yarn-install'
 
 import {Clipped} from '.'
@@ -24,7 +24,7 @@ declare module '.' {
     exec(cmd: string, opt?: object): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
     spawn(cmd: string, args?: any[], opt?: childProcess.SpawnOptions): Promise<any>; // eslint-disable-line no-undef, typescript/no-use-before-define
     print(...msg: any[]): void; // eslint-disable-line no-undef, typescript/no-use-before-define
-    prompt(opt: promptOpt | promptOpt[]): Promise<any>,
+    prompt: Enquirer,
     editPkg(mutator: Object | Function): Promise<any>
     install(deps: string[], opt?: any): Promise<any>
   }
