@@ -89,7 +89,7 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
         ['plugin'].map(type => 
           searchNpm(`${type} keywords:clipped+${type}`)
             .then((data: any) =>
-              data.map((item: any) => ({title: item.name.replace(/\@clipped\/(.*)-/, ''), value: item.name}))
+              data.map((item: any) => ({message: item.name.replace(/\@clipped\/(.*)-/, ''), name: item.name, value: item.name}))
             )
       ))
 
@@ -98,12 +98,8 @@ export async function cli(args: {action: string, opt?: any} = parseArgs()): Prom
         name: 'packages',
         message: 'Pick your plugins (You will need Babel and Webpack also if you want React/Vue/Radi)',
         choices: plugins
-      }, {
-        onCancel: () => {
-          throw new Error('Aborted')
-        }
       })
-      await api.install([...packages, 'clipped'])
+      await api.install([...(packages || []), 'clipped'])
       const infos = await Promise.all(packages.map((p: string) => {
         const c = new Clipped(opt)
         return c.use(require(c.resolve('./node_modules/' + p))).then(clip => clip.presets[0]) // only take the first-level preset
