@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.2.4](https://github.com/clippedjs/clipped/compare/@clipped/plugin-babel@1.2.3...@clipped/plugin-babel@1.2.4) (2018-11-23)
+
+
+### Bug Fixes
+
+* **eslint:** lint support for react ([e490c03](https://github.com/clippedjs/clipped/commit/e490c03))
+
+
+
+
+
 ## [1.2.3](https://github.com/clippedjs/clipped/compare/@clipped/plugin-babel@1.2.2...@clipped/plugin-babel@1.2.3) (2018-11-23)
 
 

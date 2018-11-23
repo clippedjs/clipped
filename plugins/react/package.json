@@ -1,7 +1,7 @@
 {
   "name": "@clipped/plugin-react",
   "description": "React plugin for clipped",
-  "version": "1.3.3",
+  "version": "1.3.4",
   "main": "clipped.config.js",
   "license": "MIT",
   "publishConfig": {
@@ -14,7 +14,7 @@
   ],
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
-    "@clipped/plugin-webpack": "^1.5.3",
+    "@clipped/plugin-webpack": "^1.5.4",
     "eslint-config-xo-react": "^0.17.0",
     "eslint-plugin-react": "^7.11.1",
     "react-hot-loader": "^4.3.12"

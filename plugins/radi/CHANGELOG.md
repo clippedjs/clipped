@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/clippedjs/clipped/compare/@clipped/plugin-radi@0.2.3...@clipped/plugin-radi@0.2.4) (2018-11-23)
+
+**Note:** Version bump only for package @clipped/plugin-radi
+
+
+
+
+
 ## [0.2.3](https://github.com/clippedjs/clipped/compare/@clipped/plugin-radi@0.2.2...@clipped/plugin-radi@0.2.3) (2018-11-23)
 
 **Note:** Version bump only for package @clipped/plugin-radi
