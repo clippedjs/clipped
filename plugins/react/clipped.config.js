@@ -5,7 +5,7 @@ module.exports = () => [
     id: 'org.clipped.react',
     name: 'React plugin',
     description: 'Provides support for React',
-    after: ['org.clipped.webpack', 'org.clipped.babel']
+    after: ['org.clipped.webpack', 'org.clipped.babel', 'org.clipped.eslint']
   }),
   {
     babel(cfg) {
@@ -19,6 +19,9 @@ module.exports = () => [
       for (key in cfg.entry.toConfig()) {
         cfg.entry[key].unshift(require.resolve('react-hot-loader/patch'))
       }
+    },
+    eslint(cfg) {
+      cfg.extends.set('react', require.resolve('eslint-config-xo-react'))
     }
   },
   api => {

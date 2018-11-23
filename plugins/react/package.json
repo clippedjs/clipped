@@ -15,6 +15,8 @@
   "dependencies": {
     "@babel/preset-react": "^7.0.0",
     "@clipped/plugin-webpack": "^1.5.3",
+    "eslint-config-xo-react": "^0.17.0",
+    "eslint-plugin-react": "^7.11.1",
     "react-hot-loader": "^4.3.12"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"

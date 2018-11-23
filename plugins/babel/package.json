@@ -20,6 +20,7 @@
     "babel-loader": "^8.0.4",
     "babel-plugin-transform-vue-jsx": "^3.7.0",
     "babel-preset-backpack": "^0.8.0",
+    "rollup-plugin-babel": "^4.0.3",
     "rollup-plugin-babel-minify": "^6.1.1"
   },
   "gitHead": "a91d4f4626b6932e07f0ed9f22345719bfa05626"
