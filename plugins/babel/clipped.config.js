@@ -33,10 +33,16 @@ module.exports = ({jsx = false} = {}) => [
       })
       cfg.module.rules.alias('js.use.babel.options', () => api.config.babel)
     },
-    rollup(cfg) {
+    rollup(cfg, api) {
+      // Make sure babel is on top for plugins like commonjs to work
+      cfg.plugins.unshift({
+        key: 'babel',
+        value: null
+      })
+      
       cfg.plugins
         .use('babel', require('rollup-plugin-babel'), [{}])
-        .alias('babel.args.0', () => config.babel)
+        .alias('babel.args.0', () => api.config.babel)
 
       if (process.env.NODE_ENV !== 'development') {
         cfg.plugins.use('babel-minify', require('rollup-plugin-babel-minify'), [{}])

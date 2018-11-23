@@ -72,7 +72,10 @@ module.exports = ({name = '', formats = ['cjs'], commonjs = {}, postcss = {}, gl
       }
 
       if (commonjs) {
-        cfg.plugins.use('commonjs', require('rollup-plugin-commonjs'), [commonjs])
+        cfg.plugins.use('commonjs', require('rollup-plugin-commonjs'), [{
+          ignoreGlobal: true,
+          ...commonjs
+        }])
       }
 
       if (Object.keys(alias).length > 0) {
