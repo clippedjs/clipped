@@ -18,7 +18,7 @@ declare module 'enquirer' {
   }
 
   interface Enquirer {
-    (opt: promptOpt | promptOpt[]): Promise<any>,
+    (opt: promptOpt | promptOpt[], answer?: {[index: string]: any}): Promise<any>,
     on(event: string, cb: Function): any
   }
   export var prompt: Enquirer
