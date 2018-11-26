@@ -1,3 +1,4 @@
+import  * as path from 'path'
 import {spawn, spawnSync} from 'child_process'
 import {isString, isFunction, isPlainObject, intersection} from 'lodash'
 import {createChainable} from 'jointed'
@@ -55,6 +56,18 @@ export function basePreset(this: Clipped, opt: Object = {}): void {
   this.hook('version')
     .add('clipped', async (clipped: Clipped) => {
       clipped.print(await clipped.exec('npm view clipped version'))
+    })
+
+  this.hook('gui')
+    .add('carlo', async (api: Clipped) => {
+      const carlo = require('carlo')
+      const app = await carlo.launch()
+
+      const root = path.resolve(__dirname, '../../../www')
+      app.serveFolder(root)
+      await app.exposeFunction('clipped', () => api)
+
+      await app.load('index.html')
     })
 
   this.__initialized__ = true

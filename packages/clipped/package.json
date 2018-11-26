@@ -67,6 +67,7 @@
     ]
   },
   "dependencies": {
+    "carlo": "^0.9.34",
     "cosmiconfig": "^4.0.0",
     "cross-spawn": "^6.0.5",
     "dargs": "^5.1.0",
