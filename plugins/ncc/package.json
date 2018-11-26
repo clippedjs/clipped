@@ -1,0 +1,18 @@
+{
+  "name": "@clipped/plugin-ncc",
+  "version": "0.0.0",
+  "description": "@zeit/ncc plugin for clipped",
+  "main": "clipped.config.js",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "clipped",
+    "plugin",
+    "ncc"
+  ],
+  "dependencies": {
+    "@zeit/ncc": "^0.1.5-webpack"
+  }
+}
