@@ -7,12 +7,18 @@
   <title>Clipped</title>
 </head>
 <body>
-  <button onclick="run()">Run something</button>
-  <script>
-    async function run() {
-      const api = await clipped()
+  <div id="js-hooks"></div>
 
+  <div id="js-terminal"></div>
+  <script>
+    async function load(api) {
       console.log(await api.execHook('version'))
+
+      document.getElementById('js-hooks').textContent = Object.keys(await api.hooks())
+
+      return rpc.handle({
+        printSomething: msg => document.getElementById('js-terminal').textContent += msg
+      })
     }
   </script>
 </body>

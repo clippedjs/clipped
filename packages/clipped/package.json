@@ -74,6 +74,7 @@
     "fs-extra": "^5.0.0",
     "git-url-parse": "^7.0.1",
     "got": "^9.3.2",
+    "hook-std": "^1.2.0",
     "jointed": "^1.8.2",
     "lodash": "^4.17.11",
     "mem-fs": "^1.1.3",

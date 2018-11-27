@@ -8653,6 +8653,11 @@ homedir-polyfill@^1.0.0:
   dependencies:
     parse-passwd "^1.0.0"
 
+hook-std@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/hook-std/-/hook-std-1.2.0.tgz#b37d533ea5f40068fe368cb4d022ee1992588c27"
+  integrity sha512-yntre2dbOAjgQ5yoRykyON0D9T96BfshR8IuiL/r3celeHD8I/76w4qo8m3z99houR4Z678jakV3uXrQdSvW/w==
+
 hosted-git-info@^2.1.4:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/hosted-git-info/-/hosted-git-info-2.5.0.tgz#6d60e34b3abbc8313062c3b798ef8d901a07af3c"

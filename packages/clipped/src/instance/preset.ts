@@ -1,6 +1,8 @@
+import * as fs from 'fs'
 import  * as path from 'path'
 import {spawn, spawnSync} from 'child_process'
 import {isString, isFunction, isPlainObject, intersection} from 'lodash'
+import * as hookStd from 'hook-std'
 import {createChainable} from 'jointed'
 
 import {Clipped} from '.'
@@ -57,17 +59,24 @@ export function basePreset(this: Clipped, opt: Object = {}): void {
     .add('clipped', async (clipped: Clipped) => {
       clipped.print(await clipped.exec('npm view clipped version'))
     })
-
-  this.hook('gui')
-    .add('carlo', async (api: Clipped) => {
+    
+  this.hook('ui')
+    .add('carlo', async (api: Clipped) => {      
       const carlo = require('carlo')
+      const {rpc} = require('carlo/rpc')
       const app = await carlo.launch()
 
       const root = path.resolve(__dirname, '../../../www')
       app.serveFolder(root)
-      await app.exposeFunction('clipped', () => api)
 
-      await app.load('index.html')
+      const frontend = await app.load('index.html', rpc.handle(api))
+
+      hookStd.stdout(output => {
+        frontend.printSomething(output)
+      })
+
+      api.execHook('dev')
+      api.print('I wanna do sonmething')
     })
 
   this.__initialized__ = true
