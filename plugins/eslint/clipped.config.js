@@ -23,7 +23,8 @@ module.exports = ({
       rules: {
         semi: 'off'
       },
-      overrides: []
+      overrides: [],
+      useEslintrc
     },
     webpack(cfg, api) {
       cfg.module.rules.set('eslint', {
@@ -139,5 +140,10 @@ module.exports = ({
             )
           }
         })
-      }
+      },
+  {
+    babel(_, api) {
+      api.config.eslint.parser = require.resolve('babel-eslint')
+    }
+  }
 ]
