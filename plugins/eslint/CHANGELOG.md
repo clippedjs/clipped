@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-eslint@1.4.0...@clipped/plugin-eslint@1.4.1) (2018-12-04)
+
+
+### Bug Fixes
+
+* **eslint:** disable eslintrc in config and support babel ([abc8fa3](https://github.com/clippedjs/clipped/commit/abc8fa3))
+
+
+
+
+
 # [1.4.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-eslint@1.3.0...@clipped/plugin-eslint@1.4.0) (2018-11-19)
 
 
