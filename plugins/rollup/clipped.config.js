@@ -1,4 +1,5 @@
 const path = require('path')
+const globby = require('globby')
 const rollup = require('rollup')
 // const {uglify} = require('rollup-plugin-uglify')
 // const {minify} = require('uglify-es')
@@ -102,7 +103,9 @@ module.exports = ({name = '', formats = ['cjs'], commonjs = {}, postcss = {}, gl
           }])
       // }
 
-      cfg.plugins.use('multi-entry', require('rollup-plugin-multi-entry'), [])
+      if (globby.hasMagic(cfg.input)) {
+        cfg.plugins.use('multi-entry', require('rollup-plugin-multi-entry'), [])
+      }
     }
   },
   api => {
