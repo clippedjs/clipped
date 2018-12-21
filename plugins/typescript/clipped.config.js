@@ -2,7 +2,7 @@ module.exports = () => [
   api => api.describe({
     id: 'org.clipped.typescript',
     name: 'Typescript plugin',
-    description: 'Provides support for Typescript'
+    description: 'Provides support for Typescript',
     after: ['org.clipped.webpack']
   }),
   {
@@ -14,7 +14,6 @@ module.exports = () => [
         declarationMap: true,
         sourceMap: true
       },
-      files: [],
       include: ['./src/**/*'],
       exclude: ['node_modules']
     },
