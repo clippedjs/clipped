@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.5](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.3.4...@clipped/plugin-rollup@1.3.5) (2018-12-21)
+
+
+### Bug Fixes
+
+* **rollup:** don't use multi-entry if no glob detected ([1582bda](https://github.com/clippedjs/clipped/commit/1582bda))
+
+
+
+
+
 ## [1.3.4](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.3.3...@clipped/plugin-rollup@1.3.4) (2018-11-23)
 
 **Note:** Version bump only for package @clipped/plugin-rollup
