@@ -33,6 +33,11 @@ module.exports = () => [
       cfg.module.rules.alias('ts.options.compilerOptions', () => api.config.typescript.compilerOptions)
     },
     rollup(cfg, api) {
+      cfg.plugins.unshift({
+        key: 'typescript',
+        value: null
+      })
+      
       cfg.plugins
         .use('typescript', require('rollup-plugin-typescript2'), [{}])
         .alias('typescript.args.0.tsconfigOverride', () => api.config.typescript)
