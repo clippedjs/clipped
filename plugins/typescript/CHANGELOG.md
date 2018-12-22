@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.4.2](https://github.com/clippedjs/clipped/compare/@clipped/plugin-typescript@1.4.1...@clipped/plugin-typescript@1.4.2) (2018-12-22)
+
+
+### Bug Fixes
+
+* **typescript:** place typescript above other rollup plugins ([298df2c](https://github.com/clippedjs/clipped/commit/298df2c))
+
+
+
+
+
 ## [1.4.1](https://github.com/clippedjs/clipped/compare/@clipped/plugin-typescript@1.4.0...@clipped/plugin-typescript@1.4.1) (2018-12-21)
 
 
