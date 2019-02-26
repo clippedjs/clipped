@@ -1,4 +1,5 @@
 [![Clipped](static/clipped-banner.jpg)](https://clippedjs.github.io)
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors)
 
 <p align="center">
 More than boilerplate :muscle:
@@ -68,3 +69,15 @@ You are free to make your very own presets and put on your own npm account, but 
 Made with code and :heart: by [USThing team](https://github.com/USThing)
 
 Heavily inspired by [mozilla-neutrino](https://github.com/mozilla-neutrino/neutrino-dev)
+
+## Contributors
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore -->
+<table><tr><td align="center"><a href="http://twitch.tv/inizio1"><img src="https://avatars1.githubusercontent.com/u/3119725?v=4" width="100px;" alt="IniZio"/><br /><sub><b>IniZio</b></sub></a><br /><a href="https://github.com/inizio/clipped/commits?author=IniZio" title="Code">💻</a></td></tr></table>
+
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!

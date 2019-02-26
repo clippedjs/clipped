@@ -1,0 +1,23 @@
+{
+  "projectName": "clipped",
+  "projectOwner": "inizio",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": true,
+  "contributors": [
+    {
+      "login": "IniZio",
+      "name": "IniZio",
+      "avatar_url": "https://avatars1.githubusercontent.com/u/3119725?v=4",
+      "profile": "http://twitch.tv/inizio1",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7
+}
