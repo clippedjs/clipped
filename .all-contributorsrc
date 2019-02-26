@@ -17,6 +17,15 @@
       "contributions": [
         "code"
       ]
+    },
+    {
+      "login": "cristijora",
+      "name": "Cristi Jora",
+      "avatar_url": "https://avatars2.githubusercontent.com/u/15955045?v=4",
+      "profile": "https://binarcode.com",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7
