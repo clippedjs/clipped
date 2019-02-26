@@ -11,6 +11,7 @@
     "commit": "git-cz"
   },
   "devDependencies": {
+    "all-contributors-cli": "^6.1.2",
     "commitizen": "^3.0.5",
     "cz-conventional-changelog": "^2.1.0",
     "lerna": "^3.4.3"
