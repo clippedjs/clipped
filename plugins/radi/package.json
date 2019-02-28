@@ -1,7 +1,7 @@
 {
   "name": "@clipped/plugin-radi",
   "description": "Radi plugin for clipped",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "main": "clipped.config.js",
   "license": "MIT",
   "publishConfig": {
@@ -13,7 +13,7 @@
     "radi"
   ],
   "dependencies": {
-    "@clipped/plugin-webpack": "^1.5.4",
+    "@clipped/plugin-webpack": "^1.6.0",
     "babel-plugin-transform-radi-listen": "^0.3.4",
     "radi-loader": "^1.0.0"
   }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-webpack@1.5.4...@clipped/plugin-webpack@1.6.0) (2019-02-28)
+
+
+### Features
+
+* **autoinstall:** setup autoinstall for webpack and rollup ([7be625e](https://github.com/clippedjs/clipped/commit/7be625e))
+
+
+
+
+
 ## [1.5.4](https://github.com/clippedjs/clipped/compare/@clipped/plugin-webpack@1.5.3...@clipped/plugin-webpack@1.5.4) (2018-11-23)
 
 **Note:** Version bump only for package @clipped/plugin-webpack

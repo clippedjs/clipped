@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.3.5...@clipped/plugin-rollup@1.4.0) (2019-02-28)
+
+
+### Features
+
+* **autoinstall:** setup autoinstall for webpack and rollup ([7be625e](https://github.com/clippedjs/clipped/commit/7be625e))
+
+
+
+
+
 ## [1.3.5](https://github.com/clippedjs/clipped/compare/@clipped/plugin-rollup@1.3.4...@clipped/plugin-rollup@1.3.5) (2018-12-21)
 
 
