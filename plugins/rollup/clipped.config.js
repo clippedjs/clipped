@@ -89,6 +89,8 @@ module.exports = ({name = '', formats = ['cjs'], commonjs = {}, postcss = {}, gl
 
       if (process.env.NODE_ENV === 'development') {
         cfg.plugins.use('progress', require('rollup-plugin-progress'), [{}])
+
+        cfg.plugins.use('autoinstall', require('@rollup/plugin-auto-install'), [{}])
       }
 
       // if (['umd', 'iife'].includes(cfg.output.format)) {
@@ -140,7 +142,7 @@ module.exports = ({name = '', formats = ['cjs'], commonjs = {}, postcss = {}, gl
               case 'BUNDLE_END':
                 process.exitCode = 0
                 api.print('Finished bundling, waiting for file change...')
-                break                
+                break
             }
           })
         })

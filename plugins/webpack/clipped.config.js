@@ -1,6 +1,7 @@
 const path = require('path')
 const webpack = require('webpack')
 const WebpackDevServer = require('webpack-dev-server')
+const proxy = require('webpack-proxy')
 
 const hasDeps = (deps = []) => {
   try {
@@ -86,98 +87,109 @@ module.exports = ({target = 'web'} = {}) => [
         test: /\.jsx?$/,
         include: [api.config.src],
         exclude: /(node_modules|bower_components)/,
-        use: []
+        use: [{
+          loader: 'buble-loader'}]
       })
+      //
+      // const paths = ['node_modules']
+      //
+      // // loader name, options, needed deps
+      // const styles = {
+      //   css: [],
+      //   less: ['less', {paths}],
+      //   sass: ['sass', {indentedSyntax: true, includePaths:paths}, ['node-sass']],
+      //   scss: ['sass', {includePaths: paths}, ['node-sass']],
+      //   stylus: ['stylus', {paths}],
+      //   styl: ['stylus', {paths}]
+      // }
+      //
+      // cfg['resolve.extensions'].push(...Object.values(styles).filter(item => item[0]).map(item => '.' + item[0]))
+      //
+      // for (ext in styles) {
+      //   const item = styles[ext]
+      //
+      //   if (!hasDeps((item[2] || []).concat([`${ext}-loader`]))) return
+      //
+      //   cfg.module.rules.set(ext, {
+      //     test: new RegExp(`\\.${ext}$`),
+      //     include: [api.config.src],
+      //     use: [
+      //       {key: 'style', value: require.resolve('style-loader')},
+      //       {key: 'css', value: require.resolve('css-loader')},
+      //       {key: 'postcss', value: {
+      //         loader: require.resolve('postcss-loader'),
+      //         options: {
+      //           // Necessary for external CSS imports to work
+      //           // https://github.com/facebookincubator/create-react-app/issues/2677
+      //           ident: 'postcss',
+      //           plugins: [
+      //             require('postcss-flexbugs-fixes'),
+      //             require('autoprefixer')({
+      //               browsers: [
+      //                 '>1%',
+      //                 'last 4 versions',
+      //                 'Firefox ESR',
+      //                 'not ie < 9'
+      //               ],
+      //               flexbox: 'no-2009',
+      //             }),
+      //           ],
+      //         }
+      //       }},
+      //       item[0] && {key: ext, value: {loader: require.resolve(`${item[0]}-loader`), options: item[1] || {}}}
+      //     ].filter(Boolean)
+      //   })
+      // }
+      //
+      // const assets = {
+      //   image: [/\.(png|jpe?g|gif|svg)(\?.*)?$/],
+      //   audio: [/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/],
+      //   font: [/\.(woff2?|eot|ttf|otf)(\?.*)?$/]
+      // }
+      //
+      // for (target in assets) {
+      //   const asset = assets[target]
+      //   cfg.module.rules.set(target, {
+      //     test: asset[0],
+      //     include: [api.config.src],
+      //     use: [{
+      //       key: 'url',
+      //       value: {
+      //         loader: require.resolve('url-loader'),
+      //         options: {
+      //           limit: 10000,
+      //           name: '[name].[hash:7].[ext]'
+      //         }
+      //       }
+      //     }]
+      //   })
+      // }
+      //
+      // cfg.plugins
+      //   .use('friendly-errors', require('friendly-errors-webpack-plugin'), [{
+      //     onErrors: (severity, errors) => {
+      //       if (severity !== 'error') {
+      //         return;
+      //       }
+      //       const error = errors[0];
+      //       require('node-notifier').notify({
+      //         title: api.config.packageJson.name,
+      //         message: severity + ': ' + error.name,
+      //         subtitle: error.file || '',
+      //         icon: path.join(__dirname, 'api.png')
+      //       });
+      //     }
+      //   }])
 
-      const paths = ['node_modules']
-
-      // loader name, options, needed deps
-      const styles = {
-        css: [],
-        less: ['less', {paths}],
-        sass: ['sass', {indentedSyntax: true, includePaths:paths}, ['node-sass']],
-        scss: ['sass', {includePaths: paths}, ['node-sass']],
-        stylus: ['stylus', {paths}],
-        styl: ['stylus', {paths}]
-      }
-
-      cfg['resolve.extensions'].push(...Object.values(styles).filter(item => item[0]).map(item => '.' + item[0]))
-    
-      for (ext in styles) {
-        const item = styles[ext]
-
-        if (!hasDeps((item[2] || []).concat([`${ext}-loader`]))) return
-
-        cfg.module.rules.set(ext, {
-          test: new RegExp(`\\.${ext}$`),
-          include: [api.config.src],
-          use: [
-            {key: 'style', value: require.resolve('style-loader')},
-            {key: 'css', value: require.resolve('css-loader')},
-            {key: 'postcss', value: {
-              loader: require.resolve('postcss-loader'),
-              options: {
-                // Necessary for external CSS imports to work
-                // https://github.com/facebookincubator/create-react-app/issues/2677
-                ident: 'postcss',
-                plugins: [
-                  require('postcss-flexbugs-fixes'),
-                  require('autoprefixer')({
-                    browsers: [
-                      '>1%',
-                      'last 4 versions',
-                      'Firefox ESR',
-                      'not ie < 9'
-                    ],
-                    flexbox: 'no-2009',
-                  }),
-                ],
-              }
-            }},
-            item[0] && {key: ext, value: {loader: require.resolve(`${item[0]}-loader`), options: item[1] || {}}}
-          ].filter(Boolean)
-        })
-      }
-
-      const assets = {
-        image: [/\.(png|jpe?g|gif|svg)(\?.*)?$/],
-        audio: [/\.(mp4|webm|ogg|mp3|wav|flac|aac)(\?.*)?$/],
-        font: [/\.(woff2?|eot|ttf|otf)(\?.*)?$/]
-      }
-
-      for (target in assets) {
-        const asset = assets[target]
-        cfg.module.rules.set(target, {
-          test: asset[0],
-          include: [api.config.src],
-          use: [{
-            key: 'url',
-            value: {
-              loader: require.resolve('url-loader'),
-              options: {
-                limit: 10000,
-                name: '[name].[hash:7].[ext]'
-              }
+      if (process.env.NODE_ENV === 'development') {
+        api.hook('pre')
+          .add('proxy', () => {
+            cfg.module.rules.set('js.use', proxy(cfg.module.rules.js.use))
+            if (cfg.module.rules.ts) {
+              cfg.module.rules.set('ts.use', proxy(cfg.module.rules.ts.use))
             }
-          }]
-        })
-      }
-
-      cfg.plugins
-        .use('friendly-errors', require('friendly-errors-webpack-plugin'), [{
-          onErrors: (severity, errors) => {
-            if (severity !== 'error') {
-              return;
-            }
-            const error = errors[0];
-            require('node-notifier').notify({
-              title: api.config.packageJson.name,
-              message: severity + ': ' + error.name,
-              subtitle: error.file || '',
-              icon: path.join(__dirname, 'api.png')
-            });
-          }
-        }])
+          })
+        }
     }
   },
   api => {
@@ -197,7 +209,7 @@ module.exports = ({target = 'web'} = {}) => [
           })
         })
       )
-    
+
     api.hook('build')
       .add('webpack', api =>
         new Promise((resolve, reject) => {
@@ -244,7 +256,7 @@ module.exports = ({target = 'web'} = {}) => [
             ]
           }))
           .set('output.libraryTarget', 'commonjs2')
-        
+
         cfg.plugins
           .use('banner', webpack.BannerPlugin,  [{
             raw: true,
@@ -266,14 +278,14 @@ module.exports = ({target = 'web'} = {}) => [
         api => api.execHook('watch'),
         api => new Promise((resolve, reject) => {
           const main = api.config.packageJson.main ? api.resolve(api.config.packageJson.main) : api.config.dist
-          
+
           nodemon({
             // Main field in package.json or dist/index.js
             script: main || api.config.main || api.config.dist,
             ext: 'js json',
             ignore: ["test/*", "docs/*"]
           })
-  
+
           nodemon.on('start', function () {
             api.print('🚀 App has started')
           }).on('quit', function () {
@@ -312,7 +324,7 @@ module.exports = ({target = 'web'} = {}) => [
                 .set('only-dev-server', require.resolve('webpack/hot/only-dev-server'))
                 .set('dev-server', require.resolve(`webpack-dev-server/client`))
             }
-  
+
             new WebpackDevServer(
               webpack(api.config.webpack.toConfig())
             ).listen(api.config.webpack.devServer.port, api.config.webpack.devServer.host, (err, result) => {
@@ -324,5 +336,5 @@ module.exports = ({target = 'web'} = {}) => [
           })
         })
     }
-  ],  
+  ],
 ]

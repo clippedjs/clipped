@@ -1495,6 +1495,11 @@
     lodash "^4.17.4"
     url-template "^2.0.8"
 
+"@rollup/plugin-auto-install@^1.0.2":
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/@rollup/plugin-auto-install/-/plugin-auto-install-1.0.2.tgz#b0cc84cbe9e85588fcbb813ec3d7f3176849bfdc"
+  integrity sha512-pd2sLa1yRyE3EKRjtR2yXRbYxk7QCysew75DTMis2sooxUdq/DEcdQ1j2Sga6YvOhZr2DzImeU0F81i7B6xbTQ==
+
 "@semantic-release/commit-analyzer@^5.0.0":
   version "5.1.0"
   resolved "https://registry.yarnpkg.com/@semantic-release/commit-analyzer/-/commit-analyzer-5.1.0.tgz#9faffaa59a7b4a08adab7747da67afd57a997314"
@@ -9337,6 +9342,18 @@ inquirer@^6.2.1:
     strip-ansi "^5.0.0"
     through "^2.3.6"
 
+install-packages@^0.1.0:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/install-packages/-/install-packages-0.1.1.tgz#80dbec1b0398679a27ca646e9c4f1720a8bc80eb"
+  integrity sha1-gNvsGwOYZ5onymRunE8XIKi8gOs=
+  dependencies:
+    chalk "^2.3.2"
+    command-exists "^1.2.6"
+    cross-spawn "^4.0.2"
+    joycon "^0.2.0"
+    parse-package-name "^0.1.0"
+    resolve "^1.7.1"
+
 internal-ip@1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/internal-ip/-/internal-ip-1.2.0.tgz#ae9fbf93b984878785d50a8de1b356956058cf5c"
@@ -10479,6 +10496,13 @@ joi@^6.7.x:
     isemail "1.x.x"
     moment "2.x.x"
     topo "1.x.x"
+
+joycon@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/joycon/-/joycon-0.2.0.tgz#02b15e954724881fe8afcbe64af182a5363b829e"
+  integrity sha1-ArFelUckiB/or8vmSvGCpTY7gp4=
+  dependencies:
+    json5 "^1.0.1"
 
 jpeg-js@^0.2.0:
   version "0.2.0"
@@ -12978,6 +13002,11 @@ parse-ms@^2.0.0:
   resolved "https://registry.yarnpkg.com/parse-ms/-/parse-ms-2.0.0.tgz#7b3640295100caf3fa0100ccceb56635b62f9d62"
   integrity sha512-AddiXFSLLCqj+tCRJ9MrUtHZB4DWojO3tk0NVZ+g5MaMQHF2+p2ktqxuoXyPFLljz/aUK0Nfhd/uGWnhXVXEyA==
 
+parse-package-name@^0.1.0:
+  version "0.1.0"
+  resolved "https://registry.yarnpkg.com/parse-package-name/-/parse-package-name-0.1.0.tgz#3f44dd838feb4c2be4bf318bae4477d7706bade4"
+  integrity sha1-P0Tdg4/rTCvkvzGLrkR313BrreQ=
+
 parse-passwd@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/parse-passwd/-/parse-passwd-1.0.0.tgz#6d5b934a456993b23d37f40a382d6f1666a8e5c6"
@@ -13064,6 +13093,11 @@ path-key@^2.0.0, path-key@^2.0.1:
 path-parse@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.5.tgz#3c1adf871ea9cd6c9431b6ea2bd74a0ff055c4c1"
+
+path-parse@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
+  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
 
 path-to-regexp@0.1.7:
   version "0.1.7"
@@ -15077,6 +15111,13 @@ resolve@^1.1.6:
   resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.5.0.tgz#1f09acce796c9a762579f31b2c1cc4c3cddf9f36"
   dependencies:
     path-parse "^1.0.5"
+
+resolve@^1.7.1:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/resolve/-/resolve-1.10.0.tgz#3bdaaeaf45cc07f375656dfd2e54ed0810b101ba"
+  integrity sha512-3sUr9aq5OfSg2S9pNtPA9hL1FVEAjvfOC4leW0SNf/mpnaakz2a9femSd6LqAww2RaFctwyf1lCqnTHuF1rxDg==
+  dependencies:
+    path-parse "^1.0.6"
 
 responselike@1.0.2, responselike@^1.0.2:
   version "1.0.2"
@@ -18008,6 +18049,17 @@ webpack-plugin-hash-output@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/webpack-plugin-hash-output/-/webpack-plugin-hash-output-2.1.0.tgz#b09fa7a1a9cafc9fe956f22662fb29c58296b2b4"
   integrity sha1-sJ+noanK/J/pVvImYvspxYKWsrQ=
+
+webpack-proxy@^0.2.4:
+  version "0.2.4"
+  resolved "https://registry.yarnpkg.com/webpack-proxy/-/webpack-proxy-0.2.4.tgz#6b485847ea87b72f446faec2aca62fabf03fa7cc"
+  integrity sha1-a0hYR+qHty9Eb67CrKYvq/A/p8w=
+  dependencies:
+    chalk "^2.3.2"
+    cross-spawn "^6.0.5"
+    install-packages "^0.1.0"
+    loader-utils "^1.1.0"
+    resolve "^1.7.1"
 
 webpack-pwa-manifest@^3.6.2, webpack-pwa-manifest@^3.7.1:
   version "3.8.0"
