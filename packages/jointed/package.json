@@ -1,6 +1,6 @@
 {
   "name": "jointed",
-  "version": "1.8.2",
+  "version": "1.9.0",
   "description": "Make configurations chainable",
   "main": "src/index.js",
   "scripts": {

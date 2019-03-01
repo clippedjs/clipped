@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.11](https://github.com/clippedjs/clipped/compare/create-clipped@0.1.10...create-clipped@0.1.11) (2019-03-01)
+
+**Note:** Version bump only for package create-clipped
+
+
+
+
+
 ## [0.1.10](https://github.com/clippedjs/clipped/compare/create-clipped@0.1.9...create-clipped@0.1.10) (2019-02-28)
 
 **Note:** Version bump only for package create-clipped
