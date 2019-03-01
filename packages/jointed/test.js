@@ -205,3 +205,13 @@ test('alias', t => {
   config.alias('abc.xyz', () => config.qq)
   t.is(config['abc.xyz'].toConfig(), 'dd')
 })
+
+test('when', t => {
+  const config = createChainable({
+    abc: {},
+    qq: 'dd'
+  })
+
+  config.$when(() => true, () => config.abc = '10')
+  t.is(config.toConfig().abc, '10')
+})

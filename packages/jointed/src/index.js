@@ -9,7 +9,7 @@ const keysToArr = key => Array.isArray(key) ? key : (key.split ? key.split('.') 
 
 const path = (value, keys) => keysToArr(keys).reduce((acc, k) => ((acc.get instanceof Function ? acc.get(k) : undefined) || acc[k]), value)
 
-function createChainable (instance, markers = []) {
+function createChainable (instance, markers = [], conditions = []) {
   instance = nestChainable(instance)
 
   const handler = {
@@ -26,28 +26,35 @@ function createChainable (instance, markers = []) {
 
           // If back again then go to second last bookmark
           if (target._id == last._id) {
-            return createChainable(secondLast || last, markers.slice(0, -1))
+            return createChainable(secondLast || last, markers.slice(0, -1), conditions)
           }
           // Otherewise return to last bookmark
-          return createChainable(last, markers)
+          return createChainable(last, markers, conditions)
         }
       }
 
       // Bookmark current node
       if (key === 'mark') {
-        return () => createChainable(target, [...markers, target])
+        return () => createChainable(target, [...markers, target], conditions)
+      }
+
+      if (key === '$when') {
+        return (criteria, callback) => {conditions.push({criteria, callback})}
       }
 
       // 2. Override property methods
       if (['toConfig', 'toJSON', 'valueOf'].includes(key)) {
-        return () => (target[key] instanceof Function ? target[key].apply(target, arguments) : target)
+        return () => {
+          conditions.forEach(({criteria, callback}) => {criteria() && callback()})
+          return (target[key] instanceof Function ? target[key].apply(target, arguments) : target)
+        }
       }
 
       // Override setter's function
       if (['set', 'prepend', 'append', 'add'].includes(key)) {
         return (k, v, ...args) => {
-          parent(target, k)[key](keysToArr(k).slice(-1)[0], createChainable(v, markers), ...args)
-          return createChainable(target, markers)
+          parent(target, k)[key](keysToArr(k).slice(-1)[0], createChainable(v, markers, conditions), ...args)
+          return createChainable(target, markers, conditions)
         }
       }
 
@@ -58,7 +65,8 @@ function createChainable (instance, markers = []) {
             typeof parent(target, k)[key] === 'function'
             ? (parent(target, k)[key](keysToArr(k).slice(-1)[0], ...args) || target)
             : parent(target, k)[key],
-            markers
+            markers,
+            conditions
           )
         }
       }
@@ -71,7 +79,7 @@ function createChainable (instance, markers = []) {
           (typeof value === 'object' && value !== null)
           || (Array.isArray(value))
         ) {
-          return createChainable(value, markers)
+          return createChainable(value, markers, conditions)
         }
 
         // HACK: not sure why alias return functions yet even when undefined yet
@@ -81,7 +89,7 @@ function createChainable (instance, markers = []) {
         else if (value instanceof Function || typeof value === 'function') {
           return (...args) => {
             const result = value.apply(target, args)
-            return result === undefined ? createChainable(target, markers) : result
+            return result === undefined ? createChainable(target, markers, conditions) : result
           }
         } else {
           return value
@@ -90,17 +98,17 @@ function createChainable (instance, markers = []) {
 
       // 4. Property-first methods
       if (key === 'alias') {
-        return (k, f, ...args) => {
-          parent(target, k).set(keysToArr(k).slice(-1)[0], createChainable(new AliasFunction(f)))
-          return createChainable(target, markers)
+        return (k, f) => {
+          parent(target, k).set(keysToArr(k).slice(-1)[0], createChainable(new AliasFunction(f), [], conditions))
+          return createChainable(target, markers, conditions)
         }
       }
 
       // adding constructors
       if (key === 'use') {
         return (k, func , parameters = []) => {
-          parent(target, k).set(keysToArr(k).slice(-1)[0], createChainable(new ParamConstructor(func, createChainable(parameters, markers)), markers))
-          return createChainable(target, markers)
+          parent(target, k).set(keysToArr(k).slice(-1)[0], createChainable(new ParamConstructor(func, createChainable(parameters, markers, conditions)), markers, conditions))
+          return createChainable(target, markers, conditions)
         }
       }
 
@@ -110,7 +118,8 @@ function createChainable (instance, markers = []) {
             typeof parent(target, k)[key] === 'function'
             ? (parent(target, k)[key](keysToArr(k).slice(-1)[0], ...args) || target)
             : parent(target, k)[key],
-            markers
+            markers,
+            conditions
           )
         }
       }
@@ -122,10 +131,12 @@ function createChainable (instance, markers = []) {
 
       const finalTarget = path(target, keyArr.slice(0, -1))
 
+      console.log('conditions? ', conditions)
+
       // If target has setter, use it instead
       if (finalTarget.set instanceof Function)
-        return finalTarget.set(keyArr[keyArr.length - 1], createChainable(value, markers)) || true
-      return Reflect.set(finalTarget, keyArr[keyArr.length - 1], createChainable(value, markers)) || true
+        return finalTarget.set(keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
+      return Reflect.set(finalTarget, keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
     }
   }
 
