@@ -7,7 +7,10 @@ const {placeholder} = require('./constants/method-types')
 
 const keysToArr = key => Array.isArray(key) ? key : (key.split ? key.split('.') : [key])
 
-const path = (value, keys) => keysToArr(keys).reduce((acc, k) => ((acc.get instanceof Function ? acc.get(k) : undefined) || acc[k]), value)
+const path = (value, keys) => keysToArr(keys).reduce((acc, k) => {
+  const accc = acc && acc[0]
+  return (acc.get instanceof Function && acc.get(k) || acc[k]) || (accc && (accc.get instanceof Function && accc.get(k) || accc[k]))
+}, value)
 
 function createChainable (instance, markers = [], conditions = []) {
   instance = nestChainable(instance)
@@ -15,7 +18,10 @@ function createChainable (instance, markers = [], conditions = []) {
   const handler = {
     get (target, key = '') {
       const value = path(target, key)
-      const parent = (target, key) => path(target, keysToArr(key).slice(0, -1))
+      const parent = (target, key) => {
+        console.log('parent: ', key)
+        return path(target, keysToArr(key).slice(0, -1))
+      }
 
       // 1. Property independent methods
       // Return to bookmark
@@ -46,7 +52,7 @@ function createChainable (instance, markers = [], conditions = []) {
       if (['toConfig', 'toJSON', 'valueOf'].includes(key)) {
         return () => {
           conditions.forEach(({criteria, callback}) => {criteria() && callback()})
-          return (target[key] instanceof Function ? target[key].apply(target, arguments) : target)
+          return (path(target, key) instanceof Function ? path(target, key).apply(target, arguments) : target)
         }
       }
 
@@ -129,14 +135,25 @@ function createChainable (instance, markers = [], conditions = []) {
     set (target, key, value) {
       const keyArr = keysToArr(key)
 
-      const finalTarget = path(target, keyArr.slice(0, -1))
-
-      console.log('conditions? ', conditions)
+      let finalTarget = path(target, keyArr.slice(0, -1))
 
       // If target has setter, use it instead
-      if (finalTarget.set instanceof Function)
-        return finalTarget.set(keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
-      return Reflect.set(finalTarget, keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
+      if (Array.isArray(finalTarget)) {
+        finalTarget.forEach(target => {
+          if (target.set instanceof Function) {
+            target.set(keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
+          } else {
+            Reflect.set(target, keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
+          }
+        })
+      } else {
+        if (finalTarget.set instanceof Function) {
+          finalTarget.set(keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
+        } else {
+          Reflect.set(finalTarget, keyArr[keyArr.length - 1], createChainable(value, markers, conditions)) || true
+        }
+      }
+      return true
     }
   }
 

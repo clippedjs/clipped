@@ -215,3 +215,21 @@ test('when', t => {
   config.$when(() => true, () => config.abc = '10')
   t.is(config.toConfig().abc, '10')
 })
+
+test('fallback to first element', t => {
+  const config = createChainable({
+    abc: [{
+      cd: 'ff'
+    }, {
+      jk: 47
+    }],
+    qq: 'dd'
+  })
+
+  t.is(config.abc.cd, 'ff')
+
+  config.abc.cd = 100
+
+  t.is(config.abc.cd, 100)
+  console.log(config.abc.toConfig())
+})
