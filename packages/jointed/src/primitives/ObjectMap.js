@@ -12,6 +12,18 @@ class ObjectMap extends Map {
     autobind(this)
   }
 
+  forEach(callback) {
+    Object.keys(this).forEach(key => {
+      callback(this[key])
+    })
+  }
+
+  map(callback) {
+    return Object.keys(this).map(key => {
+      callback(this[key])
+    })
+  }
+
   add () { this.set.apply(this, arguments) }
   set() {
     super.set(...arguments)

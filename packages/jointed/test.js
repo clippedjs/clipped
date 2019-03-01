@@ -233,3 +233,14 @@ test('fallback to first element', t => {
   t.is(config.abc.cd, 100)
   console.log(config.abc.toConfig())
 })
+
+test('iteration', t => {
+  const config = createChainable({
+    magic: [100, {key: 10, value: 90}],
+    boo: {nani: 'ewe'}
+  })
+
+  config.magic.forEach((val, index) => {
+    t.is(val, 100 - index * 10)
+  })
+})

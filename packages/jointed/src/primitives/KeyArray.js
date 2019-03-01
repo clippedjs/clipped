@@ -10,6 +10,15 @@ class KeyArray extends Array {
     this._id = uuid.v4()
     this.__keyarray__ = true
     this.__jointed__ = true
+
+    this._forEach = this.forEach
+    this.forEach = (callback) => {
+      this._forEach((el, index) => callback(el.value || el.key || el, index))
+    }
+
+    this._map = this.map
+    this.map = (callback) => this_.map((el, index) => callback(el.value || el.key || el, index))
+
     autobind(this)
   }
 
